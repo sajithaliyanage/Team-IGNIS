@@ -9,11 +9,21 @@ body{
     padding:20px 20px;
     border-radius:10px;
     margin-top:10%;
-    border:2px solid #db9dbe;
+    border:2px solid #e3e3e3;
 }
 
+.logo{
+    text-align: right;
+    height:55px;
+    width:50px;
+}
+
+.login-heading{
+    color:#222222;
+}
 
 .colorgraph {
+    margin-top:70px;
     height: 5px;
     border-top: 0;
     background: #c4e17f;

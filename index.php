@@ -13,8 +13,17 @@
         <div id="login-box" class="col-xs-10 col-xs-offset-1 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
             <form role="form">
                 <fieldset>
-                    <h2>SignIn to Take Your Leave</h2>
+                    <div class="col-xs-10">
+                        <h2 class="login-heading">SignIn to Take Your Leave</h2>
+                    </div>
+                    <div class="col-xs-2">
+                        <img src="images/lms-logo.png" class="img-responsive logo" />
+                    </div>
+
+
                     <hr class="colorgraph">
+
+
                     <div class="form-group">
                         <input type="text" name="email" id="email" class="form-control input-lg" placeholder="Company ID">
                     </div>
@@ -24,7 +33,7 @@
 
                     <a href="" class="btn btn-link pull-right">Forgot Password?</a>
 
-                    <hr class="colorgraph" style="margin-top:60px;">
+                    <hr class="colorgraph">
                     <div class="row">
                         <div class="col-xs-3 col-sm-3 col-md-3">
 
