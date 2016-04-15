@@ -1,4 +1,18 @@
 /* Credit to bootsnipp.com for the css for the color graph */
+body{
+    background-image:url("../images/asanoha-400px.png");
+    background-repeat: repeat;
+}
+
+#login-box{
+    background-color:#ffffff;
+    padding:20px 20px;
+    border-radius:10px;
+    margin-top:10%;
+    border:2px solid #db9dbe;
+}
+
+
 .colorgraph {
     height: 5px;
     border-top: 0;
