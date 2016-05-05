@@ -1,0 +1,40 @@
+/*media query start*/
+@media(max-width:768px){
+  .heding{
+    display: None;
+  }
+  .nav-image {
+    display: none;
+  }
+  .nav-top{
+    margin-top:0px !important;
+  }
+}
+
+@media(min-width:768px){
+  .heding-min {
+    display: none;
+  }
+}
+/*media query end*/
+
+.heding-min{
+  margin-top:-15px;
+  margin-left:10px;
+}
+
+.navbar-static-top {
+  margin-bottom: 19px;
+}
+
+.nav-top{
+  margin-top:-40px;
+}
+
+.nav-image{
+  height:30px;
+  width:30px;
+  margin-top:10px;
+  position:relative;
+  z-index:1001;
+}

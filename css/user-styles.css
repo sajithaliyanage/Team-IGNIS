@@ -1,0 +1,38 @@
+/*media query start*/
+@media (max-width:768px){
+    .left-menu{
+        height: auto;
+        position:inherit;
+    }
+}
+
+/*media query end*/
+
+/*main left bar start*/
+
+.left-menu{
+    background-color: #f8f8f8;
+    border-right:none;
+}
+
+.left-menu-div{
+    background-color: #f8f8f8 !important;
+    border-right:1px solid #e3e3e3;
+    height:100vh;
+    margin-top:-20px;
+    padding-left:0;
+    padding-right: 0px;
+}
+
+.left-menu:hover{
+    background-color: #e5e5e5 !important;
+    border-right:none;
+    color: #242525 !important;
+}
+
+
+.left-menu-active{
+    background-color: #e5e5e5;
+}
+
+/*main left bar end*/
