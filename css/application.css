@@ -1,4 +1,6 @@
 /*start apply leave*/
+
+/*today attendance*/
 .onoffswitch {
     position: relative; width: 49px;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
@@ -30,5 +32,17 @@
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label:before {
     right: 0px;
+}
+
+/*leave types*/
+
+.leave-type-head{
+    text-align: center;
+    margin-top:17px;
+}
+.leave-type-count{
+    text-align: center;
+    margin-top:-3px;
+    font-family:BatangChe;
 }
 /*end-apply leave*/

@@ -4,6 +4,15 @@
         height: auto;
         position:inherit;
     }
+    .side-bar-display{
+        display: none;
+    }
+}
+
+@media (min-width:768px){
+    .list-side-menu{
+        display:none !important;
+    }
 }
 
 /*media query end*/
