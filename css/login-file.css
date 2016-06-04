@@ -1,7 +1,9 @@
-/* Credit to bootsnipp.com for the css for the color graph */
 body{
-    background-image:url("../images/asanoha-400px.png");
-    background-repeat: repeat;
+    background:url("../images/12.jpg") no-repeat;
+    background-size: cover;
+    height:100%;
+    background-color:#dedede;
+    /*background-repeat: repeat;*/
 }
 
 #login-box{
@@ -9,7 +11,9 @@ body{
     padding:20px 20px;
     border-radius:10px;
     margin-top:10%;
-    border:2px solid #e3e3e3;
+    opacity:0.9 !important;
+    /*border:1px solid #000;*/
+    /*border:2px solid #dedede;*/
 }
 
 .logo{
@@ -19,7 +23,7 @@ body{
 }
 
 .login-heading{
-    color:#222222;
+    color:rebeccapurple;
 }
 
 .colorgraph {
@@ -33,3 +37,17 @@ body{
     background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #e3e3e3 12.5%, #e3e3e3 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
     background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #e3e3e3 12.5%, #e3e3e3 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
 }
+
+/*start media*/
+@media (max-width:768px){
+    .max-head-login{
+        display: none !important;
+    }
+}
+
+@media (min-width:768px){
+    .mini-head-login{
+        display: none !important;
+    }
+}
+/*end media*/

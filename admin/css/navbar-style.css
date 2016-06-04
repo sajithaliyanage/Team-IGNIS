@@ -52,8 +52,7 @@
   color: #FFFFFF !important;
 }
 
-
-  .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover{
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover{
     background-color: #2c3b42 !important;
 }
 
@@ -87,3 +86,4 @@
 .dropdown-menu-admin{
   background-color: #204d74 !important;
 }
+
