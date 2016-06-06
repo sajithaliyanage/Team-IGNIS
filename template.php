@@ -27,7 +27,7 @@
             <?php include ("leftbar.php")?>
         </div>
 
-        <div class="col-sm-10 col-xs-12">
+        <div class="col-sm-10 col-xs-12 col-sm-push-2">
 
          </div>
       </div>

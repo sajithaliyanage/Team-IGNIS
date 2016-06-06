@@ -31,9 +31,10 @@
     background-color: #222d31 !important;
     border-right:1px solid #b3b1a5;
     height:100vh;
-    margin-top:-20px;
+    margin-top:10px;
     padding-left:0;
     padding-right: 0px;
+    position:fixed;
 }
 
 .left-menu:hover{

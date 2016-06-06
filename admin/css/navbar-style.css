@@ -94,6 +94,10 @@
   text-align: center;
 }
 
+.nav-head-admin:hover{
+  background-color:#2c3b42 !important;
+}
+
 .image-user{
   height:30px;
   width:30px;
