@@ -1,4 +1,4 @@
-<div class="list-group">
+<div class="list-group" style="margin-top:10px;">
             <a href="index.php" class="list-group-item left-menu left-menu-active"><i class="fa fa-building icon-bar" aria-hidden="true"></i>Overall Company</a>
             <a href="department.php" class="list-group-item left-menu"><i class="fa fa-user-plus icon-bar" aria-hidden="true"></i>Edit Employees</a>
             <a href="setleaves.php" class="list-group-item left-menu"><i class="fa fa-plus icon-bar" aria-hidden="true"></i>Set Leaves</a>

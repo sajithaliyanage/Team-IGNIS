@@ -12,7 +12,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand heding font" href="#"  style="background-color:#367fa8;width:224px; text-align: center;"><span class="head-nav"></span> Admin Panel</a>
+            <a class="navbar-brand heding font nav-head-admin" href="#"><span class="head-nav"></span> Admin Panel</a>
             <a class="navbar-brand heding-min" href="#"><img class="nav-image" src="images/lms-logo.png"/></a>
         </div>
         <div style="height: 1px;" aria-expanded="false" id="navbar" class="navbar-collapse collapse">
@@ -26,7 +26,7 @@
                 <li class="list-side-menu"><a href="#">Edit Company Calendar</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle font new" data-toggle="dropdown" role="button"
-                       aria-haspopup="true" aria-expanded="false">Sajitha Liyanage <span class="caret"></span></a>
+                       aria-haspopup="true" aria-expanded="false"><img src="../images/emp.png" class="img-circle image-user"  />Sajitha Liyanage <span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-admin">
                         <li><a href="#">Switch Profile</a></li>
                         <li><a href="#">Logout</a></li>

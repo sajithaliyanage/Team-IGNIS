@@ -41,12 +41,13 @@
 
 .head-nav{
   color: #FFFFFF !important;
+  border-bottom:#FFFFFF !important;
 }
 
 .nav-bar-custom{
   background-color:#3c8dbc;
   color: #FFFFFF !important;
-  border-bottom-color:#31708f;
+  border-bottom-color:#89a3a4;
 }
 .font{
   color: #FFFFFF !important;
@@ -87,3 +88,16 @@
   background-color: #204d74 !important;
 }
 
+.nav-head-admin{
+  background-color:#2c3b42;
+  width:224px;
+  text-align: center;
+}
+
+.image-user{
+  height:30px;
+  width:30px;
+  margin-top:-7px;
+  margin-right:20px;
+  margin-bottom:-5px;
+}
