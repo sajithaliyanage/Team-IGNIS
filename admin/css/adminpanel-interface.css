@@ -1,0 +1,207 @@
+.main-box-1-1{
+    height:110px;
+    background-color: #00c0ef;
+    color: #FFFFFF;
+
+}
+.main-box-1-2{
+    height:30px;
+    background-color:#05aad7;
+    color: #FFFFFF;
+}
+
+.main-box-2-1{
+    height:110px;
+    background-color: #00a65a;
+    color: #FFFFFF;
+
+}
+.main-box-2-2{
+    height:30px;
+    background-color:#029551;
+    color: #FFFFFF;
+}
+
+.main-box-3-1{
+    height:110px;
+    background-color: #f39c11;
+    color: #FFFFFF;
+
+}
+.main-box-3-2{
+    height:30px;
+    background-color:#df8c0a;
+    color: #FFFFFF;
+}
+
+.main-box-4-1{
+    height:110px;
+    background-color: #dd4c39;
+    color: #FFFFFF;
+
+}
+.main-box-4-2{
+    height:30px;
+    background-color:#c74432;
+    color: #FFFFFF;
+}
+
+.padding-box{
+    padding-left:20px;
+    padding-right:20px;
+    margin-top:10px;
+}
+
+.padding-row{
+    padding-left:20px;
+    padding-right:20px;
+}
+
+.box-count{
+    font-family:Calibri;
+}
+.box-head{
+    font-family:Calibri;
+    margin-top:20px;
+}
+.box-icon{
+    font-size:30px;
+    text-align: center;
+    margin-top:20px;
+    color: #f8f8f8;
+}
+.more-info{
+    text-align:center;
+    margin-top:5px;
+}
+
+.nortification-box-top{
+    background-color:#FFFFFF;
+    padding-left:20px !important;
+    padding-right:20px !important;
+    border-top:2px solid #5a849c;
+}
+.nortification-box-middle{
+    height:300px;
+    color: #000;
+    background-color: #FFFFFF;
+    margin-top:40px;
+}
+.nortification-box-heading{
+    color: #000;
+    font-family:Calibri;
+    font-size:17px;
+    margin-top:15px;
+}
+.icon-margin-right{
+    margin-right:5px;
+}
+.box-item{
+    padding-left:10px;
+    margin-top:10px !important;
+}
+
+.admin-background{
+    margin-top:15px;
+    padding-bottom:50px;
+}
+
+.padding-zero{
+    padding-left:0px !important;
+    padding-right:0px !important;
+}
+
+.breadcrumb-style{
+    background-color:transparent;
+    color:#000;
+    margin-top:10px;
+    margin-bottom:5px;
+    font-size:12px;
+}
+
+
+
+/*department start*/
+.margin-top{
+    margin-top:30px !important;
+}
+
+.form-lable{
+    font-weight:600;
+    margin-top:5px;
+}
+
+.submit-button{
+    background-color: #2c3b42;
+    border: none;
+    font-size:15px;
+    margin-bottom:10px ;
+}
+
+.submit-button:hover{
+    background-color: #204d74;
+    border: none;
+    font-size:15px;
+
+}
+
+.department-add{
+    padding-top:10px;
+}
+/*department end*/
+
+/*employee start*/
+.filterable {
+    margin-top: 15px;
+}
+.filterable .panel-heading .pull-right {
+    margin-top: -20px;
+}
+.filterable .filters input[disabled] {
+    background-color: transparent;
+    border: none;
+    cursor: auto;
+    box-shadow: none;
+    padding: 0;
+    height: auto;
+}
+.filterable .filters input[disabled]::-webkit-input-placeholder {
+    color: #333;
+}
+.filterable .filters input[disabled]::-moz-placeholder {
+    color: #333;
+}
+.filterable .filters input[disabled]:-ms-input-placeholder {
+    color: #333;
+}
+.filter-box{
+    background-color:#2c3b42 !important;
+    border: none;
+}
+
+.outer-filter{
+    border-color:#2c3b42 !important ;
+    margin-top:-5px;
+}
+
+/*employee end*/
+
+/*roster start*/
+.outer-filter-roster{
+    border-color:transparent ;
+}
+
+.tab-box-1{
+     background-color:#2c3b42 !important;
+     border:none !important;
+     color:#FFFFFF !important;
+     border-radius:0px !important;
+ }
+
+.tab-box-2{
+    background-color:#204d74 !important;
+    border:none !important;
+    color:#FFFFFF !important;
+    border-radius:0px !important;
+}
+/*roster end*/
