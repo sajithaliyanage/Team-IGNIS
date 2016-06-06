@@ -23,11 +23,11 @@
     <div class="container-fluid ">
       <div class="row ">
 
-        <div class="col-sm-2 col-xs-12 left-menu-div side-bar-display">
-            <?php include ("leftbar.php")?>
-        </div>
+          <div class="col-sm-2 col-xs-12 left-menu-div side-bar-display">
+              <?php include("leftbar.php") ?>
+          </div>
 
-        <div class="col-sm-10 col-xs-12 admin-background">
+        <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2">
             <div class="row padding-row">
                 <div class="row">
                     <div class="col-lg-12">
@@ -69,6 +69,18 @@
                                 </a>
                                 <a href="#" class="list-group-item">
                                     <h5>Video Editor</h5>
+                                    <span class="label label-danger" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <h5>UI & UX Manager</h5>
+                                    <span class="label label-danger" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <h5>UI & UX Manager</h5>
+                                    <span class="label label-danger" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <h5>UI & UX Manager</h5>
                                     <span class="label label-danger" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></span>
                                 </a>
                                 <a href="#" class="list-group-item">

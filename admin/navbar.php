@@ -2,7 +2,7 @@
     <img class="nav-image" src="images/admin-logo.png"/>
 </center>
 
-<nav class="navbar navbar-inverse navbar-static-top nav-top nav-bar-custom">
+<nav class="navbar navbar-inverse navbar-static-top nav-top nav-bar-custom navbar-fixed-top" style="margin-top:0px;">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
