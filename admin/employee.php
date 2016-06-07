@@ -1,3 +1,7 @@
+<?php
+$var = "employee";
+?>
+
  <!DOCTYPE html>
 <html lang="en">
 <head>
