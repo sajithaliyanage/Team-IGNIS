@@ -2,7 +2,7 @@
     <img class="nav-image" src="images/admin-logo.png"/>
 </center>
 
-<nav class="navbar navbar-inverse navbar-static-top nav-top nav-bar-custom navbar-fixed-top" style="margin-top:0px;">
+<nav class="navbar navbar-inverse navbar-static-top nav-top nav-bar-custom navbar-fixed-top" style="margin-top:0px; box-shadow: 0 3px 7px -6px black !important;">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
@@ -16,7 +16,19 @@
             <a class="navbar-brand heding-min" href="#"><img class="nav-image" src="images/lms-logo.png"/></a>
         </div>
         <div style="height: 1px;" aria-expanded="false" id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left" style="margin-left:109px; padding-top:4px;">
+                <li >
+                    <i class="fa fa-bell-o" style="border:1px solid #d2d2d2; border-radius:100%; padding:14px; margin-left:10px;"></i>
+                </li>
 
+                <li >
+                    <i class="fa fa-envelope-o" style="border:1px solid #d2d2d2; border-radius:100%; padding:14px; margin-left:10px;"></i>
+                </li>
+
+                <li >
+                    <i class="fa fa-bell-o" style="border:1px solid #d2d2d2; border-radius:100%; padding:14px; margin-left:10px;"></i>
+                </li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="list-side-menu"><a href="#">Overall Company</a></li>
                 <li class="list-side-menu"><a href="#">Edit Departments</a></li>
