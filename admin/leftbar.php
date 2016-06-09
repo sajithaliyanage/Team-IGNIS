@@ -13,7 +13,7 @@
             <p  class=" font new" style="margin-top:-10px;"><img src="../images/emp.png" class="img-circle image-user-nav"  />Welcome Sajitha</p>
         </div>
     </center>
-    <a href="index.php" class="list-group-item left-menu left-menu<?php if($var=="index"){echo"-active";}?>"><i class="fa fa-building icon-bar" aria-hidden="true"></i>Overall Company<span class="selected"></span></a>
+    <a href="index.php" class="list-group-item left-menu left-menu<?php if($var=="index"){echo"-active";}?>"><i class="fa fa-edit icon-bar" aria-hidden="true"></i>Overall Company<span class="selected"></span></a>
     <a href="department.php" class="list-group-item left-menu left-menu<?php if($var=="department"){echo"-active";}?>"><i class="fa fa-building icon-bar" aria-hidden="true"></i>Edit Department</a>
     <a href="employee.php" class="list-group-item left-menu left-menu<?php if($var=="employee"){echo"-active";}?>"><i class="fa fa-user-plus icon-bar" aria-hidden="true"></i>Edit Employees</a>
     <a href="setleaves.php" class="list-group-item left-menu left-menu<?php if($var=="set"){echo"-active";}?>"><i class="fa fa-plus icon-bar" aria-hidden="true"></i>Set Leaves</a>

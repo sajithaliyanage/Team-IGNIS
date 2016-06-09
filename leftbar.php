@@ -13,7 +13,7 @@
             <p  class=" font new" style="margin-top:-10px;"><img src="images/emp.png" class="img-circle image-user-nav"  />Welcome Sajitha</p>
         </div>
     </center>
-    <a href="" class="list-group-item left-menu left-menu-active"><i class="fa fa-building icon-bar" aria-hidden="true"></i>Apply Leave<span class="selected"></span></a>
+    <a href="" class="list-group-item left-menu left-menu-active"><i class="fa fa-edit icon-bar" aria-hidden="true"></i>Apply Leave<span class="selected"></span></a>
     <a href="" class="list-group-item left-menu left-menu"><i class="fa fa-building icon-bar" aria-hidden="true"></i>Edit Department</a>
     <a href="" class="list-group-item left-menu left-menu"><i class="fa fa-user-plus icon-bar" aria-hidden="true"></i>Edit Employees</a>
     <a href="" class="list-group-item left-menu left-menu"><i class="fa fa-plus icon-bar" aria-hidden="true"></i>Set Leaves</a>
