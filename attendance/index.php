@@ -27,18 +27,12 @@
             <?php include ("leftbar.php")?>
         </div>
 
-        <div class="col-sm-10 col-xs-12 col-sm-push-2">
-			<div class="row">
-				<div class="col-sm-8 col-xs-12">
-				</div>
-				<div class="col-sm-4 col-xs-12">
+        <div class="col-sm-10 col-xs-12">
 
-				</div>
-			</div>
-         </div>
-      </div>
+
 
     </div>
+
 
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
