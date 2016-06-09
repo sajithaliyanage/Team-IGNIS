@@ -16,17 +16,17 @@
             <a class="navbar-brand heding-min" href="#"><img class="nav-image" src="images/lms-logo.png"/></a>
         </div>
         <div style="height: 1px;" aria-expanded="false" id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-left" style="margin-left:109px; padding-top:4px;">
+            <ul class="nav navbar-nav navbar-left" style="margin-left:17%; padding-top:4px; position: fixed;">
                 <li >
-                    <i class="fa fa-bell-o" style="border:1px solid #d2d2d2; border-radius:100%; padding:14px; margin-left:10px;"></i>
+                    <i class="fa fa-bell-o" style="border:1px solid #d2d2d2; border-radius:100%; padding:14px; margin-left:10px;"></i><span class="badge postition-alert">4</span>
                 </li>
 
                 <li >
-                    <i class="fa fa-envelope-o" style="border:1px solid #d2d2d2; border-radius:100%; padding:14px; margin-left:10px;"></i>
+                    <i class="fa fa-envelope-o" style="border:1px solid #d2d2d2; border-radius:100%; padding:14px; margin-left:10px;"></i><span class="badge postition-message">3</span>
                 </li>
 
                 <li >
-                    <i class="fa fa-bell-o" style="border:1px solid #d2d2d2; border-radius:100%; padding:14px; margin-left:10px;"></i>
+                    <i class="fa fa-binoculars" style="border:1px solid #d2d2d2; border-radius:100%; padding:14px; margin-left:10px;"></i><span class="badge postition-remind">5</span>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

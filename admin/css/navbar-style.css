@@ -106,3 +106,21 @@
   margin-bottom:-5px;
 
 }
+
+.postition-alert{
+  margin-top:-30px;
+  margin-left:-14px;
+  background-color:#07C404;
+}
+
+.postition-message{
+  margin-top:-30px;
+  margin-left:-14px;
+  background-color:#FF1717;
+}
+
+.postition-remind{
+  margin-top:-30px;
+  margin-left:-14px;
+  background-color:#FF8717;
+}
