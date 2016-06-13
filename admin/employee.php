@@ -157,6 +157,20 @@ $var = "employee";
                                     <div class="col-xs-12">
                                             <!-- Text input-->
                                         <div class="form-group">
+                                            <label class="col-sm-5 col-xs-12 control-label form-lable">Employee Department :</label>
+                                            <div class="col-sm-7 col-xs-12">
+                                                <select  name="emp_gender" class="form-control">
+                                                    <option>-Select-</option>
+                                                    <option value="YES">IT</option>
+                                                    <option value="NO">HR</option>
+                                                    <option value="NO">Sales</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+
+                                        <div class="form-group">
                                             <label class="col-sm-5 col-xs-12 control-label form-lable">Employee Role :</label>
                                             <div class="col-sm-7 col-xs-12">
                                                 <select  name="emp_role" class="form-control">
@@ -200,15 +214,6 @@ $var = "employee";
                                         <br>
 
                                         <div class="form-group">
-                                            <label class="col-sm-5 col-xs-12 control-label form-lable">Employee DOB :</label>
-                                            <div class="col-sm-7 col-xs-12">
-                                                <input id="service_name" name="emp_dob" placeholder="" class="form-control input-md" required>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <br>
-
-                                        <div class="form-group">
                                             <label class="col-sm-5 col-xs-12 control-label form-lable">Employee Gender :</label>
                                             <div class="col-sm-7 col-xs-12">
                                                 <select  name="emp_gender" class="form-control">
@@ -231,7 +236,7 @@ $var = "employee";
                                         <br>
 
                                         <div class="form-group">
-                                            <label class="col-sm-5 col-xs-12 control-label form-lable">Employee Password :</label>
+                                            <label class="col-sm-5 col-xs-12 control-label form-lable">Set Password :</label>
                                             <div class="col-sm-7 col-xs-12">
                                                 <input id="service_name" name="emp_password" placeholder="" type="text" class="form-control input-md " required>
                                             </div>
@@ -248,19 +253,6 @@ $var = "employee";
                                         <br>
                                         <br>
 
-                                        <div class="form-group">
-                                            <label class="col-sm-5 col-xs-12 control-label form-lable">Employee Department :</label>
-                                            <div class="col-sm-7 col-xs-12">
-                                                <select  name="emp_gender" class="form-control">
-                                                    <option>-Select-</option>
-                                                    <option value="YES">IT</option>
-                                                    <option value="NO">HR</option>
-                                                    <option value="NO">Sales</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <br>
 
                                         <div class="form-group">
                                             <label class="col-sm-5 col-xs-12 control-label form-lable">Job Category :</label>

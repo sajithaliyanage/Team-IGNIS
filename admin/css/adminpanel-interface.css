@@ -204,4 +204,9 @@
     color:#FFFFFF !important;
     border-radius:0px !important;
 }
+
+.full-spectrum .sp-palette {
+    max-width: 200px;
+}
+
 /*roster end*/
