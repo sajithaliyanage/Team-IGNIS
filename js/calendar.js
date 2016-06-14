@@ -1,0 +1,5 @@
+$(function () {
+
+
+    $('#myId').jalendar();
+});
