@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+<?php
+$var = "roster";
+?>
+
+=======
+>>>>>>> origin/master
  <!DOCTYPE html>
 <html lang="en">
 <head>
