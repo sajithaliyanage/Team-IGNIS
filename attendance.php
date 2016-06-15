@@ -36,10 +36,10 @@ $var = "attendance";
                     <div class="col-lg-12">
                         <ol class="breadcrumb breadcrumb-style">
                             <li>
-                                <i class="fa fa-building"></i>  <a href="attendance.php">Apply Leave</a>
+                                <i class="fa fa-building icon-bar"></i>  <a href="attendance.php">Apply Leave</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-user-plus"></i> My Attendance
+                                <i class="fa fa-check-circle icon-bar"></i> My Attendance
                             </li>
                         </ol>
                     </div>
@@ -47,7 +47,7 @@ $var = "attendance";
             <div class="row padding-row">
                 <div class="col-sm-6 col-xs-12 padding-box">
                     <form class="container ">
-                        <div class="col-md-6 col-xs-12">
+                        <div class="col-sm-6 col-xs-12">
                             <ul>
                                 <li><h4>&nbsp;&nbsp;&nbsp;Select Date Range</h4></li>
 
