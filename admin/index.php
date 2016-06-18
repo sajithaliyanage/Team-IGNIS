@@ -140,25 +140,6 @@ $var = "index";
             <hr style="border-bottom:1px solid #e3e3e3;">
 
             <div class="row padding-row">
-                <div class="col-xs-12 col-sm-5 padding-box">
-                    <div class="row">
-                        <div class="col-xs-12 nortification-box-top">
-                            <h5 class="nortification-box-heading"><i class="fa fa-cogs icon-margin-right" aria-hidden="true"></i>
-                                Nortifications</h5>
-                            <div class="list-group">
-                                <a href="#" class="list-group-item">
-                                    Cras justo odio
-                                </a>
-                                <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-                                <a href="#" class="list-group-item">Morbi leo risus</a>
-                                <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                                <a href="#" class="list-group-item">Vestibulum at eros</a>
-                                <a href="#" class="list-group-item">Vestibulum at eros</a>
-                                <a href="#" class="list-group-item">Vestibulum at eros</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="col-xs-12 col-sm-7 padding-box">
                     <div class="row">
@@ -180,7 +161,27 @@ $var = "index";
                             </div>
                         </div>
                     </div>
-                </div>
+
+<!--                <div class="col-xs-12 col-sm-5 padding-box">-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-xs-12 nortification-box-top">-->
+<!--                            <h5 class="nortification-box-heading"><i class="fa fa-cogs icon-margin-right" aria-hidden="true"></i>-->
+<!--                                Nortifications</h5>-->
+<!--                            <div class="list-group">-->
+<!--                                <a href="#" class="list-group-item">-->
+<!--                                    Cras justo odio-->
+<!--                                </a>-->
+<!--                                <a href="#" class="list-group-item">Dapibus ac facilisis in</a>-->
+<!--                                <a href="#" class="list-group-item">Morbi leo risus</a>-->
+<!--                                <a href="#" class="list-group-item">Porta ac consectetur ac</a>-->
+<!--                                <a href="#" class="list-group-item">Vestibulum at eros</a>-->
+<!--                                <a href="#" class="list-group-item">Vestibulum at eros</a>-->
+<!--                                <a href="#" class="list-group-item">Vestibulum at eros</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
             </div>
          </div>
       </div>

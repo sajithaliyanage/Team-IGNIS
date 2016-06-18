@@ -245,7 +245,7 @@ $(function () {
                 $this.find('.events .event-single').remove();
                 prevAddEvent();
                 $(this).addClass('selected').css({'background-color': settings.color});
-                $this.children('.jalendar-wood, .wood-bottom').animate({width : '-=100px' }, 0, function() {
+                $this.children('.jalendar-wood, .wood-bottom').animate({width : '+=300px' }, 0, function() {
                     $this.find('.add-event').show().find('.events-list').html(eventSingle.clone())
                     $this.find('.add-new input').select();
                     calcTotalDayAgain();
