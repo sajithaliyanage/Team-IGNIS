@@ -13,7 +13,7 @@
             <p  class=" font new" style="margin-top:-10px;"><img src="images/emp.png" class="img-circle image-user-nav"  />Welcome Sajitha</p>
         </div>
     </center>
-    <a href="" class="list-group-item left-menu left-menu"><i class="fa fa-edit icon-bar" aria-hidden="true"></i>Apply Leave<span class="<?php if($var=="apply"){echo"selected";}?>"></span></a>
+    <a href="apply.php" class="list-group-item left-menu left-menu"><i class="fa fa-edit icon-bar" aria-hidden="true"></i>Apply Leave<span class="<?php if($var=="apply"){echo"selected";}?>"></span></a>
     <a href="" class="list-group-item left-menu left-menu"><i class="fa fa-building icon-bar" aria-hidden="true"></i>Leave Status<span class="<?php if($var=="status"){echo"selected";}?>"></span></a>
     <a href="attendance.php" class="list-group-item left-menu left-menu-active"><i class="fa fa-check-circle icon-bar" aria-hidden="true"></i>My Attendance<span class="<?php if($var=="attendance"){echo"selected";}?>"></span></a>
     <a href="" class="list-group-item left-menu left-menu"><i class="fa fa-plus icon-bar" aria-hidden="true"></i>Medical Upload Center<span class="<?php if($var=="medical"){echo"selected";}?>"></span></a>

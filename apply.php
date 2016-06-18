@@ -1,3 +1,7 @@
+<?php
+$var = "apply";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +22,7 @@
 
 <body style=" background-color: #eceff4 !important;">
 
-<?php include ("navbar.php")?>
+    <?php include ("navbar.php")?>
 
 <div class="container-fluid " style="background-color: #FFFFFF;">
     <div class="row ">
