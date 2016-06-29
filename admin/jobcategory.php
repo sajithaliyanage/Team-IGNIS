@@ -46,6 +46,7 @@ $var = "job";
                     </div>
                 </div>
             </div>
+
             <div class="row padding-row">
                 <div class="col-sm-6 col-xs-12 padding-box">
                     <div class="row">

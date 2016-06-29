@@ -186,6 +186,20 @@
 
 /*employee end*/
 
+/*medical upload*/
+.upload-box{
+    margin-top:20px;
+    border:2px dashed #3c8dbc;
+    border-radius:5px;
+    height:300px;
+    margin-bottom:50px;
+}
+
+.uplaod-icon-box{
+    color:#7e7e7e;
+    margin-top:40px;
+}
+/*end medical upload*/
 /*roster start*/
 .outer-filter-roster{
     border-color:transparent ;
