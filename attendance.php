@@ -39,7 +39,7 @@ $var = "attendance";
                     <div class="col-lg-12">
                         <ol class="breadcrumb breadcrumb-style">
                             <li>
-                                <i class="fa fa-building icon-bar"></i>  <a href="attendance.php">Apply Leave</a>
+                                <i class="fa fa-building icon-bar"></i>  <a href="apply.php">Apply Leave</a>
                             </li>
                             <li class="active">
                                 <i class="fa fa-check-circle icon-bar"></i> My Attendance
@@ -68,7 +68,7 @@ $var = "attendance";
                                     <br>
                                 </li>
 
-                                <li><button class="col-sm-7 col-xs-12 btn btn-info btn-lg pull-right submit-button" type="submit">Filter</button></li>
+                                <li><button class="col-sm-7 col-xs-12 btn btn-primary btn-lg pull-right submit-button" type="submit">Filter</button></li>
                             </ul>
 
                         </div>
@@ -76,9 +76,9 @@ $var = "attendance";
                             <div class="container-fluid pull-right">
                                 <br>
 
-                                <h4><i class="fa fa-square " style="font-size: 40px;color: #00a65a" aria-hidden="true"></i>&nbsp;&nbsp;Approved Leave</h4>
+                                <h4><i class="fa fa-square " style="font-size: 40px;color: #5bb85d" aria-hidden="true"></i>&nbsp;&nbsp;Approved Leave</h4>
                                 <br>
-                                <h4><i class="fa fa-square " style="font-size: 40px;color: #ac2925" aria-hidden="true"></i>&nbsp;&nbsp;Unplanned Absences</h4>
+                                <h4><i class="fa fa-square " style="font-size: 40px;color: #d9544f" aria-hidden="true"></i>&nbsp;&nbsp;Unplanned Absences</h4>
                             </div>
                         </div>
                     </form>
@@ -96,89 +96,73 @@ $var = "attendance";
 
             <br>
 
-            <h4>My Attendance</h4>
+            <h4><b>My Attendance</b></h4>
             <br>
 
             <table class="table table-bordered table-responsive">
                 <thead>
-                <tr bgcolor="#add8e6">
+                <tr class="active">
                     <th>Date</th>
                     <th>In Time</th>
                     <th>Out Time</th>
-                    <th>Early Mins</th>
-                    <th>Late Mins</th>
                     <th>Work Time(hours)</th>
                     <th>Over Time(hours)</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr  bgcolor="#e6e6fa">
+                <tr  class="active">
                     <td>05/05/2016</td>
                     <td>07.58</td>
                     <td>5.28</td>
-                    <td>2.00</td>
-                    <td>0.00</td>
                     <td>9.30</td>
                     <td>1.30</td>
                 </tr>
-                <tr bgcolor="#e6e6fa">
+                <tr class="active">
                     <td>04/05/2016</td>
                     <td>08.00</td>
                     <td>5.00</td>
-                    <td>0.00</td>
-                    <td>0.00</td>
                     <td>9.00</td>
                     <td>1.00</td>
                 </tr>
-                <tr bgcolor="#00a65a">
+                <tr bgcolor="#5bb85d">
                     <td>03/05/2016</td>
                     <td>00.00</td>
                     <td>00.00</td>
                     <td>0.00</td>
                     <td>0.00</td>
-                    <td>0.00</td>
-                    <td>0.00</td>
                 </tr>
-                <tr  bgcolor="#e6e6fa">
+                <tr  class="active">
                     <td>05/05/2016</td>
                     <td>07.58</td>
                     <td>5.28</td>
-                    <td>2.00</td>
-                    <td>0.00</td>
                     <td>9.30</td>
                     <td>1.30</td>
                 </tr>
-                <tr bgcolor="#e6e6fa">
+                <tr class="active">
                     <td>04/05/2016</td>
                     <td>08.00</td>
                     <td>5.00</td>
-                    <td>0.00</td>
-                    <td>0.00</td>
                     <td>9.00</td>
                     <td>1.00</td>
                 </tr>
-                <tr bgcolor="#8b0000">
+                <tr bgcolor="#d9544f">
                     <td>03/05/2016</td>
                     <td>00.00</td>
                     <td>00.00</td>
                     <td>0.00</td>
                     <td>0.00</td>
-                    <td>0.00</td>
-                    <td>0.00</td>
                 </tr>
-                <tr  bgcolor="#e6e6fa">
+                <tr  class="active">
                     <td>05/05/2016</td>
                     <td>07.58</td>
                     <td>5.28</td>
-                    <td>2.00</td>
-                    <td>0.00</td>
                     <td>9.30</td>
                     <td>1.30</td>
                 </tr>
                 </tbody>
             </table>
 
-            <button class="col-md-5 col-xs-12 btn btn-info btn-lg pull-right submit-button" type="submit">Generate Report</button>
+            <button class="col-md-5 col-xs-12 btn btn-primary btn-lg pull-right submit-button " type="submit">Generate Report</button>
         </div>
 
         </div>

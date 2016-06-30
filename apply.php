@@ -1,6 +1,10 @@
 <?php
 $var = "apply";
 ?>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7080c5d8c08897c43b1a5d58c06426bd9d10eadf
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,22 +25,37 @@ $var = "apply";
 
 <body style=" background-color: #eceff4 !important;">
 
-<?php include ("navbar.php")?>
+<?php include("navbar.php") ?>
 
-<div class="container-fluid " style="background-color: #FFFFFF;">
+<div class="container-fluid ">
     <div class="row ">
 
         <div class="col-sm-2 col-xs-12 left-menu-div side-bar-display">
-            <?php include ("leftbar.php")?>
+            <?php include("leftbar.php") ?>
         </div>
 
         <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2" style="position: relative;">
 
             <div class="row padding-row">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ol class="breadcrumb breadcrumb-style">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="index.php">Take Your Leave</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-briefcase"></i> Apply Leave
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
 
+            <div class="row padding-row">
+                <div class="col-sm-6 col-xs-12 padding-box">
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top">
-                            <h5 class="nortification-box-heading"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                            <h5 class="nortification-box-heading"><i class="fa fa-calendar-check-o icon-margin-right" aria-hidden="true"></i>
                                 Remaining Leaves</h5>
                             <hr>
                             <ul class="list-group">
@@ -50,7 +69,7 @@ $var = "apply";
                                 </li>
                                 <li class="list-group-item">
                                     <span class="badge">00/10</span>
-                                   Leave Type 3
+                                    Leave Type 3
                                 </li>
                                 <li class="list-group-item">
                                     <span class="badge">00/04</span>
@@ -60,47 +79,24 @@ $var = "apply";
                                     <span class="badge">00/04</span>
                                     Leave Type 5
                                 </li>
-                                
+
                             </ul>
                         </div>
                     </div>
-            </div>
-
-            <hr style="border-bottom:1px solid #e3e3e3;">
-
-            <div class="row padding-row">
-
-                <div class="col-xs-12 col-sm-6 padding-box">
-
-                    <div class="row">
+                    <div class="row margin-top">
                         <div class="col-xs-12 nortification-box-top">
-                            <h5 class="nortification-box-heading"><i class="fa fa-calendar icon-margin-right" aria-hidden="true"></i>
+                            <h5 class="nortification-box-heading"><i class="fa fa-calendar icon-margin-right"aria-hidden="true"></i>
                                 Profile Calendar</h5>
                             <div style="height:300px;background-color:#4cae4c; margin-bottom:20px;">
 
                             </div>
                         </div>
                     </div>
-
-                    <div class="row margin-top">
-                        <div class="col-xs-12 nortification-box-top">
-                            <h5 class="nortification-box-heading"><i class="fa fa-list icon-margin-right" aria-hidden="true"></i>
-                                Past Leave Notifications</h5>
-                            <hr>
-                            <div class="list-group">
-                                <a href="#" class="list-group-item">20/05/2016<span style="float:right;"> Pending... </span></a>
-                                <a href="#" class="list-group-item">18/05/2016<span style="float:right;"> Pending... </span></a>
-                                <a href="#" class="list-group-item">16/03/2016<span style="float:right;"> Approved <i class="fa fa-check" aria-hidden="true"></i></span></a>
-                                <a href="#" class="list-group-item">02/01/2016<span style="float:right;"> Approved <i class="fa fa-check" aria-hidden="true"></i></span></a>
-                                <a href="#" class="list-group-item">07/11/2015<span style="float:right;"> Rejected <i class="fa fa-close" aria-hidden="true"></i></span></a>
-                                <a href="#" class="list-group-item">27/05/2015<span style="float:right;"> Approved <i class="fa fa-check" aria-hidden="true"></i></span></a>
-
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
+<<<<<<< HEAD
 				
+=======
+>>>>>>> 7080c5d8c08897c43b1a5d58c06426bd9d10eadf
                 <div class="col-sm-6 col-xs-12 padding-box">
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top">
@@ -112,7 +108,8 @@ $var = "apply";
                                     <div class="col-xs-12">
                                         <!-- Text input-->
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">Company ID :</label>
+                                            <label class="col-xs-4 control-label form-lable">Company ID:</label>
+
                                             <div class="col-xs-8">
                                                 <input id="service_name" name="job_category" type="text" placeholder=""
                                                        class="form-control input-md" required>
@@ -122,9 +119,10 @@ $var = "apply";
                                         <br>
 
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">Leave Type :</label>
+                                            <label class="col-xs-4 control-label form-lable">Leave Type:</label>
+
                                             <div class="col-xs-8">
-                                                <select  name="emp_role" class="form-control">
+                                                <select name="emp_role" class="form-control">
                                                     <option>-Select-</option>
                                                     <option value="YES">Anuual</option>
                                                     <option value="NO">Casual</option>
@@ -137,9 +135,11 @@ $var = "apply";
                                         <br>
 
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">Starting date :</label>
+                                            <label class="col-xs-4 control-label form-lable">Starting date:</label>
+
                                             <div class="col-xs-8">
-                                                <input id="service_name" name="job_category" type="text" placeholder="dd/mm/yyyy"
+                                                <input id="service_name" name="job_category" type="text"
+                                                       placeholder="dd/mm/yyyy"
                                                        class="form-control input-md" required>
                                             </div>
                                         </div>
@@ -147,9 +147,11 @@ $var = "apply";
                                         <br>
 
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">End date :</label>
+                                            <label class="col-xs-4 control-label form-lable">End date:</label>
+
                                             <div class="col-xs-8">
-                                                <input id="service_name" name="job_category" type="text" placeholder="dd/mm/yyyy"
+                                                <input id="service_name" name="job_category" type="text"
+                                                       placeholder="dd/mm/yyyy"
                                                        class="form-control input-md" required>
                                             </div>
                                         </div>
@@ -157,7 +159,8 @@ $var = "apply";
                                         <br>
 
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">Reason :</label>
+                                            <label class="col-xs-4 control-label form-lable">Reason:</label>
+
                                             <div class="col-xs-8">
                                                 <input id="service_name" name="job_category" type="text" placeholder=""
                                                        class="form-control input-md" required>
@@ -165,19 +168,40 @@ $var = "apply";
                                         </div>
                                         <br>
                                         <br>
-                                        <br>
-                                        <br>
 
-
-                                        <button class="btn btn-info btn-lg pull-right submit-button" type="submit">Apply</button>
+                                        <button class="btn btn-info btn-lg pull-right submit-button" type="submit">Apply
+                                        </button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
+                    <div class="row margin-top">
+                        <div class="col-xs-12 nortification-box-top">
+                            <h5 class="nortification-box-heading"><i class="fa fa-list icon-margin-right"
+                                                                     aria-hidden="true"></i>
+                                Past Leave Notifications</h5>
+                            <hr>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item">20/05/2016<span
+                                        style="float:right;"> Pending... </span></a>
+                                <a href="#" class="list-group-item">18/05/2016<span
+                                        style="float:right;"> Pending... </span></a>
+                                <a href="#" class="list-group-item">16/03/2016<span style="float:right;"> Approved <i
+                                            class="fa fa-check" aria-hidden="true"></i></span></a>
+                                <a href="#" class="list-group-item">02/01/2016<span style="float:right;"> Approved <i
+                                            class="fa fa-check" aria-hidden="true"></i></span></a>
+                                <a href="#" class="list-group-item">07/11/2015<span style="float:right;"> Rejected <i
+                                            class="fa fa-close" aria-hidden="true"></i></span></a>
+                                <a href="#" class="list-group-item">27/05/2015<span style="float:right;"> Approved <i
+                                            class="fa fa-check" aria-hidden="true"></i></span></a>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-				
             </div>
+
         </div>
     </div>
 

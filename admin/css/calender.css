@@ -37,12 +37,13 @@
 
 .jalendar-wood .close-button {
     position: absolute;
-    right: -24px;
+    right: -59px;
     display: none;
-    top: -24px;
+    top: 70px;
     cursor: pointer;
     width: 50px;
     height: 51px;
+    z-index:4000;
 }
 
 .jalendar .wood-bottom {
@@ -66,7 +67,7 @@
     /*box-shadow: 0px 1px 4px #444;*/
     display: inline-block;
     width: 100%;
-   /*float: left;*/
+    float: left;
     z-index:-1000;
 }
 
@@ -236,13 +237,17 @@
 }
 
 .jalendar .add-event {
-    width:80% !important;
-    margin-left:30%;
-    border-top:none !important;
+    width:40% !important;
+    margin-left:65.8%;
+    border-left:none !important;
     display: none;
     /*max-width: 259px !important;*/
+    float:left;
     border:1px solid #278bce;
+    margin-top:-313px;
     z-index:-1000;
+    height:313px;
+    background-color:#FFFFFF;
 }
 
 .jalendar .add-new {
