@@ -17,7 +17,7 @@
     <a href="" class="list-group-item left-menu left-menu<?php if($var=="status"){echo"-active";}?>"><i class="fa fa-building icon-bar" aria-hidden="true"></i>Leave Status<span class="<?php if($var=="status"){echo"selected";}?>"></span></a>
     <a href="attendance.php" class="list-group-item left-menu left-menu<?php if($var=="attendance"){echo"-active";}?>"><i class="fa fa-check-circle icon-bar" aria-hidden="true"></i>My Attendance<span class="<?php if($var=="attendance"){echo"selected";}?>"></span></a>
     <a href="medicalUpload.php" class="list-group-item left-menu left-menu<?php if($var=="medical"){echo"-active";}?>"><i class="fa fa-plus icon-bar" aria-hidden="true"></i>Medical Upload Center<span class="<?php if($var=="medical"){echo"selected";}?>"></span></a>
-    <a href="" class="list-group-item left-menu left-menu<?php if($var=="reports"){echo"-active";}?>"><i class="fa fa-briefcase icon-bar" aria-hidden="true"></i>Generate Reports<span class="<?php if($var=="reports"){echo"selected";}?>"></span></a>
+    <a href="generateReport.php" class="list-group-item left-menu left-menu<?php if($var=="reports"){echo"-active";}?>"><i class="fa fa-briefcase icon-bar" aria-hidden="true"></i>Generate Reports<span class="<?php if($var=="reports"){echo"selected";}?>"></span></a>
 
     <a href="" class="list-group-item left-menu left-menu<?php if($var=="calendar"){echo"-active";}?>"><i class="fa fa-calendar icon-bar" aria-hidden="true"></i>My Calendar<span class="<?php if($var=="calendar"){echo"selected";}?>"></span></a>
 
