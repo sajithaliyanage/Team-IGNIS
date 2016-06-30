@@ -1,3 +1,4 @@
+/*apply start*/
 .main-box-1-1{
     height:80px;
     background-color: #00c0ef;
@@ -81,6 +82,31 @@
     padding-right:20px !important;
     border-top:2px solid #5a849c;
 }
+
+.nortification-box-top3{
+    background-color:#FFFFFF;
+    padding-left:20px !important;
+    padding-right:20px !important;
+    border-top:2px solid #5a849c;
+    padding-top: 20px;
+}
+
+
+/*for profile interface*/
+.nortification-box-top1{
+    background-color:#FFFFFF;
+    padding-left:20px !important;
+    padding-right:20px !important;
+    /*border-top:2px solid #5a849c;*/
+}
+
+.nortification-box-top2{
+    background-color:#FFFFFF;
+    padding-left:20px !important;
+    padding-right:20px !important;
+    border-top:2px solid #5a849c;
+}
+/*...*/
 .nortification-box-middle{
     height:300px;
     color: #000;
@@ -121,7 +147,7 @@
 
 
 
-/*department start*/
+/* start*/
 .margin-top{
     margin-top:30px !important;
 }
@@ -148,9 +174,9 @@
 .department-add{
     padding-top:10px;
 }
-/*department end*/
+/* end*/
 
-/*employee start*/
+
 .filterable {
     margin-top: 15px;
 }
@@ -184,24 +210,34 @@
     margin-top:-5px;
 }
 
-/*employee end*/
+/*apply end*/
 
-/*roster start*/
+
 .outer-filter-roster{
     border-color:transparent ;
 }
 
+/*for profile class*/
 .tab-box-1{
-     background-color:#2c3b42 !important;
+     background-color:#00a65a !important;
      border:none !important;
      color:#FFFFFF !important;
-     border-radius:0px !important;
+     border-radius:2px !important;
+     width: 150px;
+     padding-left: 30px;
+     margin-right:5px;
+
  }
 
 .tab-box-2{
-    background-color:#204d74 !important;
+    background-color:#ffffff !important;
     border:none !important;
-    color:#FFFFFF !important;
-    border-radius:0px !important;
+    color:#000000 !important;
+    border-radius:2px !important;
+    width: 150px;
+    padding-left: 10px;
+
+
 }
-/*roster end*/
+
+/*...*/
