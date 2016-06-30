@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 <?php
 $var = "roster";
 ?>
-
-=======
->>>>>>> origin/master
  <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,12 +30,26 @@ $var = "roster";
             <?php include ("leftbar.php")?>
         </div>
 
-        <div class="col-sm-10 col-xs-12 col-sm-push-2">
-			<div class="row">
-				<div class="col-sm-6 col-xs-12">
+        <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2" style="position: relative;">
+				<div class="row padding-row">
+					<div class="row">
+						<div class="col-lg-12">
+							<ol class="breadcrumb breadcrumb-style">
+								<li>
+									<i class="fa fa-dashboard"></i>  <a href="index.php">Take Your Leave</a>
+								</li>
+								<li class="active">
+									<i class="fa fa-briefcase"></i> Upload Medical Reports
+								</li>
+							</ol>
+						</div>
+					</div>
 				</div>
-				<div class="col-sm-6 col-xs-12">
-				                        <div class="col-xs-12 nortification-box-top">
+				
+			<div class="col-sm-6 col-xs-12">
+				</div>
+				<div class="col-sm-6 col-xs-12">		
+					<div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-tag icon-margin-right" aria-hidden="true"></i>
                                 Shift Application</h5>
                             <hr>
@@ -128,10 +138,8 @@ $var = "roster";
                                     </div>
                                 </div>
                             </form>
-                        </div>
+                    </div>   </div>
 
-				</div>
-			</div>
          </div>
       </div>
 
