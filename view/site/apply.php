@@ -1,10 +1,6 @@
 <?php
 $var = "apply";
 ?>
-<<<<<<< HEAD
-=======
-
->>>>>>> 7080c5d8c08897c43b1a5d58c06426bd9d10eadf
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,10 +89,6 @@ $var = "apply";
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
-				
-=======
->>>>>>> 7080c5d8c08897c43b1a5d58c06426bd9d10eadf
                 <div class="col-sm-6 col-xs-12 padding-box">
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top">
