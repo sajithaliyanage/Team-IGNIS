@@ -1,72 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Take Your Leave</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/login-file.css" type="text/css" />
-</head>
-<body>
 
-<div class="container ">
-    <div class="row" >
-        <div id="login-box" class=" col-xs-10 col-xs-offset-1 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <form role="form" method="POST">
-                <fieldset>
-                    <div class="max-head-login">
-                        <div class="col-xs-10">
-                            <h2 class="login-heading">TAKE YOUR LEAVE</h2>
-                        </div>
-                        <div class="col-xs-2">
-                            <img src="images/lms-logo.png" class="img-responsive logo" />
-                        </div>
-                    </div>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-                    <div class="mini-head-login">
-                        <div class="col-xs-12">
-                            <center>
-                                <img src="images/lms-logo.png" class="img-responsive logo" />
-                            </center>
-                        </div>
+        <title>Take Your Leave | Online</title>
+        <link rel="stylesheet" href="public/css/bootstrap.min.css">
+        <link rel="stylesheet" href="public/css/font-awesome.min.css">
+        <link rel="stylesheet" href="public/css/login-file.css">
+    </head>
 
-                    </div>
+    <body>
 
-
-                    <hr class="colorgraph">
-
-
-                    <div class="form-group">
-                        <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Enter Company ID" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Enter Password" required>
-                    </div>
-
-                    <a href="" class="btn btn-link pull-right">Forgot Password?</a>
-
-                    <hr class="colorgraph">
+        <div class="top-content" style="margin-bottom:-50px !important;">
+        	
+            <div class="inner-bg">
+                <div class="container">
                     <div class="row">
-                        <div class="col-xs-3 col-sm-3 col-md-3">
+                        <div class="col-sm-8 col-sm-offset-2 text" style="margin-top:-60px;">
+                            <center>
+                                <img src="public/images/new-logo.png" style="height:50px; width:50px;" class="img-responsive" />
+                            </center>
 
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                            <input type="submit" class="btn btn-lg btn-success btn-block" value="Login">
-                        </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3">
-
+                            <h1>Take Your Leave | Online LMS</h1>
+                            <div class="description">
+                            	<p>
+                                    Take Your Leave is online leave management system for all kind of companies and include lots of facilities and services
+                            	</p>
+                            </div>
                         </div>
                     </div>
-                </fieldset>
-            </form>
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3 form-box">
+                        	<div class="form-top">
+                        		<div class="form-top-left">
+                        			<h3>Login to our site</h3>
+                            		<p>Enter your company-ID and password to log on:</p>
+                        		</div>
+                        		<div class="form-top-right">
+                        			<i class="fa fa-lock"></i>
+                        		</div>
+                            </div>
+                            <div class="form-bottom">
+			                    <form role="form" action="" method="post" class="login-form">
+			                    	<div class="form-group">
+			                    		<label class="sr-only" for="form-username">CompanyID</label>
+			                        	<input type="text" name="form-username" placeholder="CompanyID..." class="form-username form-control" id="form-username" required>
+			                        </div>
+			                        <div class="form-group">
+			                        	<label class="sr-only" for="form-password">Password</label>
+			                        	<input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password" required>
+			                        </div>
+			                        <button type="submit" class="btn">Sign in!</button>
+			                    </form>
+		                    </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+            
         </div>
-    </div>
+    </body>
 
-    <center>
-        <div style="bottom:0; position: relative;margin-top:120px;">
-            <p style=" text-align: center !important; color:#FFFFFF;">Take Your Leave is online leave management system for all kind of companies and include lots of facilities and services</p>
-        </div>
-    </center>
-
-</div><!-- /container -->
-</body>
 </html>

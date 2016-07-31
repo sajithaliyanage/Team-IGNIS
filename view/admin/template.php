@@ -8,11 +8,11 @@
 
     <title>Take Your Leave | Online</title>
 
-    <link href="public/css/bootstrap.min.css" rel="stylesheet">
-    <link href="public/css/interface-leftmenu.css" rel="stylesheet">
-    <link href="public/css/adminpanel-interface.css" rel="stylesheet">
-    <link href="public/css/navbar-style.css" rel="stylesheet">
-    <link href="public/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/interface-leftmenu.css" rel="stylesheet">
+    <link href="css/adminpanel-interface.css" rel="stylesheet">
+    <link href="css/navbar-style.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
 
   </head>
 
@@ -24,17 +24,17 @@
       <div class="row">
 
         <div class="col-sm-2 col-xs-12 left-menu-div side-bar-display">
-            <?php include("leftbar.php") ?>
+            <?php include ("leftbar.php")?>
         </div>
 
-        <div class="col-sm-10 col-xs-12 col-sm-push-2">
+        <div class="col-sm-10 col-xs-12">
 
          </div>
       </div>
 
     </div>
 
-    <script src="public/js/jquery.js"></script>
-    <script src="public/js/bootstrap.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
 </body>
 </html>
