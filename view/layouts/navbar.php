@@ -41,7 +41,7 @@
                        aria-haspopup="true" aria-expanded="false"><img src="../../public/images/emp.png" class="img-circle image-user"  />Sajitha Liyanage <span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-admin">
                         <li><a href="#">My Profile</a></li>
-                        <li><a href="#">Logout</a></li>
+                        <li><a href="../../module/logout.php">Logout</a></li>
                     </ul>
                 </li>
             </ul>
