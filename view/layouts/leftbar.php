@@ -22,6 +22,8 @@
     <a href="" class="list-group-item left-menu left-menu<?php if($var=="calendar"){echo"-active";}?>"><i class="fa fa-calendar icon-bar" aria-hidden="true"></i>My Calendar<span class="<?php if($var=="calendar"){echo"selected";}?>"></span></a>
 
     <a href="../site/roster.php" class="list-group-item left-menu left-menu<?php if($var=="roster"){echo"-active";}?>"><i class="fa fa-shirtsinbulk icon-bar" aria-hidden="true"></i>Roster System<span class="<?php if($var=="roster"){echo"selected";}?>"></span></a>
+
     <a href="../site/profile.php" class="list-group-item left-menu left-menu<?php if($var=="profile"){echo"-active";}?>"><i class="fa fa-user icon-bar" aria-hidden="true"></i>My Profile<span class="<?php if($var=="profile"){echo"selected";}?>"></span></a>
+
 
 </div>
