@@ -64,7 +64,7 @@ $var = "attendance";
                                             <label class="col-xs-4 control-label form-lable">Start Date:</label>
 
                                             <div class="col-xs-8">
-                                                <input id="service_name" name="job_category" type="text"
+                                                <input id="example1" name="example1" type="text"
                                                        placeholder="dd/mm/yyyy"
                                                        class="form-control input-md" required>
                                             </div>
@@ -76,9 +76,10 @@ $var = "attendance";
                                             <label class="col-xs-4 control-label form-lable">End date:</label>
 
                                             <div class="col-xs-8">
-                                                <input id="service_name" name="job_category" type="text"
+                                                <input id="example2" name="example2" type="text"
                                                        placeholder="dd/mm/yyyy"
                                                        class="form-control input-md" required>
+
                                             </div>
                                         </div>
                                         <br>
@@ -99,7 +100,7 @@ $var = "attendance";
                                         <br>
 
 
-                                        <button class="btn btn-info btn-lg pull-right submit-button" type="submit">Fitler & Download
+                                        <button class="btn btn-info btn-lg pull-right submit-button"  type="submit">Fitler & Download
                                         </button>
                                     </div>
                                 </div>
@@ -118,108 +119,25 @@ $var = "attendance";
                             <div class="row">
                                 <div class="col-xs-12">
                                     <table class="table table-responsive">
-                                        <thead>
                                         <tr>
                                             <th>Date</th>
                                             <th>In Time</th>
                                             <th>Out Time</th>
-                                            <th>Work Time(hours)</th>
-                                            <th>Over Time(hours)</th>
+                                            <th>Work Time</th>
+                                            <th>Over Time</th>
                                         </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>05/05/2016</td>
-                                            <td>07.58</td>
-                                            <td>5.28</td>
-                                            <td>9.30</td>
-                                            <td>1.30</td>
-                                        </tr>
-                                        <tr class="success">
-                                            <td>04/05/2016</td>
-                                            <td>08.00</td>
-                                            <td>5.00</td>
-                                            <td>9.00</td>
-                                            <td>1.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>03/05/2016</td>
-                                            <td>00.00</td>
-                                            <td>00.00</td>
-                                            <td>0.00</td>
-                                            <td>0.00</td>
-                                        </tr>
-                                        <tr class="danger">
-                                            <td>05/05/2016</td>
-                                            <td>07.58</td>
-                                            <td>5.28</td>
-                                            <td>9.30</td>
-                                            <td>1.30</td>
-                                        </tr>
-                                        <tr>
-                                            <td>04/05/2016</td>
-                                            <td>08.00</td>
-                                            <td>5.00</td>
-                                            <td>9.00</td>
-                                            <td>1.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>03/05/2016</td>
-                                            <td>00.00</td>
-                                            <td>00.00</td>
-                                            <td>0.00</td>
-                                            <td>0.00</td>
-                                        </tr>
-                                        <tr class="success">
-                                            <td>05/05/2016</td>
-                                            <td>07.58</td>
-                                            <td>5.28</td>
-                                            <td>9.30</td>
-                                            <td>1.30</td>
-                                        </tr>
-                                        <tr>
-                                            <td>05/05/2016</td>
-                                            <td>07.58</td>
-                                            <td>5.28</td>
-                                            <td>9.30</td>
-                                            <td>1.30</td>
-                                        </tr>
-                                        <tr class="success">
-                                            <td>04/05/2016</td>
-                                            <td>08.00</td>
-                                            <td>5.00</td>
-                                            <td>9.00</td>
-                                            <td>1.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>03/05/2016</td>
-                                            <td>00.00</td>
-                                            <td>00.00</td>
-                                            <td>0.00</td>
-                                            <td>0.00</td>
-                                        </tr>
-                                        <tr class="danger">
-                                            <td>05/05/2016</td>
-                                            <td>07.58</td>
-                                            <td>5.28</td>
-                                            <td>9.30</td>
-                                            <td>1.30</td>
-                                        </tr>
-                                        <tr>
-                                            <td>04/05/2016</td>
-                                            <td>08.00</td>
-                                            <td>5.00</td>
-                                            <td>9.00</td>
-                                            <td>1.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>03/05/2016</td>
-                                            <td>00.00</td>
-                                            <td>00.00</td>
-                                            <td>0.00</td>
-                                            <td>0.00</td>
-                                        </tr>
-                                        </tbody>
+                                        <?php include "excelReader.php"?>
+                                        <?php foreach( $data as $row ) { ?>
+                                            <tr>
+                                                <td><?php echo( $row['Date'] ); ?></td>
+                                                <td><?php echo( $row['In Time'] ); ?></td>
+                                                <td><?php echo( $row['Out Time'] ); ?></td>
+                                                <td><?php echo( $row['Work Time'] ); ?></td>
+                                                <td><?php echo( $row['Over Time'] ); ?></td>
+
+                                            </tr>
+                                        <?php } ?>
+
                                     </table>
                                 </div>
                             </div>
