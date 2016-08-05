@@ -27,6 +27,24 @@ $var = "resetpswd";
     <div class="inner-bg">
         <div class="container">
 
+            <div class="row padding-row">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ol class="breadcrumb breadcrumb-style">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="index.php">Admin Panel</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-user-md"></i> My Profile
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-user-plus"></i> Reset Password
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3 form-box">
                     <div class="form-top">

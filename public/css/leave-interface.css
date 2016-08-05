@@ -83,28 +83,22 @@
     border-top:2px solid #5a849c;
 }
 
-.nortification-box-top3{
+
+#imageBox{
+    background-image:url('../images/default.png');
     background-color:#FFFFFF;
-    padding-left:20px !important;
-    padding-right:20px !important;
-    border-top:2px solid #5a849c;
-    padding-top: 20px;
+    margin-left:50px !important;
+    margin-right:50px !important;
+    width:350px;
+    height:400px;
+
 }
-
-
-/*for profile interface*/
-.nortification-box-top1{
-    background-color:#FFFFFF;
+#imageBox:hover {
+    background-image:url('../images/default_hover.png');
     padding-left:20px !important;
     padding-right:20px !important;
-    /*border-top:2px solid #5a849c;*/
-}
 
-.nortification-box-top2{
-    background-color:#FFFFFF;
-    padding-left:20px !important;
-    padding-right:20px !important;
-    border-top:2px solid #5a849c;
+
 }
 /*...*/
 .nortification-box-middle{
@@ -212,9 +206,6 @@
 
 /*apply end*/
 
-
-<<<<<<< HEAD
-=======
 /*medical upload*/
 .upload-box{
     margin-top:20px;
@@ -230,7 +221,7 @@
 }
 /*end medical upload*/
 /*roster start*/
->>>>>>> 7080c5d8c08897c43b1a5d58c06426bd9d10eadf
+
 .outer-filter-roster{
     border-color:transparent ;
 }

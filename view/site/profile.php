@@ -35,16 +35,33 @@ $var = "profile";
             <hr style="border-bottom:1px solid #e3e3e3;">
 
             <div class="row padding-row">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ol class="breadcrumb breadcrumb-style">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="index.php">Admin Panel</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-user-md"></i> My Profile
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row padding-row">
                 <div class="col-xs-12 col-sm-6 padding-box">
 
                     <div class="row">
                         <div class="row"><br><br><br><br></div>
-                        <div class="col-xs-12 nortification-box-top2">
+                        <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-user icon-margin-right" aria-hidden="true"></i>
                                 My Profile</h5>
                             <hr>
                             <div class="col-xs-10">
-                                <img src="../admin/images/default.png" width="300" height="400" align="right"/>
+
+                                    <a href="#"><div id="imageBox"></div></a>
+
                             </div>
                         </div>
                     </div>
@@ -70,7 +87,7 @@ $var = "profile";
 
                             <div class="col-xs-12">
 
-                                <div class="col-xs-12 nortification-box-top2">
+                                <div class="col-xs-12 nortification-box-top">
                                     <h5 class="nortification-box-heading"><i class="fa fa-edit icon-margin-right" aria-hidden="true"></i>
                                         Edit Profile</h5>
                                     <hr>
@@ -116,7 +133,7 @@ $var = "profile";
 
                                     <br><br>
 
-                                    <button class="btn btn-info btn-lg pull-right submit-button" type="submit" >Edit</button>
+                                    <a href="editProfile.php"><button class="btn btn-info btn-lg pull-right submit-button" type="submit" >Edit</button></a>
 
 
                                 </div>
