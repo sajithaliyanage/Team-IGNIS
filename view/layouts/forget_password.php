@@ -8,9 +8,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Take Your Leave | Online</title>
-        <link rel="stylesheet" href="public/css/bootstrap.min.css">
-        <link rel="stylesheet" href="public/css/font-awesome.min.css">
-        <link rel="stylesheet" href="public/css/login-file.css">
+        <link rel="stylesheet" href="../../public/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../public/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../../public/css/login-file.css">
     </head>
 
     <body>
@@ -22,7 +22,7 @@
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-2 text" style="margin-top:-60px;">
                             <center>
-                                <img src="public/images/new-logo.png" style="height:50px; width:50px;" class="img-responsive" />
+                                <a href="../../index.php"><img src="../../public/images/new-logo.png" style="height:50px; width:50px;" class="img-responsive" /></a>
                             </center>
 
                             <h1>Take Your Leave | Online LMS</h1>
@@ -43,25 +43,20 @@
 
                         	<div class="form-top">
                         		<div class="form-top-left">
-                        			<h3>Login to our site</h3>
-                            		<p>Enter your company-ID and password to log on:</p>
+                        			<h3>Forget your password ?</h3>
+                            		<p>Enter your company email:</p>
                         		</div>
                         		<div class="form-top-right">
                         			<i class="fa fa-lock"></i>
                         		</div>
                             </div>
                             <div class="form-bottom">
-			                    <form role="form" action="module/login.php" method="post" class="login-form">
+			                    <form role="form" action="" method="post" class="login-form">
 			                    	<div class="form-group">
-			                    		<label class="sr-only" for="form-username">CompanyID</label>
-			                        	<input type="text" name="companyID" placeholder="CompanyID..." class="form-username form-control" id="form-username" required>
+			                    		<label class="sr-only">Email</label>
+			                        	<input type="text" name="companyID" placeholder="Company email..." class="form-username form-control" id="form-username" required>
 			                        </div>
-			                        <div class="form-group">
-			                        	<label class="sr-only" for="form-password">Password</label>
-			                        	<input type="password" name="password" placeholder="Password..." class="form-password form-control" id="form-password" required>
-			                        </div>
-                                    <a href="view/layouts/forget_password.php"><h5 class="form-top1">Forget your password?</h5></a>
-			                        <button type="submit" class="btn">Sign in!</button>
+			                        <button type="submit" class="btn">Confirm</button>
 			                    </form>
 		                    </div>
                         </div>
@@ -72,8 +67,8 @@
             
         </div>
 
-        <script src="public/js/jquery.js"></script>
-        <script src="public/js/bootstrap.js"></script>
+        <script src="../../public/js/jquery.js"></script>
+        <script src="../../public/js/bootstrap.js"></script>
     </body>
 
 </html>
