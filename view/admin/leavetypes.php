@@ -1,5 +1,13 @@
 <?php
 $var = "leave";
+include('../../controller/siteController.php');
+include('../../config/connect.php');
+$pdo = connect();
+
+if(!$isLoggedin && $empRole!="admin"){
+    header('Location:../../index.php');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -53,36 +61,24 @@ $var = "leave";
                             <h5 class="nortification-box-heading"><i class="fa fa-check icon-margin-right" aria-hidden="true"></i>
                                 Added Leave Types</h5>
                             <hr>
-                            <h5 style="text-align: right;">Total Job Categories : <span class="badge">07</span></h5>
+                            <?php
+                                $sql = "select * from leave_type";
+                                $query = $pdo->prepare($sql);
+                                $query->execute();
+                                $result = $query->fetchAll();
+                                $rowCount = $query->rowCount();
+                            ?>
+                            <h5 style="text-align: right;">Total Job Categories : <span class="badge"><?php if($rowCount<10){echo "0".$rowCount;}else{echo $rowCount;} ?></span></h5>
                             <div class="list-group">
-                                <a href="#" class="list-group-item">
-                                     <h5>Annual Leaves</h5>
-                                     <span class="label label-danger" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <h5>Casual Leaves</h5>
-                                    <span class="label label-danger" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <h5>Medical Leaves</h5>
-                                    <span class="label label-danger" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <h5>Half Days</h5>
-                                    <span class="label label-danger" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <h5>Monthly Short Leaves</h5>
-                                    <span class="label label-danger" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <h5>Unauthorized Leaves</h5>
-                                    <span class="label label-danger" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <h5>Authorized Leaves</h5>
-                                    <span class="label label-danger" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></span>
-                                </a>
+
+                                <?php
+                                foreach($result as $rs){
+                                    echo " <a href='#' class='list-group-item'>
+                                                <h5>".$rs['leave_name']."</h5>
+                                                <span class=\"label label-danger\" style=\"float: right; margin-top:-24px;\">Delete <i class=\"fa fa-close\" aria-hidden=\"true\"></i></span>
+                                               </a>";
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -92,8 +88,9 @@ $var = "leave";
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-plus icon-margin-right" aria-hidden="true"></i>
                                 Add New Leave Type</h5>
+                            <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">Leave type added successfully!</div>
                             <hr>
-                            <form role="form" data-toggle="validator" action="" method="post">
+                            <form role="form" data-toggle="validator" action="module/addLeaveTypes.php" method="post">
                                 <div class="department-add">
                                     <div class="col-xs-12">
                                             <!-- Text input-->

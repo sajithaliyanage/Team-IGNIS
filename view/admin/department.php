@@ -1,5 +1,14 @@
 <?php
 $var = "department";
+include('../../controller/siteController.php');
+include('../../config/connect.php');
+$pdo = connect();
+
+//require_once('module/Department.php');
+
+if(!$isLoggedin && $empRole!="admin"){
+    header('Location:../../index.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,36 +62,21 @@ $var = "department";
                                 Current Departments</h5>
                             <hr>
                             <div class="list-group">
-                                <a href="#" class="list-group-item">
-                                    <div style="height:25px; width:25px; background-color:#8a6d3b; float: left; margin-right:10px; margin-top:5px;"></div>
-                                     <h5>HR Department</h5>
-                                     <h5 style="float: right; margin-top:-24px;"> More Info <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></h5>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div style="height:25px; width:25px; background-color:#00a65a; float: left; margin-right:10px; margin-top:5px;"></div>
-                                    <h5>IT Department</h5>
-                                    <h5 style="float: right; margin-top:-24px;"> More Info <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></h5>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div style="height:25px; width:25px; background-color:#337ab7; float: left; margin-right:10px; margin-top:5px;"></div>
-                                    <h5>Server Department</h5>
-                                    <h5 style="float: right; margin-top:-24px;"> More Info <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></h5>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div style="height:25px; width:25px; background-color:#843534; float: left; margin-right:10px; margin-top:5px;"></div>
-                                    <h5>Salary Department</h5>
-                                    <h5 style="float: right; margin-top:-24px;"> More Info <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></h5>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div style="height:25px; width:25px; background-color:#d58512; float: left; margin-right:10px; margin-top:5px;"></div>
-                                    <h5>Marketing Department</h5>
-                                    <h5 style="float: right; margin-top:-24px;"> More Info <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></h5>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div style="height:25px; width:25px; background-color:#999999; float: left; margin-right:10px; margin-top:5px;"></div>
-                                    <h5>Sales Department</h5>
-                                    <h5 style="float: right; margin-top:-24px;"> More Info <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></h5>
-                                </a>
+                                <?php
+                                    $sql = "select * from department WHERE currentStatus=:log";
+                                    $query = $pdo->prepare($sql);
+                                    $query->execute(array('log'=>"approved"));
+                                    $result = $query->fetchAll();
+
+                                    foreach($result as $rs){
+                                        echo " <a href='index_department_employee.php?id=".$rs['dept_id']."' class='list-group-item'>
+                                                <div style='height:25px; width:25px; background-color:#".$rs['dept_color']."; float: left; margin-right:10px; margin-top:5px;'></div>
+                                                <h5>".$rs['dept_name']."</h5>
+                                                <h5 style='float: right; margin-top:-24px;'>More Info <i class='fa fa-chevron-circle-right' aria-hidden='true'></i></h5>
+                                               </a>";
+                                    }
+                                ?>
+
                             </div>
                         </div>
                     </div>
@@ -92,8 +86,12 @@ $var = "department";
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-plus icon-margin-right" aria-hidden="true"></i>
                                 Add New Department</h5>
+
+<!--                            //alert to user-->
+                            <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">Department added successfully!</div>
+
                             <hr>
-                            <form role="form" data-toggle="validator" action="" method="post">
+                            <form role="form" data-toggle="validator" action="module/addDepartments.php" method="post">
                                 <div class="department-add">
                                     <div class="col-xs-12">
                                             <!-- Text input-->
@@ -142,9 +140,16 @@ $var = "department";
                                 Pending Requests</h5>
                             <hr>
                             <div class="list-group">
-                                <a href="#" class="list-group-item">IT Department<span style="float:right;"> Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>
-                                <a href="#" class="list-group-item">Sales Department<span style="float:right;"> Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>
-                                <a href="#" class="list-group-item">HR Department<span style="float:right;"> Approved <i class="fa fa-check" aria-hidden="true"></i></span></a>
+                                <?php
+                                    $sql = "select * from department";
+                                    $query = $pdo->prepare($sql);
+                                    $query->execute();
+                                    $result = $query->fetchAll();
+
+                                    foreach($result as $rs){
+                                        echo "<a href='#' class='list-group-item'>".$rs['dept_name']."<span style='float:right;'>"; if($rs['currentStatus']=='waiting'){echo 'Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>';}else if($rs['currentStatus']=='approved'){ echo 'Approved <i class=\'fa fa-check\' aria-hidden=\'true\'></i></span></a>';}else{echo 'Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></a>';};
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
