@@ -63,9 +63,9 @@ if(!$isLoggedin && $empRole!="admin"){
                                 Added Job Categories</h5>
                             <hr>
                             <?php
-                                $sql = "select * from job_category";
+                                $sql = "select * from job_category where currentStatus=:log ";
                                 $query = $pdo->prepare($sql);
-                                $query->execute();
+                                $query->execute(array('log'=>"approved"));
                                 $result = $query->fetchAll();
                                 $rowCount = $query->rowCount();
                             ?>
@@ -118,9 +118,16 @@ if(!$isLoggedin && $empRole!="admin"){
                                 Pending Requests</h5>
                             <hr>
                             <div class="list-group">
-                                <a href="#" class="list-group-item">IT Department<span style="float:right;"> Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>
-                                <a href="#" class="list-group-item">Sales Department<span style="float:right;"> Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>
-                                <a href="#" class="list-group-item">HR Department<span style="float:right;"> Approved <i class="fa fa-check" aria-hidden="true"></i></span></a>
+                                <?php
+                                $sql = "select * from job_category";
+                                $query = $pdo->prepare($sql);
+                                $query->execute();
+                                $result = $query->fetchAll();
+
+                                foreach($result as $rs){
+                                    echo "<a href='#' class='list-group-item'>".$rs['job_cat_name']."<span style='float:right;'>"; if($rs['currentStatus']=='waiting'){echo 'Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>';}else if($rs['currentStatus']=='approved'){ echo 'Approved <i class=\'fa fa-check\' aria-hidden=\'true\'></i></span></a>';}else{echo 'Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></a>';};
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>

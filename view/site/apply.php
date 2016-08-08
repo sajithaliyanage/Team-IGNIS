@@ -1,5 +1,10 @@
 <?php
 $var = "apply";
+include('../../controller/siteController.php');
+
+if(!$isLoggedin){
+    header('Location:../../index.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

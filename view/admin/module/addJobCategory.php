@@ -6,9 +6,9 @@ $catName = $_POST['job_category'];
 
 try{
 
-    $sql = "INSERT INTO job_category (job_cat_name) VALUES (:catName)";
+    $sql = "INSERT INTO job_category (job_cat_name) VALUES (:catName,:ststus)";
     $query = $pdo->prepare($sql);
-    $query->execute(array('catName'=>$catName));
+    $query->execute(array('catName'=>$catName,'ststus'=>"waiting"));
 
     header("Location:../jobcategory.php?job=done");
 
