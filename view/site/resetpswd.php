@@ -20,9 +20,9 @@ $var = "resetpswd";
 
 </head>
 
-<body>
+<body style="background-color:#eceff4">
 
-<div class="top-content" style="margin-bottom:-50px; !important;">
+<div class="top-content" style="margin-bottom:-50px; !important; background-color: #eceff4">
 
     <div class="inner-bg">
         <div class="container">
@@ -32,10 +32,10 @@ $var = "resetpswd";
                     <div class="col-lg-12">
                         <ol class="breadcrumb breadcrumb-style">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.php">Admin Panel</a>
+                                <i class="fa fa-dashboard"></i>  <a href="../../index.php">Take Your Leave</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-user-md"></i> My Profile
+                                <i class="fa fa-user-md"></i> <a href="profile.php">My Profile</a>
                             </li>
                             <li class="active">
                                 <i class="fa fa-user-plus"></i> Reset Password
@@ -69,7 +69,7 @@ $var = "resetpswd";
                                 <label class="sr-only" for="form-password">Confirm password</label>
                                 <input type="password" name="form-password" placeholder="Confirm password" class="form-password form-control" id="form-password" required>
                             </div>
-                            <button type="submit" class="btn">Reset password</button>
+                            <button class="btn btn-info btn-lg pull-right submit-button" type="submit" >Reset password</button>
                         </form>
                     </div>
                 </div>

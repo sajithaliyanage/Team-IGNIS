@@ -1,9 +1,7 @@
-@import url(http://fonts.googleapis.com/css?family=Fugaz+One);
-@import url(http://fonts.googleapis.com/css?family=Roboto:300);
 .jalendar {
     position: relative;
     width: 300px;
-    margin: 30px auto;
+    margin: 10px auto;
 }
 
 .jalendar .left {
@@ -27,7 +25,7 @@
     position: relative;
     background: url('../images/jalendar-wood-bg.png') left top;
     border-radius: 10px;
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.7), inset 0 -2px 10px rgba(255, 255, 255, 0.3);
+    /*box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.7), inset 0 -2px 10px rgba(255, 255, 255, 0.3);*/
     padding: 15px;
     /*border-bottom: 1px solid rgba(255, 255, 255, 0.2);*/
     /*border-top: 1px solid #e1bf89;*/
@@ -39,12 +37,13 @@
 
 .jalendar-wood .close-button {
     position: absolute;
-    right: -24px;
+    right: -59px;
     display: none;
-    top: -24px;
+    top: 70px;
     cursor: pointer;
     width: 50px;
     height: 51px;
+    z-index:4000;
 }
 
 .jalendar .wood-bottom {
@@ -56,37 +55,39 @@
     width: 100%;
     height: 100%;
     z-index: 1;
-    box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.8), 0 2px 5px rgba(0, 0, 0, 0.7);
-    border-bottom: 1px solid #653f08;
+    /*box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.8), 0 2px 5px rgba(0, 0, 0, 0.7);*/
+    /*border-bottom: 1px solid #653f08;*/
 }
 
 .jalendar-pages {
     position: relative;
     background-color: #fff;
-    border-radius: 2px;
-    box-shadow: 0px 1px 4px #444;
+    /*border-radius: 2px;*/
+    border:1px solid #278bce;
+    /*box-shadow: 0px 1px 4px #444;*/
     display: inline-block;
     width: 100%;
     float: left;
+    z-index:-1000;
 }
 
 .jalendar .pages-bottom {
     position: absolute;
     border-radius: 0 0 2px 2px;
-    height: 4px;
+    height: 0px;
     bottom: -4px;
     left: 1%;
     width: 98%;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(0, 0, 0, 0.5);
+    /*box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(0, 0, 0, 0.5);*/
     background: #fff;
 }
 
 .jalendar-pages > .header {
     text-align: center;
-    background: #3498db;
+    background: #278bce !important;
     position: relative;
-    border-radius: 3px 3px 0 0;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.7), inset 0 -10px 20px rgba(0, 0, 0, 0.2), inset 0 40px 40px rgba(255, 255, 255, 0.3);
+    /*border-radius: 3px 3px 0 0;*/
+    /*box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.7), inset 0 -10px 20px rgba(0, 0, 0, 0.2), inset 0 40px 40px rgba(255, 255, 255, 0.3);*/
     overflow: hidden;
 }
 
@@ -96,7 +97,7 @@
     display: inline-block;
     font: 24px "Roboto", Arial, Helvetica, Geneva, sans-serif;
     color: #fff;
-    text-shadow: 0 -1px 3px rgba(0, 0, 0, 0.5);
+    /*text-shadow: 0 -1px 3px rgba(0, 0, 0, 0.5);*/
 }
 
 .jalendar-pages > .header .prv-m,
@@ -138,7 +139,7 @@
     background: url('../images/jalendar-sprite.png') no-repeat 0 -41px;
     height: 22px;
     font: 13px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
-    text-shadow: 0 1px 0 #000;
+    /*text-shadow: 0 1px 0 #000;*/
     color: #fff;
 }
 
@@ -150,15 +151,15 @@
     margin: 12px 15px;
     background-color: rgba(0, 0, 0, 0.06);
     border-radius: 30px;
-    box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.3);
+    /*box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.3);*/
     padding: 6px 12px;
     color: #666;
     font: 12px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 
 .jalendar .total-bar b {
-    color: #3498db !important;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 1);
+    color: #278bce;
+    /*text-shadow: 0 1px 1px rgba(255, 255, 255, 1);*/
 }
 
 .jalendar .days {
@@ -177,7 +178,7 @@
     font: 14px "Roboto", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
-    color: #3498db !important;
+    color: #666;
     cursor: pointer;
     position: relative;
 }
@@ -193,9 +194,10 @@
 }
 
 .jalendar .days .day.selected {
-    box-shadow: inset 0 5px 15px rgba(255, 255, 255, 0.4), inset 0 -10px 10px rgba(0, 0, 0, 0.2);
+    /*box-shadow: inset 0 5px 15px rgba(255, 255, 255, 0.4), inset 0 -10px 10px rgba(0, 0, 0, 0.2);*/
     color: #fff;
-    text-shadow: 0 1px 1px #000;
+    /*text-shadow: 0 1px 1px #000;*/
+    margin-top:-35px !important;
 }
 
 .jalendar .days .day:nth-child(7n+1) {
@@ -235,9 +237,17 @@
 }
 
 .jalendar .add-event {
-    float: right;
+    width:40% !important;
+    margin-left:65.8%;
+    border-left:none !important;
     display: none;
-    max-width: 259px !important;
+    /*max-width: 259px !important;*/
+    float:left;
+    border:1px solid #278bce;
+    margin-top:-313px;
+    z-index:-1000;
+    height:313px;
+    background-color:#FFFFFF;
 }
 
 .jalendar .add-new {
@@ -245,7 +255,7 @@
     margin: 0 0 20px 0;
     padding: 20px 15px 15px 15px;
     border-radius: 0 0 3px 3px;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+    /*box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);*/
     position: relative;
 }
 
@@ -255,9 +265,9 @@
     border: none;
     width: 100%;
     border-radius: 30px;
-    box-shadow: 0 2px 2px rgba(255, 255, 255, 1), inset 0 2px 5px rgba(0, 0, 0, 0.4);
+    /*box-shadow: 0 2px 2px rgba(255, 255, 255, 1), inset 0 2px 5px rgba(0, 0, 0, 0.4);*/
     font: 18px "Roboto", "Helvetica Neue", Arial;
-    color: #3498db ;
+    color: #25A2A6;
     background-color: rgba(0, 0, 0, 0.1);
     outline: none;
     margin: 0 0 15px 0;
@@ -335,7 +345,7 @@
 }
 
 .jalendar .add-time .select .dropdown .option:hover {
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4), inset 0 -1px 0 rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.5), inset 0 -14px 7px rgba(0, 0, 0, 0.1), inset 0 14px 7px rgba(255, 255, 255, 0.1);
+    /*box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4), inset 0 -1px 0 rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.5), inset 0 -14px 7px rgba(0, 0, 0, 0.1), inset 0 14px 7px rgba(255, 255, 255, 0.1);*/
     color: #fff;
 }
 
@@ -427,7 +437,7 @@
     height: 2px;
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.45);
-    box-shadow: 0 1px 2px #fff;
+    /*box-shadow: 0 1px 2px #fff;*/
 }
 
 .jalendar .events .event-single {
@@ -457,7 +467,7 @@
 
 .jalendar .events .event-single .details .clock {
     background: url(../images/jalendar-sprite.png) 0 -184px;
-    color: #fff;
+    color: #000;
     padding: 0 0 0 20px;
     font: bold 12px "Helvetica Neue", Arial;
     float: left;
