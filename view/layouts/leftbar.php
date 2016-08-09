@@ -13,6 +13,7 @@
             <p  class=" font new" style="margin-top:-10px;"><img src="../../public/images/emp.png" class="img-circle image-user-nav"  />Welcome Sajitha</p>
         </div>
     </center>
+    <a href="#" style="<?php if($empRole!="director"){echo "display:none;";}?>" class="list-group-item left-menu left-menu<?php if($var=="apply"){echo"-active";}?>"><i class="fa fa-edit icon-bar" aria-hidden="true"></i>Give Permission<span class="<?php if($var=="apply"){echo"selected";}?>"></span></a>
     <a href="../site/apply.php" class="list-group-item left-menu left-menu<?php if($var=="apply"){echo"-active";}?>"><i class="fa fa-edit icon-bar" aria-hidden="true"></i>Apply Leave<span class="<?php if($var=="apply"){echo"selected";}?>"></span></a>
     <a href="" class="list-group-item left-menu left-menu<?php if($var=="status"){echo"-active";}?>"><i class="fa fa-building icon-bar" aria-hidden="true"></i>Leave Status<span class="<?php if($var=="status"){echo"selected";}?>"></span></a>
     <a href="../site/attendance.php" class="list-group-item left-menu left-menu<?php if($var=="attendance"){echo"-active";}?>"><i class="fa fa-check-circle icon-bar" aria-hidden="true"></i>My Attendance<span class="<?php if($var=="attendance"){echo"selected";}?>"></span></a>

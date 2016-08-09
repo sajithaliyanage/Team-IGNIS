@@ -1,5 +1,11 @@
 <?php
 $var = "index";
+include('../../controller/siteController.php');
+
+if(!$isLoggedin && $empRole!="admin"){
+    header('Location:../../index.php');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

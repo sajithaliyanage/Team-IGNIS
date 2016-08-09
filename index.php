@@ -54,11 +54,11 @@
 			                    <form role="form" action="module/login.php" method="post" class="login-form">
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="form-username">CompanyID</label>
-			                        	<input type="text" name="companyID" placeholder="CompanyID..." class="form-username form-control" id="form-username" required>
+			                        	<input type="text" name="companyID" placeholder="CompanyID" class="form-username form-control" id="form-username" required>
 			                        </div>
 			                        <div class="form-group">
 			                        	<label class="sr-only" for="form-password">Password</label>
-			                        	<input type="password" name="password" placeholder="Password..." class="form-password form-control" id="form-password" required>
+			                        	<input type="password" name="password" placeholder="Password" class="form-password form-control" id="form-password" required>
 			                        </div>
                                     <a href="view/layouts/forget_password.php"><h5 class="form-top1">Forget your password?</h5></a>
 			                        <button type="submit" class="btn">Sign in!</button>
