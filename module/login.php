@@ -120,6 +120,7 @@ try{
             WHERE director.comp_id=:comp_id and employee.password=:password";
     $query = $pdo->prepare($sql);
     $query->execute(array('comp_id'=>$companyID, 'password'=>$password ));
+    $results  = $query->fetchAll();
     $rowCount = $query->rowCount();
 
     if($rowCount==1){
@@ -134,11 +135,11 @@ try{
 
         session_start();
         $_SESSION['empName'] =$empName;
-        $_SESSION['empID'] =$empName;
+        $_SESSION['empID'] =$empID;
         $_SESSION['empRole'] = "director";
         session_write_close();
 
-        header("Location:../view/site/apply.php?role=director");
+        header("Location:../view/site/director.php?role=director");
     }
 
     if( $isValidUser == false){
