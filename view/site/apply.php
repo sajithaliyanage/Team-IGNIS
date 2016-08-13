@@ -233,9 +233,9 @@ if(!$isLoggedin){
                             <hr>
                             <div class="list-group">
                                 <?php
-                                $sql = "select * from apply_leave JOIN leave_type ON apply_leave.leave_id=leave_type.leave_id";
+                                $sql = "select * from apply_leave JOIN leave_type ON apply_leave.leave_id=leave_type.leave_id WHERE comp_id=:empID";
                                 $query = $pdo->prepare($sql);
-                                $query->execute();
+                                $query->execute(array('empID'=>$empID));
                                 $result = $query->fetchAll();
 
                                 foreach($result as $rs){
