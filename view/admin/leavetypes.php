@@ -103,6 +103,17 @@ if(!$isLoggedin && $empRole!="admin"){
                                         </div>
                                         <br>
                                         <br>
+                                        <div class="form-group">
+                                            <label class="col-xs-5 control-label form-lable">Renew Period :</label>
+                                            <div class="col-xs-7">
+                                                <select  name="leave_period" class="form-control">
+                                                    <option value="annual">Annual</option>
+                                                    <option value="monthly">Monthly</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
 
                                             <button class="btn btn-info btn-lg pull-right submit-button" type="submit">Submit</button>
                                     </div>
