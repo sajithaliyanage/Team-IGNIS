@@ -1,5 +1,13 @@
 <?php
 $var = "job";
+include('../../controller/siteController.php');
+include('../../config/connect.php');
+$pdo = connect();
+
+if(!$isLoggedin && $empRole!="admin"){
+    header('Location:../../index.php');
+}
+
 ?>
 
  <!DOCTYPE html>
@@ -54,44 +62,24 @@ $var = "job";
                             <h5 class="nortification-box-heading"><i class="fa fa-check icon-margin-right" aria-hidden="true"></i>
                                 Added Job Categories</h5>
                             <hr>
-                            <h5 style="text-align: right;">Total Job Categories : <span class="badge">06</span></h5>
+                            <?php
+                                $sql = "select * from job_category where currentStatus=:log ";
+                                $query = $pdo->prepare($sql);
+                                $query->execute(array('log'=>"approved"));
+                                $result = $query->fetchAll();
+                                $rowCount = $query->rowCount();
+                            ?>
+                            <h5 style="text-align: right;">Total Job Categories : <span class="badge"><?php if($rowCount<10){echo "0".$rowCount;}else{echo $rowCount;} ?></span></h5>
                             <div class="list-group">
-                                <a href="#" class="list-group-item">
-                                     <h5>Software Engineer</h5>
-                                     <span class="label label-danger" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <h5>Web Developer</h5>
-                                    <span class="label label-danger" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <h5>Web Designer</h5>
-                                    <span class="label label-danger" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <h5>Graphic Designer</h5>
-                                    <span class="label label-danger" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <h5>Video Editor</h5>
-                                    <span class="label label-danger" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <h5>UI & UX Manager</h5>
-                                    <span class="label label-danger" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <h5>UI & UX Manager</h5>
-                                    <span class="label label-danger" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <h5>UI & UX Manager</h5>
-                                    <span class="label label-danger" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <h5>UI & UX Manager</h5>
-                                    <span class="label label-danger" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></span>
-                                </a>
+
+                                <?php
+                                foreach($result as $rs){
+                                    echo " <a href='#' class='list-group-item'>
+                                                <h5>".$rs['job_cat_name']."</h5>
+                                                <span class=\"label label-danger\" style=\"float: right; margin-top:-24px;\">Delete <i class=\"fa fa-close\" aria-hidden=\"true\"></i></span>
+                                               </a>";
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -101,8 +89,9 @@ $var = "job";
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-plus icon-margin-right" aria-hidden="true"></i>
                                 Add New Job Category</h5>
+                            <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">Job category added successfully!</div>
                             <hr>
-                            <form role="form" data-toggle="validator" action="" method="post">
+                            <form role="form" data-toggle="validator" action="module/addJobCategory.php" method="post">
                                 <div class="department-add">
                                     <div class="col-xs-12">
                                             <!-- Text input-->
@@ -129,9 +118,16 @@ $var = "job";
                                 Pending Requests</h5>
                             <hr>
                             <div class="list-group">
-                                <a href="#" class="list-group-item">IT Department<span style="float:right;"> Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>
-                                <a href="#" class="list-group-item">Sales Department<span style="float:right;"> Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>
-                                <a href="#" class="list-group-item">HR Department<span style="float:right;"> Approved <i class="fa fa-check" aria-hidden="true"></i></span></a>
+                                <?php
+                                $sql = "select * from job_category";
+                                $query = $pdo->prepare($sql);
+                                $query->execute();
+                                $result = $query->fetchAll();
+
+                                foreach($result as $rs){
+                                    echo "<a href='#' class='list-group-item'>".$rs['job_cat_name']."<span style='float:right;'>"; if($rs['currentStatus']=='waiting'){echo 'Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>';}else if($rs['currentStatus']=='approved'){ echo 'Approved <i class=\'fa fa-check\' aria-hidden=\'true\'></i></span></a>';}else{echo 'Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></a>';};
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>

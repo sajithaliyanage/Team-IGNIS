@@ -54,7 +54,7 @@
 			                    <form role="form" action="" method="post" class="login-form">
 			                    	<div class="form-group">
 			                    		<label class="sr-only">Email</label>
-			                        	<input type="text" name="companyID" placeholder="Company email..." class="form-username form-control" id="form-username" required>
+			                        	<input type="email" name="companyID" placeholder="Company email" class="form-username form-control" id="form-username" required>
 			                        </div>
 			                        <button type="submit" class="btn">Confirm</button>
 			                    </form>

@@ -14,4 +14,10 @@ if(isset($_SESSION['empID']) && !empty($_SESSION['empID'])) {
     $empRole = $_SESSION['empRole'];
 }
 
+//if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 60)) {
+//    session_unset();
+//    session_destroy();
+//}
+//$_SESSION['LAST_ACTIVITY'] = time();
+
 ?>

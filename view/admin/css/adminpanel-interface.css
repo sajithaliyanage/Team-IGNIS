@@ -112,6 +112,7 @@
     font-family:Calibri;
     font-size:17px;
     margin-top:15px;
+
 }
 .icon-margin-right{
     margin-right:5px;
@@ -167,6 +168,40 @@
 
 .department-add{
     padding-top:10px;
+}
+
+.alert-user{
+    text-align: right;
+    margin-top:-28px;
+    margin-bottom:-2px;
+    color:#00a65a;
+    font-weight:500;
+    -webkit-animation: seconds 1.0s forwards;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-delay: 5s;
+    animation: seconds 1.0s forwards;
+    animation-iteration-count: 1;
+    animation-delay: 5s;
+    position: relative;
+}
+
+@-webkit-keyframes seconds {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        left: -9999px;
+    }
+}
+@keyframes seconds {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        left: -9999px;
+    }
 }
 /*department end*/
 

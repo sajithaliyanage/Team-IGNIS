@@ -1,5 +1,6 @@
 <?php
 $var = "profile";
+include('../../controller/siteController.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +18,10 @@ $var = "profile";
     <link href="../../public/css/navbar-style.css" rel="stylesheet">
     <link href="../../public/css/font-awesome.min.css" rel="stylesheet">
 
+    <script src="../../public/js/bootstrap.js"></script>
+    <script src="../../public/js/bootstrap-datepicker.js"></script>
+    <script src="../../public/js/myProfile.js"></script>
+
 </head>
 
 <body style=" background-color: #eceff4 !important;">
@@ -32,14 +37,12 @@ $var = "profile";
 
         <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2" style="position: relative;">
 
-            <hr style="border-bottom:1px solid #e3e3e3;">
-
             <div class="row padding-row">
                 <div class="row">
                     <div class="col-lg-12">
                         <ol class="breadcrumb breadcrumb-style">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.php">Admin Panel</a>
+                                <i class="fa fa-dashboard"></i>  <a href="../../index.php">Take Your Leave</a>
                             </li>
                             <li class="active">
                                 <i class="fa fa-user-md"></i> My Profile
@@ -53,14 +56,31 @@ $var = "profile";
                 <div class="col-xs-12 col-sm-6 padding-box">
 
                     <div class="row">
-                        <div class="row"><br><br><br><br></div>
+
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-user icon-margin-right" aria-hidden="true"></i>
                                 My Profile</h5>
                             <hr>
-                            <div class="col-xs-10">
+                            <div class="col-xs-12">
 
-                                    <a href="#"><div id="imageBox"></div></a>
+                                <div class="nortification-box-status">
+                                    <ul class="nav nav-tabs navbar-right" role="tablist">
+                                        <li><h5 style="margin-right: 120px;font-size: 20px">Available status</h5></li>
+                                        <li role="presentation" class="active tab-box-1"><a href="attendance.php" class="tab-box-1" aria-controls="home" role="tab" data-toggle="tab""><b>Present</b></a></li>
+<!--                                    <li role="presentation" class="active tab-box-2"><a href="attendance.php" aria-controls="profile" class="tab-box-2" role="tab" data-toggle="tab"><b>Absent</b></a></li>-->
+                                    </ul>
+
+                                </div>
+                                <br><br>
+
+                                <center>
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Click here to change your profile picture!">
+                                        <!--<img class="grayscale" src="../../public/images/default.png" width="350" height="400"/>-->
+                                        <img src='../../public/images/default.png' style="margin-bottom:40px " width='80%' onmouseover="this.src='../../public/images/default_hover.png';" onmouseout="this.src='../../public/images/default.png';" />
+                                    </a>
+
+                                </center>
+
 
                             </div>
                         </div>
@@ -73,16 +93,7 @@ $var = "profile";
 
                 <div class="col-sm-6 col-xs-12 padding-box">
 
-                    <div class="row">
 
-                        <ul class="nav nav-tabs navbar-right" role="tablist">
-                            <li role="presentation" class="active tab-box-1"><a href="attendance.php" class="tab-box-1" aria-controls="home" role="tab" data-toggle="tab""><b>Present</b></a></li>
-                            <li role="presentation" class="active tab-box-2"><a href="attendance.php" aria-controls="profile" class="tab-box-2" role="tab" data-toggle="tab"><b>Absent</b></a></li>
-                        </ul>
-
-                    <div>
-
-                        <br><br><br><br>
                         <div class="row">
 
                             <div class="col-xs-12">

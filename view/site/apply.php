@@ -1,5 +1,10 @@
 <?php
 $var = "apply";
+include('../../controller/siteController.php');
+
+if(!$isLoggedin){
+    header('Location:../../index.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +21,7 @@ $var = "apply";
     <link href="../../public/css/leave-interface.css" rel="stylesheet">
     <link href="../../public/css/navbar-style.css" rel="stylesheet">
     <link href="../../public/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../public/css/calender.css" rel="stylesheet">
 
 </head>
 
@@ -79,15 +85,42 @@ $var = "apply";
                             </ul>
                         </div>
                     </div>
+<!--                    <div class="row margin-top">-->
+<!--                        <div class="col-xs-12 nortification-box-top">-->
+<!--                            <h5 class="nortification-box-heading"><i class="fa fa-calendar icon-margin-right" aria-hidden="true"></i>-->
+<!--                                Profile Calendar</h5>-->
+<!--                            <div style="height:300px;background-color:#4cae4c; margin-bottom:20px;">-->
+<!---->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
                     <div class="row margin-top">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-calendar icon-margin-right" aria-hidden="true"></i>
                                 Profile Calendar</h5>
-                            <div style="height:300px;background-color:#4cae4c; margin-bottom:20px;">
+
+                            <div id="myId" class="jalendar mid img-responsive" style="width: 95% !important;">
+                                <div class="added-event" data-date="19/5/2016" data-time="20:45"
+                                     data-title="Tarkan İstanbul Concert on Harbiye Açık Hava Tiyatrosu"></div>
+                                <div class="added-event" data-date="17/5/2016" data-time="21:00"
+                                     data-title="CodeCanyon İstanbul Meeting on Starbucks, Kadıköy"></div>
+                                <div class="added-event" data-date="1/5/2016" data-time="22:00"
+                                     data-title="Front-End Design and Javascript Conferance on Haliç Kongre Merkezi"></div>
+                                <div class="added-event" data-date="17/5/2016" data-time="22:00"
+                                     data-title="Lorem ipsum dolor sit amet"></div>
+                                <div class="added-event" data-date="21/5/2016" data-time="22:00"
+                                     data-title="Lorem ipsum dolor sit amet"></div>
+                                <div class="added-event" data-date="21/6/2016" data-time="22:00"
+                                     data-title="Lorem ipsum dolor sit amet"></div>
+                                <div class="added-event" data-date="3/6/2016" data-time="22:00"
+                                     data-title="Lorem ipsum dolor sit amet"></div>
 
                             </div>
+
                         </div>
                     </div>
+
                 </div>
                 <div class="col-sm-6 col-xs-12 padding-box">
                     <div class="row">
@@ -170,8 +203,7 @@ $var = "apply";
                     </div>
                     <div class="row margin-top">
                         <div class="col-xs-12 nortification-box-top">
-                            <h5 class="nortification-box-heading"><i class="fa fa-list icon-margin-right"
-                                                                     aria-hidden="true"></i>
+                            <h5 class="nortification-box-heading"><i class="fa fa-list icon-margin-right" aria-hidden="true"></i>
                                 Past Leave Notifications</h5>
                             <hr>
                             <div class="list-group">
@@ -201,5 +233,8 @@ $var = "apply";
 
 <script src="../../public/js/jquery.js"></script>
 <script src="../../public/js/bootstrap.js"></script>
+<script src="../../public/js/jalendar.js"></script>
+<script src="../../public/js/calendar.js"></script>
+
 </body>
 </html>

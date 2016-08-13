@@ -1,51 +1,4 @@
-/*apply start*/
-.main-box-1-1{
-    height:80px;
-    background-color: #00c0ef;
-    color: #FFFFFF;
-
-}
-.main-box-1-2{
-    height:30px;
-    background-color:#05aad7;
-    color: #FFFFFF;
-}
-
-.main-box-2-1{
-    height:80px;
-    background-color: #00a65a;
-    color: #FFFFFF;
-
-}
-.main-box-2-2{
-    height:30px;
-    background-color:#029551;
-    color: #FFFFFF;
-}
-
-.main-box-3-1{
-    height:80px;
-    background-color: #f39c11;
-    color: #FFFFFF;
-
-}
-.main-box-3-2{
-    height:30px;
-    background-color:#df8c0a;
-    color: #FFFFFF;
-}
-
-.main-box-4-1{
-    height:80px;
-    background-color: #dd4c39;
-    color: #FFFFFF;
-
-}
-.main-box-4-2{
-    height:30px;
-    background-color:#c74432;
-    color: #FFFFFF;
-}
+/*start*/
 
 .padding-box{
     padding-left:20px;
@@ -83,23 +36,33 @@
     border-top:2px solid #5a849c;
 }
 
-
-#imageBox{
-    background-image:url('../images/default.png');
-    background-color:#FFFFFF;
-    margin-left:50px !important;
-    margin-right:50px !important;
-    width:350px;
-    height:400px;
-
-}
-#imageBox:hover {
-    background-image:url('../images/default_hover.png');
-    padding-left:20px !important;
-    padding-right:20px !important;
-
+.nortification-box-status{
+    background-color: rgba(68, 77, 78, 0.16) !important;
+    padding-left:5px !important;
+    font-family:Calibri;
+    font-size:17px;
+    margin-top:15px;
+    margin-bottom:15px;
+    height: 45px;
 
 }
+
+/*change image*/
+img.grayscale{
+    filter: grayscale(0%);
+    -webkit-filter: grayscale(0%);
+    padding-left:50px;
+    margin-left:20px;
+}
+
+img.grayscale:hover{
+
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);  /* For Webkit browsers */
+    -webkit-transition: all .6s ease;  /* Transition for Webkit browsers */
+}
+
+
 /*...*/
 .nortification-box-middle{
     height:300px;
@@ -204,48 +167,28 @@
     margin-top:-5px;
 }
 
-/*apply end*/
-
-/*medical upload*/
-.upload-box{
-    margin-top:20px;
-    border:2px dashed #3c8dbc;
-    border-radius:5px;
-    height:300px;
-    margin-bottom:50px;
-}
-
-.uplaod-icon-box{
-    color:#7e7e7e;
-    margin-top:40px;
-}
-/*end medical upload*/
-/*roster start*/
-
-.outer-filter-roster{
-    border-color:transparent ;
-}
 
 /*for profile class*/
 .tab-box-1{
-     background-color:#00a65a !important;
+     background-color:#008000 !important;
      border:none !important;
      color:#FFFFFF !important;
      border-radius:2px !important;
      width: 150px;
-     padding-left: 30px;
-     margin-right:5px;
+     margin-right:10px;
+     /*padding-right: 10px;*/
+    text-align: center;
 
  }
 
 .tab-box-2{
-    background-color:#ffffff !important;
+    background-color:#b22222 !important;
     border:none !important;
     color:#000000 !important;
     border-radius:2px !important;
     width: 150px;
-    padding-left: 10px;
-
+    margin-right:10px;
+    text-align: center;
 
 }
 

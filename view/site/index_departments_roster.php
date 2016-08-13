@@ -17,23 +17,23 @@ if(!$isLoggedin && $empRole!="admin"){
 
     <title>Take Your Leave | Online</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/interface-leftmenu.css" rel="stylesheet">
-    <link href="css/adminpanel-interface.css" rel="stylesheet">
-    <link href="css/navbar-style.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="../admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../admin/css/interface-leftmenu.css" rel="stylesheet">
+    <link href="../admin/css/adminpanel-interface.css" rel="stylesheet">
+    <link href="../admin/css/navbar-style.css" rel="stylesheet">
+    <link href="../admin/css/font-awesome.min.css" rel="stylesheet">
 
 </head>
 
 <body style=" background-color: #eceff4 !important;">
 
-<?php include("navbar.php") ?>
+<?php include("../layouts/navbar.php") ?>
 
 <div class="container-fluid ">
     <div class="row ">
 
         <div class="col-sm-2 col-xs-12 left-menu-div side-bar-display">
-            <?php include("leftbar.php") ?>
+            <?php include("../layouts/leftbar.php") ?>
         </div>
 
         <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2" style="position: relative;">
@@ -42,10 +42,10 @@ if(!$isLoggedin && $empRole!="admin"){
                     <div class="col-lg-12">
                         <ol class="breadcrumb breadcrumb-style">
                             <li>
-                                <i class="fa fa-dashboard"></i> <a href="index.php">Admin Panel</a>
+                                <i class="fa fa-dashboard"></i> <a href="director.php">Take Your Leave</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-edit"></i> <a href="index.php">Overall Company</a>
+                                <i class="fa fa-edit"></i> <a href="director.php">Overall Company</a>
                             </li>
                             <li class="active">
                                 <i class="fa fa-shirtsinbulk"></i> Roster Departments
@@ -85,7 +85,7 @@ if(!$isLoggedin && $empRole!="admin"){
     </div>
 </div>
 
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.js"></script>
+<script src="../admin/js/jquery.js"></script>
+<script src="../admin/js/bootstrap.js"></script>
 </body>
 </html>

@@ -40,8 +40,8 @@
                     <a href="#" class="dropdown-toggle font new" data-toggle="dropdown" role="button"
                        aria-haspopup="true" aria-expanded="false"><img src="images/emp.png" class="img-circle image-user"  />Sajitha Liyanage <span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-admin">
-                        <li><a href="#">Switch Profile</a></li>
-                        <li><a href="#">Logout</a></li>
+                        <li><a href="../site/default_admin.php">Switch Profile</a></li>
+                        <li><a href="../../module/logout.php">Logout</a></li>
                     </ul>
                 </li>
             </ul>

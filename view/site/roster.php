@@ -1,5 +1,6 @@
 <?php
 $var = "roster";
+include('../../controller/siteController.php');
 ?>
  <!DOCTYPE html>
 <html lang="en">

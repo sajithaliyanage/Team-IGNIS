@@ -1,5 +1,6 @@
 <?php
 $var = "reports";
+include('../../controller/siteController.php');
 ?>
 
 <!DOCTYPE html>

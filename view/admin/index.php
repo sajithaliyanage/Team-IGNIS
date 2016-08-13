@@ -1,5 +1,11 @@
 <?php
 $var = "index";
+include('../../controller/siteController.php');
+
+if(!$isLoggedin && $empRole!="admin"){
+    header('Location:../../index.php');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -148,8 +154,7 @@ $var = "index";
                 <div class="col-xs-12 col-sm-7 padding-box">
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top">
-                            <h5 class="nortification-box-heading"><i class="fa fa-calendar icon-margin-right"
-                                                                     aria-hidden="true"></i>
+                            <h5 class="nortification-box-heading"><i class="fa fa-calendar icon-margin-right" aria-hidden="true"></i>
                                 Company Calendar</h5>
 
                             <div id="myId" class="jalendar mid img-responsive" style="width: 95% !important;">
