@@ -1,4 +1,10 @@
 <?php
+$var="status";
+include('../../controller/siteController.php');
+
+if(!$isLoggedin){
+    header('Location:../../index.php');
+}
 
 ?>
 <!DOCTYPE html>

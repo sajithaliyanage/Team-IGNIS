@@ -1,5 +1,10 @@
 <?php
 $var = "medical";
+include('../../controller/siteController.php');
+
+if(!$isLoggedin){
+    header('Location:../../index.php');
+}
 ?>
 
 <!DOCTYPE html>

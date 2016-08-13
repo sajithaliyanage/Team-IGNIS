@@ -1,6 +1,8 @@
 <?php
 $var = "employee";
 include('../../controller/siteController.php');
+include('../../config/connect.php');
+$pdo = connect();
 
 if(!$isLoggedin && $empRole!="admin"){
     header('Location:../../index.php');
@@ -60,30 +62,20 @@ if(!$isLoggedin && $empRole!="admin"){
                                 Count of Employees</h5>
                             <hr>
                             <ul class="list-group">
-                                <li class="list-group-item">
-                                    <span class="badge">14</span>
-                                    IT Department
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="badge">35</span>
-                                    HR Department
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="badge">16</span>
-                                    Sales Department
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="badge">09</span>
-                                    Salary Department
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="badge">04</span>
-                                    Server Department
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="badge">21</span>
-                                    Marketing Department
-                                </li>
+                                <?php
+                                    $sql="SELECT * FROM department WHERE currentStatus=:log";
+                                    $query = $pdo->prepare($sql);
+                                    $query->execute(array('log'=>"approved"));
+                                    $result = $query->fetchAll();
+
+                                    foreach($result as $rs){
+                                        echo "<li class=\"list-group-item\">
+                                                <span class=\"badge\">";if($rs['no_of_emp']<10){echo "0".$rs['no_of_emp'];}else{echo $rs['no_of_emp'];} echo"</span>
+                                                    ".$rs['dept_name']."
+                                                </li>";
+                                    }
+                                ?>
+
                             </ul>
                         </div>
                     </div>
@@ -157,19 +149,28 @@ if(!$isLoggedin && $empRole!="admin"){
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-plus icon-margin-right" aria-hidden="true"></i>
                                 Add New Employee</h5>
+
+                            <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">New employee added successfully!</div>
                             <hr>
-                            <form role="form" data-toggle="validator" action="" method="post">
+                            <form role="form" data-toggle="validator" action="module/addEmployee.php" method="post">
                                 <div class="department-add">
                                     <div class="col-xs-12">
                                             <!-- Text input-->
                                         <div class="form-group">
                                             <label class="col-sm-5 col-xs-12 control-label form-lable">Employee Department :</label>
                                             <div class="col-sm-7 col-xs-12">
-                                                <select  name="emp_gender" class="form-control">
-                                                    <option>-Select-</option>
-                                                    <option value="YES">IT</option>
-                                                    <option value="NO">HR</option>
-                                                    <option value="NO">Sales</option>
+                                                <select  name="emp_department" class="form-control">
+                                                    <?php
+                                                    $sql = "select * from department WHERE currentStatus=:log";
+                                                    $query = $pdo->prepare($sql);
+                                                    $query->execute(array('log'=>"approved"));
+                                                    $result = $query->fetchAll();
+
+                                                    foreach($result as $rs){
+                                                        echo " <option value='".$rs['dept_id']."'>".$rs['dept_name']."</option>";
+                                                    }
+                                                    ?>
+
                                                 </select>
                                             </div>
                                         </div>
@@ -180,11 +181,11 @@ if(!$isLoggedin && $empRole!="admin"){
                                             <label class="col-sm-5 col-xs-12 control-label form-lable">Employee Role :</label>
                                             <div class="col-sm-7 col-xs-12">
                                                 <select  name="emp_role" class="form-control">
-                                                    <option>-Select-</option>
-                                                    <option value="YES">Director</option>
-                                                    <option value="NO">Manager</option>
-                                                    <option value="NO">Executive Officer</option>
-                                                    <option value="NO">Employee</option>
+                                                    <option value="director">Director</option>
+                                                    <option value="admin">Administrator</option>
+                                                    <option value="manager">Manager</option>
+                                                    <option value="executive">Executive Officer</option>
+                                                    <option value="employee">Employee</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -192,10 +193,34 @@ if(!$isLoggedin && $empRole!="admin"){
                                         <br>
 
                                         <div class="form-group">
-                                            <label class="col-sm-5 col-xs-12 control-label form-lable">Employee Name :</label>
+                                            <label class="col-sm-5 col-xs-12 control-label form-lable">Job Category :</label>
                                             <div class="col-sm-7 col-xs-12">
-                                                <input id="service_name" name="emp_name" type="text" placeholder=""
-                                                       class="form-control input-md" required>
+                                                <select  name="emp_category" class="form-control">
+                                                    <?php
+                                                    $sql = "select * from job_category WHERE currentStatus=:log";
+                                                    $query = $pdo->prepare($sql);
+                                                    $query->execute(array('log'=>"approved"));
+                                                    $result = $query->fetchAll();
+
+                                                    foreach($result as $rs){
+                                                        echo " <option value='".$rs['job_cat_id']."'>".$rs['job_cat_name']."</option>";
+                                                    }
+                                                    ?>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-5 col-xs-12 control-label form-lable">Job Level :</label>
+                                            <div class="col-sm-7 col-xs-12">
+                                                <select  name="emp_level" class="form-control">
+                                                    <option value="permanent">Permanent</option>
+                                                    <option value="probation">Probation</option>
+                                                    <option value="trainee">Trainee</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <br>
@@ -212,6 +237,17 @@ if(!$isLoggedin && $empRole!="admin"){
                                         <br>
 
                                         <div class="form-group">
+                                            <label class="col-sm-5 col-xs-12 control-label form-lable">Employee Name :</label>
+                                            <div class="col-sm-7 col-xs-12">
+                                                <input id="service_name" name="emp_name" type="text" placeholder=""
+                                                       class="form-control input-md" required>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+
+
+                                        <div class="form-group">
                                             <label class="col-sm-5 col-xs-12 control-label form-lable">Employee NIC :</label>
                                             <div class="col-sm-7 col-xs-12">
                                                 <input id="service_name" name="emp_nic" type="text" placeholder="xxxxxxxxxV" class="form-control input-md" required>                                            </div>
@@ -223,9 +259,8 @@ if(!$isLoggedin && $empRole!="admin"){
                                             <label class="col-sm-5 col-xs-12 control-label form-lable">Employee Gender :</label>
                                             <div class="col-sm-7 col-xs-12">
                                                 <select  name="emp_gender" class="form-control">
-                                                    <option>-Select-</option>
-                                                    <option value="YES">Male</option>
-                                                    <option value="NO">Female</option>
+                                                    <option value="male">Male</option>
+                                                    <option value="female">Female</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -244,7 +279,7 @@ if(!$isLoggedin && $empRole!="admin"){
                                         <div class="form-group">
                                             <label class="col-sm-5 col-xs-12 control-label form-lable">Set Password :</label>
                                             <div class="col-sm-7 col-xs-12">
-                                                <input id="service_name" name="emp_password" placeholder="" type="text" class="form-control input-md " required>
+                                                <input id="service_name" name="emp_password" placeholder="" value="123" type="text" class="form-control input-md " required>
                                             </div>
                                         </div>
                                         <br>
@@ -260,34 +295,6 @@ if(!$isLoggedin && $empRole!="admin"){
                                         <br>
 
 
-                                        <div class="form-group">
-                                            <label class="col-sm-5 col-xs-12 control-label form-lable">Job Category :</label>
-                                            <div class="col-sm-7 col-xs-12">
-                                                <select  name="emp_gender" class="form-control">
-                                                    <option>-Select-</option>
-                                                    <option value="YES">Software Engineer</option>
-                                                    <option value="NO">Secretary</option>
-                                                    <option value="NO">Clerk</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <br>
-
-                                        <div class="form-group">
-                                            <label class="col-sm-5 col-xs-12 control-label form-lable">Job Level :</label>
-                                            <div class="col-sm-7 col-xs-12">
-                                                <select  name="emp_gender" class="form-control">
-                                                    <option>-Select-</option>
-                                                    <option value="YES">Permanent</option>
-                                                    <option value="NO">Probation</option>
-                                                    <option value="NO">Trainee</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <br>
-
                                             <button class="btn btn-info btn-lg pull-right submit-button" type="submit">Submit</button>
                                     </div>
                                 </div>
@@ -295,18 +302,18 @@ if(!$isLoggedin && $empRole!="admin"){
                         </div>
                     </div>
 
-                    <div class="row margin-top">
-                        <div class="col-xs-12 nortification-box-top">
-                            <h5 class="nortification-box-heading"><i class="fa fa-cogs icon-margin-right" aria-hidden="true"></i>
-                                Pending Requests</h5>
-                            <hr>
-                            <div class="list-group">
-                                <a href="#" class="list-group-item">IT Department<span style="float:right;"> Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>
-                                <a href="#" class="list-group-item">Sales Department<span style="float:right;"> Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>
-                                <a href="#" class="list-group-item">HR Department<span style="float:right;"> Approved <i class="fa fa-check" aria-hidden="true"></i></span></a>
-                            </div>
-                        </div>
-                    </div>
+<!--                    <div class="row margin-top">-->
+<!--                        <div class="col-xs-12 nortification-box-top">-->
+<!--                            <h5 class="nortification-box-heading"><i class="fa fa-cogs icon-margin-right" aria-hidden="true"></i>-->
+<!--                                Pending Requests</h5>-->
+<!--                            <hr>-->
+<!--                            <div class="list-group">-->
+<!--                                <a href="#" class="list-group-item">IT Department<span style="float:right;"> Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>-->
+<!--                                <a href="#" class="list-group-item">Sales Department<span style="float:right;"> Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>-->
+<!--                                <a href="#" class="list-group-item">HR Department<span style="float:right;"> Approved <i class="fa fa-check" aria-hidden="true"></i></span></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
             </div>
          </div>

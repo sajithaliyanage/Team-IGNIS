@@ -156,9 +156,9 @@ if(!$isLoggedin && $empRole!="admin"){
                                             <div class="col-xs-7">
                                                 <select  name="job_level" class="form-control">
                                                     <option>-Select-</option>
-                                                    <option value="Permanent">Permanent</option>
-                                                    <option value="Probation">Probation</option>
-                                                    <option value="Trainee">Trainee</option>
+                                                    <option value="permanent">Permanent</option>
+                                                    <option value="probation">Probation</option>
+                                                    <option value="trainee">Trainee</option>
                                                 </select>
                                             </div>
                                         </div>

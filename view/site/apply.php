@@ -1,6 +1,8 @@
 <?php
 $var = "apply";
 include('../../controller/siteController.php');
+include('../../config/connect.php');
+$pdo = connect();
 
 if(!$isLoggedin){
     header('Location:../../index.php');
@@ -61,27 +63,26 @@ if(!$isLoggedin){
                                 Remaining Leaves</h5>
                             <hr>
                             <ul class="list-group">
-                                <li class="list-group-item">
-                                    <span class="badge">00/25</span>
-                                    Leave Type 1
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="badge">00/05</span>
-                                    Leave Type 2
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="badge">00/10</span>
-                                    Leave Type 3
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="badge">00/04</span>
-                                    Leave Type 4
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="badge">00/04</span>
-                                    Leave Type 5
-                                </li>
 
+                                <?php
+
+                                    $sql="SELECT employee_leave_count.leave_count ,leave_type.leave_name FROM employee_leave_count
+                                          JOIN leave_type ON employee_leave_count.leave_id = leave_type.leave_id
+                                          WHERE employee_leave_count.comp_id=:empID and leave_type.currentStatus=:log";
+                                    $query = $pdo->prepare($sql);
+                                    $query->execute(array('empID'=> $empID,'log'=>"approved"));
+                                    $result = $query->fetchAll();
+
+                                    foreach($result as $rs){
+                                        $val = intval($rs['leave_count']);
+                                        if($val<10){
+                                            $val = "0".$rs['leave_count'];
+                                        }
+                                        echo "<li class='list-group-item'>
+                                                ".$rs['leave_name']."<span class='badge' style='background-color:#2c3b42; font-size:15px;'>".$val." <span style='font-size:9px;'>remaining</span></span>
+                                                </li>";
+                                    }
+                                ?>
                             </ul>
                         </div>
                     </div>
@@ -127,32 +128,30 @@ if(!$isLoggedin){
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-tag icon-margin-right" aria-hidden="true"></i>
                                 Leave Application</h5>
+
+                            <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">Leave application send successfully!</div>
+
                             <hr>
-                            <form role="form" data-toggle="validator" action="" method="post">
+                            <form role="form" data-toggle="validator" action="../../module/applyLeave.php" method="post">
                                 <div class="department-add">
                                     <div class="col-xs-12">
                                         <!-- Text input-->
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">Company ID:</label>
-
-                                            <div class="col-xs-8">
-                                                <input id="service_name" name="job_category" type="text" placeholder=""
-                                                       class="form-control input-md" required>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <br>
-
-                                        <div class="form-group">
                                             <label class="col-xs-4 control-label form-lable">Leave Type:</label>
 
                                             <div class="col-xs-8">
-                                                <select name="emp_role" class="form-control">
-                                                    <option>-Select-</option>
-                                                    <option value="YES">Anuual</option>
-                                                    <option value="NO">Casual</option>
-                                                    <option value="NO">Half day</option>
-                                                    <option value="NO">Short leave</option>
+                                                <select name="leave_type" class="form-control">
+                                                    <?php
+                                                        $sql = "select * from leave_type where currentStatus=:log ";
+                                                        $query = $pdo->prepare($sql);
+                                                        $query->execute(array('log'=>"approved"));
+                                                        $result = $query->fetchAll();
+
+                                                        foreach($result as $rs){
+                                                            echo "<option value='".$rs['leave_id']."'>".$rs['leave_name']."</option>";
+                                                        }
+                                                    ?>
+
                                                 </select>
                                             </div>
                                         </div>
@@ -160,11 +159,26 @@ if(!$isLoggedin){
                                         <br>
 
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">Starting date:</label>
+                                            <label class="col-xs-4 control-label form-lable">Priority Type:</label>
 
                                             <div class="col-xs-8">
-                                                <input id="service_name" name="job_category" type="text"
-                                                       placeholder="dd/mm/yyyy"
+                                                <select name="leave_priority" class="form-control">
+                                                    <option value="high">High</option>
+                                                    <option value="medium">Medium</option>
+                                                    <option value="low">Low</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+
+
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label form-lable">Starting Date:</label>
+
+                                            <div class="col-xs-8">
+                                                <input id="service_name" name="start_date" type="text"
+                                                       placeholder="DD / MM / YYYY"
                                                        class="form-control input-md" required>
                                             </div>
                                         </div>
@@ -172,12 +186,22 @@ if(!$isLoggedin){
                                         <br>
 
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">End date:</label>
+                                            <label class="col-xs-4 control-label form-lable">End Date:</label>
 
                                             <div class="col-xs-8">
-                                                <input id="service_name" name="job_category" type="text"
-                                                       placeholder="dd/mm/yyyy"
-                                                       class="form-control input-md" required>
+                                                <input id="service_name" name="end_date" type="text"
+                                                       placeholder="DD / MM / YYYY" class="form-control input-md" required>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label form-lable">Number of Days:</label>
+
+                                            <div class="col-xs-8">
+                                                <input id="service_name" name="numDays" type="text"
+                                                       placeholder="" class="form-control input-md" required>
                                             </div>
                                         </div>
                                         <br>
@@ -187,10 +211,11 @@ if(!$isLoggedin){
                                             <label class="col-xs-4 control-label form-lable">Reason:</label>
 
                                             <div class="col-xs-8">
-                                                <input id="service_name" name="job_category" type="text" placeholder=""
-                                                       class="form-control input-md" required>
+                                                <textarea class="form-control" name="reason" rows="2" required></textarea>
                                             </div>
                                         </div>
+                                        <br>
+                                        <br>
                                         <br>
                                         <br>
 
@@ -207,19 +232,16 @@ if(!$isLoggedin){
                                 Past Leave Notifications</h5>
                             <hr>
                             <div class="list-group">
-                                <a href="#" class="list-group-item">20/05/2016<span
-                                        style="float:right;"> Pending... </span></a>
-                                <a href="#" class="list-group-item">18/05/2016<span
-                                        style="float:right;"> Pending... </span></a>
-                                <a href="#" class="list-group-item">16/03/2016<span style="float:right;"> Approved <i
-                                            class="fa fa-check" aria-hidden="true"></i></span></a>
-                                <a href="#" class="list-group-item">02/01/2016<span style="float:right;"> Approved <i
-                                            class="fa fa-check" aria-hidden="true"></i></span></a>
-                                <a href="#" class="list-group-item">07/11/2015<span style="float:right;"> Rejected <i
-                                            class="fa fa-close" aria-hidden="true"></i></span></a>
-                                <a href="#" class="list-group-item">27/05/2015<span style="float:right;"> Approved <i
-                                            class="fa fa-check" aria-hidden="true"></i></span></a>
+                                <?php
+                                $sql = "select * from apply_leave JOIN leave_type ON apply_leave.leave_id=leave_type.leave_id";
+                                $query = $pdo->prepare($sql);
+                                $query->execute();
+                                $result = $query->fetchAll();
 
+                                foreach($result as $rs){
+                                    echo "<a  class='list-group-item'>".$rs['leave_name']." - ".$rs['apply_date']."<span style='float:right;'>"; if($rs['status']=='waiting'){echo 'Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>';}else if($rs['status']=='approved'){ echo 'Approved <i class=\'fa fa-check\' aria-hidden=\'true\'></i></span></a>';}else{echo 'Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></a>';};
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>

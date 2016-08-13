@@ -27,7 +27,7 @@ try{
 
         session_start();
         $_SESSION['empName'] =$empName;
-        $_SESSION['empID'] =$empName;
+        $_SESSION['empID'] =$empID;
         $_SESSION['empRole'] = "employee";
         session_write_close();
 
@@ -54,7 +54,7 @@ try{
 
         session_start();
         $_SESSION['empName'] =$empName;
-        $_SESSION['empID'] =$empName;
+        $_SESSION['empID'] =$empID;
         $_SESSION['empRole'] = "admin";
         session_write_close();
 
@@ -81,7 +81,7 @@ try{
 
         session_start();
         $_SESSION['empName'] =$empName;
-        $_SESSION['empID'] =$empName;
+        $_SESSION['empID'] =$empID;
         $_SESSION['empRole'] = "manager";
         session_write_close();
 
@@ -108,7 +108,7 @@ try{
 
         session_start();
         $_SESSION['empName'] =$empName;
-        $_SESSION['empID'] =$empName;
+        $_SESSION['empID'] =$empID;
         $_SESSION['empRole'] = "executive";
         session_write_close();
 

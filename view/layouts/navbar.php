@@ -38,7 +38,7 @@
                 <li class="list-side-menu"><a href="#">Edit Company Calendar</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle font new" data-toggle="dropdown" role="button"
-                       aria-haspopup="true" aria-expanded="false"><img src="../../public/images/emp.png" class="img-circle image-user"  />Sajitha Liyanage <span class="caret"></span></a>
+                       aria-haspopup="true" aria-expanded="false"><img src="../../public/images/emp.png" class="img-circle image-user"  /><?php echo $empName?><span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-admin">
                         <li><a href="#">My Profile</a></li>
                         <li><a href="../../module/logout.php">Logout</a></li>

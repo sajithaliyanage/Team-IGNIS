@@ -18,7 +18,7 @@ try{
 
     $last_set_job_id = $pdo->lastInsertId();
 
-//    $sql = "INSERT INTO leave_set_job (set_id,job_cat_id,leave_count) VALUES (:set_id,IN :job_cat_id, IN :leave_count)";
+
     $sql2="";
     $expo = array();
     $count = 0;
