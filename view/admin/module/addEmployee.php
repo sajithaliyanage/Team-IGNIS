@@ -27,29 +27,29 @@ try{
 
 
     if($empRole=='director'){
-        $sql = "INSERT INTO director (comp_id) VALUES (:comp_id)";
+        $sql = "INSERT INTO director (comp_id,dept_id) VALUES (:comp_id,:dept_id)";
         $query = $pdo->prepare($sql);
-        $query->execute(array('comp_id'=>$empId));
+        $query->execute(array('comp_id'=>$empId, 'dept_id'=>$deptId));
 
     }else if($empRole=='admin'){
-        $sql = "INSERT INTO admin (comp_id) VALUES (:comp_id)";
+        $sql = "INSERT INTO admin (comp_id,dept_id) VALUES (:comp_id,:dept_id)";
         $query = $pdo->prepare($sql);
-        $query->execute(array('comp_id'=>$empId));
+        $query->execute(array('comp_id'=>$empId, 'dept_id'=>$deptId));
 
     }else if($empRole=='manager'){
-        $sql = "INSERT INTO manager (comp_id) VALUES (:comp_id)";
+        $sql = "INSERT INTO manager (comp_id,dept_id) VALUES (:comp_id,:dept_id)";
         $query = $pdo->prepare($sql);
-        $query->execute(array('comp_id'=>$empId));
+        $query->execute(array('comp_id'=>$empId, 'dept_id'=>$deptId));
 
     }else if($empRole=='executive'){
-        $sql = "INSERT INTO executive (comp_id) VALUES (:comp_id)";
+        $sql = "INSERT INTO executive (comp_id,dept_id) VALUES (:comp_id,:dept_id)";
         $query = $pdo->prepare($sql);
-        $query->execute(array('comp_id'=>$empId));
+        $query->execute(array('comp_id'=>$empId, 'dept_id'=>$deptId));
 
     }else if($empRole=='employee'){
-        $sql = "INSERT INTO general_employee (comp_id) VALUES (:comp_id)";
+        $sql = "INSERT INTO general_employee (comp_id,dept_id) VALUES (:comp_id,:dept_id)";
         $query = $pdo->prepare($sql);
-        $query->execute(array('comp_id'=>$empId));
+        $query->execute(array('comp_id'=>$empId, 'dept_id'=>$deptId));
 
     }
 
@@ -94,8 +94,8 @@ try{
     header("Location:../employee.php?job=done");
 
 }catch(PDOException $e){
-    //echo $e;
-    header("Location:../../layouts/error.php");
+    echo $e;
+    //header("Location:../../layouts/error.php");
 }
 
 

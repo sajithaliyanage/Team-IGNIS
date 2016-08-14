@@ -237,6 +237,11 @@ if(!$isLoggedin){
                                 $query = $pdo->prepare($sql);
                                 $query->execute(array('empID'=>$empID));
                                 $result = $query->fetchAll();
+                                $rowCount = $query->rowCount();
+
+                                if($rowCount==0){
+                                    echo "There is no any past leave request";
+                                }
 
                                 foreach($result as $rs){
                                     echo "<a  class='list-group-item'>".$rs['leave_name']." - ".$rs['apply_date']."<span style='float:right;'>"; if($rs['status']=='waiting'){echo 'Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>';}else if($rs['status']=='approved'){ echo 'Approved <i class=\'fa fa-check\' aria-hidden=\'true\'></i></span></a>';}else{echo 'Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></a>';};

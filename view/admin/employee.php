@@ -100,10 +100,8 @@ if(!$isLoggedin && $empRole!="admin"){
                                     <tr class="filters">
                                         <th><input type="text" class="form-control" placeholder="Department" disabled>
                                         </th>
-                                        <th><input type="text" class="form-control" placeholder="Employee Role"
-                                                   disabled></th>
-                                        <th><input type="text" class="form-control" placeholder="Employee Name"
-                                                   disabled></th>
+                                        <th></th>
+                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -161,9 +159,9 @@ if(!$isLoggedin && $empRole!="admin"){
                                             <div class="col-sm-7 col-xs-12">
                                                 <select  name="emp_department" class="form-control">
                                                     <?php
-                                                    $sql = "select * from department WHERE currentStatus=:log";
+                                                    $sql = "select * from department WHERE currentStatus=:log and roster_status=:state";
                                                     $query = $pdo->prepare($sql);
-                                                    $query->execute(array('log'=>"approved"));
+                                                    $query->execute(array('log'=>"approved",'state'=>"NO"));
                                                     $result = $query->fetchAll();
 
                                                     foreach($result as $rs){

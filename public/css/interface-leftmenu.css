@@ -67,7 +67,7 @@
 
 .selected {
     border-bottom: 7px solid transparent;
-    border-right: 7px solid #FFFFFF;
+    border-right: 7px solid #eceff4;
     border-top: 7px solid transparent;
     display: inline-block;
     height: 0;

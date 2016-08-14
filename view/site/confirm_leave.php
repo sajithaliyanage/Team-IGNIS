@@ -1,8 +1,8 @@
 <?php
-$var="status";
+$var="approve";
 include('../../controller/siteController.php');
 
-if(!$isLoggedin){
+if(!$isLoggedin || $empRole=='director' || $empRole=='employee'){
     header('Location:../../index.php');
 }
 
@@ -78,7 +78,8 @@ if(!$isLoggedin){
 
                                 <li class="list-group-item">Duration : 2016/08/12 to 2016/08/13</li>
                                 <li class="list-group-item">Reason :personal issue</li>
-                                <li class="list-group-item">special note :<input type="textarea" name=""> <button class="btn btn-success btn-sm">Approve</button> <button class="btn btn-danger btn-sm">Reject</button><button type="button" class="btn btn-link btn-xs">cancel Leave</button></li>
+                                <li class="list-group-item">special note :<input type="text" name="" >
+                                    <button class="btn btn-success btn-sm"><?php if($empRole=='manager'){echo "Approve";}else{ echo "Recommend";}?></button> <button class="btn btn-danger btn-sm">Reject</button><button type="button" class="btn btn-link btn-xs">cancel Leave</button></li>
 
 
 
@@ -118,11 +119,11 @@ if(!$isLoggedin){
                                  Leave requests on same time</h5>
                             <hr>
                             <div class="list-group-item-heading">
-                                <a href="#" class="list-group-item"><i class="fa fa-user" aria-hidden="true"></i> Name  <span style="float:right;"> Date <i class="fa fa-clock-o fa-lg" aria-hidden="true"></i></span></a>
+                                <a href="#" class="list-group-item"><i class="fa fa-user" aria-hidden="true"></i> Employee Name  <span style="float:right;"> Date <i class="fa fa-clock-o fa-lg" aria-hidden="true"></i></span></a>
                             </div>
 
                             <div class="list-group">
-                                <a href="#" class="list-group-item">Sajitha Liayanage<span style="float:right;"> 2016/08/01 </span></a>
+                                <a href="#" class="list-group-item">Sajitha Liyanage<span style="float:right;"> 2016/08/01 </span></a>
                                 <a href="#" class="list-group-item">Priyanwada Kulasuriya<span style="float:right;"> 2016/08/01 </span></a>
                                 <a href="#" class="list-group-item">Gothami Gunarathne<span style="float:right;"> 2016/08/01 </span></a>
                                 <a href="#" class="list-group-item">Madusha Ushan<span style="float:right;"> 2016/08/01 </span></a>
