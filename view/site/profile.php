@@ -1,6 +1,13 @@
 <?php
 $var = "profile";
 include('../../controller/siteController.php');
+include('../../config/connect.php');
+$pdo = connect();
+
+if(!$isLoggedin){
+    header('Location:../../index.php');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -103,51 +110,88 @@ include('../../controller/siteController.php');
                                         Edit Profile</h5>
                                     <hr>
 
-                                    <div class="form-group">
-                                        <label class="col-xs-5 control-label form-lable">User Name:</label>
-                                        <lable>G.A.G.S.Karunarathna</lable>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-xs-5 control-label form-lable">Email:</label>
-                                        <lable>mymail@gmail.com</lable>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-xs-5 control-label form-lable">Contact Number:</label>
-                                        <lable>0771234567</lable>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-xs-5 control-label form-lable">Company Id:</label>
-                                        <lable>2014csxxxx</lable>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-xs-5 control-label form-lable">Department:</label>
-                                        <lable>Computer Department</lable>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-xs-5 control-label form-lable">Job Category:</label>
-                                        <lable>Software Engineer</lable>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-xs-5 control-label form-lable">Job Level:</label>
-                                        <lable>Tranier</lable>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-xs-5 control-label form-lable">NIC:</label>
-                                        <lable>947341030V</lable>
-                                    </div>
+                                    <?php
+                                    $sql = "select * from employee where comp_id=:empID ";
+                                    $query = $pdo->prepare($sql);
+                                    $query->execute(array('empID'=>$empID));
+                                    $result = $query->fetchAll();
 
-                                    <br>
-                                    <div class="form-group">
-                                        <label class="col-xs-5 control-label form-lable">Password:</label>
-                                        <a href="resetpswd.php">Reset Password</a>
-                                    </div>
+//                                    $sql1 = "select employee.comp_id,employee.dept_id,department.dept_name from employee INNER JOIN department ON employee.dept_id=:department.dept_id WHERE employee.comp_id=:empID";
+//                                    $query1 = $pdo->prepare($sql1);
+//                                    $query1->execute(array('empID'=>$empID));
+//                                    $result1 = $query1->fetchAll();
+//
+//                                    $sql2 = "select employee.comp_id,employee.job_cat_id,job_category.job_cat_name from employee INNER JOIN job_category ON employee.job_cat_id=:job_category.job_cat_id WHERE employee.comp_id=:empID";
+//                                    $query2 = $pdo->prepare($sql2);
+//                                    $query2->execute(array('empID'=>$empID));
+//                                    $result2 = $query2->fetchAll();
 
-                                    <br><br>
 
-                                    <a href="editProfile.php"><button class="btn btn-info btn-lg pull-right submit-button" type="submit" >Edit</button></a>
+                                    foreach($result as $rs) {
+
+                                        echo "<div class=\"form-group\">
+                                            <label class=\"col-xs-5 control-label form-lable\">";
+                                        echo "User Name:";
+                                        echo " </label>
+                                             <lable>" . $rs['name'] . "</lable>
+                                    </div>";
+
+                                        echo "<div class=\"form-group\">
+                                        <label class=\"col-xs-5 control-label form-lable\">";
+                                        echo "Email:";
+                                        echo " </label>
+                                        <lable>" . $rs['email'] . "</lable>
+                                    </div>";
+                                        echo "<div class=\"form-group\">
+                                        <label class=\"col-xs-5 control-label form-lable\">";
+                                        echo "Contact Number:";
+                                        echo " </label>
+                                        <lable>" . $rs['tel_no'] . "</lable>
+                                    </div>";
+                                        echo "<div class=\"form-group\">
+                                        <label class=\"col-xs-5 control-label form-lable\">";
+                                        echo "Company ID:";
+                                        echo " </label>
+                                        <lable>" . $rs['comp_id'] . "</lable>
+                                    </div>";
+                                        echo "<div class=\"form-group\">
+                                        <label class=\"col-xs-5 control-label form-lable\">"; echo "Job Level:"; echo" </label>
+                                        <lable>" . $rs['emp_level'] . "</lable>
+                                    </div>";
+                                        echo "<div class=\"form-group\">
+                                        <label class=\"col-xs-5 control-label form-lable\">"; echo "NIC:"; echo" </label>
+                                        <lable>" . $rs['name'] . "</lable>
+                                    </div>";
+
+                                        echo "<div class=\"form-group\">
+                                        <label class=\"col-xs-5 control-label form-lable\">";
+                                        echo "Department:";
+                                        echo " </label>
+                                        <lable>" . $rs['dept_id'] . "</lable>
+                                    </div>";
+
+                                        echo "<div class=\"form-group\">
+                                        <label class=\"col-xs-5 control-label form-lable\">";
+                                        echo "Job Category:";
+                                        echo " </label>
+                                        <lable>" . $rs['job_cat_id'] . "</lable>
+                                    </div>";
+                                    }
+
+                                    ?>
+                                        <br>
+                                        <div class="form-group">
+                                            <label class="col-xs-5 control-label form-lable">Password:</label>
+                                            <a href="resetpswd.php">Reset Password</a>
+                                        </div>
+
+                                        <br><br>
+
+                                        <a href="editProfile.php"><button class="btn btn-info btn-lg pull-right submit-button" type="submit" >Edit</button></a>
 
 
                                 </div>
+
                             </div>
                         </div>
                 </div>
