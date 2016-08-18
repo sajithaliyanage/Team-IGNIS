@@ -77,7 +77,7 @@ if(isset($_GET['id'])){
                                 ?>
                                 <i class="fa fa-connectdevelop icon-margin-right" aria-hidden="true"></i>Conversation with - <?php if($eName!=null){echo $eName;}else{ echo "Select Employee";}?></h5>
                             <hr>
-                            <div class="panel-body" style="height:57.5vh;">
+                            <div id="chat-scroll" class="panel-body" style="height:57.5vh;">
                                 <?php
                                 if(!isset($_GET['id'])){
                                     echo "<h2 style='text-align: center; margin-top:18%; color:#d4d4d4;'>Select an employee for start a<br/>conversation</h2>";
@@ -85,88 +85,6 @@ if(isset($_GET['id'])){
                                 ?>
                                 <ul class="chat" id="chat_id">
 
-
-<!---->
-<!--                                    <li class="left clearfix">-->
-<!--                                        <span class="chat-img pull-left">-->
-<!--                                    <img src="../admin/images/default.png" style="max-height:50px; max-width:60px;" alt="User Avatar"-->
-<!--                                         class="img-circle"/>-->
-<!--                                        </span>-->
-<!---->
-<!--                                        <div class="chat-body clearfix" style="padding-right:30%;">-->
-<!--                                            <div class="header">-->
-<!--                                                <strong class="primary-font">Jack Sparrow</strong>-->
-<!--                                                <small class="pull-right text-muted">-->
-<!--                                                    <span class="glyphicon glyphicon-time"></span>12 mins ago-->
-<!--                                                </small>-->
-<!--                                            </div>-->
-<!--                                            <p>-->
-<!--                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum-->
-<!--                                                ornare-->
-<!--                                                dolor, quis ullamcorper ligula sodales.-->
-<!--                                            </p>-->
-<!--                                        </div>-->
-<!--                                    </li>-->
-<!--                                    <li class="right clearfix">-->
-<!--                                        <span class="chat-img pull-right">-->
-<!--                                            <img src="../admin/images/default.png" style="max-height:50px; max-width:60px;" alt="User Avatar"-->
-<!--                                                 class="img-circle"/>-->
-<!--                                        </span>-->
-<!---->
-<!--                                        <div class="chat-body clearfix" style="padding-left:30%; ">-->
-<!--                                            <div class="header">-->
-<!--                                                <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>13-->
-<!--                                                    mins ago-->
-<!--                                                </small>-->
-<!--                                                <strong class="pull-right primary-font">Sajitha Liyanage</strong>-->
-<!--                                            </div>-->
-<!--                                            <p>-->
-<!--                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum-->
-<!--                                                ornare-->
-<!--                                                dolor, quis ullamcorper ligula sodales.-->
-<!--                                            </p>-->
-<!--                                        </div>-->
-<!--                                    </li>-->
-<!--                                    <li class="left clearfix">-->
-<!--                                        <span class="chat-img pull-left">-->
-<!--                                    <img src="../admin/images/default.png" style="max-height:50px; max-width:60px;" alt="User Avatar"-->
-<!--                                         class="img-circle"/>-->
-<!--                                </span>-->
-<!---->
-<!--                                        <div class="chat-body clearfix" style="padding-right:30%;">-->
-<!--                                            <div class="header">-->
-<!--                                                <strong class="primary-font">Jack Sparrow</strong>-->
-<!--                                                <small class="pull-right text-muted">-->
-<!--                                                    <span class="glyphicon glyphicon-time"></span>14 mins ago-->
-<!--                                                </small>-->
-<!--                                            </div>-->
-<!--                                            <p>-->
-<!--                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum-->
-<!--                                                ornare-->
-<!--                                                dolor, quis ullamcorper ligula sodales.-->
-<!--                                            </p>-->
-<!--                                        </div>-->
-<!--                                    </li>-->
-<!--                                    <li class="right clearfix">-->
-<!--                                        <span class="chat-img pull-right">-->
-<!--                                    <img src="../admin/images/default.png" style="max-height:50px; max-width:60px;" alt="User Avatar"-->
-<!--                                         class="img-circle"/>-->
-<!--                                </span>-->
-<!---->
-<!--                                        <div class="chat-body clearfix" style="padding-left:30%;">-->
-<!--                                            <div class="header">-->
-<!--                                                <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>15-->
-<!--                                                    mins ago-->
-<!--                                                </small>-->
-<!--                                                <strong class="pull-right primary-font">Sajitha Liyanage</strong>-->
-<!--                                            </div>-->
-<!--                                            <p>-->
-<!--                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum-->
-<!--                                                ornare-->
-<!--                                                dolor, quis ullamcorper ligula sodales.-->
-<!--                                            </p>-->
-<!--                                        </div>-->
-<!--                                    </li>-->
                                 </ul>
                             </div>
                             <div class="panel-footer" style="">
@@ -247,6 +165,11 @@ if(isset($_GET['id'])){
 </script>
 
 <script  type="text/javascript">
+    window.setInterval(function() {
+        var elem = document.getElementById('chat-scroll');
+        elem.scrollTop = elem.scrollHeight;
+    }, 100);
+
 
     function getParameterByName(name, url) {
         if (!url) url = window.location.href;
@@ -293,7 +216,7 @@ if(isset($_GET['id'])){
                         document.getElementById("chat_id").innerHTML += "</span>";
                         document.getElementById("chat_id").innerHTML +="<div class='chat-body clearfix' style=''>";
                         document.getElementById("chat_id").innerHTML +="<div class='header'>";
-                        document.getElementById("chat_id").innerHTML +="<strong class='primary-font' style=' margin-left:150px;'>"+obj[x].sender_id+"</strong>";
+                        document.getElementById("chat_id").innerHTML +="<strong class='primary-font' style=' margin-left:150px;'>"+'<?php if($eName!=null){echo $eName;}?>'+"</strong>";
                         document.getElementById("chat_id").innerHTML +="<small class='text-muted' style='margin-top:-30px !important;'><span style='margin-left: 30%;'>"+obj[x].send_date+"</span></small>";
                         document.getElementById("chat_id").innerHTML +="</div>";
                         document.getElementById("chat_id").innerHTML +="<p style='margin-right: 30%; margin-left:60px; margin-top:20px;'>"+obj[x].message+"</p>";
@@ -307,7 +230,7 @@ if(isset($_GET['id'])){
                         document.getElementById("chat_id").innerHTML +="<div class='chat-body clearfix' style=''>";
                         document.getElementById("chat_id").innerHTML +="<div class='header'>";
                         document.getElementById("chat_id").innerHTML +="<small class='text-muted' style='margin-top:-30px !important;'><span style='margin-left: 30%;'>"+obj[x].send_date+"</span></small>";
-                        document.getElementById("chat_id").innerHTML +="<strong class='pull-right primary-font' style=' margin-right:150px;'>"+obj[x].sender_id+"</strong>";
+                        document.getElementById("chat_id").innerHTML +="<strong class='pull-right primary-font' style=' margin-right:150px;'>"+'<?php echo $empName; ?>'+"</strong>";
                         document.getElementById("chat_id").innerHTML +="</div>";
                         document.getElementById("chat_id").innerHTML +="<p style='margin-left: 30%; margin-right:60px; margin-top:20px;'>"+obj[x].message+"</p>";
                         document.getElementById("chat_id").innerHTML +="</div>";

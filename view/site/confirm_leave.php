@@ -1,11 +1,23 @@
 <?php
 $var="approve";
 include('../../controller/siteController.php');
+include('../../config/connect.php');
+$pdo = connect();
 
 if(!$isLoggedin || $empRole=='director' || $empRole=='employee'){
     header('Location:../../index.php');
 }
 
+$employerID='';
+if(isset($_GET['appId'])){
+    $employerID = $_GET['appId'];
+}
+
+$sql = "select dept_id from employee where comp_id=:log ";
+$query = $pdo->prepare($sql);
+$query->execute(array('log'=>$empID));
+$result = $query->fetch();
+$departmentId = $result['dept_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,32 +71,119 @@ if(!$isLoggedin || $empRole=='director' || $empRole=='employee'){
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-calendar-check-o icon-margin-right" aria-hidden="true"></i>
-                                leaves pending for approval or rejection</h5>
-
+                                Take Your Decision</h5>
+                            <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">Your action done successfully!</div>
                             <hr>
 
-                            
-                            <div class="right">
-                                <ul class="pager ">
-                                    <li class="previous btn-sm"><a href="#"">Previous</a></li>
-                                    <li class="next btn-sm"><a href="#">Next</a></li>
-                                </ul>
-                            </div>
+                            <?php
+                                $eName='';
+                                if($employerID!=null){
+                                    $sql = "SELECT * FROM apply_leave JOIN employee ON employee.comp_id = apply_leave.comp_id WHERE
+                                            apply_leave.comp_id=:empID and employee.dept_id=:depId ";
+                                    $query = $pdo->prepare($sql);
+                                    $query->execute(array('empID'=>$employerID,'depId'=>$departmentId));
+                                    $result = $query->fetchAll();
 
-                            <div class="list-group">
-                                <li class="list-group-item" style="background-color:#ccd7f8 "><h5 >Leave applied by :Dileep Jayasundara</h5></li>
-                            </div>
+                                    foreach($result as $rs){
+                                        echo "<div class=\"list-group\">
+                                                <li class=\"list-group-item\" style=\"background-color:#d6e9c6\"><h5 >Leave applied by : <strong> ".$rs['name']."</strong></h5></li>
+                                            </div>
+                                                <form action='../../module/confirmLeave.php?empId=".$rs['comp_id']."' method='POST'>
 
-                            <div class="list-group">
+                                                <div class=\"list-group\">
+                                                    <li class=\"list-group-item\">Leave Priority :  <strong>".$rs['leave_priority']."</strong></li>
+                                                    <li class=\"list-group-item\">Duration :  <strong> ".$rs['start_date']." to ".$rs['end_date']."</strong></li>
+                                                    <li class=\"list-group-item\">Number of Days:  <strong>".$rs['number_of_days']."</strong></li>
+                                                    <li class=\"list-group-item\">Reason :  <strong>".$rs['reason']."</strong></li>
+                                                    <li class=\"list-group-item\">special note :<input type=\"text\" name='note' placeholder=' If reject..'>
+                                                        <a class=\"btn btn-success btn-sm\" data-toggle=\"modal\" data-target='#accept-leave".$rs['apply_leave_id']."'>"; if($empRole=='manager'){echo "Approve";}else{ echo "Recommend";} echo"</a>
+                                                        <a class=\"btn btn-danger btn-sm\" data-toggle=\"modal\" data-target='#reject-leave".$rs['apply_leave_id']."' >Reject</a>
+                                                        <a class=\"btn btn-link btn-xs\" data-toggle=\"modal\" data-target='#cancel-leave".$rs['apply_leave_id']."'>Cancel Leave</a></li>
+                                                </div>
 
-                                <li class="list-group-item">Duration : 2016/08/12 to 2016/08/13</li>
-                                <li class="list-group-item">Reason :personal issue</li>
-                                <li class="list-group-item">special note :<input type="text" name="" >
-                                    <button class="btn btn-success btn-sm"><?php if($empRole=='manager'){echo "Approve";}else{ echo "Recommend";}?></button> <button class="btn btn-danger btn-sm">Reject</button><button type="button" class="btn btn-link btn-xs">cancel Leave</button></li>
+
+                                                    <div class=\"modal fade\" id='accept-leave".$rs['apply_leave_id']."' >
+                                                        <div class=\"modal-dialog\">
+
+                                                            <!-- Modal content-->
+                                                            <div class=\"modal-content\">
+                                                                <div class=\"modal-header\">
+                                                                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>
+                                                                    <h4 class=\"modal-title\">"; if($empRole=='manager'){echo "Approve";}else{ echo "Recommend";} echo" Leave</h4>
+                                                                </div>
+                                                                <div class=\"modal-body\">
+                                                                    <p>Are you sure you want to "; if($empRole=='manager'){echo "approve";}else{ echo "recommend";} echo" this leave ?</p>
+                                                                </div>
+                                                                <div class=\"modal-footer\">
+                                                                    <button class=\"btn btn-success\" type='submit' name=\"submit\" value='done'>"; if($empRole=='manager'){echo "Approve";}else{ echo "Recommend";} echo"</button>
+                                                                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class=\"modal fade\" id='reject-leave".$rs['apply_leave_id']."' >
+                                                        <div class=\"modal-dialog\">
+
+                                                            <!-- Modal content-->
+                                                            <div class=\"modal-content\">
+                                                                <div class=\"modal-header\">
+                                                                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>
+                                                                    <h4 class=\"modal-title\">Reject Leave</h4>
+                                                                </div>
+                                                                <div class=\"modal-body\">
+                                                                    <p>Are you sure you want to reject this leave ?</p>
+                                                                </div>
+                                                                <div class=\"modal-footer\">
+                                                                    <button class=\"btn btn-danger\" type='submit' name=\"submit\" value='reject'>Reject</button>
+                                                                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class=\"modal fade\" id='cancel-leave".$rs['apply_leave_id']."' >
+                                                        <div class=\"modal-dialog\">
+
+                                                            <!-- Modal content-->
+                                                            <div class=\"modal-content\">
+                                                                <div class=\"modal-header\">
+                                                                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>
+                                                                    <h4 class=\"modal-title\">Cancel Leave</h4>
+                                                                </div>
+                                                                <div class=\"modal-body\">
+                                                                    <p>Are you sure you want to cancel this leave ?</p>
+                                                                </div>
+                                                                <div class=\"modal-footer\">
+                                                                    <button class=\"btn btn-warning\" type='submit' name=\"submit\" value='cancel'>Cancel</button>
+                                                                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                        </form>";
+                                    }
+                                }else{
+                                    echo" <div class=\"list-group\">
+                                                <li class=\"list-group-item\" style=\"background-color:#d6e9c6\"><h5 >Leave applied by : NOT SELECT ANY ONE </h5></li>
+                                            </div>
+
+                                            <div class=\"list-group\">
+                                                <li class=\"list-group-item\">Leave Priority : </li>
+                                                <li class=\"list-group-item\">Duration :</li>
+                                                <li class=\"list-group-item\">Number of Days: </li>
+                                                <li class=\"list-group-item\">Reason :</li>
+                                                <li class=\"list-group-item\">special note :<input type=\"text\" name=\"\"  placeholder=' If reject..' >
+                                                    <button class=\"btn btn-success btn-sm\">";if($empRole=='manager'){echo "Approve";}else{ echo "Recommend";} echo"</button> <button class=\"btn btn-danger btn-sm\">Reject</button><button type=\"button\" class=\"btn btn-link btn-xs\">cancel Leave</button></li>
+                                            </div>";
+                                }
+                            ?>
 
 
-
-                            </div>
                             
                         </div>
                     </div>
@@ -117,17 +216,43 @@ if(!$isLoggedin || $empRole=='director' || $empRole=='employee'){
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-angle-double-right " aria-hidden="true"></i>
-                                 Leave requests on same time</h5>
+                                 Waiting for approval or rejection</h5>
                             <hr>
-                            <div class="list-group-item-heading">
-                                <a href="#" class="list-group-item"><i class="fa fa-user" aria-hidden="true"></i> Employee Name  <span style="float:right;"> Date <i class="fa fa-clock-o fa-lg" aria-hidden="true"></i></span></a>
-                            </div>
 
                             <div class="list-group">
-                                <a href="#" class="list-group-item">Sajitha Liyanage<span style="float:right;"> 2016/08/01 </span></a>
-                                <a href="#" class="list-group-item">Priyanwada Kulasuriya<span style="float:right;"> 2016/08/01 </span></a>
-                                <a href="#" class="list-group-item">Gothami Gunarathne<span style="float:right;"> 2016/08/01 </span></a>
-                                <a href="#" class="list-group-item">Madusha Ushan<span style="float:right;"> 2016/08/01 </span></a>
+                                <?php
+                                if($empRole == 'manager'){
+                                    $sql = "select * from apply_leave JOIN employee ON employee.comp_id = apply_leave.comp_id where employee.dept_id=:log and apply_leave.status =:state and apply_leave.comp_id !=:myId";
+                                    $query = $pdo->prepare($sql);
+                                    $query->execute(array('log'=>$departmentId,'state'=>"recommended",'myId'=>$empID));
+                                    $rowCount = $query->rowCount();
+                                    $result = $query->fetchAll();
+
+                                    if($rowCount==0){
+                                        echo "There is no any pending request";
+                                    }
+
+                                    foreach($result as $rs){
+                                        echo "<a href='?appId=".$rs['comp_id']."' class=\"list-group-item\">".$rs['name']."<span style=\"float:right;\">Waiting for Approve <i class=\"fa fa-question\" aria-hidden=\"true\"></i></span></a>";
+                                    }
+
+                                }else if($empRole == 'executive'){
+                                    $sql = "select * from apply_leave JOIN employee ON employee.comp_id = apply_leave.comp_id where employee.dept_id=:log and apply_leave.status =:state and apply_leave.comp_id !=:myId";
+                                    $query = $pdo->prepare($sql);
+                                    $query->execute(array('log'=>$departmentId,'state'=>"waiting",'myId'=>$empID));
+                                    $rowCount = $query->rowCount();
+                                    $result = $query->fetchAll();
+
+                                    if($rowCount==0){
+                                        echo "There is no any pending request";
+                                    }
+
+                                    foreach($result as $rs){
+                                        echo "<a href='?appId=".$rs['comp_id']."' class=\"list-group-item\">".$rs['name']."<span style=\"float:right;\">Waiting for Approve <i class=\"fa fa-question\" aria-hidden=\"true\"></i></span></a>";
+                                    }
+                                }
+
+                                ?>
 
 
                             </div>

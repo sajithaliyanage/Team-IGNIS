@@ -325,7 +325,7 @@ if(!$isLoggedin && $empRole!="director"){
                                             </div>
                                            </div>
 
-                                           <div class=\"modal fade\" id='accept-leave".$rs['leave_id']."' >
+                            <div class=\"modal fade\" id='accept-leave".$rs['leave_id']."' >
                                 <div class=\"modal-dialog\">
 
                                     <!-- Modal content-->

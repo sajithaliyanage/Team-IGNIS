@@ -202,7 +202,7 @@ if(!$isLoggedin){
 
 </div>
 
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.js"></script>
+<script src="../../public/js/jquery.js"></script>
+<script src="../../public/js/bootstrap.js"></script>
 </body>
 </html>
