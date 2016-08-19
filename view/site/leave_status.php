@@ -1,5 +1,5 @@
 <?php
-$var = "apply";
+$var = "status";
 include('../../controller/siteController.php');
 include('../../config/connect.php');
 $pdo = connect();
@@ -21,14 +21,6 @@ $pdo = connect();
     <link href="../../public/css/leave-interface.css" rel="stylesheet">
     <link href="../../public/css/navbar-style.css" rel="stylesheet">
     <link href="../../public/css/font-awesome.min.css" rel="stylesheet">
-    <link href="../../public/css/calender.css" rel="stylesheet">
-
-    <script>
-        function DeleteRow(o) {
-            var p=o.parentNode.parentNode;
-            p.parentNode.removeChild(p);
-        }
-    </script>
 
 
 </head>
@@ -44,7 +36,7 @@ $pdo = connect();
             <?php include("../layouts/leftbar.php") ?>
         </div>
 
-        <div class="col-sm-11 col-xs-12 admin-background col-sm-push-2" style="position: relative;">
+        <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2" style="position: relative;">
 
             <div class="row padding-row">
                 <div class="row">
@@ -62,7 +54,7 @@ $pdo = connect();
             </div>
 
             <div class="row padding-row">
-                <div class="col-sm-11 col-xs-12 padding-box">
+                <div class="col-xs-12 padding-box">
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top table-responsive">
                             <h5 class="nortification-box-heading"><i class="fa fa-calendar-check-o icon-margin-right" aria-hidden="true"></i>
@@ -137,9 +129,6 @@ $pdo = connect();
 
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
 
