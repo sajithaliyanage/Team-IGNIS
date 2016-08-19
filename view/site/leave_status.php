@@ -82,8 +82,8 @@ $pdo = connect();
                                     <td>applied on 2016/08/11 at 4.20 p.m</td>
                                     <td>Waiting for Approval</td>
                                     <td >
-                                        <button class="btn btn-success btn-sm" onclick=""><i class="fa fa-pencil-square-o"></i>Edit</button>
-                                        <button class="btn btn-danger btn-sm" onclick="DeleteRow(this)"><i class="fa fa-times"></i>Delete</button>
+                                        <button class="btn btn-success btn-sm" onclick=""><i class="fa fa-pencil-square-o"></i> Edit</button>
+                                        <button class="btn btn-danger btn-sm" onclick="DeleteRow(this)"><i class="fa fa-times"></i> Delete</button>
 
                                     </td>
 
@@ -96,8 +96,8 @@ $pdo = connect();
                                     <td>applied on 2016/07/11 at 4.20 p.m</td>
                                     <td>Approved</td>
                                     <td >
-                                        <button class="btn btn-success btn-sm" onclick=""><i class="fa fa-pencil-square-o"></i>Edit</button>
-                                        <button class="btn btn-danger btn-sm" onclick="DeleteRow(this)"><i class="fa fa-times"></i>Delete</button>
+                                        <button class="btn btn-success btn-sm" onclick=""><i class="fa fa-pencil-square-o"></i> Edit </button>
+                                        <button class="btn btn-danger btn-sm" onclick="DeleteRow(this)"><i class="fa fa-times"></i> Delete </button>
 
                                     </td>
 
@@ -111,8 +111,8 @@ $pdo = connect();
                                     <td>applied on 2016/02/11 at 4.20 p.m</td>
                                     <td>rejected</td>
                                     <td >
-                                        <button class="btn btn-success btn-sm" onclick=""><i class="fa fa-pencil-square-o"></i>Edit</button>
-                                        <button class="btn btn-danger btn-sm" onclick="DeleteRow(this)"><i class="fa fa-times"></i>Delete</button>
+                                        <button class="btn btn-success btn-sm" onclick=""><i class="fa fa-pencil-square-o"></i> Edit</button>
+                                        <button class="btn btn-danger btn-sm" onclick="DeleteRow(this)"><i class="fa fa-times"></i> Delete</button>
 
                                     </td>
 
