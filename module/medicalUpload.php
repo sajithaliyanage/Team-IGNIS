@@ -6,13 +6,13 @@ $pdo = connect();
 $applyLeaveID = $_POST['apply_leave_id'];
 $uploadDate = date("d/m/Y");
 
-if(empty($_FILES["fileToUpload"]["name"]) || $applyLeaveID==''){
+if(empty($_FILES["fileToUpload"]["name"]) || empty($_POST['apply_leave_id'])){
     header("Location:../view/site/medicalUpload.php?fail");
 }
 try{
     $sql="INSERT INTO medical_report (comp_id,apply_leave_id,uploaded_date,status) VALUES (:comp_id,:apply_leave_id,:uploaded_date,:status)";
     $query =$pdo->prepare($sql);
-    $query->execute(array('comp_id'=>$empID,'apply_leave_id'=>$applyLeaveID,'uploaded_date'=>$uploadDate,'status'=>"waiting"));
+    $query->execute(array('comp_id'=>$empID ,'apply_leave_id'=>$applyLeaveID,'uploaded_date'=>$uploadDate,'status'=>"waiting"));
 
     $medicalID = $pdo->lastInsertId();
 
@@ -50,7 +50,7 @@ try{
 
                     $sql="UPDATE medical_report SET medical_report=:location WHERE med_id=:log";
                     $query =$pdo->prepare($sql);
-                    $query->execute(array('location'=>$target_dir,'log'=>$medicalID));
+                    $query->execute(array('location'=>$target_file,'log'=>$medicalID));
 
                     header( 'Location:../view/site/medicalUpload.php?success' ) ;
                 }
