@@ -57,18 +57,19 @@ $pdo = connect();
                 <div class="col-xs-12 padding-box">
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top table-responsive">
-                            <h5 class="nortification-box-heading"><i class="fa fa-calendar-check-o icon-margin-right" aria-hidden="true"></i>
-                                My Recent Leave Requests</h5>
+                            <center>
+                                <h4 style="color:#065abc"><strong>My Recent Leave Requests</strong></h4>
+                            </center>
                             <hr>
 
-                            <table class="table table-striped table-hover">
-                                <thead>
+                            <table class="table ">
+                                <thead style="color: #065ABC">
                                 <tr>
-                                    <th>My Recent Leave Requests</th>
-                                    <th>Leave type</th>
-                                    <th>Duration</th>
+                                    <th><strong>My Recent Leave Requests</strong></th>
                                     <th></th>
-                                    <th>Leave State</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th><strong>Leave State</strong></th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -80,10 +81,10 @@ $pdo = connect();
                                     <td>sick leave</td>
                                     <td>1 day</td>
                                     <td>applied on 2016/08/11 at 4.20 p.m</td>
-                                    <td>Waiting for Approval</td>
+                                    <td style="color: #3671cc">Waiting for Approval</td>
                                     <td >
-                                        <button class="btn btn-success btn-sm" onclick=""><i class="fa fa-pencil-square-o"></i> Edit</button>
-                                        <button class="btn btn-danger btn-sm" onclick="DeleteRow(this)"><i class="fa fa-times"></i> Delete</button>
+                                        <button class="btn  btn-sm" onclick=""><i class="fa fa-pencil-square-o fa-lg" ></i> </button>
+                                        <button class="btn  btn-sm" onclick="DeleteRow(this)"><i class="fa fa-times fa-lg" ></i> </button>
 
                                     </td>
 
@@ -94,10 +95,10 @@ $pdo = connect();
                                     <td>Annual leave</td>
                                     <td>1 day</td>
                                     <td>applied on 2016/07/11 at 4.20 p.m</td>
-                                    <td>Approved</td>
+                                    <td style="color: #048000">Approved</td>
                                     <td >
-                                        <button class="btn btn-success btn-sm" onclick=""><i class="fa fa-pencil-square-o"></i> Edit </button>
-                                        <button class="btn btn-danger btn-sm" onclick="DeleteRow(this)"><i class="fa fa-times"></i> Delete </button>
+                                        <button class="btn  btn-sm" onclick=""><i class="fa fa-pencil-square-o fa-lg" ></i> </button>
+                                        <button class="btn  btn-sm" onclick="DeleteRow(this)"><i class="fa fa-times fa-lg " ></i> </button>
 
                                     </td>
 
@@ -109,10 +110,10 @@ $pdo = connect();
                                     <td>short leave</td>
                                     <td>0.5 day</td>
                                     <td>applied on 2016/02/11 at 4.20 p.m</td>
-                                    <td>rejected</td>
+                                    <td style="color: #c72110">rejected</td>
                                     <td >
-                                        <button class="btn btn-success btn-sm" onclick=""><i class="fa fa-pencil-square-o"></i> Edit</button>
-                                        <button class="btn btn-danger btn-sm" onclick="DeleteRow(this)"><i class="fa fa-times"></i> Delete</button>
+                                        <button class="btn  btn-sm" onclick=""><i class="fa fa-pencil-square-o fa-lg" ></i> </button>
+                                        <button class="btn  btn-sm" onclick="DeleteRow(this)"><i class="fa fa-times fa-lg"></i> </button>
 
                                     </td>
 
