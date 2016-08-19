@@ -1,6 +1,8 @@
 <?php
 $var = "medical";
 include('../../controller/siteController.php');
+include('../../config/connect.php');
+$pdo = connect();
 
 if(!$isLoggedin){
     header('Location:../../index.php');
@@ -62,14 +64,48 @@ if(!$isLoggedin){
                             <hr>
                             <div class="row">
                                 <div class="col-xs-10 col-xs-offset-1">
-                                    <div class="upload-box">
-                                        <center>
-                                            <i class="fa fa-upload fa-5x uplaod-icon-box" aria-hidden="true"></i>
-                                            <h3>Drop Your Medical Here</h3>
-                                            <h5>or</h5>
-                                            <button class="btn btn-info btn-lg submit-button" type="submit">Select Medical</button>
-                                        </center>
-                                    </div>
+                                    <form action="../../module/medicalUpload.php" method="POST"  enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label form-lable">Select Absent Date:</label>
+
+                                            <div class="col-xs-8">
+                                                <select name="apply_leave_id" class="form-control">
+                                                    <?php
+                                                        $sql = "SELECT * FROM apply_leave WHERE comp_id=:empId AND status=:log AND medical_status=:state";
+                                                        $query = $pdo->prepare($sql);
+                                                        $query->execute(array('empId'=>$empID,'log'=>"approved",'state'=>"no"));
+                                                        $result = $query->fetchAll();
+                                                        $rowCount = $query->rowCount();
+
+                                                        if($rowCount==0){
+                                                            echo " <option value=''>Results empty</option>";
+                                                        }
+
+                                                        foreach($result as $rs){
+                                                            echo " <option value='".$rs['apply_leave_id']."'>".$rs['number_of_days']." Day - ".$rs['start_date']." to ".$rs['end_date']."</option>";
+                                                        }
+
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <div class="upload-box">
+                                            <center>
+                                                <i class="fa fa-upload fa-5x uplaod-icon-box" aria-hidden="true"></i>
+                                                <h3>Drop Your Medical Here</h3>
+                                                <h5>or</h5>
+                                                <label for="fileToUpload" class="btn btn-info btn-lg submit-button" >
+                                                    Browse From Computer
+                                                </label>
+                                                <input   type="file" name="fileToUpload" id="fileToUpload" />
+
+                                                <p>(Max Size 3MB)</p>
+                                            </center>
+                                        </div>
+                                        <button class="btn btn-info btn-lg pull-right submit-button" type="submit">Submit Medical</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

@@ -219,7 +219,7 @@ if(!$isLoggedin){
                                         <br>
                                         <br>
 
-                                        <button class="btn btn-info btn-lg pull-right submit-button" type="submit">Apply
+                                        <button class="btn btn-info btn-lg pull-right submit-button" type="submit">Apply Leave
                                         </button>
                                     </div>
                                 </div>

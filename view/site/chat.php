@@ -165,10 +165,10 @@ if(isset($_GET['id'])){
 </script>
 
 <script  type="text/javascript">
-    window.setInterval(function() {
-        var elem = document.getElementById('chat-scroll');
-        elem.scrollTop = elem.scrollHeight;
-    }, 100);
+//    window.setInterval(function() {
+//        var elem = document.getElementById('chat-scroll');
+//        elem.scrollTop = elem.scrollHeight;
+//    }, 100);
 
 
     function getParameterByName(name, url) {

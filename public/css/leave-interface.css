@@ -135,6 +135,10 @@ input.empty {
 
 }
 
+input[type="file"] {
+    display: none;
+}
+
 .department-add{
     padding-top:10px;
 }
@@ -273,5 +277,12 @@ input.empty {
     overflow-y: scroll;
 }
 
+.upload-box{
+    border:2px dotted #2c3b42;
+    padding:20px 10px ;
+    border-radius:10px;
+    margin-bottom:20px;
+    margin-top:20px;
+}
 
 /*...*/

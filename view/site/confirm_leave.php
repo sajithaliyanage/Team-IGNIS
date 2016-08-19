@@ -8,9 +8,9 @@ if(!$isLoggedin || $empRole=='director' || $empRole=='employee'){
     header('Location:../../index.php');
 }
 
-$employerID='';
+$applyLeaveID='';
 if(isset($_GET['appId'])){
-    $employerID = $_GET['appId'];
+    $applyLeaveID = $_GET['appId'];
 }
 
 $sql = "select dept_id from employee where comp_id=:log ";
@@ -77,18 +77,18 @@ $departmentId = $result['dept_id'];
 
                             <?php
                                 $eName='';
-                                if($employerID!=null){
+                                if($applyLeaveID!=null){
                                     $sql = "SELECT * FROM apply_leave JOIN employee ON employee.comp_id = apply_leave.comp_id WHERE
-                                            apply_leave.comp_id=:empID and employee.dept_id=:depId ";
+                                            apply_leave.apply_leave_id=:appLeaveID and employee.dept_id=:depId ";
                                     $query = $pdo->prepare($sql);
-                                    $query->execute(array('empID'=>$employerID,'depId'=>$departmentId));
+                                    $query->execute(array('appLeaveID'=>$applyLeaveID,'depId'=>$departmentId));
                                     $result = $query->fetchAll();
 
                                     foreach($result as $rs){
                                         echo "<div class=\"list-group\">
                                                 <li class=\"list-group-item\" style=\"background-color:#d6e9c6\"><h5 >Leave applied by : <strong> ".$rs['name']."</strong></h5></li>
                                             </div>
-                                                <form action='../../module/confirmLeave.php?empId=".$rs['comp_id']."' method='POST'>
+                                                <form action='../../module/confirmLeave.php?empId=".$rs['comp_id']."&app_leave_id=".$applyLeaveID."' method='POST'>
 
                                                 <div class=\"list-group\">
                                                     <li class=\"list-group-item\">Leave Priority :  <strong>".$rs['leave_priority']."</strong></li>
@@ -233,7 +233,7 @@ $departmentId = $result['dept_id'];
                                     }
 
                                     foreach($result as $rs){
-                                        echo "<a href='?appId=".$rs['comp_id']."' class=\"list-group-item\">".$rs['name']."<span style=\"float:right;\">Waiting for Approve <i class=\"fa fa-question\" aria-hidden=\"true\"></i></span></a>";
+                                        echo "<a href='?appId=".$rs['apply_leave_id']."' class=\"list-group-item\">".$rs['name']."<span style=\"float:right;\">Waiting for Approve <i class=\"fa fa-question\" aria-hidden=\"true\"></i></span></a>";
                                     }
 
                                 }else if($empRole == 'executive'){
@@ -248,7 +248,7 @@ $departmentId = $result['dept_id'];
                                     }
 
                                     foreach($result as $rs){
-                                        echo "<a href='?appId=".$rs['comp_id']."' class=\"list-group-item\">".$rs['name']."<span style=\"float:right;\">Waiting for Approve <i class=\"fa fa-question\" aria-hidden=\"true\"></i></span></a>";
+                                        echo "<a href='?appId=".$rs['apply_leave_id']."' class=\"list-group-item\">".$rs['name']."<span style=\"float:right;\">Waiting for Approve <i class=\"fa fa-question\" aria-hidden=\"true\"></i></span></a>";
                                     }
                                 }
 
