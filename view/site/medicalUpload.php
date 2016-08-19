@@ -99,10 +99,17 @@ if(!$isLoggedin){
                                                 <label for="fileToUpload" class="btn btn-info btn-lg submit-button" >
                                                     Browse From Computer
                                                 </label>
-                                                <input   type="file" name="fileToUpload" id="fileToUpload" />
+                                                <input type="file" name="fileToUpload" id="fileToUpload" onchange="readURL(this)" />
 
-                                                <p>(Max Size 3MB)</p>
+                                                <p>(PDF or image files only allowed - Max Size 3MB)</p>
                                             </center>
+
+                                            <div id="myProgress" style="margin-top:20px;">
+                                                <div id="myBar">
+                                                    <div id="label">0%</div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                         <button class="btn btn-info btn-lg pull-right submit-button" type="submit">Submit Medical</button>
                                     </form>
@@ -150,5 +157,44 @@ if(!$isLoggedin){
 
 <script src="../../public/js/jquery.js"></script>
 <script src="../../public/js/bootstrap.js"></script>
+<script>
+    $('#fileToUpload').click(function() {
+        $('#myProgress').css({
+            'display': 'block'
+        });
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(600)
+                    .height(500);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+            move()
+        }
+    }
+    function move() {
+        var elem = document.getElementById("myBar");
+        var width = 10;
+        var id = setInterval(frame, 10);
+
+        function frame() {
+            if (width >= 100) {
+                clearInterval(id);
+            } else {
+                width++;
+                elem.style.width = width + '%';
+                document.getElementById("label").innerHTML = width * 1 + '%';
+            }
+        }
+    }
+
+</script>
 </body>
 </html>
