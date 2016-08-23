@@ -10,9 +10,9 @@ $note = $_POST['note'];
 $appliedEmployeeId = $_GET['empId'];
 $appliedLeaveId = $_GET['app_leave_id'];
 
-$sql0 = "SELECT * FROM employee join apply_leave on apply_leave.comp_id = employee.comp_id where employee.comp_id=:employeeID";
+$sql0 = "SELECT * FROM employee join apply_leave on apply_leave.comp_id = employee.comp_id where employee.comp_id=:employeeID AND apply_leave.apply_leave_id=:leaveID";
 $query0 = $pdo->prepare($sql0);
-$query0->execute(array('employeeID'=>$appliedEmployeeId));
+$query0->execute(array('employeeID'=>$appliedEmployeeId,'leaveID'=>$appliedLeaveId));
 $result = $query0->fetch();
 
 try{

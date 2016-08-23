@@ -6,7 +6,21 @@ function sendApprovedSMS($textlocal,$mobileNumber,$employeeName,$leaveCount,$sta
 
     $numbers = array($mobileNumber);
     $sender = 'Take Your Leave';
-    $message ="Hey ".$employeeName.", We are happy to say your Manager has approved your ".$leaveCount."day leaves on ".$startDate." to ".$endDate." \n \n
+    $message ="Hey ".$employeeName.", We are happy to say your manager has approved your ".$leaveCount."day leaves on ".$startDate." to ".$endDate." \n \n
+            - Take Your Leave";
+
+    try {
+        $result = $textlocal->sendSms($numbers, $message, $sender);
+    } catch (Exception $e) {
+        die('Error: ' . $e->getMessage());
+    }
+}
+
+function sendMedicalApprovedSMS($textlocal,$mobileNumber,$employeeName,$leaveCount,$startDate,$endDate){
+
+    $numbers = array($mobileNumber);
+    $sender = 'Take Your Leave';
+    $message ="Hey ".$employeeName.", We are happy to say your manager has approved your medical for ".$leaveCount."day leaves at ".$startDate." to ".$endDate." \n \n
             - Take Your Leave";
 
     try {
@@ -21,6 +35,20 @@ function sendRejetSMS($textlocal,$mobileNumber,$employeeName,$appliedDate){
     $numbers = array($mobileNumber);
     $sender = 'Take Your Leave';
     $message ="Hey ".$employeeName.", We are bad to say your leave has been rejected applied on ".$appliedDate." \n \n
+            - Take Your Leave";
+
+    try {
+        $result = $textlocal->sendSms($numbers, $message, $sender);
+    } catch (Exception $e) {
+        die('Error: ' . $e->getMessage());
+    }
+}
+
+function sendMedicalRejetSMS($textlocal,$mobileNumber,$employeeName,$leaveCount,$startDate,$endDate){
+
+$numbers = array($mobileNumber);
+    $sender = 'Take Your Leave';
+    $message ="Hey ".$employeeName.", We are bad to say your medical has been rejected applied for ".$leaveCount."day leaves at ".$startDate." to ".$endDate." \n \n
             - Take Your Leave";
 
     try {

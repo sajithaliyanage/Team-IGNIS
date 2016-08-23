@@ -187,6 +187,7 @@ $departmentId = $result['dept_id'];
                             
                         </div>
                     </div>
+
                     <div class="row margin-top">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-list icon-margin-right"
