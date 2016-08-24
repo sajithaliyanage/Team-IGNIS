@@ -84,7 +84,11 @@ $pdo = connect();
                                         $result = $query->fetchAll();
 
                                         if($rowCount==0){
-                                            echo "<center>There is no any leave request</center>";
+                                            echo "<tr><td><center>-</center></td>";
+                                            echo "<td><center>-</center></td>";
+                                            echo "<td><center>-</center></td>";
+                                            echo "<td><center>-</center></td>";
+                                            echo "<td><center>-</center></td></tr>";
                                         }
 
                                         foreach($result as $rs){

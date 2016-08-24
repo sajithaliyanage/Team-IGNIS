@@ -62,7 +62,6 @@ $var = "visitProfile";
                                     <ul class="nav nav-tabs navbar-right" role="tablist">
                                         <li><h5 style="margin-right: 120px;font-size: 20px">Available status</h5></li>
                                         <li role="presentation" class="active tab-box-1"><a href="attendance.php" class="tab-box-1" aria-controls="home" role="tab" data-toggle="tab""><b>Present</b></a></li>
-                                        <!--<li role="presentation" class="active tab-box-2"><a href="attendance.php" aria-controls="profile" class="tab-box-2" role="tab" data-toggle="tab"><b>Absent</b></a></li>-->
                                     </ul>
 
                                 </div>
