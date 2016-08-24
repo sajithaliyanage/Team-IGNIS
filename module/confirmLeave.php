@@ -16,7 +16,7 @@ $query0->execute(array('employeeID'=>$appliedEmployeeId,'leaveID'=>$appliedLeave
 $result = $query0->fetch();
 
 try{
-    if($empRole=='manager'){
+    if($empRole=='manager' || $empRole=='admin'){
         if($action =='done'){
             $sql = "UPDATE apply_leave SET status=:log, medical_status=:medical where comp_id=:employeeID AND apply_leave_id=:apply_leave_id";
             $query = $pdo->prepare($sql);

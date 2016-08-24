@@ -96,7 +96,7 @@ $departmentId = $result['dept_id'];
                                                     <li class=\"list-group-item\">Number of Days:  <strong>".$rs['number_of_days']."</strong></li>
                                                     <li class=\"list-group-item\">Reason :  <strong>".$rs['reason']."</strong></li>
                                                     <li class=\"list-group-item\">special note :<input type=\"text\" name='note' placeholder=' If reject..'>
-                                                        <a class=\"btn btn-success btn-sm\" data-toggle=\"modal\" data-target='#accept-leave".$rs['apply_leave_id']."'>"; if($empRole=='manager'){echo "Approve";}else{ echo "Recommend";} echo"</a>
+                                                        <a class=\"btn btn-success btn-sm\" data-toggle=\"modal\" data-target='#accept-leave".$rs['apply_leave_id']."'>"; if($empRole=='manager' || $empRole == 'admin' ){echo "Approve";}else{ echo "Recommend";} echo"</a>
                                                         <a class=\"btn btn-danger btn-sm\" data-toggle=\"modal\" data-target='#reject-leave".$rs['apply_leave_id']."' >Reject</a>
                                                         <a class=\"btn btn-link btn-xs\" data-toggle=\"modal\" data-target='#cancel-leave".$rs['apply_leave_id']."'>Cancel Leave</a></li>
                                                 </div>
@@ -178,7 +178,7 @@ $departmentId = $result['dept_id'];
                                                 <li class=\"list-group-item\">Number of Days: </li>
                                                 <li class=\"list-group-item\">Reason :</li>
                                                 <li class=\"list-group-item\">special note :<input type=\"text\" name=\"\"  placeholder=' If reject..' >
-                                                    <button class=\"btn btn-success btn-sm\">";if($empRole=='manager'){echo "Approve";}else{ echo "Recommend";} echo"</button> <button class=\"btn btn-danger btn-sm\">Reject</button><button type=\"button\" class=\"btn btn-link btn-xs\">cancel Leave</button></li>
+                                                    <button class=\"btn btn-success btn-sm\">";if($empRole=='manager' || $empRole == 'admin' ){echo "Approve";}else{ echo "Recommend";} echo"</button> <button class=\"btn btn-danger btn-sm\">Reject</button><button type=\"button\" class=\"btn btn-link btn-xs\">cancel Leave</button></li>
                                             </div>";
                                 }
                             ?>

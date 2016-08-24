@@ -37,7 +37,7 @@ try{
             $mobileNumber = sprintf( "%d%d", $var1, $var2 );
 
             //send SMS for approved
-            //sendMedicalApprovedSMS($textlocal,$mobileNumber,$result['name'],$result['number_of_days'],$result['start_date'],$result['end_date']);
+            sendMedicalApprovedSMS($textlocal,$mobileNumber,$result['name'],$result['number_of_days'],$result['start_date'],$result['end_date']);
             //send email
             //sendMedicalApprovedEmail($result['email'],$result['name'],$result['number_of_days'],$result['start_date'],$result['end_date']);
 
@@ -57,7 +57,7 @@ try{
             $mobileNumber = sprintf( "%d%d", $var1, $var2 );
 
             //send SMS for reject
-            //sendMedicalRejetSMS($textlocal,$mobileNumber,$result['name'],$result['number_of_days'],$result['start_date'],$result['end_date']);
+            sendMedicalRejetSMS($textlocal,$mobileNumber,$result['name'],$result['number_of_days'],$result['start_date'],$result['end_date']);
             //send email
             //sendMedicalRejectEmail($result['email'],$result['name'],$result['number_of_days'],$result['start_date'],$result['end_date']);
 

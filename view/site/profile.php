@@ -71,15 +71,13 @@ if(!$isLoggedin){
                             <div class="col-xs-12">
 
                                 <div class="nortification-box-status">
-                                    <ul class="nav nav-tabs navbar-right" role="tablist">
-                                        <li><h5 style="margin-right: 120px;font-size: 20px">Available status</h5></li>
-                                        <li role="presentation" class="active tab-box-1"><a href="attendance.php" class="tab-box-1" aria-controls="home" role="tab" data-toggle="tab""><b>Present</b></a></li>
-<!--                                    <li role="presentation" class="active tab-box-2"><a href="attendance.php" aria-controls="profile" class="tab-box-2" role="tab" data-toggle="tab"><b>Absent</b></a></li>-->
-                                    </ul>
+                                    <center>
+                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Click here to change your profile picture!">
+                                            <!--<img class="grayscale" src="../../public/images/default.png" width="350" height="400"/>-->
+                                            <img src='../../public/images/default.png' style="margin-bottom:40px " width='60%' onmouseover="this.src='../../public/images/default_hover.png';" onmouseout="this.src='../../public/images/default.png';" />
+                                        </a>
 
-                                </div>
-                                <br><br>
-
+<<<<<<< HEAD
                                 <center>
                                     <a href="#" for="fileToUpload" data-toggle="tooltip" data-placement="top" title="Click here to change your profile picture!">
                                         <!--<img class="grayscale" src="../../public/images/default.png" width="350" height="400"/>-->
@@ -96,8 +94,16 @@ if(!$isLoggedin){
                                     </div>
 
                                 </center>
+=======
+                                    </center>
+>>>>>>> 7bca591d755a41303ab92b9f9a94901f9017c34e
 
+                                    <ul class="nav nav-tabs">
+                                        <li><h5 style="font-size: 17px">Available status</h5></li>
+                                        <li role="presentation" class="active tab-box-1"><a class="tab-box-1"><b>Present</b></a></li>
+                                    </ul>
 
+                                </div>
                             </div>
                         </div>
                     </div>

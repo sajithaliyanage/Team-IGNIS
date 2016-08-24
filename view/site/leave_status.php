@@ -58,70 +58,45 @@ $pdo = connect();
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top table-responsive">
                             <center>
-                                <h4 style="color:#065abc"><strong>My Recent Leave Requests</strong></h4>
+                                <h4>My Recent Leave Requests</h4>
                             </center>
                             <hr>
 
                             <table class="table ">
                                 <thead style="color: #065ABC">
-                                <tr>
-                                    <th><strong>My Recent Leave Requests</strong></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th><strong>Leave State</strong></th>
-                                    <th></th>
-                                </tr>
+                                    <tr>
+
+                                        <th style='text-align: center;'>Start Date - End Date</th>
+                                        <th style='text-align: center;'>Leave Type</th>
+                                        <th style='text-align: center;'>Number of Days</th>
+                                        <th style='text-align: center;'>Applied Date</th>
+                                        <th style='text-align: center;'>Leave Status</th>
+
+                                    </tr>
                                 </thead>
 
                                 <tbody>
-                                <tr>
+                                    <?php
+                                        $sql = "select * from apply_leave JOIN leave_type ON apply_leave.leave_id = leave_type.leave_id where apply_leave.comp_id =:myId";
+                                        $query = $pdo->prepare($sql);
+                                        $query->execute(array('myId'=>$empID));
+                                        $rowCount = $query->rowCount();
+                                        $result = $query->fetchAll();
 
-                                    <td>2016/08/12-2016/08/13</td>
-                                    <td>sick leave</td>
-                                    <td>1 day</td>
-                                    <td>applied on 2016/08/11 at 4.20 p.m</td>
-                                    <td style="color: #3671cc">Waiting for Approval</td>
-                                    <td >
-                                        <button class="btn  btn-sm" onclick=""><i class="fa fa-pencil-square-o fa-lg" ></i> </button>
-                                        <button class="btn  btn-sm" onclick="DeleteRow(this)"><i class="fa fa-times fa-lg" ></i> </button>
+                                        if($rowCount==0){
+                                            echo "<center>There is no any leave request</center>";
+                                        }
 
-                                    </td>
-
-                                </tr>
-                                <tr>
-
-                                    <td>2016/07/12-2016/07/13</td>
-                                    <td>Annual leave</td>
-                                    <td>1 day</td>
-                                    <td>applied on 2016/07/11 at 4.20 p.m</td>
-                                    <td style="color: #048000">Approved</td>
-                                    <td >
-                                        <button class="btn  btn-sm" onclick=""><i class="fa fa-pencil-square-o fa-lg" ></i> </button>
-                                        <button class="btn  btn-sm" onclick="DeleteRow(this)"><i class="fa fa-times fa-lg " ></i> </button>
-
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-
-                                    <td>2016/02/12-2016/02/12</td>
-                                    <td>short leave</td>
-                                    <td>0.5 day</td>
-                                    <td>applied on 2016/02/11 at 4.20 p.m</td>
-                                    <td style="color: #c72110">rejected</td>
-                                    <td >
-                                        <button class="btn  btn-sm" onclick=""><i class="fa fa-pencil-square-o fa-lg" ></i> </button>
-                                        <button class="btn  btn-sm" onclick="DeleteRow(this)"><i class="fa fa-times fa-lg"></i> </button>
-
-                                    </td>
-
-
-                                </tr>
-
-
-
+                                        foreach($result as $rs){
+                                            echo "<tr>
+                                                    <td style='text-align: center;'>".$rs['start_date']." - ".$rs['end_date']."</td>
+                                                    <td style='text-align: center;'>".$rs['leave_name']."</td>
+                                                    <td style='text-align: center;'>".$rs['number_of_days']." day</td>
+                                                    <td style='text-align: center;'>".$rs['apply_date']."</td>
+                                                    <td style='text-align: center;'><span>"; if($rs['status']=='waiting'){echo 'Waiting for Approve <i class=\"fa fa-question\" aria-hidden=\"true\"></i></span></a>';}else if($rs['status']=='approved'){ echo '<span style="color:#00a65a;">Approved<i class=\'fa fa-check\' aria-hidden=\'true\'></i></span> </span></a>';}else{echo '<span style="color:#d43f3a;">Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></span>';} echo "</td>
+                                                </tr>";
+                                        }
+                                    ?>
 
                                 </tbody>
                             </table>

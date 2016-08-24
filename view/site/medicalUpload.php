@@ -77,7 +77,7 @@ $departmentId = $result['dept_id'];
 
             <div class="row padding-row">
                 <div class="col-sm-7 col-xs-12 padding-box">
-                    <div class="row" style="<?php if($empRole != 'manager'){ echo 'display:none;';}?> margin-bottom:20px;">
+                    <div class="row" style="<?php if($empRole != 'manager' && $empRole != 'admin' ){ echo 'display:none;';}?> margin-bottom:20px;">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-calendar-check-o icon-margin-right" aria-hidden="true"></i>
                                 Take Your Decision</h5>
@@ -238,7 +238,7 @@ $departmentId = $result['dept_id'];
                 </div>
 
                 <div class="col-sm-5 col-xs-12 padding-box">
-                    <div class="row " style="<?php if($empRole != 'manager'){ echo 'display:none;';}?> margin-bottom:20px;">
+                    <div class="row " style="<?php if($empRole != 'manager' && $empRole != 'admin' ){ echo 'display:none;';}?> margin-bottom:20px;">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-angle-double-right " aria-hidden="true"></i>
                                 Waiting medicals for approval or rejection</h5>
