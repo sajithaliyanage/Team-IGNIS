@@ -81,10 +81,19 @@ if(!$isLoggedin){
                                 <br><br>
 
                                 <center>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Click here to change your profile picture!">
+                                    <a href="#" for="fileToUpload" data-toggle="tooltip" data-placement="top" title="Click here to change your profile picture!">
                                         <!--<img class="grayscale" src="../../public/images/default.png" width="350" height="400"/>-->
-                                        <img src='../../public/images/default.png' style="margin-bottom:40px " width='80%' onmouseover="this.src='../../public/images/default_hover.png';" onmouseout="this.src='../../public/images/default.png';" />
+                                        <input type="file" name="fileToUpload" id="fileToUpload" onchange="readURL(this)"/>
+                                        <img src='../../public/images/default.png' style="margin-bottom:40px " width='60%' onmouseover="this.src='../../public/images/default_hover.png';" onmouseout="this.src='../../public/images/default.png';" />
                                     </a>
+                                    <div class="output"></div>
+
+
+                                    <div id="myProgress" style="margin-top:20px;">
+                                        <div id="myBar">
+                                            <div id="label">0%</div>
+                                        </div>
+                                    </div>
 
                                 </center>
 
@@ -111,21 +120,11 @@ if(!$isLoggedin){
                                     <hr>
 
                                     <?php
-                                    $sql = "select * from employee where comp_id=:empID ";
+
+                                    $sql = "select * from employee INNER JOIN department ON employee.dept_id=department.dept_id INNER JOIN job_category ON employee.job_cat_id=job_category.job_cat_id WHERE comp_id=:empID";
                                     $query = $pdo->prepare($sql);
                                     $query->execute(array('empID'=>$empID));
                                     $result = $query->fetchAll();
-
-//                                    $sql1 = "select employee.comp_id,employee.dept_id,department.dept_name from employee INNER JOIN department ON employee.dept_id=:department.dept_id WHERE employee.comp_id=:empID";
-//                                    $query1 = $pdo->prepare($sql1);
-//                                    $query1->execute(array('empID'=>$empID));
-//                                    $result1 = $query1->fetchAll();
-//
-//                                    $sql2 = "select employee.comp_id,employee.job_cat_id,job_category.job_cat_name from employee INNER JOIN job_category ON employee.job_cat_id=:job_category.job_cat_id WHERE employee.comp_id=:empID";
-//                                    $query2 = $pdo->prepare($sql2);
-//                                    $query2->execute(array('empID'=>$empID));
-//                                    $result2 = $query2->fetchAll();
-
 
                                     foreach($result as $rs) {
 
@@ -155,26 +154,30 @@ if(!$isLoggedin){
                                         <lable>" . $rs['comp_id'] . "</lable>
                                     </div>";
                                         echo "<div class=\"form-group\">
-                                        <label class=\"col-xs-5 control-label form-lable\">"; echo "Job Level:"; echo" </label>
+                                        <label class=\"col-xs-5 control-label form-lable\">";
+                                        echo "Job Level:";
+                                        echo" </label>
                                         <lable>" . $rs['emp_level'] . "</lable>
                                     </div>";
                                         echo "<div class=\"form-group\">
-                                        <label class=\"col-xs-5 control-label form-lable\">"; echo "NIC:"; echo" </label>
-                                        <lable>" . $rs['name'] . "</lable>
+                                        <label class=\"col-xs-5 control-label form-lable\">";
+                                        echo "NIC:";
+                                        echo" </label>
+                                        <lable>" . $rs['nic'] . "</lable>
                                     </div>";
 
                                         echo "<div class=\"form-group\">
                                         <label class=\"col-xs-5 control-label form-lable\">";
                                         echo "Department:";
                                         echo " </label>
-                                        <lable>" . $rs['dept_id'] . "</lable>
+                                        <lable>" . $rs['dept_name'] . "</lable>
                                     </div>";
 
                                         echo "<div class=\"form-group\">
                                         <label class=\"col-xs-5 control-label form-lable\">";
                                         echo "Job Category:";
                                         echo " </label>
-                                        <lable>" . $rs['job_cat_id'] . "</lable>
+                                        <lable>" . $rs['job_cat_name'] . "</lable>
                                     </div>";
                                     }
 
@@ -204,5 +207,44 @@ if(!$isLoggedin){
 
 <script src="../../public/js/jquery.js"></script>
 <script src="../../public/js/bootstrap.js"></script>
+
+<script>
+    $('#fileToUpload').click(function() {
+        $('#myProgress').css({
+            'display': 'block'
+        });
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(600)
+                    .height(500);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+            move()
+        }
+    }
+    function move() {
+        var elem = document.getElementById("myBar");
+        var width = 10;
+        var id = setInterval(frame, 10);
+
+        function frame() {
+            if (width >= 100) {
+                clearInterval(id);
+            } else {
+                width++;
+                elem.style.width = width + '%';
+                document.getElementById("label").innerHTML = width * 1 + '%';
+            }
+        }
+    }
+</script>
 </body>
 </html>
