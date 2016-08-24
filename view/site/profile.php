@@ -76,27 +76,9 @@ if(!$isLoggedin){
                                             <!--<img class="grayscale" src="../../public/images/default.png" width="350" height="400"/>-->
                                             <img src='../../public/images/default.png' style="margin-bottom:40px " width='60%' onmouseover="this.src='../../public/images/default_hover.png';" onmouseout="this.src='../../public/images/default.png';" />
                                         </a>
-
-<<<<<<< HEAD
-                                <center>
-                                    <a href="#" for="fileToUpload" data-toggle="tooltip" data-placement="top" title="Click here to change your profile picture!">
-                                        <!--<img class="grayscale" src="../../public/images/default.png" width="350" height="400"/>-->
-                                        <input type="file" name="fileToUpload" id="fileToUpload" onchange="readURL(this)"/>
-                                        <img src='../../public/images/default.png' style="margin-bottom:40px " width='60%' onmouseover="this.src='../../public/images/default_hover.png';" onmouseout="this.src='../../public/images/default.png';" />
-                                    </a>
-                                    <div class="output"></div>
-
-
-                                    <div id="myProgress" style="margin-top:20px;">
-                                        <div id="myBar">
-                                            <div id="label">0%</div>
-                                        </div>
-                                    </div>
-
-                                </center>
-=======
+                                        
                                     </center>
->>>>>>> 7bca591d755a41303ab92b9f9a94901f9017c34e
+
 
                                     <ul class="nav nav-tabs">
                                         <li><h5 style="font-size: 17px">Available status</h5></li>
