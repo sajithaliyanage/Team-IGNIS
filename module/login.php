@@ -27,7 +27,7 @@ try{
 
         session_start();
         $_SESSION['empName'] =$empName;
-        $_SESSION['empID'] =$empID;
+        $_SESSION['empID'] = $empID;
         $_SESSION['empRole'] = "employee";
         session_write_close();
 
