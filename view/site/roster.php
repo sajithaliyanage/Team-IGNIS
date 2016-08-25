@@ -50,13 +50,16 @@ include('../../controller/siteController.php');
 			<div class="col-sm-6 col-xs-12">
 
 
-                <div style="max-width:800px;position:relative">
 
                     <div class="mySlides">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading" align="center"><i class="fa fa-paperclip icon-margin-right" aria-hidden="true">Today Shift</i>
                             </h5>
                             <hr>
+
+                            <p>Morning Shift</p><br>
+                            <p>Evening Shift</p><br>
+                            <p>Night Shift</p><br>
                         </div>
 
                     </div>
@@ -65,6 +68,11 @@ include('../../controller/siteController.php');
                             <h5 class="nortification-box-heading" align="center"><i class="fa fa-paperclip icon-margin-right" aria-hidden="true">Tomorrow Shift</i>
                             </h5>
                             <hr>
+
+                            <p>Morning Shift</p><br>
+                            <p>Evening Shift</p><br>
+                            <p>Night Shift</p><br>
+
                         </div>
 
                     </div>
@@ -76,7 +84,12 @@ include('../../controller/siteController.php');
                           <h5 class="nortification-box-heading" align="center"><i class="fa fa-paperclip icon-margin-right" aria-hidden="true">Yesterday Shift</i>
                               </h5>
                           <hr>
-                          </div>
+
+                          <p>Morning Shift</p><br>
+                          <p>Evening Shift</p><br>
+                          <p>Night Shift</p><br>
+
+                      </div>
 
                   </div>
 
@@ -85,7 +98,7 @@ include('../../controller/siteController.php');
 
 
 
-                    <a class="w3-btn-floating" style="position:absolute;top:45%;left:0" onclick="plusDivs(-1)">❮</a>
+                    <a width="40px" height="40px"line-height="40px" style="position:absolute;top:45%;left:0" onclick="plusDivs(-1)">❮</a>
                     <a class="w3-btn-floating" style="position:absolute;top:45%;right:0" onclick="plusDivs(1)">❯</a>
 
                 </div>
