@@ -108,7 +108,7 @@ if(!$isLoggedin && $empRole!="admin"){
                                         <div class="form-group">
                                             <label class="col-xs-5 control-label form-lable">Department Color :</label>
                                             <div class="col-xs-7">
-                                                <input id="service_name" name="dept_color" placeholder="" class="form-control input-md jscolor" required>
+                                                <input type="color" id="service_name" name="dept_color" placeholder="" class="form-control input-md jscolor" required>
                                             </div>
                                         </div>
                                         <br>
@@ -161,7 +161,7 @@ if(!$isLoggedin && $empRole!="admin"){
     </div>
 
     <script src="js/jquery.js"></script>
-    <script src="js/jscolor.min.js"></script>
+<!--    <script src="js/jscolor.min.js"></script>-->
     <script src="js/bootstrap.js"></script>
 </body>
 </html>

@@ -20,7 +20,7 @@ include('../../controller/siteController.php');
 
   </head>
 
-  <body>
+<body style=" background-color: #eceff4 !important;">
 
     <?php include ("../layouts/navbar.php")?>
 
@@ -48,6 +48,67 @@ include('../../controller/siteController.php');
 				</div>
 				
 			<div class="col-sm-6 col-xs-12">
+
+
+                <div style="max-width:800px;position:relative">
+
+                    <div class="mySlides">
+                        <div class="col-xs-12 nortification-box-top">
+                            <h5 class="nortification-box-heading" align="center"><i class="fa fa-paperclip icon-margin-right" aria-hidden="true">Today Shift</i>
+                            </h5>
+                            <hr>
+                        </div>
+
+                    </div>
+                    <div class="mySlides">
+                        <div class="col-xs-12 nortification-box-top">
+                            <h5 class="nortification-box-heading" align="center"><i class="fa fa-paperclip icon-margin-right" aria-hidden="true">Tomorrow Shift</i>
+                            </h5>
+                            <hr>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="mySlides">
+                      <div class="col-xs-12 nortification-box-top">
+                          <h5 class="nortification-box-heading" align="center"><i class="fa fa-paperclip icon-margin-right" aria-hidden="true">Yesterday Shift</i>
+                              </h5>
+                          <hr>
+                          </div>
+
+                  </div>
+
+
+
+
+
+
+                    <a class="w3-btn-floating" style="position:absolute;top:45%;left:0" onclick="plusDivs(-1)">❮</a>
+                    <a class="w3-btn-floating" style="position:absolute;top:45%;right:0" onclick="plusDivs(1)">❯</a>
+
+                </div>
+
+                <script>
+                    var slideIndex = 1;
+                    showDivs(slideIndex);
+
+                    function plusDivs(n) {
+                        showDivs(slideIndex += n);
+                    }
+
+                    function showDivs(n) {
+                        var i;
+                        var x = document.getElementsByClassName("mySlides");
+                        if (n > x.length) {slideIndex = 1}
+                        if (n < 1) {slideIndex = x.length}
+                        for (i = 0; i < x.length; i++) {
+                            x[i].style.display = "none";
+                        }
+                        x[slideIndex-1].style.display = "block";
+                    }
+                </script>
 				</div>
 				<div class="col-sm-6 col-xs-12">		
 					<div class="col-xs-12 nortification-box-top">

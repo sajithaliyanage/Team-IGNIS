@@ -67,6 +67,13 @@ if(!$isLoggedin){
                             <div class="col-xs-12">
 
                                 <div class="nortification-box-status">
+<<<<<<< HEAD
+=======
+                                    <ul class="nav nav-tabs navbar-right" role="tablist">
+                                        <li><h5 style="margin-right: 120px;font-size: 20px">Available status</h5></li>
+                                        <li role="presentation" class="active tab-box-1"><a href="attendance.php" class="tab-box-1" aria-controls="home" role="tab" data-toggle="tab""><b>Present</b></a></li>
+                                    </ul>
+>>>>>>> 4ec7e743dc97e0dba86d6ac24e17c02230a7edbd
 
                                     <center>
                                         <div class="tab-box-1"><b>Present</b></div>

@@ -78,10 +78,23 @@ if(!$isLoggedin){
 
                                     <center>
                                         <a href="#" data-toggle="tooltip" data-placement="top" title="Click here to change your profile picture!">
+<<<<<<< HEAD
                                             <img src='../../public/images/default.png' style="margin-bottom:40px; padding-top: 20px" width='60%' onmouseover="this.src='../../public/images/default_hover.png';" onmouseout="this.src='../../public/images/default.png';" />
                                         </a>
                                     </center>
 
+=======
+                                            <img src='../../public/images/default.png' style="margin-bottom:40px " width='60%' onmouseover="this.src='../../public/images/default_hover.png';" onmouseout="this.src='../../public/images/default.png';" />
+                                        </a>
+
+                                        <ul class="nav nav-tab">
+                                            <li style="text-align: center;"><h5 style="font-size: 16px; text-align:center !important; margin-right:10px;">Available status<a class="tab-box-1" style="float:left;"><b>Present</b></a></h5></li>
+                                        </ul>
+                                    </center>
+
+
+
+>>>>>>> 4ec7e743dc97e0dba86d6ac24e17c02230a7edbd
                                 </div>
                             </div>
                         </div>
