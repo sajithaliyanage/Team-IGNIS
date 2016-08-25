@@ -57,12 +57,23 @@ include('../../controller/siteController.php');
                             <h5 class="nortification-box-heading"><i class="fa fa-paperclip icon-margin-right" aria-hidden="true"></i>
                               Filter Your Report  </h5>
                             <hr>
-                            <form role="form" data-toggle="validator" action="" method="post">
+                            <form role="form" data-toggle="validator" action="../../module/fileGenerator.php" method="post">
                                 <div class="department-add">
                                     <div class="col-xs-12">
                                         <div class="row">
+                                            <?php
+                                                if(isset($_GET['both'])){
+                                                    echo "<p style='color:#c9302c;margin-left:20px;'>** Select <strong>report type</strong> and <strong>file type </strong> to download</p>";
+                                                }else if(isset($_GET['type'])){
+                                                    echo "<p style='color:#c9302c;margin-left:20px;'>** Select <strong>report type</strong> to download</p>";
+                                                }else if(isset($_GET['file'])){
+                                                    echo "<p style='color:#c9302c;margin-left:20px;'>** Select <strong>file type</strong> to download</p>";
+                                                }else if(isset($_GET['empty'])){
+                                                    echo "<p style='color:#c9302c;margin-left:20px;'>** No results to generate a file</p>";
+                                                }
+                                            ?>
                                             <div class="col-xs-12 col-sm-4">
-                                                <select name="emp_role" class="form-control" onchange = 'showUser(this.value)'>
+                                                <select name="report_type" class="form-control" onchange = 'showUser(this.value)'>
                                                     <option value="empty">- Select Report Type -</option>
                                                     <option style="<?php if($empRole !='director'){echo 'display:none'; }?>" value="company_emp">Company Employees</option>
                                                     <option style="<?php if($empRole !='director'){echo 'display:none'; }?>"  value="dept_details">Company Department Detail</option>
@@ -71,21 +82,21 @@ include('../../controller/siteController.php');
                                                     <option style="<?php if($empRole !='manager' && $empRole !='admin'){echo 'display:none'; }?>"  value="dept_emp">Department Employees</option>
                                                 </select>
                                             </div>
-                                            <div class="col-xs-12 col-sm-2">
+                                            <div class="col-xs-12 col-sm-2" style="<?php if($empRole =='director'){echo "display:none";}?>">
                                                 <input id="example1" name="start_date" type="text"
                                                        placeholder="Start Date"
                                                        class="form-control input-md">
                                             </div>
-                                            <div class="col-xs-12 col-sm-2">
+                                            <div class="col-xs-12 col-sm-2"  style="<?php if($empRole =='director'){echo "display:none";}?>">
                                                 <input id="example2" name="end_date" type="text"
                                                        placeholder="End Date"
                                                        class="form-control input-md">
                                             </div>
                                             <div class="col-xs-12 col-sm-2">
-                                                <select name="emp_role" class="form-control">
-                                                    <option value="YES">PDF</option>
-                                                    <option value="NO">Excel Sheet</option>
-                                                    <option value="NO">Word Sheet</option>
+                                                <select name="file_type" class="form-control">
+                                                    <option value="empty">- File Type -</option>
+                                                    <option value="pdf">PDF</option>
+                                                    <option value="csv">CSV / EXCEL</option>
                                                 </select>
                                             </div>
                                             <div class="col-xs-12 col-sm-2">

@@ -160,7 +160,7 @@ try {
 
         $departmentID = $ID['dept_id'];
 
-        $sql = "SELECT * FROM employee JOIN job_category ON employee.job_cat_id = job_category.job_cat_id WHERE dept_id=:depID";
+        $sql = "SELECT * FROM employee JOIN job_category ON employee.job_cat_id = job_category.job_cat_id WHERE employee.dept_id=:depID";
         $query = $pdo->prepare($sql);
         $query->execute(array('depID'=>$departmentID));
         $result = $query->fetchAll();
