@@ -20,7 +20,7 @@ include('../../controller/siteController.php');
 
   </head>
 
-  <body>
+<body style=" background-color: #eceff4 !important;">
 
     <?php include ("../layouts/navbar.php")?>
 
@@ -50,11 +50,38 @@ include('../../controller/siteController.php');
 			<div class="col-sm-6 col-xs-12">
 
 
-                <div class="w3-content" style="max-width:800px;position:relative">
+                <div style="max-width:800px;position:relative">
 
-                    <h1 class="mySlides" align="middle">TEXT 1</h1>
-                    <h1 class="mySlides" align="middle">TEXT 2</h1>
-                    <h1 class="mySlides" align="middle">TEXT 3</h1>
+                    <div class="mySlides">
+                        <div class="col-xs-12 nortification-box-top">
+                            <h5 class="nortification-box-heading" align="center"><i class="fa fa-paperclip icon-margin-right" aria-hidden="true">Today Shift</i>
+                            </h5>
+                            <hr>
+                        </div>
+
+                    </div>
+                    <div class="mySlides">
+                        <div class="col-xs-12 nortification-box-top">
+                            <h5 class="nortification-box-heading" align="center"><i class="fa fa-paperclip icon-margin-right" aria-hidden="true">Tomorrow Shift</i>
+                            </h5>
+                            <hr>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="mySlides">
+                      <div class="col-xs-12 nortification-box-top">
+                          <h5 class="nortification-box-heading" align="center"><i class="fa fa-paperclip icon-margin-right" aria-hidden="true">Yesterday Shift</i>
+                              </h5>
+                          <hr>
+                          </div>
+
+                  </div>
+
+
+
 
 
 
