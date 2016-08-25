@@ -232,25 +232,31 @@ input[type="file"] {
 
 /*for profile class*/
 .tab-box-1{
-     background-color:#008000 !important;
+     background-color:#029551 !important;
      border:none !important;
      color:#FFFFFF !important;
      border-radius:2px !important;
      width: 100px;
-     /*padding-right: 10px;*/
+    height:40px;
+    padding-top: 10px;
     text-align: center;
 
  }
 
 .tab-box-2{
-    background-color:#b22222 !important;
+    background-color:#204d74 !important;
     border:none !important;
     color:#000000 !important;
     border-radius:2px !important;
-    width: 150px;
-    margin-right:10px;
+    width: 100px;
+    height:40px;
+    padding-top: 10px;
     text-align: center;
 
+}
+.more-info{
+    text-align:center;
+    margin-top:5px;
 }
 /*chat*/
 

@@ -1,5 +1,13 @@
 <?php
 $var = "editProfile";
+include('../../controller/siteController.php');
+include('../../config/connect.php');
+$pdo = connect();
+
+if(!$isLoggedin){
+    header('Location:../../index.php');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,30 +71,23 @@ $var = "editProfile";
                             <div class="col-xs-12">
 
                                 <div class="nortification-box-status">
-                                    <ul class="nav nav-tabs navbar-right" role="tablist">
-                                        <li><h5 style="margin-right: 120px;font-size: 20px">Available status</h5></li>
-                                        <li role="presentation" class="active tab-box-1"><a href="attendance.php" class="tab-box-1" aria-controls="home" role="tab" data-toggle="tab""><b>Present</b></a></li>
-                                        <!--                                    <li role="presentation" class="active tab-box-2"><a href="attendance.php" aria-controls="profile" class="tab-box-2" role="tab" data-toggle="tab"><b>Absent</b></a></li>-->
-                                    </ul>
+
+                                    <center>
+                                        <div class="tab-box-1"><b>Present</b></div>
+                                    </center>
+
+                                    <center>
+                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Click here to change your profile picture!">
+                                            <img src='../../public/images/default.png' style="margin-bottom:40px; padding-top: 20px" width='60%' onmouseover="this.src='../../public/images/default_hover.png';" onmouseout="this.src='../../public/images/default.png';" />
+                                        </a>
+                                    </center>
+
 
                                 </div>
-                                <br><br>
-
-                                <center>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Click here to change your profile picture!">
-                                        <!--<img class="grayscale" src="../../public/images/default.png" width="350" height="400"/>-->
-                                        <img src='../../public/images/default.png' style="margin-bottom:40px " width='80%' onmouseover="this.src='../../public/images/default_hover.png';" onmouseout="this.src='../../public/images/default.png';" />
-                                    </a>
-
-                                </center>
-
-
                             </div>
                         </div>
                     </div>
                     <br><br>
-
-
 
                 </div>
                 <div class="col-sm-6 col-xs-12 padding-box">
@@ -100,65 +101,96 @@ $var = "editProfile";
                                             Edit Profile</h5>
                                         <hr>
 
-                                        <div class="form-group">
-                                            <label class="col-xs-5 control-label form-lable">User Name:</label>
-                                            <div class="col-sm-7 col-xs-12">
-                                                <input id="service_name" name="emp_name" type="text" placeholder="G.A.G.S.Karunarathna"
-                                                       class="form-control input-md" required>
-                                            </div>
-                                        </div>
-                                        <br><br><br>
-                                        <div class="form-group">
-                                            <label class="col-xs-5 control-label form-lable">Email:</label>
-                                            <div class="col-sm-7 col-xs-12">
-                                                <input id="service_name" name="emp_name" type="text" placeholder="mymail@gmail.com"
-                                                       class="form-control input-md" required>
-                                            </div>
-                                        </div>
-                                        <br><br>
-                                        <div class="form-group">
-                                            <label class="col-xs-5 control-label form-lable">Contact Number:</label>
-                                            <div class="col-sm-7 col-xs-12">
-                                                <input id="service_name" name="emp_name" type="text" placeholder="0771234567"
-                                                       class="form-control input-md" required>
-                                            </div>
-                                        </div>
-                                        <br><br>
-                                        <div class="form-group">
-                                            <label class="col-xs-5 control-label form-lable">Company Id:</label>
-                                            <lable class="col-xs-7 col-xs-12">2014csxxxx</lable>
-                                        </div>
-                                        <br><br>
-                                        <div class="form-group">
-                                            <label class="col-xs-5 control-label form-lable">Department:</label>
-                                            <lable class="col-xs-7 col-xs-12">Computer Department</lable>
-                                        </div>
-                                        <br><br>
-                                        <div class="form-group">
-                                            <label class="col-xs-5 control-label form-lable">Job Category:</label>
-                                            <div class="col-sm-7 col-xs-12">
-                                                <input id="service_name" name="emp_name" type="text" placeholder="Software Engineer"
-                                                       class="form-control input-md" required>
-                                            </div>
 
-                                        </div>
-                                        <br><br>
-                                        <div class="form-group">
-                                            <label class="col-xs-5 control-label form-lable">Job Level:</label>
-                                            <div class="col-sm-7 col-xs-12">
-                                                <input id="service_name" name="emp_name" type="text" placeholder="Tranier"
-                                                       class="form-control input-md" required>
+                                <?php
+
+                                $sql = "select * from employee INNER JOIN department ON employee.dept_id=department.dept_id INNER JOIN job_category ON employee.job_cat_id=job_category.job_cat_id WHERE comp_id=:empID";
+                                $query = $pdo->prepare($sql);
+                                $query->execute(array('empID'=>$empID));
+                                $result = $query->fetchAll();
+
+                                foreach($result as $rs) {
+
+                                    echo "<div class=\"form-group\">
+                                         <label class=\"col-xs-5 control-label form-lable\">";
+                                            echo "User Name:";
+                                            echo "</label>
+                                            <div class=\"col-sm-7 col-xs-12\">
+                                                <input id=\"service_name\" name=\"emp_name\" type=\"text\" placeholder=".$rs['name']."
+                                                       class=\"form-control input-md\" required>
                                             </div>
+                                        </div>";
 
-                                        </div>
-                                        <br><br>
-                                        <div class="form-group">
-                                            <label class="col-xs-5 control-label form-lable">NIC:</label>
-                                            <lable class="col-xs-7 col-xs-12">947341030V</lable>
-                                        </div>
+                                    echo "<br><br>
+                                        <div class=\"form-group\">
+                                            <label class=\"col-xs-5 control-label form-lable\">";
+                                            echo "Company Id:";
+                                            echo "</label>
+                                            <lable class=\"col-xs-7 col-xs-12\">".$rs['comp_id']."</lable>
+                                        </div>";
 
-                                        <br>
-                                        <br><br>
+                                    echo "<br><br>
+                                        <div class=\"form-group\">
+                                         <label class=\"col-xs-5 control-label form-lable\">";
+                                            echo "Email:";
+                                            echo "</label>
+                                            <div class=\"col-sm-7 col-xs-12\">
+                                                <input id=\"service_name\" name=\"emp_name\" type=\"text\" placeholder=".$rs['email']."
+                                                       class=\"form-control input-md\" required>
+                                            </div>
+                                        </div>";
+
+                                     echo "<br><br>
+                                        <div class=\"form-group\">
+                                         <label class=\"col-xs-5 control-label form-lable\">";
+                                            echo "Contact number:";
+                                            echo "</label>
+                                            <div class=\"col-sm-7 col-xs-12\">
+                                                <input id=\"service_name\" name=\"emp_name\" type=\"text\" placeholder=".$rs['tel_no']."
+                                                       class=\"form-control input-md\" required>
+                                            </div>
+                                        </div>";
+
+                                    echo "<br><br>
+                                        <div class=\"form-group\">
+                                            <label class=\"col-xs-5 control-label form-lable\">";
+                                            echo "Department:";
+                                            echo "</label>
+                                            <lable class=\"col-xs-7 col-xs-12\">".$rs['dept_name']."</lable>
+                                        </div>";
+
+                                    echo "<br><br>
+                                        <div class=\"form-group\">
+                                         <label class=\"col-xs-5 control-label form-lable\">";
+                                            echo "Job Category:";
+                                            echo "</label>
+                                            <div class=\"col-sm-7 col-xs-12\">
+                                                <input id=\"service_name\" name=\"emp_name\" type=\"text\" placeholder=".$rs['job_cat_name']."
+                                                       class=\"form-control input-md\" required>
+                                            </div>
+                                        </div>";
+
+                                    echo "<br><br>
+                                        <div class=\"form-group\">
+                                         <label class=\"col-xs-5 control-label form-lable\">";
+                                            echo "Job Level:";
+                                            echo "</label>
+                                            <div class=\"col-sm-7 col-xs-12\">
+                                                <input id=\"service_name\" name=\"emp_name\" type=\"text\" placeholder=".$rs['emp_level']."
+                                                       class=\"form-control input-md\" required>
+                                            </div>
+                                        </div>";
+
+                                    echo "<br><br>
+                                        <div class=\"form-group\">
+                                            <label class=\"col-xs-5 control-label form-lable\">";
+                                            echo "NIC:";
+                                            echo "</label>
+                                            <lable class=\"col-xs-7 col-xs-12\">".$rs['nic']."</lable>
+                                        </div>";
+                                    echo"<br><br><br>";
+                                        }
+                                        ?>
 
                                         <a href="profile.php"><button class="btn btn-info btn-lg pull-right submit-button" type="submit" >Save</button></a>
 

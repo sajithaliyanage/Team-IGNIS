@@ -71,19 +71,16 @@ if(!$isLoggedin){
                             <div class="col-xs-12">
 
                                 <div class="nortification-box-status">
+
+                                   <center>
+                                       <div class="tab-box-1"><b>Present</b></div>
+                                   </center>
+
                                     <center>
                                         <a href="#" data-toggle="tooltip" data-placement="top" title="Click here to change your profile picture!">
-                                            <!--<img class="grayscale" src="../../public/images/default.png" width="350" height="400"/>-->
-                                            <img src='../../public/images/default.png' style="margin-bottom:40px " width='60%' onmouseover="this.src='../../public/images/default_hover.png';" onmouseout="this.src='../../public/images/default.png';" />
+                                            <img src='../../public/images/default.png' style="margin-bottom:40px; padding-top: 20px" width='60%' onmouseover="this.src='../../public/images/default_hover.png';" onmouseout="this.src='../../public/images/default.png';" />
                                         </a>
-                                        
                                     </center>
-
-
-                                    <ul class="nav nav-tabs">
-                                        <li><h5 style="font-size: 17px">Available status</h5></li>
-                                        <li role="presentation" class="active tab-box-1"><a class="tab-box-1"><b>Present</b></a></li>
-                                    </ul>
 
                                 </div>
                             </div>
@@ -125,33 +122,23 @@ if(!$isLoggedin){
 
                                         echo "<div class=\"form-group\">
                                         <label class=\"col-xs-5 control-label form-lable\">";
+                                        echo "Company ID:";
+                                        echo " </label>
+                                        <lable>" . $rs['comp_id'] . "</lable>
+                                    </div>";
+
+                                        echo "<div class=\"form-group\">
+                                        <label class=\"col-xs-5 control-label form-lable\">";
                                         echo "Email:";
                                         echo " </label>
                                         <lable>" . $rs['email'] . "</lable>
                                     </div>";
+
                                         echo "<div class=\"form-group\">
                                         <label class=\"col-xs-5 control-label form-lable\">";
                                         echo "Contact Number:";
                                         echo " </label>
                                         <lable>" . $rs['tel_no'] . "</lable>
-                                    </div>";
-                                        echo "<div class=\"form-group\">
-                                        <label class=\"col-xs-5 control-label form-lable\">";
-                                        echo "Company ID:";
-                                        echo " </label>
-                                        <lable>" . $rs['comp_id'] . "</lable>
-                                    </div>";
-                                        echo "<div class=\"form-group\">
-                                        <label class=\"col-xs-5 control-label form-lable\">";
-                                        echo "Job Level:";
-                                        echo" </label>
-                                        <lable>" . $rs['emp_level'] . "</lable>
-                                    </div>";
-                                        echo "<div class=\"form-group\">
-                                        <label class=\"col-xs-5 control-label form-lable\">";
-                                        echo "NIC:";
-                                        echo" </label>
-                                        <lable>" . $rs['nic'] . "</lable>
                                     </div>";
 
                                         echo "<div class=\"form-group\">
@@ -166,6 +153,19 @@ if(!$isLoggedin){
                                         echo "Job Category:";
                                         echo " </label>
                                         <lable>" . $rs['job_cat_name'] . "</lable>
+                                    </div>";
+
+                                        echo "<div class=\"form-group\">
+                                        <label class=\"col-xs-5 control-label form-lable\">";
+                                        echo "Job Level:";
+                                        echo" </label>
+                                        <lable>" . $rs['emp_level'] . "</lable>
+                                    </div>";
+                                        echo "<div class=\"form-group\">
+                                        <label class=\"col-xs-5 control-label form-lable\">";
+                                        echo "NIC:";
+                                        echo" </label>
+                                        <lable>" . $rs['nic'] . "</lable>
                                     </div>";
                                     }
 

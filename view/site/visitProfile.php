@@ -1,5 +1,13 @@
 <?php
 $var = "visitProfile";
+include('../../controller/siteController.php');
+include('../../config/connect.php');
+$pdo = connect();
+
+if(!$isLoggedin){
+    header('Location:../../index.php');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,31 +62,29 @@ $var = "visitProfile";
 
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-user icon-margin-right" aria-hidden="true"></i>
-                                Profile Picture</h5>
+                                Profile</h5>
                             <hr>
                             <div class="col-xs-12">
 
                                 <div class="nortification-box-status">
-                                    <ul class="nav nav-tabs navbar-right" role="tablist">
-                                        <li><h5 style="margin-right: 120px;font-size: 20px">Available status</h5></li>
-                                        <li role="presentation" class="active tab-box-1"><a href="attendance.php" class="tab-box-1" aria-controls="home" role="tab" data-toggle="tab""><b>Present</b></a></li>
-                                        <!--<li role="presentation" class="active tab-box-2"><a href="attendance.php" aria-controls="profile" class="tab-box-2" role="tab" data-toggle="tab"><b>Absent</b></a></li>-->
-                                    </ul>
+
+                                    <center>
+                                        <div class="tab-box-1"><b>Present</b></div>
+                                    </center>
+
+                                    <center>
+                                            <img src='../../public/images/default.png' style="margin-bottom:40px; padding-top: 20px" width='60%'  />
+                                    </center>
+
+                                    <div class="more-info">
+                                        <a href="chat.php" style="color: #00c0ef;font-size: 20 "> Leave a message <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                                    </div>
 
                                 </div>
-                                <br><br>
-
-                                <center>
-                                        <img src='../../public/images/default.png' style="margin-bottom:40px " width='80%' />
-                                </center>
-
-
                             </div>
                         </div>
                     </div>
                     <br><br>
-
-
 
                 </div>
 
@@ -91,44 +97,72 @@ $var = "visitProfile";
 
                             <div class="col-xs-12 nortification-box-top">
                                 <h5 class="nortification-box-heading"><i class="fa fa-edit icon-margin-right" aria-hidden="true"></i>
-                                    Edit Profile</h5>
+                                    Profile Details</h5>
                                 <hr>
 
-                                <div class="form-group">
-                                    <label class="col-xs-5 control-label form-lable">User Name:</label>
-                                    <lable>G.A.G.S.Karunarathna</lable>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-5 control-label form-lable">Email:</label>
-                                    <lable>mymail@gmail.com</lable>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-5 control-label form-lable">Contact Number:</label>
-                                    <lable>0771234567</lable>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-5 control-label form-lable">Company Id:</label>
-                                    <lable>2014csxxxx</lable>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-5 control-label form-lable">Department:</label>
-                                    <lable>Computer Department</lable>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-5 control-label form-lable">Job Category:</label>
-                                    <lable>Software Engineer</lable>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-5 control-label form-lable">Job Level:</label>
-                                    <lable>Tranier</lable>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-5 control-label form-lable">NIC:</label>
-                                    <lable>947341030V</lable>
-                                </div>
-                                <br><br>
+                                <?php
 
+                                $sql = "select * from employee INNER JOIN department ON employee.dept_id=department.dept_id INNER JOIN job_category ON employee.job_cat_id=job_category.job_cat_id WHERE comp_id=:empID";
+                                $query = $pdo->prepare($sql);
+                                $query->execute(array('empID'=>$empID));
+                                $result = $query->fetchAll();
 
+                                foreach($result as $rs) {
+
+                                    echo "<div class=\"form-group\">
+                                            <label class=\"col-xs-5 control-label form-lable\">";
+                                    echo "User Name:";
+                                    echo " </label>
+                                             <lable>" . $rs['name'] . "</lable>
+                                    </div>";
+
+                                    echo "<div class=\"form-group\">
+                                        <label class=\"col-xs-5 control-label form-lable\">";
+                                    echo "Email:";
+                                    echo " </label>
+                                        <lable>" . $rs['email'] . "</lable>
+                                    </div>";
+                                    echo "<div class=\"form-group\">
+                                        <label class=\"col-xs-5 control-label form-lable\">";
+                                    echo "Contact Number:";
+                                    echo " </label>
+                                        <lable>" . $rs['tel_no'] . "</lable>
+                                    </div>";
+                                    echo "<div class=\"form-group\">
+                                        <label class=\"col-xs-5 control-label form-lable\">";
+                                    echo "Company ID:";
+                                    echo " </label>
+                                        <lable>" . $rs['comp_id'] . "</lable>
+                                    </div>";
+                                    echo "<div class=\"form-group\">
+                                        <label class=\"col-xs-5 control-label form-lable\">";
+                                    echo "Job Level:";
+                                    echo" </label>
+                                        <lable>" . $rs['emp_level'] . "</lable>
+                                    </div>";
+                                    echo "<div class=\"form-group\">
+                                        <label class=\"col-xs-5 control-label form-lable\">";
+                                    echo "NIC:";
+                                    echo" </label>
+                                        <lable>" . $rs['nic'] . "</lable>
+                                    </div>";
+
+                                    echo "<div class=\"form-group\">
+                                        <label class=\"col-xs-5 control-label form-lable\">";
+                                    echo "Department:";
+                                    echo " </label>
+                                        <lable>" . $rs['dept_name'] . "</lable>
+                                    </div>";
+
+                                    echo "<div class=\"form-group\">
+                                        <label class=\"col-xs-5 control-label form-lable\">";
+                                    echo "Job Category:";
+                                    echo " </label>
+                                        <lable>" . $rs['job_cat_name'] . "</lable>
+                                    </div>";
+                                }
+
+                                ?>
                             </div>
                         </div>
                     </div>
