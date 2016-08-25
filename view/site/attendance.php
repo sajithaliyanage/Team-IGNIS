@@ -20,7 +20,6 @@ include('../../controller/siteController.php');
     <link rel="stylesheet" href="../../public/css/datepicker.css">
     <link rel="stylesheet" href="../../public/css/attendance.css">
 
-
   </head>
 
 <body style=" background-color: #eceff4 !important;">

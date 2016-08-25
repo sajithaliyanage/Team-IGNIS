@@ -18,6 +18,7 @@ include('../../controller/siteController.php');
     <link href="../../public/css/leave-interface.css" rel="stylesheet">
     <link href="../../public/css/navbar-style.css" rel="stylesheet">
     <link href="../../public/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../public/css/datepicker.css">
 
 </head>
 
@@ -50,70 +51,49 @@ include('../../controller/siteController.php');
             </div>
 
             <div class="row padding-row">
-                <div class="col-sm-5 col-xs-12 padding-box">
+                <div class="col-xs-12 padding-box">
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-paperclip icon-margin-right" aria-hidden="true"></i>
-                              Report Options  </h5>
+                              Filter Your Report  </h5>
                             <hr>
                             <form role="form" data-toggle="validator" action="" method="post">
                                 <div class="department-add">
                                     <div class="col-xs-12">
-
-                                        <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">Report Type:</label>
-
-                                            <div class="col-xs-8">
-                                                <select name="emp_role" class="form-control">
-                                                    <option value="NO">Got Leaves</option>
-                                                    <option value="YES">Blanace Leaves</option>
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-4">
+                                                <select name="emp_role" class="form-control" onchange = 'showUser(this.value)'>
+                                                    <option value="empty">- Select Report Type -</option>
+                                                    <option style="<?php if($empRole !='director'){echo 'display:none'; }?>" value="company_emp">Company Employees</option>
+                                                    <option style="<?php if($empRole !='director'){echo 'display:none'; }?>"  value="dept_details">Company Department Detail</option>
+                                                    <option style="<?php if($empRole =='director'){echo 'display:none'; }?>"  value="own_all">Own leave status - ALL</option>
+                                                    <option style="<?php if($empRole =='director'){echo 'display:none'; }?>"  value="own_approved">Own leave status - Only approved</option>
+                                                    <option style="<?php if($empRole !='manager' && $empRole !='admin'){echo 'display:none'; }?>"  value="dept_emp">Department Employees</option>
                                                 </select>
                                             </div>
-                                        </div>
-                                        <br>
-                                        <br>
-
-                                        <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">Starting date:</label>
-
-                                            <div class="col-xs-8">
-                                                <input id="service_name" name="job_category" type="text"
-                                                       placeholder="dd/mm/yyyy"
-                                                       class="form-control input-md" required>
+                                            <div class="col-xs-12 col-sm-2">
+                                                <input id="example1" name="start_date" type="text"
+                                                       placeholder="Start Date"
+                                                       class="form-control input-md">
                                             </div>
-                                        </div>
-                                        <br>
-                                        <br>
-
-                                        <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">End date:</label>
-
-                                            <div class="col-xs-8">
-                                                <input id="service_name" name="job_category" type="text"
-                                                       placeholder="dd/mm/yyyy"
-                                                       class="form-control input-md" required>
+                                            <div class="col-xs-12 col-sm-2">
+                                                <input id="example2" name="end_date" type="text"
+                                                       placeholder="End Date"
+                                                       class="form-control input-md">
                                             </div>
-                                        </div>
-                                        <br>
-                                        <br>
-
-                                        <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">File Type:</label>
-
-                                            <div class="col-xs-8">
+                                            <div class="col-xs-12 col-sm-2">
                                                 <select name="emp_role" class="form-control">
                                                     <option value="YES">PDF</option>
                                                     <option value="NO">Excel Sheet</option>
                                                     <option value="NO">Word Sheet</option>
                                                 </select>
                                             </div>
+                                            <div class="col-xs-12 col-sm-2">
+                                                <button class="btn btn-info btn-lg pull-right submit-button" type="submit" style="padding:10px 25px; margin-top:-5px;">Download
+                                                </button>
+                                            </div>
                                         </div>
-                                        <br>
-                                        <br>
 
-
-                                        <button class="btn btn-info btn-lg pull-right submit-button" type="submit">Download
-                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -121,8 +101,10 @@ include('../../controller/siteController.php');
                     </div>
 
                 </div>
+            </div>
 
-                <div class="col-sm-7 col-xs-12 padding-box">
+            <div class="row padding-row">
+                <div class="col-xs-12 padding-box">
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-eye icon-margin-right" aria-hidden="true"></i>
@@ -130,85 +112,14 @@ include('../../controller/siteController.php');
                             <hr>
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <table class="table table-striped">
-                                        <thead>
-                                        <tr>
-                                            <th>#ID</th>
-                                            <th>Username</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>200</td>
-                                            <td>janedoe</td>
-                                            <td>Yane</td>
-                                            <td>Doe</td>
-                                        </tr>
-                                        <tr>
-                                            <td>100</td>
-                                            <td>zanedoe</td>
-                                            <td>Jane</td>
-                                            <td>Moe</td>
-                                        </tr>
-                                        <tr>
-                                            <td>100</td>
-                                            <td>janedoe</td>
-                                            <td>Jane</td>
-                                            <td>Doe</td>
-                                        </tr>
-                                        <tr>
-                                            <td>100</td>
-                                            <td>janedoe</td>
-                                            <td>Jane</td>
-                                            <td>Doe</td>
-                                        </tr>
-                                        <tr>
-                                            <td>100</td>
-                                            <td>janedoe</td>
-                                            <td>Jane</td>
-                                            <td>Doe</td>
-                                        </tr>
-                                        <tr>
-                                            <td>100</td>
-                                            <td>janedoe</td>
-                                            <td>Jane</td>
-                                            <td>Doe</td>
-                                        </tr>
-                                        <tr>
-                                            <td>100</td>
-                                            <td>janedoe</td>
-                                            <td>Jane</td>
-                                            <td>Doe</td>
-                                        </tr>
-                                        <tr>
-                                            <td>100</td>
-                                            <td>janedoe</td>
-                                            <td>Jane</td>
-                                            <td>Doe</td>
-                                        </tr>
-                                        <tr>
-                                            <td>100</td>
-                                            <td>janedoe</td>
-                                            <td>Jane</td>
-                                            <td>Doe</td>
-                                        </tr>
-                                        <tr>
-                                            <td>100</td>
-                                            <td>janedoe</td>
-                                            <td>Jane</td>
-                                            <td>Doe</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                    <div id="demo"><center>Select a leave type to filtring</center></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
+
 
         </div>
     </div>
@@ -217,5 +128,33 @@ include('../../controller/siteController.php');
 
 <script src="../../public/js/jquery.js"></script>
 <script src="../../public/js/bootstrap.js"></script>
+<script src="../../public/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+    // When the document is ready
+    $(document).ready(function () {
+
+        $('#example1').datepicker({
+            format: "dd/mm/yyyy"
+        });
+        $('#example2').datepicker({
+            format: "dd/mm/yyyy"
+        });
+
+    });
+</script>
+
+<script>
+    function showUser(str){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if(xhttp.readyState==4 && xhttp.status==200){
+                document.getElementById("demo").innerHTML = xhttp.responseText;
+            }
+        }
+        xhttp.open("GET","../../module/ajaxResponceReport.php?q="+str ,true);
+        xhttp.send();
+    }
+</script>
+
 </body>
 </html>
