@@ -50,7 +50,7 @@ include('../../controller/siteController.php');
                 </div>
             </div>
 
-            <div class="row padding-row" >
+            <div class="row padding-row" style="height: 200px" >
                 <div class="col-sm-12 col-xs-12 padding-row">
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top">
@@ -102,9 +102,9 @@ include('../../controller/siteController.php');
                                         <br>
 
 
-                                        <button class="btn btn-info btn-lg pull-left submit-button"  type="submit">Fitler
+                                        <button class="btn btn-primary btn-lg pull-left submit-button" style="width: 150px " type="submit">Fitler
                                         </button>
-                                        <button class="btn btn-info btn-lg pull-right submit-button"  type="submit">Download
+                                        <button class="btn btn-info btn-lg pull-right submit-button" style="width: 150px" type="submit">Download
                                         </button>
                                     </div>
                                 </div>
