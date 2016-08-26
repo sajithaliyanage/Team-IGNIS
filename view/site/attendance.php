@@ -154,20 +154,20 @@ include('../../controller/siteController.php');
 
     <script src="../../public/js/jquery.js"></script>
     <script src="../../public/js/bootstrap.js"></script>
-        <script src="../../public/js/bootstrap-datepicker.js"></script>
-        <script type="text/javascript">
-            // When the document is ready
-            $(document).ready(function () {
+    <script src="../../public/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        // When the document is ready
+        $(document).ready(function () {
 
-                $('#example1').datepicker({
-                    format: "dd/mm/yyyy"
-                });
-                $('#example2').datepicker({
-                    format: "dd/mm/yyyy"
-                });
-
+            $('#example1').datepicker({
+                format: "dd/mm/yyyy"
             });
-        </script>
+            $('#example2').datepicker({
+                format: "dd/mm/yyyy"
+            });
+
+        });
+    </script>
 
 </body>
 </html>
