@@ -20,6 +20,7 @@ include('../../controller/siteController.php');
     <link rel="stylesheet" href="../../public/css/datepicker.css">
     <link rel="stylesheet" href="../../public/css/attendance.css">
 
+
   </head>
 
 <body style=" background-color: #eceff4 !important;">
@@ -49,8 +50,8 @@ include('../../controller/siteController.php');
                 </div>
             </div>
 
-            <div class="row padding-row">
-                <div class="col-sm-5 col-xs-12 padding-box">
+            <div class="row padding-row" >
+                <div class="col-sm-12 col-xs-12 padding-row">
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-paperclip icon-margin-right" aria-hidden="true"></i>
@@ -61,9 +62,9 @@ include('../../controller/siteController.php');
                                     <div class="col-xs-12">
 
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">Start Date:</label>
+                                            <label class="col-xs-6 control-label form-lable">Start Date:</label>
 
-                                            <div class="col-xs-8">
+                                            <div class="col-xs-6">
                                                 <input id="example1" name="example1" type="text"
                                                        placeholder="dd/mm/yyyy"
                                                        class="form-control input-md" required>
@@ -73,22 +74,23 @@ include('../../controller/siteController.php');
                                         <br>
 
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">End date:</label>
+                                            <label class="col-xs-6 control-label form-lable">End date:</label>
 
-                                            <div class="col-xs-8">
+                                            <div class="col-xs-6">
                                                 <input id="example2" name="example2" type="text"
                                                        placeholder="dd/mm/yyyy"
                                                        class="form-control input-md" required>
 
                                             </div>
                                         </div>
+
                                         <br>
                                         <br>
 
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">File Type:</label>
+                                            <label class="col-xs-6 control-label form-lable">File Type:</label>
 
-                                            <div class="col-xs-8">
+                                            <div class="col-xs-6">
                                                 <select name="emp_role" class="form-control">
                                                     <option value="YES">PDF</option>
                                                     <option value="NO">Excel Sheet</option>
@@ -100,7 +102,9 @@ include('../../controller/siteController.php');
                                         <br>
 
 
-                                        <button class="btn btn-info btn-lg pull-right submit-button"  type="submit">Fitler & Download
+                                        <button class="btn btn-info btn-lg pull-left submit-button"  type="submit">Fitler
+                                        </button>
+                                        <button class="btn btn-info btn-lg pull-right submit-button"  type="submit">Download
                                         </button>
                                     </div>
                                 </div>
@@ -109,8 +113,11 @@ include('../../controller/siteController.php');
                     </div>
 
                 </div>
+                </div>
+                <br>
 
-                <div class="col-sm-7 col-xs-12 padding-box">
+<div class="row padding-row">
+                <div class="col-sm-12 col-xs-12 padding-box">
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-eye icon-margin-right" aria-hidden="true"></i>
@@ -154,20 +161,20 @@ include('../../controller/siteController.php');
 
     <script src="../../public/js/jquery.js"></script>
     <script src="../../public/js/bootstrap.js"></script>
-    <script src="../../public/js/bootstrap-datepicker.js"></script>
-    <script type="text/javascript">
-        // When the document is ready
-        $(document).ready(function () {
+        <script src="../../public/js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript">
+            // When the document is ready
+            $(document).ready(function () {
 
-            $('#example1').datepicker({
-                format: "dd/mm/yyyy"
-            });
-            $('#example2').datepicker({
-                format: "dd/mm/yyyy"
-            });
+                $('#example1').datepicker({
+                    format: "dd/mm/yyyy"
+                });
+                $('#example2').datepicker({
+                    format: "dd/mm/yyyy"
+                });
 
-        });
-    </script>
+            });
+        </script>
 
 </body>
 </html>
