@@ -22,7 +22,8 @@ if(!$isLoggedin && $empRole!="admin"){
     <link href="css/adminpanel-interface.css" rel="stylesheet">
     <link href="css/navbar-style.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/calender.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../public/css/datepicker.css">
+
 
 </head>
 
@@ -156,48 +157,70 @@ if(!$isLoggedin && $empRole!="admin"){
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-calendar icon-margin-right" aria-hidden="true"></i>
                                 Company Calendar</h5>
+                                <hr>
 
-                            <div id="myId" class="jalendar mid img-responsive" style="width: 95% !important;">
-                                <div class="added-event" data-date="19/5/2016" data-time="20:45"
-                                     data-title="Tarkan İstanbul Concert on Harbiye Açık Hava Tiyatrosu"></div>
-                                <div class="added-event" data-date="17/5/2016" data-time="21:00"
-                                     data-title="CodeCanyon İstanbul Meeting on Starbucks, Kadıköy"></div>
-                                <div class="added-event" data-date="1/5/2016" data-time="22:00"
-                                     data-title="Front-End Design and Javascript Conferance on Haliç Kongre Merkezi"></div>
-                                <div class="added-event" data-date="17/5/2016" data-time="22:00"
-                                     data-title="Lorem ipsum dolor sit amet"></div>
-                                <div class="added-event" data-date="21/5/2016" data-time="22:00"
-                                     data-title="Lorem ipsum dolor sit amet"></div>
-                                <div class="added-event" data-date="21/6/2016" data-time="22:00"
-                                     data-title="Lorem ipsum dolor sit amet"></div>
-                                <div class="added-event" data-date="3/6/2016" data-time="22:00"
-                                     data-title="Lorem ipsum dolor sit amet"></div>
+                                <div>
+                                    <iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;ctz=Asia%2FColombo" style="border-width:0" width="100%" height="400" frameborder="0" scrolling="no"></iframe>
+                                </div>
 
-                            </div>
+                                <div style="background-color:#FFFFFF; z-index:2000; position:relative; margin-top:-31px; width:100%; height:40px;">
 
+                                </div>
                         </div>
                     </div>
                 </div>
 
-<!--                                <div class="col-xs-12 col-sm-5 padding-box">-->
-<!--                                    <div class="row">-->
-<!--                                        <div class="col-xs-12 nortification-box-top">-->
-<!--                                            <h5 class="nortification-box-heading"><i class="fa fa-cogs icon-margin-right" aria-hidden="true"></i>-->
-<!--                                                Nortifications</h5>-->
-<!--                                            <div class="list-group">-->
-<!--                                                <a href="#" class="list-group-item">-->
-<!--                                                    Cras justo odio-->
-<!--                                                </a>-->
-<!--                                                <a href="#" class="list-group-item">Dapibus ac facilisis in</a>-->
-<!--                                                <a href="#" class="list-group-item">Morbi leo risus</a>-->
-<!--                                                <a href="#" class="list-group-item">Porta ac consectetur ac</a>-->
-<!--                                                <a href="#" class="list-group-item">Vestibulum at eros</a>-->
-<!--                                                <a href="#" class="list-group-item">Vestibulum at eros</a>-->
-<!--                                                <a href="#" class="list-group-item">Vestibulum at eros</a>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
+                <div class="col-xs-12 col-sm-5 padding-box">
+                    <div class="row">
+                        <div class="col-xs-12 nortification-box-top">
+                            <h5 class="nortification-box-heading"><i class="fa fa-pencil icon-margin-right"aria-hidden="true"></i>
+                                Add Event</h5>
+                            <hr>
+                            <div class="list-group">
+                                <form role="form" data-toggle="validator" action="module/addEvent.php" method="post">
+                                    <div class="department-add">
+                                        <div class="col-xs-12">
+                                            <!-- Text input-->
+                                            <div class="form-group">
+                                                <label class="col-xs-4 control-label form-lable">Event Name:</label>
+                                                <div class="col-xs-8">
+                                                    <input id="service_name" name="event_name" type="text" placeholder=""
+                                                           class="form-control input-md" required>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <br>
+
+                                            <div class="form-group">
+                                                <label class="col-xs-4 control-label form-lable">Event Date:</label>
+
+                                                <div class="col-xs-8">
+                                                    <input id="example1" name="event_date" type="text"
+                                                           placeholder="dd/mm/yyyy"
+                                                           class="form-control input-md" required>
+
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <br>
+
+                                            <div class="form-group">
+                                                <label class="col-xs-4 control-label form-lable">Description:</label>
+                                                <div class="col-xs-8">
+                                                    <textarea class="form-control" name="description" rows="2" required></textarea>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <br>
+
+                                            <button class="btn btn-info btn-lg pull-right submit-button" type="submit" style="margin-top:20px;">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -233,33 +256,43 @@ if(!$isLoggedin && $empRole!="admin"){
     </div>
 
 </div>
-<script language="javascript" type="text/javascript">
-        $('#iconified').on('keyup', function() {
-            var input = $(this);
-            if(input.val().length === 0) {
-                input.addClass('empty');
-            } else {
-                input.removeClass('empty');
-            }
-        });
 
-        function filter(element) {
-            var value = $(element).val().toLowerCase();;
-
-            $("#theList > li").each(function() {
-                var listVal = $(this).text().toLowerCase();
-                if (listVal.indexOf(value)>= 0) {
-                    $(this).show();
-                }
-                else {
-                    $(this).hide();
-                }
-            });
-        }
-</script>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.js"></script>
-<script src="js/jalendar.js"></script>
-<script src="js/calendar.js"></script>
+<script language="javascript" type="text/javascript">
+    $('#iconified').on('keyup', function() {
+        var input = $(this);
+        if(input.val().length === 0) {
+            input.addClass('empty');
+        } else {
+            input.removeClass('empty');
+        }
+    });
+
+    function filter(element) {
+        var value = $(element).val().toLowerCase();;
+
+        $("#theList > li").each(function() {
+            var listVal = $(this).text().toLowerCase();
+            if (listVal.indexOf(value)>= 0) {
+                $(this).show();
+            }
+            else {
+                $(this).hide();
+            }
+        });
+    }
+</script>
+<script src="../../public/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+    // When the document is ready
+    $(document).ready(function () {
+
+        $('#example1').datepicker({
+            format: "dd/mm/yyyy"
+        });
+
+    });
+</script>
 </body>
 </html>
