@@ -68,16 +68,9 @@ if(!$isLoggedin){
 
                                 <div class="nortification-box-status">
                                     <center>
-                                        <div class="tab-box-1"><b>Present</b></div>
-                                    </center>
-
-                                    <center>
                                             <img src='../../public/images/default.png' style="margin-bottom:40px; padding-top: 20px" width='60%'  />
                                     </center>
 
-                                    <div class="more-info">
-                                        <a href="chat.php" style="color: #00c0ef;font-size: 20 "> Leave a message <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
-                                    </div>
 
                                 </div>
                             </div>
@@ -98,6 +91,10 @@ if(!$isLoggedin){
                                 <h5 class="nortification-box-heading"><i class="fa fa-edit icon-margin-right" aria-hidden="true"></i>
                                     Profile Details</h5>
                                 <hr>
+
+                                <center>
+                                    <div class="tab-box-1">Present</div>
+                                </center>
 
                                 <?php
 
@@ -162,6 +159,11 @@ if(!$isLoggedin){
                                 }
 
                                 ?>
+
+                                <div class="more-info">
+                                    <a href="chat.php" style="color: #204d74;margin-left: 150px "> Leave a message <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                                </div>
+                                <br><br>
                             </div>
                         </div>
                     </div>
@@ -173,7 +175,7 @@ if(!$isLoggedin){
 
 </div>
 
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.js"></script>
+    <script src="../../public/js/jquery.js"></script>
+    <script src="../../public/js/bootstrap.js"></script>
 </body>
 </html>

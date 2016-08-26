@@ -67,15 +67,11 @@ if(!$isLoggedin){
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-user icon-margin-right" aria-hidden="true"></i>
                                 My Profile</h5>
+                            <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">Your profile edited successfully!</div>
                             <hr>
                             <div class="col-xs-12">
 
                                 <div class="nortification-box-status">
-
-                                    <center>
-                                        <div class="tab-box-1"><b>Present</b></div>
-                                    </center>
-
                                     <center>
                                         <a href="#" data-toggle="tooltip" data-placement="top" title="Click here to change your profile picture!">
                                             <img src='../../public/images/default.png' style="margin-bottom:40px; padding-top: 20px" width='60%' onmouseover="this.src='../../public/images/default_hover.png';" onmouseout="this.src='../../public/images/default.png';" />
@@ -100,101 +96,108 @@ if(!$isLoggedin){
                                         <h5 class="nortification-box-heading"><i class="fa fa-edit icon-margin-right" aria-hidden="true"></i>
                                             Edit Profile</h5>
                                         <hr>
+                                        <form role="form" data-toggle="validator" action="../../module/editProf.php" method="post">
+                                            <?php
 
+                                            $sql = "select * from employee INNER JOIN department ON employee.dept_id=department.dept_id INNER JOIN job_category ON employee.job_cat_id=job_category.job_cat_id WHERE comp_id=:empID";
+                                            $query = $pdo->prepare($sql);
+                                            $query->execute(array('empID'=>$empID));
+                                            $result = $query->fetchAll();
 
-                                <?php
+                                            foreach($result as $rs) {
 
-                                $sql = "select * from employee INNER JOIN department ON employee.dept_id=department.dept_id INNER JOIN job_category ON employee.job_cat_id=job_category.job_cat_id WHERE comp_id=:empID";
-                                $query = $pdo->prepare($sql);
-                                $query->execute(array('empID'=>$empID));
-                                $result = $query->fetchAll();
+                                                echo "<div class=\"form-group\">
+                                                     <label class=\"col-xs-5 control-label form-lable\">";
+                                                        echo "User Name:";
+                                                        echo "</label>
+                                                        <div class=\"col-sm-7 col-xs-12\">
+                                                            <input id=\"service_name\" name=\"emp_name\" type=\"text\" placeholder=".$rs['name']."
+                                                                   class=\"form-control input-md\" required>
+                                                        </div>
+                                                    </div>";
 
-                                foreach($result as $rs) {
+                                                echo "<br><br>
+                                                    <div class=\"form-group\">
+                                                        <label class=\"col-xs-5 control-label form-lable\">";
+                                                        echo "Company Id:";
+                                                        echo "</label>
+                                                        <lable class=\"col-xs-7 col-xs-12\">".$rs['comp_id']."</lable>
+                                                    </div>";
 
-                                    echo "<div class=\"form-group\">
-                                         <label class=\"col-xs-5 control-label form-lable\">";
-                                            echo "User Name:";
-                                            echo "</label>
-                                            <div class=\"col-sm-7 col-xs-12\">
-                                                <input id=\"service_name\" name=\"emp_name\" type=\"text\" placeholder=".$rs['name']."
-                                                       class=\"form-control input-md\" required>
-                                            </div>
-                                        </div>";
+                                                echo "<br><br>
+                                                    <div class=\"form-group\">
+                                                     <label class=\"col-xs-5 control-label form-lable\">";
+                                                        echo "Email:";
+                                                        echo "</label>
+                                                        <div class=\"col-sm-7 col-xs-12\">
+                                                            <input id=\"service_name\" name=\"emp_email\" type=\"text\" placeholder=".$rs['email']."
+                                                                   class=\"form-control input-md\" required>
+                                                        </div>
+                                                    </div>";
 
-                                    echo "<br><br>
-                                        <div class=\"form-group\">
-                                            <label class=\"col-xs-5 control-label form-lable\">";
-                                            echo "Company Id:";
-                                            echo "</label>
-                                            <lable class=\"col-xs-7 col-xs-12\">".$rs['comp_id']."</lable>
-                                        </div>";
+                                                 echo "<br><br>
+                                                    <div class=\"form-group\">
+                                                     <label class=\"col-xs-5 control-label form-lable\">";
+                                                        echo "Contact number:";
+                                                        echo "</label>
+                                                        <div class=\"col-sm-7 col-xs-12\">
+                                                            <input id=\"service_name\" name=\"emp_tele\" type=\"text\" placeholder=".$rs['tel_no']."
+                                                                   class=\"form-control input-md\" required>
+                                                        </div>
+                                                    </div>";
 
-                                    echo "<br><br>
-                                        <div class=\"form-group\">
-                                         <label class=\"col-xs-5 control-label form-lable\">";
-                                            echo "Email:";
-                                            echo "</label>
-                                            <div class=\"col-sm-7 col-xs-12\">
-                                                <input id=\"service_name\" name=\"emp_name\" type=\"text\" placeholder=".$rs['email']."
-                                                       class=\"form-control input-md\" required>
-                                            </div>
-                                        </div>";
+                                                echo "<br><br>
+                                                    <div class=\"form-group\">
+                                                        <label class=\"col-xs-5 control-label form-lable\">";
+                                                        echo "Department:";
+                                                        echo "</label>
+                                                        <lable class=\"col-xs-7 col-xs-12\">".$rs['dept_name']."</lable>
+                                                    </div>";
 
-                                     echo "<br><br>
-                                        <div class=\"form-group\">
-                                         <label class=\"col-xs-5 control-label form-lable\">";
-                                            echo "Contact number:";
-                                            echo "</label>
-                                            <div class=\"col-sm-7 col-xs-12\">
-                                                <input id=\"service_name\" name=\"emp_name\" type=\"text\" placeholder=".$rs['tel_no']."
-                                                       class=\"form-control input-md\" required>
-                                            </div>
-                                        </div>";
+                                                echo "<br><br>
+                                                <div class=\"form-group\">
+                                                    <label class=\"col-sm-5 col-xs-12 control-label form-lable\">Job Category :</label>
+                                                    <div class=\"col-sm-7 col-xs-12\">
+                                                        <select  name=\"emp_category\" class=\"form-control\">";
 
-                                    echo "<br><br>
-                                        <div class=\"form-group\">
-                                            <label class=\"col-xs-5 control-label form-lable\">";
-                                            echo "Department:";
-                                            echo "</label>
-                                            <lable class=\"col-xs-7 col-xs-12\">".$rs['dept_name']."</lable>
-                                        </div>";
+                                                                $sql1 = "select * from job_category WHERE currentStatus=:log";
+                                                                $query1 = $pdo->prepare($sql1);
+                                                                $query1->execute(array('log'=>"approved"));
+                                                                $result1 = $query1->fetchAll();
 
-                                    echo "<br><br>
-                                        <div class=\"form-group\">
-                                         <label class=\"col-xs-5 control-label form-lable\">";
-                                            echo "Job Category:";
-                                            echo "</label>
-                                            <div class=\"col-sm-7 col-xs-12\">
-                                                <input id=\"service_name\" name=\"emp_name\" type=\"text\" placeholder=".$rs['job_cat_name']."
-                                                       class=\"form-control input-md\" required>
-                                            </div>
-                                        </div>";
+                                                                foreach($result1 as $rs1){
+                                                                    echo " <option value='".$rs1['job_cat_id']."'>".$rs1['job_cat_name']."</option>";
+                                                                }
 
-                                    echo "<br><br>
-                                        <div class=\"form-group\">
-                                         <label class=\"col-xs-5 control-label form-lable\">";
-                                            echo "Job Level:";
-                                            echo "</label>
-                                            <div class=\"col-sm-7 col-xs-12\">
-                                                <input id=\"service_name\" name=\"emp_name\" type=\"text\" placeholder=".$rs['emp_level']."
-                                                       class=\"form-control input-md\" required>
-                                            </div>
-                                        </div>";
+                                                        echo "</select>
+                                                    </div>
+                                                </div>";
 
-                                    echo "<br><br>
-                                        <div class=\"form-group\">
-                                            <label class=\"col-xs-5 control-label form-lable\">";
-                                            echo "NIC:";
-                                            echo "</label>
-                                            <lable class=\"col-xs-7 col-xs-12\">".$rs['nic']."</lable>
-                                        </div>";
-                                    echo"<br><br><br>";
-                                        }
-                                        ?>
+                                                echo "<br><br>
+                                                    <div class=\"form-group\">
+                                                     <label class=\"col-xs-5 control-label form-lable\">";
+                                                        echo "Job Level:";
+                                                        echo "</label>
+                                                        <div class=\"col-sm-7 col-xs-12\">
+                                                            <input id=\"service_name\" name=\"emp_level\" type=\"text\" placeholder=".$rs['emp_level']."
+                                                                   class=\"form-control input-md\" required>
+                                                        </div>
+                                                    </div>";
 
-                                        <a href="profile.php"><button class="btn btn-info btn-lg pull-right submit-button" type="submit" >Save</button></a>
+                                                echo "<br><br>
+                                                    <div class=\"form-group\">
+                                                        <label class=\"col-xs-5 control-label form-lable\">";
+                                                        echo "NIC:";
+                                                        echo "</label>
+                                                        <lable class=\"col-xs-7 col-xs-12\">".$rs['nic']."</lable>
+                                                    </div>";
+                                                echo"<br><br><br>";
+                                                    }
+                                                    ?>
 
+                                            <a href="profile.php"><button class="btn btn-info btn-lg pull-right submit-button" type="submit" >Save</button></a>
 
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -206,7 +209,7 @@ if(!$isLoggedin){
 
         </div>
 
-        <script src="js/jquery.js"></script>
-        <script src="js/bootstrap.js"></script>
+    <script src="../../public/js/jquery.js"></script>
+    <script src="../../public/js/bootstrap.js"></script>
 </body>
 </html>

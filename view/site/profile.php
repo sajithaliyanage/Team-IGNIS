@@ -71,11 +71,6 @@ if(!$isLoggedin){
                             <div class="col-xs-12">
 
                                 <div class="nortification-box-status">
-
-                                   <center>
-                                       <div class="tab-box-1"><b>Present</b></div>
-                                   </center>
-
                                     <center>
                                         <a href="#" data-toggle="tooltip" data-placement="top" title="Click here to change your profile picture!">
 
