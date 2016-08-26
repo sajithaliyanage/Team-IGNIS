@@ -62,29 +62,47 @@ if(!$isLoggedin){
             <div class="row padding-row">
                 <div class="col-xs-12 col-sm-6 padding-box">
 
-                    <div class="row">
-
-                        <div class="col-xs-12 nortification-box-top">
-                            <h5 class="nortification-box-heading"><i class="fa fa-user icon-margin-right" aria-hidden="true"></i>
-                                My Profile</h5>
-                            <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">Your profile edited successfully!</div>
-                            <hr>
+                    <div class="col-xs-12 nortification-box-top">
+                        <h5 class="nortification-box-heading"><i class="fa fa-user icon-margin-right" aria-hidden="true"></i>
+                            My Profile
+                        </h5>
+                        <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">Profile picture changed successfully!</div>
+                        <hr>
                             <div class="col-xs-12">
+                                <?php
+                                    $sql = "SELECT image from employee WHERE comp_id=:empID";
+                                    $query = $pdo->prepare($sql);
+                                    $query->execute(array('empID'=>$empID));
+                                    $result = $query->fetch();
+                                ?>
 
                                 <div class="nortification-box-status">
                                     <center>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Click here to change your profile picture!">
-                                            <img src='../../public/images/default.png' style="margin-bottom:40px; padding-top: 20px" width='60%' onmouseover="this.src='../../public/images/default_hover.png';" onmouseout="this.src='../../public/images/default.png';" />
-                                        </a>
-                                    </center>
+                                        <form action="../../module/changeProfilePic.php" method="POST"  enctype="multipart/form-data" data-toggle="tooltip" data-placement="top"  title="Click here to change your profile picture!">
+                                            <label  for="fileToUpload">
 
+                                                    <img src='<?php if($result['image']!=null){echo '../'.$result['image'];}else{echo "../../public/images/default.png";}?>' style="margin-bottom:40px; padding-top: 20px" width='75%'  />
+
+                                            </label>
+
+                                            <input type="file" name="fileToUpload" id="fileToUpload" onchange="readURL(this)"/>
+
+
+                                            <div id="myProgress" style="margin-top:20px;">
+                                                <div id="myBar">
+                                                    <div id="label">0%</div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-info btn-lg pull-right submit-button" type="submit">Change</button>
+                                        </form>
+                                    </center>
 
                                 </div>
                             </div>
-                        </div>
-                    </div>
+
                     <br><br>
 
+                </div>
                 </div>
                 <div class="col-sm-6 col-xs-12 padding-box">
 
@@ -96,6 +114,7 @@ if(!$isLoggedin){
                                         <h5 class="nortification-box-heading"><i class="fa fa-edit icon-margin-right" aria-hidden="true"></i>
                                             Edit Profile</h5>
                                         <hr>
+                                        <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">Your profile edited successfully!</div>
                                         <form role="form" data-toggle="validator" action="../../module/editProf.php" method="post">
                                             <?php
 
@@ -195,7 +214,7 @@ if(!$isLoggedin){
                                                     }
                                                     ?>
 
-                                            <a href="profile.php"><button class="btn btn-info btn-lg pull-right submit-button" type="submit" >Save</button></a>
+                                            <a href="profile.php"><button class="btn btn-info btn-lg pull-right submit-button" type="submit" >Submit</button></a>
 
                                         </form>
                                     </div>
@@ -211,5 +230,44 @@ if(!$isLoggedin){
 
     <script src="../../public/js/jquery.js"></script>
     <script src="../../public/js/bootstrap.js"></script>
+<script>
+    $('#fileToUpload').click(function() {
+        $('#myProgress').css({
+            'display': 'block'
+        });
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(600)
+                    .height(500);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+            move()
+        }
+    }
+    function move() {
+        var elem = document.getElementById("myBar");
+        var width = 10;
+        var id = setInterval(frame, 10);
+
+        function frame() {
+            if (width >= 100) {
+                clearInterval(id);
+            } else {
+                width++;
+                elem.style.width = width + '%';
+                document.getElementById("label").innerHTML = width * 1 + '%';
+            }
+        }
+    }
+</script>
+
 </body>
 </html>

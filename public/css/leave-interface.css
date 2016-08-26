@@ -1,5 +1,4 @@
 /*start*/
-
 .padding-box{
     padding-left:20px;
     padding-right:20px;
@@ -229,34 +228,19 @@ input[type="file"] {
     margin-top:-5px;
 }
 
-
 /*for profile class*/
 .tab-box-1{
-     background-color:#204d74 !important;
+     background-color:#029551 !important;
      border:none !important;
      color:#FFFFFF !important;
      border-radius:5px !important;
-     width: 100px;
-     height:40px;
-     padding-top: 10px;
-     padding-bottom: 10px;
+     padding: 10px 20px;
      margin-bottom: 10px;
      text-align: center;
-     margin-left: 200px;
-
+     margin-left: 20px;
  }
 
-.tab-box-2{
-    background-color:#204d74 !important;
-    border:none !important;
-    color: #ffffff; !important;
-    border-radius:2px !important;
-    width: 100px;
-    height:40px;
-    padding-top: 10px;
-    text-align: center;
 
-}
 .more-info{
     text-align:center;
     margin-top:5px;

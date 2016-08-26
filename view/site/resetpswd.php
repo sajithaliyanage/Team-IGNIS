@@ -28,65 +28,72 @@ if(!$isLoggedin){
 
 </head>
 
-<body style="background-color:#eceff4">
+<body style=" background-color: #eceff4 !important;">
 
-<div class="top-content" style="margin-bottom:-50px; !important; background-color: #eceff4">
+    <?php include ("../layouts/navbar.php")?>
 
-    <div class="inner-bg">
-        <div class="container">
+    <div class="container-fluid ">
+        <div class="row ">
 
-            <div class="row padding-row">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <ol class="breadcrumb breadcrumb-style">
-                            <li>
-                                <i class="fa fa-dashboard"></i>  <a href="../../index.php">Take Your Leave</a>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-user-md"></i> <a href="profile.php">My Profile</a>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-user-plus"></i> Reset Password
-                            </li>
-                        </ol>
-                    </div>
-                </div>
+            <div class="col-sm-2 col-xs-12 left-menu-div side-bar-display">
+                <?php include ("../layouts/leftbar.php")?>
             </div>
 
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3 form-box">
-                    <div class="form-top">
-                        <div class="form-top-left">
-                            <h3>Reset your password</h3>
-                        </div>
-                        <div class="form-top-right">
-                            <i class="fa fa-lock"></i>
+            <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2" style="position: relative;">
+                    <div class="row padding-row">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ol class="breadcrumb breadcrumb-style">
+                                    <li>
+                                        <i class="fa fa-dashboard"></i>  <a href="../../index.php">Take Your Leave</a>
+                                    </li>
+                                    <li class="active">
+                                        <i class="fa fa-user-md"></i> <a href="profile.php">My Profile</a>
+                                    </li>
+                                    <li class="active">
+                                        <i class="fa fa-user-plus"></i> Reset Password
+                                    </li>
+                                </ol>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-bottom">
-                        <form role="form" action="" method="post" class="login-form">
-                            <div class="form-group">
-                                <label class="sr-only" for="form-username">Current password</label>
-                                <input type="password" name="form-username" placeholder="Current password" class="form-username form-control" id="form-username" required>
+
+                    <div class="row padding-row">
+                        <div class="col-xs-12 col-sm-1 padding-box"></div>
+                        <div class="col-xs-12 col-sm-10 padding-box">
+
+                            <div class="col-xs-12 nortification-box-top">
+                                <h5 class="nortification-box-heading"><i class="fa fa-lock icon-margin-right" aria-hidden="true"></i>
+                                    Reset Password
+                                </h5>
+                                <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">Password changed successfully!</div>
+                                <hr>
+                                    <div class="form-bottom">
+                                    <form role="form"  data-toggle="validator" action="../../module/resetPswd.php" method="post">
+
+                                            <div class="form-group">
+                                                <label class="sr-only" for="form-username">Current password</label>
+                                                <input type="password" name="cur_pswd" placeholder="Current password" class="form-username form-control" id="form-username" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="sr-only" for="form-password">New password</label>
+                                                <input type="password" name="new_pswd" placeholder="New password" class="form-password form-control" id="form-password" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="sr-only" for="form-password">Confirm password</label>
+                                                <input type="password" name="con_pswd" placeholder="Confirm password" class="form-password form-control" id="form-password" required>
+                                            </div>
+                                            <button class="btn btn-info btn-lg pull-right submit-button" type="submit" >Reset password</button>
+
+                                    </form>
+                                </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="form-password">New password</label>
-                                <input type="password" name="form-password" placeholder="New password" class="form-password form-control" id="form-password" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="form-password">Confirm password</label>
-                                <input type="password" name="form-password" placeholder="Confirm password" class="form-password form-control" id="form-password" required>
-                            </div>
-                            <button class="btn btn-info btn-lg pull-right submit-button" type="submit" >Reset password</button>
-                        </form>
-                    </div>
+                        </div>
                 </div>
             </div>
 
         </div>
-    </div>
-
-</div>
 </body>
 
 </html>

@@ -71,6 +71,16 @@ if(!$isLoggedin){
                                             <img src='../../public/images/default.png' style="margin-bottom:40px; padding-top: 20px" width='60%'  />
                                     </center>
 
+                                    <center>
+                                        <div >Available status <span class="tab-box-1">Present</span></div >
+                                    </center>
+
+                                    <div class="more-info" style="margin-top: 15px;padding-bottom: 20px;">
+                                       <center>
+                                        <a href="chat.php" style="color: #204d74"><i class="fa fa-envelope" aria-hidden="true"></i> Leave a message </a>
+                                       </center>
+                                    </div>
+
 
                                 </div>
                             </div>
@@ -91,10 +101,6 @@ if(!$isLoggedin){
                                 <h5 class="nortification-box-heading"><i class="fa fa-edit icon-margin-right" aria-hidden="true"></i>
                                     Profile Details</h5>
                                 <hr>
-
-                                <center>
-                                    <div class="tab-box-1">Present</div>
-                                </center>
 
                                 <?php
 
@@ -160,9 +166,6 @@ if(!$isLoggedin){
 
                                 ?>
 
-                                <div class="more-info">
-                                    <a href="chat.php" style="color: #204d74;margin-left: 150px "> Leave a message <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
-                                </div>
                                 <br><br>
                             </div>
                         </div>
