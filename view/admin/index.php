@@ -1,6 +1,8 @@
 <?php
 $var = "index";
 include('../../controller/siteController.php');
+include('../../config/connect.php');
+$pdo = connect();
 
 if(!$isLoggedin && $empRole!="admin"){
     header('Location:../../index.php');
@@ -59,7 +61,14 @@ if(!$isLoggedin && $empRole!="admin"){
                         <div class="col-xs-12 main-box-1-1">
                             <div class="row">
                                 <div class="col-xs-8">
-                                    <h2 class="box-count">04</h2>
+                                    <?php
+                                        $sql="SELECT * FROM department WHERE currentStatus=:log and roster_status=:state";
+                                        $query = $pdo->prepare($sql);
+                                        $query->execute(array('log'=>"approved",'state'=>"NO"));
+                                        $numrow = $query->rowCount();
+                                        $numrows = intval($numrow);
+                                    ?>
+                                    <h2 class="box-count"><?php if($numrows<10){echo "0".$numrow;}else{echo $numrow;}?></h2>
 
                                     <h3 class="box-head">Departments</h3>
                                 </div>
@@ -82,7 +91,14 @@ if(!$isLoggedin && $empRole!="admin"){
                         <div class="col-xs-12 main-box-2-1">
                             <div class="row">
                                 <div class="col-xs-8">
-                                    <h2 class="box-count">08</h2>
+                                    <?php
+                                        $sql="SELECT * FROM manager";
+                                        $query = $pdo->prepare($sql);
+                                        $query->execute();
+                                        $numrow = $query->rowCount();
+                                        $numrows = intval($numrow);
+                                    ?>
+                                    <h2 class="box-count"><?php if($numrows<10){echo "0".$numrow;}else{echo $numrow;}?></h2>
 
                                     <h3 class="box-head">Managers</h3>
                                 </div>
@@ -95,7 +111,7 @@ if(!$isLoggedin && $empRole!="admin"){
                     <div class="row">
                         <div class="col-xs-12  main-box-2-2">
                             <div class="more-info">
-                                <a href="index_departments.php" style="color:#FFFFFF;">More Info <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                                <a href="managers.php" style="color:#FFFFFF;">More Info <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>
@@ -105,7 +121,14 @@ if(!$isLoggedin && $empRole!="admin"){
                         <div class="col-xs-12 main-box-3-1">
                             <div class="row">
                                 <div class="col-xs-8">
-                                    <h2 class="box-count">54</h2>
+                                    <?php
+                                        $sql="SELECT * FROM employee";
+                                        $query = $pdo->prepare($sql);
+                                        $query->execute();
+                                        $numrow = $query->rowCount();
+                                        $numrows = intval($numrow);
+                                    ?>
+                                    <h2 class="box-count"><?php if($numrows<10){echo "0".$numrow;}else{echo $numrow;}?></h2>
 
                                     <h3 class="box-head">Employees</h3>
                                 </div>
@@ -128,7 +151,14 @@ if(!$isLoggedin && $empRole!="admin"){
                         <div class="col-xs-12 main-box-4-1">
                             <div class="row">
                                 <div class="col-xs-8">
-                                    <h2 class="box-count">1</h2>
+                                    <?php
+                                    $sql="SELECT * FROM department WHERE currentStatus=:log and roster_status=:state";
+                                    $query = $pdo->prepare($sql);
+                                    $query->execute(array('log'=>"approved",'state'=>"YES"));
+                                    $numrow = $query->rowCount();
+                                    $numrows = intval($numrow);
+                                    ?>
+                                    <h2 class="box-count"><?php if($numrows<10){echo "0".$numrow;}else{echo $numrow;}?></h2>
 
                                     <h3 class="box-head">Rosters</h3>
                                 </div>

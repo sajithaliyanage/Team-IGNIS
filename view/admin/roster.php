@@ -239,10 +239,17 @@ if(isset($_GET['id'])){
                                                             <div class="form-group">
                                                                 <label class="col-sm-5 col-xs-12 control-label form-lable">Job Level :</label>
                                                                 <div class="col-sm-7 col-xs-12">
-                                                                    <select  name="emp_level" class="form-control">
-                                                                        <option value="permanent">Permanent</option>
-                                                                        <option value="probation">Probation</option>
-                                                                        <option value="trainee">Trainee</option>
+                                                                    <select  name="emp_level" class="form-control"  style="text-transform: capitalize;">
+                                                                        <?php
+                                                                            $sql = "select * from job_level";
+                                                                            $query = $pdo->prepare($sql);
+                                                                            $query->execute();
+                                                                            $result = $query->fetchAll();
+
+                                                                            foreach($result as $rs){
+                                                                                echo " <option value='".$rs['level_id']."' style='text-transform:capitalize;'>".$rs['level_name']."</option>";
+                                                                            }
+                                                                        ?>
                                                                     </select>
                                                                 </div>
                                                             </div>

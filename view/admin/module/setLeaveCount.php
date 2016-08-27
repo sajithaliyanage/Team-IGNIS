@@ -3,7 +3,7 @@ include('../../../config/connect.php');
 $pdo = connect();
 
 $joc_cat_id = $_POST['job_cat'];
-$joc_cat_level = $_POST['job_level'];
+$joc_cat_level_id = $_POST['job_level'];
 $leaveValues = $_POST['leave_type'];// Returns an array
 
 try{
@@ -12,9 +12,9 @@ try{
     $query0->execute();
     $result0 = $query0->fetchAll();
 
-    $sql = "INSERT INTO leave_set_job (job_cat_id,level_name) VALUES (:job_cat_id,:level_name)";
+    $sql = "INSERT INTO leave_set_job (job_cat_id,level_id) VALUES (:job_cat_id,:level_id)";
     $query = $pdo->prepare($sql);
-    $query->execute(array('job_cat_id'=>$joc_cat_id,'level_name'=>$joc_cat_level));
+    $query->execute(array('job_cat_id'=>$joc_cat_id,'level_id'=>$joc_cat_level_id));
 
     $last_set_job_id = $pdo->lastInsertId();
 

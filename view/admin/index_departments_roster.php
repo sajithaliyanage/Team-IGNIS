@@ -74,13 +74,13 @@ if(!$isLoggedin && $empRole!="admin"){
                                                 <h3 class=\"box-head\">Department</h3>
                                             </div>
                                             <div class=\"col-xs-4\">
-                                                <i class=\"fa fa-building fa-5x box-icon\" style=\"color:#".$rs['dept_color'].";\" aria-hidden=\"true\"></i>
+                                                <i class=\"fa fa-building fa-5x box-icon\" style=\"color:".$rs['dept_color'].";\" aria-hidden=\"true\"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class=\"row\">
-                                    <div class=\"col-xs-12  main-box-1-2-inner\" style=\"background-color:#".$rs['dept_color'].";\">
+                                    <div class=\"col-xs-12  main-box-1-2-inner\" style=\"background-color:".$rs['dept_color'].";\">
                                         <div class=\"more-info\">
                                             <a href='index_department_employee.php?id=".$rs['dept_id']."' style=\"color:#2c3b42;\">View Employees <i class=\"fa fa-chevron-circle-right\" style=\"color:#2c3b42;\" aria-hidden=\"true\"></i></a>
                                         </div>

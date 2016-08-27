@@ -61,7 +61,7 @@ if(!$isLoggedin && $empRole!="admin"){
                             <h5 class="nortification-box-heading"><i class="fa fa-user icon-margin-right" aria-hidden="true"></i>
                                 Count of Employees</h5>
                             <hr>
-                            <ul class="list-group">
+                            <ul class="list-group" >
                                 <?php
                                     $sql="SELECT * FROM department WHERE currentStatus=:log";
                                     $query = $pdo->prepare($sql);
@@ -69,10 +69,12 @@ if(!$isLoggedin && $empRole!="admin"){
                                     $result = $query->fetchAll();
 
                                     foreach($result as $rs){
-                                        echo "<li class=\"list-group-item\">
-                                                <span class=\"badge\">";if($rs['no_of_emp']<10){echo "0".$rs['no_of_emp'];}else{echo $rs['no_of_emp'];} echo"</span>
-                                                    ".$rs['dept_name']."
-                                                </li>";
+                                        echo "  <a href='index_department_employee.php?id=".$rs['dept_id']."'>
+                                                    <li class=\"list-group-item\"  style='border-radius:0 !important; color:#333; '>
+                                                    <span class=\"badge\">";if($rs['no_of_emp']<10){echo "0".$rs['no_of_emp'];}else{echo $rs['no_of_emp'];} echo"</span>
+                                                        ".$rs['dept_name']."
+                                                    </li>
+                                                </a>";
                                     }
                                 ?>
 
@@ -80,66 +82,6 @@ if(!$isLoggedin && $empRole!="admin"){
                         </div>
                     </div>
 
-                    <div class="row margin-top">
-                        <div class="col-xs-12 nortification-box-top">
-                            <h5 class="nortification-box-heading"><i class="fa fa-user icon-margin-right" aria-hidden="true"></i>
-                                Filter Employees</h5>
-                            <hr>
-                            <div class="panel panel-primary filterable outer-filter">
-                                <div class="panel-heading filter-box">
-                                    <h3 class="panel-title">Employees</h3>
-
-                                    <div class="pull-right">
-                                        <button class="btn btn-default btn-xs btn-filter"><span
-                                                class="fa fa-filter"></span> Filter
-                                        </button>
-                                    </div>
-                                </div>
-                                <table class="table">
-                                    <thead>
-                                    <tr class="filters">
-                                        <th><input type="text" class="form-control" placeholder="Department" disabled>
-                                        </th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>IT Department</td>
-                                        <td>Manager</td>
-                                        <td>Sajitha Liyanage</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Marketing Department</td>
-                                        <td>Executive Officer</td>
-                                        <td>Nilasha Deemantha</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Sales Department</td>
-                                        <td>Executive Officer</td>
-                                        <td>Madusha Ushan</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Sales Department</td>
-                                        <td>Manager</td>
-                                        <td>Dileep Jayasundara</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Marketing Department</td>
-                                        <td>Manager</td>
-                                        <td>Gothami Karunarathne</td>
-                                    </tr>
-                                    <tr>
-                                        <td>IT Department</td>
-                                        <td>Executive Officer</td>
-                                        <td>Priyanwada Kulasooriya</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="col-sm-6 col-xs-12 padding-box">
@@ -214,10 +156,17 @@ if(!$isLoggedin && $empRole!="admin"){
                                         <div class="form-group">
                                             <label class="col-sm-5 col-xs-12 control-label form-lable">Job Level :</label>
                                             <div class="col-sm-7 col-xs-12">
-                                                <select  name="emp_level" class="form-control">
-                                                    <option value="permanent">Permanent</option>
-                                                    <option value="probation">Probation</option>
-                                                    <option value="trainee">Trainee</option>
+                                                <select  name="emp_level" class="form-control" style="text-transform: capitalize;">
+                                                    <?php
+                                                        $sql = "select * from job_level";
+                                                        $query = $pdo->prepare($sql);
+                                                        $query->execute();
+                                                        $result = $query->fetchAll();
+
+                                                        foreach($result as $rs){
+                                                            echo " <option value='".$rs['level_id']."' style='text-transform:capitalize;'>".$rs['level_name']."</option>";
+                                                        }
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -320,7 +269,7 @@ if(!$isLoggedin && $empRole!="admin"){
     </div>
 
     <script src="js/jquery.js"></script>
-    <script src="js/filter.js"></script>
+<!--    <script src="js/filter.js"></script>-->
     <script src="js/bootstrap.js"></script>
 </body>
 </html>

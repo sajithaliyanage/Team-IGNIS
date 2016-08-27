@@ -83,6 +83,33 @@ if(!$isLoggedin && $empRole!="admin"){
                             </div>
                         </div>
                     </div>
+
+                    <div class="row margin-top">
+                        <div class="col-xs-12 nortification-box-top">
+                            <h5 class="nortification-box-heading"><i class="fa fa-check icon-margin-right" aria-hidden="true"></i>
+                                Added Job Levels</h5>
+                            <hr>
+                            <?php
+                                $sql = "select * from job_level";
+                                $query = $pdo->prepare($sql);
+                                $query->execute();
+                                $result = $query->fetchAll();
+                                $rowCount = $query->rowCount();
+                            ?>
+                            <h5 style="text-align: right;">Total Job Levels : <span class="badge"><?php if($rowCount<10){echo "0".$rowCount;}else{echo $rowCount;} ?></span></h5>
+                            <div class="list-group">
+
+                                <?php
+                                foreach($result as $rs){
+                                    echo " <a href='#' class='list-group-item'>
+                                                <h5>".$rs['level_name']."</h5>
+                                                <span class=\"label label-danger\" style=\"float: right; margin-top:-24px;\">Delete <i class=\"fa fa-close\" aria-hidden=\"true\"></i></span>
+                                               </a>";
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm-6 col-xs-12 padding-box">
                     <div class="row">
@@ -99,6 +126,33 @@ if(!$isLoggedin && $empRole!="admin"){
                                             <label class="col-xs-5 control-label form-lable">Job Category :</label>
                                             <div class="col-xs-7">
                                                 <input id="service_name" name="job_category" type="text" placeholder=""
+                                                       class="form-control input-md" required>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+
+                                            <button class="btn btn-info btn-lg pull-right submit-button" type="submit">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="row margin-top">
+                        <div class="col-xs-12 nortification-box-top">
+                            <h5 class="nortification-box-heading"><i class="fa fa-plus icon-margin-right" aria-hidden="true"></i>
+                                Add New Job Level</h5>
+                            <div class="alert-user" style="<?php if(!isset($_GET['job1'])){echo 'display:none;';}?>">Job level added successfully!</div>
+                            <hr>
+                            <form role="form" data-toggle="validator" action="module/addJobLevels.php" method="post">
+                                <div class="department-add">
+                                    <div class="col-xs-12">
+                                            <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-xs-5 control-label form-lable">Job Level :</label>
+                                            <div class="col-xs-7">
+                                                <input id="service_name" name="level_name" type="text" placeholder="all in simple letters"
                                                        class="form-control input-md" required>
                                             </div>
                                         </div>

@@ -24,8 +24,8 @@ try{
     $query = $pdo->prepare($sql);
     $query->execute(array('depID'=>$deptId,'gID'=>$groupID));
 
-    $sql = "INSERT INTO employee (comp_id,name,nic,gender,email,password,tel_no,image,emp_level,job_cat_id,group_id,dept_id) VALUES
-            (:compId,:empName,:empNIC,:empGender,:empEmail,:empPassword,:empTel,:empImage,:empLevel,:empJob,:groupID,:empDept)";
+    $sql = "INSERT INTO employee (comp_id,name,nic,gender,email,password,tel_no,image,job_cat_id,level_id,group_id,dept_id) VALUES
+            (:compId,:empName,:empNIC,:empGender,:empEmail,:empPassword,:empTel,:empImage,:empJob,:empLevel,:groupID,:empDept)";
     $query = $pdo->prepare($sql);
     $query->execute(array('compId'=>$empId,'empName'=>$empName,'empNIC'=>$empNIC,'empGender'=>$empGender,'empEmail'=>$empEmail,
         'empPassword'=>$empPassword,'empTel'=>$empTelephone,'empImage'=>"null",'empLevel'=>$empLevel,'empJob'=>$empCategory,'groupID'=>$groupID,'empDept'=>$deptId));
