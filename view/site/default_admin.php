@@ -26,7 +26,7 @@ if(!$isLoggedin || $empRole!="admin"){
 
     <div class="btn-group dropdown" style="top:0; right:0;position:absolute;">
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:transparent !important; color: #2c3b42;">
-            <img src="../../public/images/emp.png" class="img-circle image-user"  /><?php echo $empName;?><span class="caret"></span>
+            <img src="../<?php if($empImage != 'null'){echo $empImage;}else{ echo '../public/images/default.png';}?>" class="img-circle image-user"  /><?php echo $empName;?><span class="caret"></span>
             <span class="sr-only">Toggle Dropdown</span>
         </button>
         <ul id="theList" class="dropdown-menu">

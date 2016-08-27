@@ -10,7 +10,7 @@
     <br/>
     <center>
         <div style="padding:10px 0;">
-            <p  class=" font new" style="margin-top:-10px;"><img src="../../public/images/emp.png" class="img-circle image-user-nav"  />Welcome Sajitha</p>
+            <p  class=" font new" style="margin-top:-10px;"><img src="../<?php if($empImage != 'null'){echo $empImage;}else{ echo '../public/images/default.png';}?>" class="img-circle image-user-nav"  />Welcome Sajitha</p>
         </div>
     </center>
     <a href="index.php" class="list-group-item left-menu left-menu<?php if($var=="index"){echo"-active";}?>"><i class="fa fa-edit icon-bar" aria-hidden="true"></i>Overall Company<span class="<?php if($var=="index"){echo"selected";}?>"></span></a>

@@ -81,7 +81,7 @@ $managerCount = $query->rowCount();
                                    <div class=\"row\" style='margin-top:10px; border-left:20px solid ".$rs['dept_color']."'>
                                     <div class=\"col-xs-3\">
                                         <center>
-                                            <img src=\"images/default.png\" class=\"img-responsive\" style=\"height:60px; width:60px;\" />
+                                            <img src='../"; if($rs['image'] != 'null'){echo $rs['image'];}else{ echo '../public/images/default.png';} echo"' class=\"img-responsive\" style=\"height:60px; width:60px;\" />
                                         </center>
                                     </div>
                                     <div class=\"col-xs-3\">

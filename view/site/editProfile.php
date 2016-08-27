@@ -1,5 +1,5 @@
 <?php
-$var = "editProfile";
+$var = "profile";
 include('../../controller/siteController.php');
 include('../../config/connect.php');
 $pdo = connect();
@@ -78,25 +78,25 @@ if(!$isLoggedin){
 
                                 <div class="nortification-box-status">
                                     <center>
-                                        <form action="../../module/changeProfilePic.php" method="POST"  enctype="multipart/form-data" data-toggle="tooltip" data-placement="top"  title="Click here to change your profile picture!">
-                                            <label  for="fileToUpload">
-
-                                                    <img src='<?php if($result['image']!=null){echo '../'.$result['image'];}else{echo "../../public/images/default.png";}?>' style="margin-bottom:40px; padding-top: 20px" width='75%'  />
-
+                                        <form action="../../module/changeProfilePic.php" method="POST"  enctype="multipart/form-data"  title="Click here to change your profile picture!">
+                                            <label for="fileToUpload" style="width:100%;">
+                                                <img src='<?php if($result['image']!='null'){echo '../'.$result['image'];}else{echo "../../public/images/default.png";}?>' style="margin-bottom:40px; padding-top: 20px" width='80%' height='400' />
                                             </label>
 
                                             <input type="file" name="fileToUpload" id="fileToUpload" onchange="readURL(this)"/>
 
+                                            <p style="margin-top:-30px;">(PNG,JPG,JPEG files only allowed - Max Size 3MB (320x400))</p>
 
                                             <div id="myProgress" style="margin-top:20px;">
                                                 <div id="myBar">
                                                     <div id="label">0%</div>
                                                 </div>
+                                                <button class="btn btn-info btn-lg pull-right submit-button" type="submit" style="margin-top:40px;">Change</button>
                                             </div>
-                                            <button class="btn btn-info btn-lg pull-right submit-button" type="submit">Change</button>
-                                        </form>
-                                    </center>
 
+                                        </form>
+
+                                    </center>
                                 </div>
                             </div>
 
@@ -114,11 +114,10 @@ if(!$isLoggedin){
                                         <h5 class="nortification-box-heading"><i class="fa fa-edit icon-margin-right" aria-hidden="true"></i>
                                             Edit Profile</h5>
                                         <hr>
-                                        <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">Your profile edited successfully!</div>
-                                        <form role="form" data-toggle="validator" action="../../module/editProf.php" method="post">
+                                        <form role="form" data-toggle="validator" action="../../module/editEmployeeProfile.php" method="post">
                                             <?php
 
-                                            $sql = "select * from employee INNER JOIN department ON employee.dept_id=department.dept_id INNER JOIN job_category ON employee.job_cat_id=job_category.job_cat_id WHERE comp_id=:empID";
+                                            $sql = "select * from employee INNER JOIN department ON employee.dept_id=department.dept_id INNER JOIN job_category ON employee.job_cat_id=job_category.job_cat_id  JOIN job_level ON job_level.level_id=employee.level_id WHERE comp_id=:empID";
                                             $query = $pdo->prepare($sql);
                                             $query->execute(array('empID'=>$empID));
                                             $result = $query->fetchAll();
@@ -127,15 +126,15 @@ if(!$isLoggedin){
 
                                                 echo "<div class=\"form-group\">
                                                      <label class=\"col-xs-5 control-label form-lable\">";
-                                                        echo "User Name:";
+                                                        echo "Employee Name:";
                                                         echo "</label>
                                                         <div class=\"col-sm-7 col-xs-12\">
-                                                            <input id=\"service_name\" name=\"emp_name\" type=\"text\" placeholder=".$rs['name']."
+                                                            <input id=\"service_name\" name=\"emp_name\" value='".$rs['name']."' type=\"text\" placeholder=''
                                                                    class=\"form-control input-md\" required>
                                                         </div>
                                                     </div>";
 
-                                                echo "<br><br>
+                                                echo "<br><br><br>
                                                     <div class=\"form-group\">
                                                         <label class=\"col-xs-5 control-label form-lable\">";
                                                         echo "Company Id:";
@@ -149,7 +148,7 @@ if(!$isLoggedin){
                                                         echo "Email:";
                                                         echo "</label>
                                                         <div class=\"col-sm-7 col-xs-12\">
-                                                            <input id=\"service_name\" name=\"emp_email\" type=\"text\" placeholder=".$rs['email']."
+                                                            <input id=\"service_name\" name=\"emp_email\" value='".$rs['email']."' type=\"text\" placeholder=''
                                                                    class=\"form-control input-md\" required>
                                                         </div>
                                                     </div>";
@@ -160,7 +159,7 @@ if(!$isLoggedin){
                                                         echo "Contact number:";
                                                         echo "</label>
                                                         <div class=\"col-sm-7 col-xs-12\">
-                                                            <input id=\"service_name\" name=\"emp_tele\" type=\"text\" placeholder=".$rs['tel_no']."
+                                                            <input id=\"service_name\" name=\"emp_tele\" value='".$rs['tel_no']."' type=\"text\" placeholder=''
                                                                    class=\"form-control input-md\" required>
                                                         </div>
                                                     </div>";
@@ -170,26 +169,15 @@ if(!$isLoggedin){
                                                         <label class=\"col-xs-5 control-label form-lable\">";
                                                         echo "Department:";
                                                         echo "</label>
-                                                        <lable class=\"col-xs-7 col-xs-12\">".$rs['dept_name']."</lable>
+                                                        <lable class=\"col-xs-7\">".$rs['dept_name']."</lable>
                                                     </div>";
 
                                                 echo "<br><br>
                                                 <div class=\"form-group\">
                                                     <label class=\"col-sm-5 col-xs-12 control-label form-lable\">Job Category :</label>
-                                                    <div class=\"col-sm-7 col-xs-12\">
-                                                        <select  name=\"emp_category\" class=\"form-control\">";
 
-                                                                $sql1 = "select * from job_category WHERE currentStatus=:log";
-                                                                $query1 = $pdo->prepare($sql1);
-                                                                $query1->execute(array('log'=>"approved"));
-                                                                $result1 = $query1->fetchAll();
+                                                    <lable class=\"col-xs-7\">".$rs['job_cat_name']."</lable>
 
-                                                                foreach($result1 as $rs1){
-                                                                    echo " <option value='".$rs1['job_cat_id']."'>".$rs1['job_cat_name']."</option>";
-                                                                }
-
-                                                        echo "</select>
-                                                    </div>
                                                 </div>";
 
                                                 echo "<br><br>
@@ -197,10 +185,7 @@ if(!$isLoggedin){
                                                      <label class=\"col-xs-5 control-label form-lable\">";
                                                         echo "Job Level:";
                                                         echo "</label>
-                                                        <div class=\"col-sm-7 col-xs-12\">
-                                                            <input id=\"service_name\" name=\"emp_level\" type=\"text\" placeholder=".$rs['emp_level']."
-                                                                   class=\"form-control input-md\" required>
-                                                        </div>
+                                                       <lable class=\"col-xs-7\" style='text-transform: capitalize;'>".$rs['level_name']."</lable>
                                                     </div>";
 
                                                 echo "<br><br>
@@ -214,7 +199,7 @@ if(!$isLoggedin){
                                                     }
                                                     ?>
 
-                                            <a href="profile.php"><button class="btn btn-info btn-lg pull-right submit-button" type="submit" >Submit</button></a>
+                                            <a href="profile.php"><button class="btn btn-info btn-lg pull-right submit-button" type="submit" >Save Changes</button></a>
 
                                         </form>
                                     </div>
@@ -230,44 +215,44 @@ if(!$isLoggedin){
 
     <script src="../../public/js/jquery.js"></script>
     <script src="../../public/js/bootstrap.js"></script>
-<script>
-    $('#fileToUpload').click(function() {
-        $('#myProgress').css({
-            'display': 'block'
+    <script>
+        $('#fileToUpload').click(function() {
+            $('#myProgress').css({
+                'display': 'block'
+            });
         });
-    });
 
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-            reader.onload = function (e) {
-                $('#blah')
-                    .attr('src', e.target.result)
-                    .width(600)
-                    .height(500);
-            };
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result)
+                        .width(600)
+                        .height(500);
+                };
 
-            reader.readAsDataURL(input.files[0]);
-            move()
-        }
-    }
-    function move() {
-        var elem = document.getElementById("myBar");
-        var width = 10;
-        var id = setInterval(frame, 10);
-
-        function frame() {
-            if (width >= 100) {
-                clearInterval(id);
-            } else {
-                width++;
-                elem.style.width = width + '%';
-                document.getElementById("label").innerHTML = width * 1 + '%';
+                reader.readAsDataURL(input.files[0]);
+                move()
             }
         }
-    }
-</script>
+        function move() {
+            var elem = document.getElementById("myBar");
+            var width = 10;
+            var id = setInterval(frame, 10);
+
+            function frame() {
+                if (width >= 100) {
+                    clearInterval(id);
+                } else {
+                    width++;
+                    elem.style.width = width + '%';
+                    document.getElementById("label").innerHTML = width * 1 + '%';
+                }
+            }
+        }
+    </script>
 
 </body>
 </html>

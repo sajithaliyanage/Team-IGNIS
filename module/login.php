@@ -21,6 +21,7 @@ try{
         foreach($results as $rs){
             $empID = $rs['comp_id'];
             $empName = $rs['name'];
+            $empImage = $rs['image'];
         }
 
         ini_set('session.cookie_httponly',true);
@@ -28,6 +29,7 @@ try{
         session_start();
         $_SESSION['empName'] =$empName;
         $_SESSION['empID'] = $empID;
+        $_SESSION['image'] = $empImage;
         $_SESSION['empRole'] = "employee";
         session_write_close();
 
@@ -48,6 +50,7 @@ try{
         foreach($results as $rs){
             $empID = $rs['comp_id'];
             $empName = $rs['name'];
+            $empImage = $rs['image'];
         }
 
         ini_set('session.cookie_httponly',true);
@@ -55,6 +58,7 @@ try{
         session_start();
         $_SESSION['empName'] =$empName;
         $_SESSION['empID'] =$empID;
+        $_SESSION['image'] = $empImage;
         $_SESSION['empRole'] = "admin";
         session_write_close();
 
@@ -75,6 +79,7 @@ try{
         foreach($results as $rs){
             $empID = $rs['comp_id'];
             $empName = $rs['name'];
+            $empImage = $rs['image'];
         }
 
         ini_set('session.cookie_httponly',true);
@@ -82,6 +87,7 @@ try{
         session_start();
         $_SESSION['empName'] =$empName;
         $_SESSION['empID'] =$empID;
+        $_SESSION['image'] = $empImage;
         $_SESSION['empRole'] = "manager";
         session_write_close();
 
@@ -102,6 +108,7 @@ try{
         foreach($results as $rs){
             $empID = $rs['comp_id'];
             $empName = $rs['name'];
+            $empImage = $rs['image'];
         }
 
         ini_set('session.cookie_httponly',true);
@@ -109,6 +116,7 @@ try{
         session_start();
         $_SESSION['empName'] =$empName;
         $_SESSION['empID'] =$empID;
+        $_SESSION['image'] = $empImage;
         $_SESSION['empRole'] = "executive";
         session_write_close();
 
@@ -129,6 +137,7 @@ try{
         foreach($results as $rs){
             $empID = $rs['comp_id'];
             $empName = $rs['name'];
+            $empImage = $rs['image'];
         }
 
         ini_set('session.cookie_httponly',true);
@@ -136,6 +145,7 @@ try{
         session_start();
         $_SESSION['empName'] =$empName;
         $_SESSION['empID'] =$empID;
+        $_SESSION['image'] = $empImage;
         $_SESSION['empRole'] = "director";
         session_write_close();
 

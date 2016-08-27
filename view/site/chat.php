@@ -25,10 +25,6 @@ if(isset($_GET['id'])){
     <link href="../../public/css/navbar-style.css" rel="stylesheet">
     <link href="../../public/css/font-awesome.min.css" rel="stylesheet">
 
-    <script src="../../public/js/bootstrap.js"></script>
-    <script src="../../public/js/bootstrap-datepicker.js"></script>
-    <script src="../../public/js/myProfile.js"></script>
-
 </head>
 
 <body style=" background-color: #eceff4 !important;">
@@ -119,7 +115,7 @@ if(isset($_GET['id'])){
 
                                     foreach ($result as $rs) {
                                         echo "
-                                            <li onchange='showUser(this.value)' class=\"list-group-item\"  style=\"border-left: hidden; border-right:hidden;\"><a href='?id=".$rs['comp_id']."'><img src=\"../admin/images/default.png\" style=\"width:30px; height:30px; margin-right:10px;\" />" . $rs['name'] . "</a></li>";
+                                            <li onchange='showUser(this.value)' class=\"list-group-item\"  style=\"border-left: hidden; border-right:hidden;\"><a href='?id=".$rs['comp_id']."'><img src='../"; if($rs['image'] != 'null'){echo $rs['image'];}else{ echo '../public/images/default.png';} echo"' style=\"width:30px; height:30px; margin-right:10px;\" />" . $rs['name'] . "</a></li>";
                                     }
                                     ?>
                                 </ul>

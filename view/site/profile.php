@@ -25,10 +25,6 @@ if(!$isLoggedin){
     <link href="../../public/css/navbar-style.css" rel="stylesheet">
     <link href="../../public/css/font-awesome.min.css" rel="stylesheet">
 
-    <script src="../../public/js/bootstrap.js"></script>
-    <script src="../../public/js/bootstrap-datepicker.js"></script>
-    <script src="../../public/js/myProfile.js"></script>
-
 </head>
 
 <body style=" background-color: #eceff4 !important;">
@@ -67,6 +63,8 @@ if(!$isLoggedin){
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-user icon-margin-right" aria-hidden="true"></i>
                                 My Profile</h5>
+
+                            <div class="alert-user" style="<?php if(!isset($_GET['success'])){echo 'display:none;';}?>">Profile picture changed successfully!</div>
                             <hr>
                             <div class="row">
                                     <div class="col-xs-12">
@@ -79,7 +77,9 @@ if(!$isLoggedin){
 
                                         <div class="nortification-box-status">
                                             <center>
-                                                    <img src='<?php if($result['image']!=null){echo '../'.$result['image'];}else{echo "../../public/images/default.png";}?>' style="margin-bottom:40px; padding-top: 20px" width='75%'  />
+                                                <div>
+                                                    <img src='<?php if($result['image']!='null'){echo '../'.$result['image'];}else{echo "../../public/images/default.png";}?>' style="margin-bottom:40px; padding-top: 20px" width='80%' height='400'  />
+                                                </div>
                                             </center>
 
 
@@ -100,11 +100,12 @@ if(!$isLoggedin){
                                 <div class="col-xs-12 nortification-box-top">
                                     <h5 class="nortification-box-heading"><i class="fa fa-edit icon-margin-right" aria-hidden="true"></i>
                                         Edit Profile</h5>
+                                    <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">Your profile edited successfully!</div>
                                     <hr>
 
                                     <?php
 
-                                    $sql = "select * from employee INNER JOIN department ON employee.dept_id=department.dept_id INNER JOIN job_category ON employee.job_cat_id=job_category.job_cat_id WHERE comp_id=:empID";
+                                    $sql = "select * from employee INNER JOIN department ON employee.dept_id=department.dept_id INNER JOIN job_category ON employee.job_cat_id=job_category.job_cat_id JOIN job_level ON job_level.level_id=employee.level_id WHERE comp_id=:empID";
                                     $query = $pdo->prepare($sql);
                                     $query->execute(array('empID'=>$empID));
                                     $result = $query->fetchAll();
@@ -113,7 +114,7 @@ if(!$isLoggedin){
 
                                         echo "<div class=\"form-group\">
                                             <label class=\"col-xs-5 control-label form-lable\">";
-                                        echo "User Name:";
+                                        echo "Employee Name:";
                                         echo " </label>
                                              <lable>" . $rs['name'] . "</lable>
                                     </div>";
@@ -157,7 +158,7 @@ if(!$isLoggedin){
                                         <label class=\"col-xs-5 control-label form-lable\">";
                                         echo "Job Level:";
                                         echo" </label>
-                                        <lable>" . $rs['emp_level'] . "</lable>
+                                        <lable style='text-transform: capitalize;'>" . $rs['level_name'] . "</lable>
                                     </div>";
                                         echo "<div class=\"form-group\">
                                         <label class=\"col-xs-5 control-label form-lable\">";
@@ -176,7 +177,7 @@ if(!$isLoggedin){
 
                                         <br><br>
 
-                                        <a href="editProfile.php"><button class="btn btn-info btn-lg pull-right submit-button" type="submit" >Edit</button></a>
+                                        <a href="editProfile.php"><button class="btn btn-info btn-lg pull-right submit-button" type="submit" >Edit Profile Details</button></a>
 
 
                                 </div>

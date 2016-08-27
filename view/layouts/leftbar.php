@@ -10,7 +10,7 @@
     <br/>
     <center>
         <div style="padding:10px 0;">
-            <p  class=" font new" style="margin-top:-10px; text-transform: capitalize;"><img src="../../public/images/default.png" class="img-circle image-user-nav"  />Welcome <?php echo $empRole;?></p>
+            <p  class=" font new" style="margin-top:-10px; text-transform: capitalize;"><img src="../<?php if($empImage != 'null'){echo $empImage;}else{ echo '../public/images/default.png';}?>" class="img-circle image-user-nav"  />Welcome <?php echo $empRole;?></p>
         </div>
     </center>
 

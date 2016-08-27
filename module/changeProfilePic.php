@@ -6,33 +6,7 @@ $pdo = connect();
 try{
     if(!empty($_FILES["fileToUpload"]["name"])){
 
-        $path = "../uploads/profilePicture/" . $empID . "/";
-
-        function Delete($path)
-        {
-            if (is_dir($path) === true) {
-                $files = array_diff(scandir($path), array('.', '..'));
-
-                foreach ($files as $file) {
-                    Delete(realpath($path) . '/' . $file);
-                }
-
-                return rmdir($path);
-            } else if (is_file($path) === true) {
-                return unlink($path);
-            }
-
-            return false;
-        }
-
-        Delete($path);
-        try {
-            mkdir('../uploads/profilePicture/' . $empID . '/', 0777, true);
-        } catch (Exception $e) {
-            header('Location:../view/site/profile.php?upload=danger');
-        }
-
-
+        mkdir('../uploads/profilePicture/' . $empID . '/', 0777, true);
         $target_dir = "../uploads/profilePicture/". $empID ."/";
 
         if(!empty($_FILES["fileToUpload"]["name"])){
@@ -54,6 +28,9 @@ try{
                 header( 'Location:../view/site/profile.php?uploadError' ) ;
                 // if everything is ok, try to upload fil
             } else {
+                $temp = explode(".", $_FILES["fileToUpload.3"]["name"]);
+                $newfilename = "profile" . '.' . $imageFileType;
+                $target_file = $target_dir.$newfilename;
                 if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
                     $sql="UPDATE employee SET image=:target_file WHERE comp_id=:empID";

@@ -38,9 +38,10 @@
                 <li class="list-side-menu"><a href="#">Edit Company Calendar</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle font new" data-toggle="dropdown" role="button"
-                       aria-haspopup="true" aria-expanded="false"><img src="../../public/images/default.png" class="img-circle image-user"  /><?php echo $empName;?><span class="caret"></span></a>
+                       aria-haspopup="true" aria-expanded="false"><img src="../<?php if($empImage != 'null'){echo $empImage;}else{ echo '../public/images/default.png';}?>" class="img-circle image-user"  /><?php echo $empName;?><span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-admin">
-                        <li><a href="#">My Profile</a></li>
+                        <li style="<?php if($empRole!='admin'){echo 'display:none;';}?>"><a href="../site/default_admin.php">Switch Profile</a></li>
+                        <li><a href="../site/profile.php">My Profile</a></li>
                         <li><a href="../../module/logout.php">Logout</a></li>
                     </ul>
                 </li>

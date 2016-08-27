@@ -118,7 +118,7 @@ $empCount = $query3->rowCount();
                                    <div class=\"row\" style=\"margin-top:10px;\">
                                     <div class=\"col-xs-4\">
                                         <center>
-                                            <img src=\"images/default.png\" class=\"img-responsive\" style=\"height:60px; width:60px;\" />
+                                            <img src='../"; if($rs['image'] != 'null'){echo $rs['image'];}else{ echo '../public/images/default.png';} echo"' class=\"img-responsive\" style=\"height:60px; width:60px;\" />
                                         </center>
                                     </div>
                                     <div class=\"col-xs-8\">
@@ -141,7 +141,7 @@ $empCount = $query3->rowCount();
                               <div class=\"row\" style=\"margin-top:10px;\">
                                     <div class=\"col-xs-4\">
                                         <center>
-                                            <img src=\"images/default.png\" class=\"img-responsive\" style=\"height:60px; width:60px;\" />
+                                            <img src='../"; if($rs['image'] != 'null'){echo $rs['image'];}else{ echo '../public/images/default.png';} echo"' class=\"img-responsive\" style=\"height:60px; width:60px;\" />
                                         </center>
                                     </div>
                                     <div class=\"col-xs-8\">
@@ -163,7 +163,7 @@ $empCount = $query3->rowCount();
                                 <div class=\"row\" style=\"margin-top:10px;\">
                                     <div class=\"col-xs-4\">
                                         <center>
-                                            <img src=\"images/default.png\" class=\"img-responsive\" style=\"height:60px; width:60px;\" />
+                                            <img src='../"; if($rs['image'] != 'null'){echo $rs['image'];}else{ echo '../public/images/default.png';} echo"' class=\"img-responsive\" style=\"height:60px; width:60px;\" />
                                         </center>
                                     </div>
                                     <div class=\"col-xs-8\">
