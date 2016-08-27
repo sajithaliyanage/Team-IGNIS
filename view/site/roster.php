@@ -50,7 +50,6 @@ include('../../controller/siteController.php');
 			<div class="col-sm-6 col-xs-12">
 
 
-
                     <div class="mySlides">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading" align="center"><i class="fa fa-paperclip icon-margin-right" aria-hidden="true">Today Shift</i>
@@ -91,17 +90,17 @@ include('../../controller/siteController.php');
 
                       </div>
 
-                  </div>
+
+
+                    </div>
 
 
 
 
+                <a  style="position:absolute;top:45%;left:0;" onclick="plusDivs(-1)"> < </a>
+                <a  style="position:absolute;top:45%;right:0" onclick="plusDivs(1)"> > </a>
 
 
-                    <a width="40px" height="40px"line-height="40px" style="position:absolute;top:45%;left:0" onclick="plusDivs(-1)">❮</a>
-                    <a class="w3-btn-floating" style="position:absolute;top:45%;right:0" onclick="plusDivs(1)">❯</a>
-
-                </div>
 
                 <script>
                     var slideIndex = 1;
@@ -123,6 +122,7 @@ include('../../controller/siteController.php');
                     }
                 </script>
 				</div>
+
 				<div class="col-sm-6 col-xs-12">		
 					<div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-tag icon-margin-right" aria-hidden="true"></i>
