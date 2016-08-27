@@ -32,7 +32,7 @@ $objWriter->save('new.xlsx');
 
 
 
-    for($row=2;$row<=$lastRow;$row++){
+    for($row=$lastRow;$row>=$lastRow-10;$row--){
 
         echo"<tr><td>";
         echo $worksheet->getCell('A'.$row)->getValue();
