@@ -133,17 +133,8 @@ include('../../controller/siteController.php');
                                             <th>Work Time</th>
                                             <th>Over Time</th>
                                         </tr>
-                                        <?php include "excelReader.php"?>
-                                        <?php foreach( $data as $row ) { ?>
-                                            <tr>
-                                                <td><?php echo( $row['Date'] ); ?></td>
-                                                <td><?php echo( $row['In Time'] ); ?></td>
-                                                <td><?php echo( $row['Out Time'] ); ?></td>
-                                                <td><?php echo( $row['Work Time'] ); ?></td>
-                                                <td><?php echo( $row['Over Time'] ); ?></td>
+                                        <?php include "excelRead.php"?>
 
-                                            </tr>
-                                        <?php } ?>
 
                                     </table>
                                 </div>
