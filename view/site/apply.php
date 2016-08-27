@@ -24,6 +24,7 @@ if(!$isLoggedin){
     <link href="../../public/css/navbar-style.css" rel="stylesheet">
     <link href="../../public/css/font-awesome.min.css" rel="stylesheet">
     <link href="../../public/css/calender.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../public/css/datepicker.css">
 
 </head>
 
@@ -177,8 +178,8 @@ if(!$isLoggedin){
                                             <label class="col-xs-4 control-label form-lable">Starting Date:</label>
 
                                             <div class="col-xs-8">
-                                                <input id="service_name" name="start_date" type="text"
-                                                       placeholder="DD / MM / YYYY"
+                                                <input id="example2" name="start_date" type="text"
+                                                       placeholder="dd/mm/yyyy"
                                                        class="form-control input-md" required>
                                             </div>
                                         </div>
@@ -189,8 +190,9 @@ if(!$isLoggedin){
                                             <label class="col-xs-4 control-label form-lable">End Date:</label>
 
                                             <div class="col-xs-8">
-                                                <input id="service_name" name="end_date" type="text"
-                                                       placeholder="DD / MM / YYYY" class="form-control input-md" required>
+                                                <input id="example1" name="end_date" type="text"
+                                                       placeholder="dd/mm/yyyy"
+                                                       class="form-control input-md" required>
                                             </div>
                                         </div>
                                         <br>
@@ -262,6 +264,20 @@ if(!$isLoggedin){
 <script src="../../public/js/bootstrap.js"></script>
 <script src="../../public/js/jalendar.js"></script>
 <script src="../../public/js/calendar.js"></script>
+<script src="../../public/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+    // When the document is ready
+    $(document).ready(function () {
+
+        $('#example1').datepicker({
+            format: "dd/mm/yyyy"
+        });
+        $('#example2').datepicker({
+            format: "dd/mm/yyyy"
+        });
+
+    });
+</script>
 
 </body>
 </html>

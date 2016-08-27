@@ -87,7 +87,7 @@ $empCount = $query3->rowCount();
 
             <div class="row padding-row  padding-box-inner">
                 <div class="row padding-row" style="margin-top:-30px;">
-                    <div class="col-xs-12 padding-box" style="background-color:#<?php echo $result0[0][3]?>;">
+                    <div class="col-xs-12 padding-box" style="background-color:<?php echo $result0[0][3]?>;">
                         <h4 style="text-align: center; color: #FFFFFF; text-transform: uppercase;"><?php echo $result0[0][1]; ?></h4>
                     </div>
                 </div>

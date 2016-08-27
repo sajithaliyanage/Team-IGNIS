@@ -13,30 +13,24 @@ $empGender = $_POST['emp_gender'];
 $empEmail = $_POST['emp_email'];
 $empPassword = $_POST['emp_password'];
 $empTelephone = $_POST['emp_tele'];
+$groupID = $_POST['group_id'];
 
 try{
     $sql = "UPDATE department SET no_of_emp =no_of_emp+1 WHERE dept_id=:depID";
     $query = $pdo->prepare($sql);
     $query->execute(array('depID'=>$deptId));
 
-    $sql = "INSERT INTO employee (comp_id,name,nic,gender,email,password,tel_no,image,emp_level,job_cat_id,dept_id) VALUES
-            (:compId,:empName,:empNIC,:empGender,:empEmail,:empPassword,:empTel,:empImage,:empLevel,:empJob,:empDept)";
+    $sql = "UPDATE group_detail SET no_of_employees =no_of_employees+1 WHERE dept_id=:depID AND group_id=:gID";
+    $query = $pdo->prepare($sql);
+    $query->execute(array('depID'=>$deptId,'gID'=>$groupID));
+
+    $sql = "INSERT INTO employee (comp_id,name,nic,gender,email,password,tel_no,image,emp_level,job_cat_id,group_id,dept_id) VALUES
+            (:compId,:empName,:empNIC,:empGender,:empEmail,:empPassword,:empTel,:empImage,:empLevel,:empJob,:groupID,:empDept)";
     $query = $pdo->prepare($sql);
     $query->execute(array('compId'=>$empId,'empName'=>$empName,'empNIC'=>$empNIC,'empGender'=>$empGender,'empEmail'=>$empEmail,
-        'empPassword'=>$empPassword,'empTel'=>$empTelephone,'empImage'=>"null",'empLevel'=>$empLevel,'empJob'=>$empCategory,'empDept'=>$deptId));
+        'empPassword'=>$empPassword,'empTel'=>$empTelephone,'empImage'=>"null",'empLevel'=>$empLevel,'empJob'=>$empCategory,'groupID'=>$groupID,'empDept'=>$deptId));
 
-
-    if($empRole=='director'){
-        $sql = "INSERT INTO director (comp_id,dept_id) VALUES (:comp_id,:dept_id)";
-        $query = $pdo->prepare($sql);
-        $query->execute(array('comp_id'=>$empId, 'dept_id'=>$deptId));
-
-    }else if($empRole=='admin'){
-        $sql = "INSERT INTO admin (comp_id,dept_id) VALUES (:comp_id,:dept_id)";
-        $query = $pdo->prepare($sql);
-        $query->execute(array('comp_id'=>$empId, 'dept_id'=>$deptId));
-
-    }else if($empRole=='manager'){
+    if($empRole=='manager'){
         $sql = "INSERT INTO manager (comp_id,dept_id) VALUES (:comp_id,:dept_id)";
         $query = $pdo->prepare($sql);
         $query->execute(array('comp_id'=>$empId, 'dept_id'=>$deptId));
@@ -91,7 +85,7 @@ try{
     $query2 = $pdo->prepare($sql2);
     $query2->execute($expo);
 
-    header("Location:../employee.php?job=done");
+    header("Location:../roster.php?job=done");
 
 }catch(PDOException $e){
     //echo $e;

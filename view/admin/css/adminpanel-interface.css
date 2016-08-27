@@ -185,6 +185,24 @@
     position: relative;
 }
 
+.alert-user2{
+    text-align: center;
+    margin-top:5px;
+    margin-bottom:-80px;
+    color:#FFFFFF;
+    font-weight:500;
+    -webkit-animation: seconds 1.0s forwards;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-delay: 5s;
+    animation: seconds 1.0s forwards;
+    animation-iteration-count: 1;
+    animation-delay: 5s;
+    position: relative;
+    background-color:#00a65a;
+    width:250px;
+    padding:5px 10px;
+}
+
 @-webkit-keyframes seconds {
     0% {
         opacity: 1;

@@ -70,7 +70,7 @@ if(!$isLoggedin && $empRole!="admin"){
 
                                     foreach($result as $rs){
                                         echo " <a href='index_department_employee.php?id=".$rs['dept_id']."' class='list-group-item'>
-                                                <div style='height:25px; width:25px; background-color:#".$rs['dept_color']."; float: left; margin-right:10px; margin-top:5px;'></div>
+                                                <div style='height:25px; width:25px; background-color:".$rs['dept_color']."; float: left; margin-right:10px; margin-top:5px;'></div>
                                                 <h5>".$rs['dept_name']."</h5>
                                                 <h5 style='float: right; margin-top:-24px;'>More Info <i class='fa fa-chevron-circle-right' aria-hidden='true'></i></h5>
                                                </a>";
