@@ -114,7 +114,7 @@ $empCount = $query3->rowCount();
 //                            echo "No one add yet";
 //                        }
                         foreach($result as $rs){
-                            echo "<a href='../site/profile.php?empId=".$rs['comp_id']."'>
+                            echo "<a href='../site/visitProfile.php?empId=".$rs['comp_id']."'>
                                    <div class=\"row\" style=\"margin-top:10px;\">
                                     <div class=\"col-xs-4\">
                                         <center>
@@ -137,7 +137,7 @@ $empCount = $query3->rowCount();
 //                        echo "No one add yet";
 //                    }
                     foreach($result2 as $rs){
-                        echo "<a href='../site/profile.php?empId=".$rs['comp_id']."'>
+                        echo "<a href='../site/visitProfile.php?empId=".$rs['comp_id']."'>
                               <div class=\"row\" style=\"margin-top:10px;\">
                                     <div class=\"col-xs-4\">
                                         <center>
@@ -159,7 +159,7 @@ $empCount = $query3->rowCount();
 //                        echo "No one add yet";
 //                    }
                     foreach($result3 as $rs){
-                        echo "<a href='../site/profile.php?empId=".$rs['comp_id']."'>
+                        echo "<a href='../site/visitProfile.php?empId=".$rs['comp_id']."'>
                                 <div class=\"row\" style=\"margin-top:10px;\">
                                     <div class=\"col-xs-4\">
                                         <center>

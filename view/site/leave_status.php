@@ -91,15 +91,48 @@ $pdo = connect();
                                             echo "<td><center>-</center></td></tr>";
                                         }
 
-                                        foreach($result as $rs){
+                                        foreach($result as $rs) {
                                             echo "<tr>
-                                                    <td style='text-align: center;'>".$rs['start_date']." - ".$rs['end_date']."</td>
-                                                    <td style='text-align: center;'>".$rs['leave_name']."</td>
-                                                    <td style='text-align: center;'>".$rs['number_of_days']." day</td>
-                                                    <td style='text-align: center;'>".$rs['apply_date']."</td>
-                                                    <td style='text-align: center;'><span>"; if($rs['status']=='waiting'){echo 'Waiting for Approve <i class=\"fa fa-question\" aria-hidden=\"true\"></i></span></a>';}else if($rs['status']=='approved'){ echo '<span style="color:#00a65a;">Approved<i class=\'fa fa-check\' aria-hidden=\'true\'></i></span> </span></a>';}else{echo '<span style="color:#d43f3a;">Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></span>';} echo "</td>
-                                                </tr>";
-                                        }
+                                                    <td style='text-align: center;'>" . $rs['start_date'] . " - " . $rs['end_date'] . "</td>
+                                                    <td style='text-align: center;'>" . $rs['leave_name'] . "</td>
+                                                    <td style='text-align: center;'>" . $rs['number_of_days'] . " day</td>
+                                                    <td style='text-align: center;'>" . $rs['apply_date'] . "</td>
+                                                    <td style='text-align: center;'><span>";
+                                                    if ($rs['status'] == 'waiting' | $rs['status'] == 'recommended') {
+                                                        echo "Waiting for Approve <i class='fa fa-question' aria-hidden='true'></i></span></a> <a class=\"btn btn-link btn-xs\" data-toggle=\"modal\" data-target='#cancel-leave" . $rs['apply_leave_id'] . "'><span class=\"label label-danger\" title='Cancel leave'>X</span></a>";
+                                                    } else if ($rs['status'] == 'approved') {
+                                                        echo '<span style="color:#00a65a;">Approved<i class=\'fa fa-check\' aria-hidden=\'true\'></i></span> </span></a>';
+                                                    } else if ($rs['status'] == 'rejected') {
+                                                        echo '<span style="color:#d43f3a;">Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></span>';
+                                                    } else if ($rs['status'] == 'canceled') {
+                                                        echo '<span style="color:#FF8717;">Canceled <i class=\'fa fa-exclamation\' aria-hidden=\'true\'></i></span></span>';
+                                                    }
+                                                    echo "</td>
+                                                        </tr>
+
+                                                          <form action='../../module/cancelLeave.php?app_leave_id=".$rs['apply_leave_id']."' method='POST'>
+                                                            <div class=\"modal fade\" id='cancel-leave".$rs['apply_leave_id']."' >
+                                                                        <div class=\"modal-dialog\">
+
+                                                                            <!-- Modal content-->
+                                                                            <div class=\"modal-content\">
+                                                                                <div class=\"modal-header\">
+                                                                                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>
+                                                                                    <h4 class=\"modal-title\">Cancel Leave</h4>
+                                                                                </div>
+                                                                                <div class=\"modal-body\">
+                                                                                    <p>Are you sure you want to cancel this leave ?</p>
+                                                                                </div>
+                                                                                <div class=\"modal-footer\">
+                                                                                    <button class=\"btn btn-warning\" type='submit' name=\"submit\" value='cancel'>Cancel</button>
+                                                                                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                          </form>";
+                                                }
                                     ?>
 
                                 </tbody>

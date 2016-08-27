@@ -8,6 +8,8 @@ if(!$isLoggedin){
     header('Location:../../index.php');
 }
 
+$visitID = $_GET['empId'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,10 +67,16 @@ if(!$isLoggedin){
                                 Profile</h5>
                             <hr>
                             <div class="col-xs-12">
+                                <?php
+                                    $sql = "SELECT * from employee WHERE comp_id=:empID";
+                                    $query = $pdo->prepare($sql);
+                                    $query->execute(array('empID'=>$visitID));
+                                    $result = $query->fetch();
+                                ?>
 
                                 <div class="nortification-box-status">
                                     <center>
-                                            <img src='../../public/images/default.png' style="margin-bottom:40px; padding-top: 20px" width='60%'  />
+                                            <img src='<?php if($result['image']!='null'){echo '../'.$result['image'];}else{echo "../../public/images/default.png";}?>' style="margin-bottom:40px; padding-top: 20px" width='60%'  />
                                     </center>
 
                                     <center>
@@ -77,7 +85,7 @@ if(!$isLoggedin){
 
                                     <div class="more-info" style="margin-top: 15px;padding-bottom: 20px;">
                                        <center>
-                                        <a href="chat.php" style="color: #204d74"><i class="fa fa-envelope" aria-hidden="true"></i> Leave a message </a>
+                                        <a href="chat.php?id=<?php echo $result['comp_id'];?>" style="color: #204d74"><i class="fa fa-envelope" aria-hidden="true"></i> Leave a message </a>
                                        </center>
                                     </div>
 
@@ -104,9 +112,9 @@ if(!$isLoggedin){
 
                                 <?php
 
-                                $sql = "select * from employee INNER JOIN department ON employee.dept_id=department.dept_id INNER JOIN job_category ON employee.job_cat_id=job_category.job_cat_id WHERE comp_id=:empID";
+                                $sql = "select * from employee INNER JOIN department ON employee.dept_id=department.dept_id INNER JOIN job_category ON employee.job_cat_id=job_category.job_cat_id JOIN job_level ON employee.level_id = job_level.level_id WHERE comp_id=:empID";
                                 $query = $pdo->prepare($sql);
-                                $query->execute(array('empID'=>$empID));
+                                $query->execute(array('empID'=>$visitID));
                                 $result = $query->fetchAll();
 
                                 foreach($result as $rs) {
@@ -140,7 +148,7 @@ if(!$isLoggedin){
                                         <label class=\"col-xs-5 control-label form-lable\">";
                                     echo "Job Level:";
                                     echo" </label>
-                                        <lable>" . $rs['emp_level'] . "</lable>
+                                        <lable>" . $rs['level_name'] . "</lable>
                                     </div>";
                                     echo "<div class=\"form-group\">
                                         <label class=\"col-xs-5 control-label form-lable\">";

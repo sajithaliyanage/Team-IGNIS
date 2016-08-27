@@ -13,6 +13,9 @@ if(isset($_GET['appId'])){
     $applyLeaveID = $_GET['appId'];
 }
 
+$startDate ='';
+$endDate = '';
+
 $sql = "select dept_id from employee where comp_id=:log ";
 $query = $pdo->prepare($sql);
 $query->execute(array('log'=>$empID));
@@ -78,19 +81,23 @@ $departmentId = $result['dept_id'];
                             <?php
                                 $eName='';
                                 if($applyLeaveID!=null){
-                                    $sql = "SELECT * FROM apply_leave JOIN employee ON employee.comp_id = apply_leave.comp_id WHERE
+                                    $sql = "SELECT * FROM apply_leave JOIN employee ON employee.comp_id = apply_leave.comp_id JOIN leave_type ON leave_type.leave_id=apply_leave.leave_id JOIN job_category ON job_category.job_cat_id=employee.job_cat_id WHERE
                                             apply_leave.apply_leave_id=:appLeaveID and employee.dept_id=:depId ";
                                     $query = $pdo->prepare($sql);
                                     $query->execute(array('appLeaveID'=>$applyLeaveID,'depId'=>$departmentId));
                                     $result = $query->fetchAll();
 
                                     foreach($result as $rs){
+                                        $startDate = $rs['start_date'];
+                                        $endDate = $rs['end_date'];
                                         echo "<div class=\"list-group\">
-                                                <li class=\"list-group-item\" style=\"background-color:#d6e9c6\"><h5 >Leave applied by : <strong> ".$rs['name']."</strong></h5></li>
+                                                <li class=\"list-group-item\" style=\"background-color:#d6e9c6\"><h5 >Leave applied by : <strong><a href='visitProfile.php?empId=".$rs['comp_id']."'> ".$rs['name']."</a></strong> - ( ".$rs['job_cat_name']." )</h5></li>
                                             </div>
                                                 <form action='../../module/confirmLeave.php?empId=".$rs['comp_id']."&app_leave_id=".$applyLeaveID."' method='POST'>
 
                                                 <div class=\"list-group\">
+                                                    <li class=\"list-group-item\" style='";if($empRole !='manager' && $empRole !='admin'){echo 'display:none;';} echo"'>Recommand By :  <strong>".$rs['recommandBy']."</strong></li>
+                                                    <li class=\"list-group-item\">Leave Type :  <strong>".$rs['leave_name']."</strong></li>
                                                     <li class=\"list-group-item\">Leave Priority :  <strong>".$rs['leave_priority']."</strong></li>
                                                     <li class=\"list-group-item\">Duration :  <strong> ".$rs['start_date']." to ".$rs['end_date']."</strong></li>
                                                     <li class=\"list-group-item\">Number of Days:  <strong>".$rs['number_of_days']."</strong></li>
@@ -98,7 +105,7 @@ $departmentId = $result['dept_id'];
                                                     <li class=\"list-group-item\">special note :<input type=\"text\" name='note' placeholder=' If reject..'>
                                                         <a class=\"btn btn-success btn-sm\" data-toggle=\"modal\" data-target='#accept-leave".$rs['apply_leave_id']."'>"; if($empRole=='manager' || $empRole == 'admin' ){echo "Approve";}else{ echo "Recommend";} echo"</a>
                                                         <a class=\"btn btn-danger btn-sm\" data-toggle=\"modal\" data-target='#reject-leave".$rs['apply_leave_id']."' >Reject</a>
-                                                        <a class=\"btn btn-link btn-xs\" data-toggle=\"modal\" data-target='#cancel-leave".$rs['apply_leave_id']."'>Cancel Leave</a></li>
+                                                    </li>
                                                 </div>
 
 
@@ -144,27 +151,6 @@ $departmentId = $result['dept_id'];
                                                         </div>
                                                     </div>
 
-                                                    <div class=\"modal fade\" id='cancel-leave".$rs['apply_leave_id']."' >
-                                                        <div class=\"modal-dialog\">
-
-                                                            <!-- Modal content-->
-                                                            <div class=\"modal-content\">
-                                                                <div class=\"modal-header\">
-                                                                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>
-                                                                    <h4 class=\"modal-title\">Cancel Leave</h4>
-                                                                </div>
-                                                                <div class=\"modal-body\">
-                                                                    <p>Are you sure you want to cancel this leave ?</p>
-                                                                </div>
-                                                                <div class=\"modal-footer\">
-                                                                    <button class=\"btn btn-warning\" type='submit' name=\"submit\" value='cancel'>Cancel</button>
-                                                                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-
                                         </form>";
                                     }
                                 }else{
@@ -173,12 +159,13 @@ $departmentId = $result['dept_id'];
                                             </div>
 
                                             <div class=\"list-group\">
+                                                <li class=\"list-group-item\">Leave Type : </li>
                                                 <li class=\"list-group-item\">Leave Priority : </li>
                                                 <li class=\"list-group-item\">Duration :</li>
                                                 <li class=\"list-group-item\">Number of Days: </li>
                                                 <li class=\"list-group-item\">Reason :</li>
                                                 <li class=\"list-group-item\">special note :<input type=\"text\" name=\"\"  placeholder=' If reject..' >
-                                                    <button class=\"btn btn-success btn-sm\">";if($empRole=='manager' || $empRole == 'admin' ){echo "Approve";}else{ echo "Recommend";} echo"</button> <button class=\"btn btn-danger btn-sm\">Reject</button><button type=\"button\" class=\"btn btn-link btn-xs\">cancel Leave</button></li>
+                                                    <button class=\"btn btn-success btn-sm\">";if($empRole=='manager' || $empRole == 'admin' ){echo "Approve";}else{ echo "Recommend";} echo"</button> <button class=\"btn btn-danger btn-sm\">Reject</button></li>
                                             </div>";
                                 }
                             ?>
@@ -190,24 +177,33 @@ $departmentId = $result['dept_id'];
 
                     <div class="row margin-top">
                         <div class="col-xs-12 nortification-box-top">
-                            <h5 class="nortification-box-heading"><i class="fa fa-list icon-margin-right"
-                                                                     aria-hidden="true"></i>
-                                Past Leave Notifications</h5>
+                            <h5 class="nortification-box-heading"><i class="fa fa-list icon-margin-right"aria-hidden="true"></i>
+                               Approved Leaves In Same Time</h5>
                             <hr>
                             <div class="list-group">
-                                <a href="#" class="list-group-item">20/05/2016<span style="float:right;"> Approved <i
-                                            class="fa fa-check" aria-hidden="true"></i></span></a>
-                                <a href="#" class="list-group-item">18/05/2016<span style="float:right;"> Approved <i
-                                            class="fa fa-check" aria-hidden="true"></i></span></a>
-                                <a href="#" class="list-group-item">16/03/2016<span style="float:right;"> Approved <i
-                                            class="fa fa-check" aria-hidden="true"></i></span></a>
-                                <a href="#" class="list-group-item">02/01/2016<span style="float:right;"> Approved <i
-                                            class="fa fa-check" aria-hidden="true"></i></span></a>
-                                <a href="#" class="list-group-item">07/11/2015<span style="float:right;"> Rejected <i
-                                            class="fa fa-close" aria-hidden="true"></i></span></a>
-                                <a href="#" class="list-group-item">27/05/2015<span style="float:right;"> Approved <i
-                                            class="fa fa-check" aria-hidden="true"></i></span></a>
+                                <?php
+                                    if($applyLeaveID!=null){
+                                        $sql = "select * from apply_leave JOIN employee ON apply_leave.comp_id=employee.comp_id
+                                            JOIN job_category ON job_category.job_cat_id = employee.job_cat_id
+                                            WHERE apply_leave.status=:log AND employee.dept_id=:deptID AND
+                                            (STR_TO_DATE(apply_leave.start_date, '%d/%m/%Y') BETWEEN STR_TO_DATE('$startDate','%d/%m/%Y') AND STR_TO_DATE('$endDate', '%d/%m/%Y'))";
+                                        $query = $pdo->prepare($sql);
+                                        $query->execute(array('log'=>"approved",'deptID'=>$departmentId));
+                                        $result = $query->fetchAll();
+                                        $rowCount = $query->rowCount();
 
+                                        if($rowCount==0){
+                                            echo "There is no any leave approved";
+                                        }
+
+                                        foreach($result as $rs){
+                                            echo "<a  class='list-group-item'>".$rs['name']."<span style='float:right;'>".$rs['job_cat_name']."</span></a>";
+                                        }
+                                    }else{
+                                        echo "Select waiting leave request to get result";
+                                    }
+
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -234,7 +230,7 @@ $departmentId = $result['dept_id'];
                                     }
 
                                     foreach($result as $rs){
-                                        echo "<a href='?appId=".$rs['apply_leave_id']."' class=\"list-group-item\">".$rs['name']."<span style=\"float:right;\">Waiting for Approve <i class=\"fa fa-question\" aria-hidden=\"true\"></i></span></a>";
+                                        echo "<a href='?appId=".$rs['apply_leave_id']."' class=\"list-group-item\" style='";if($rs['leave_priority']=='high'){echo 'border-left:10px solid red;';} echo"'>".$rs['name']."<span style=\"float:right;\">Waiting for Approve <i class=\"fa fa-question\" aria-hidden=\"true\"></i></span></a>";
                                     }
 
                                 }else if($empRole == 'executive'){
@@ -249,7 +245,7 @@ $departmentId = $result['dept_id'];
                                     }
 
                                     foreach($result as $rs){
-                                        echo "<a href='?appId=".$rs['apply_leave_id']."' class=\"list-group-item\">".$rs['name']."<span style=\"float:right;\">Waiting for Approve <i class=\"fa fa-question\" aria-hidden=\"true\"></i></span></a>";
+                                        echo "<a href='?appId=".$rs['apply_leave_id']."' class=\"list-group-item\" style='";if($rs['leave_priority']=='high'){echo 'border-left:10px solid red;';} echo"'>".$rs['name']."<span style=\"float:right;\">Waiting for Approve <i class=\"fa fa-question\" aria-hidden=\"true\"></i></span></a>";
                                     }
                                 }
 

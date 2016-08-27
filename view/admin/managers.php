@@ -77,7 +77,7 @@ $managerCount = $query->rowCount();
                             echo "No one add yet";
                         }
                         foreach($result as $rs){
-                            echo "<a href='../site/profile.php?empId=".$rs['comp_id']."'>
+                            echo "<a href='../site/visitProfile.php?empId=".$rs['comp_id']."'>
                                    <div class=\"row\" style='margin-top:10px; border-left:20px solid ".$rs['dept_color']."'>
                                     <div class=\"col-xs-3\">
                                         <center>

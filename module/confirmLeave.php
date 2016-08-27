@@ -70,30 +70,13 @@ try{
 
             header("Location:../view/site/confirm_leave.php?job=done");
 
-        }else if($action == 'cancel'){
-
-            $sql = "UPDATE apply_leave SET status=:log where comp_id=:employeeID AND apply_leave_id=:apply_leave_id";
-            $query = $pdo->prepare($sql);
-            $query->execute(array('log'=>"canceled",'employeeID'=>$appliedEmployeeId,'apply_leave_id'=>$appliedLeaveId));
-
-            $var1 = +94;
-            $var2 = intval(substr($result['tel_no'],1));
-            $mobileNumber = sprintf( "%d%d", $var1, $var2 );
-
-            //send SMS for reject
-            sendCanceledSMS($textlocal,$mobileNumber,$result['name'],$result['apply_date']);
-            //send email
-            sendCanceledEmail($result['email'],$result['name'],$result['apply_date']);
-
-            header("Location:../view/site/confirm_leave.php?job=done");
-
         }
     }else if($empRole=='executive'){
         if($action == 'done'){
 
-            $sql = "UPDATE apply_leave SET status=:log where comp_id=:employeeID AND apply_leave_id=:apply_leave_id";
+            $sql = "UPDATE apply_leave SET status=:log , recommandBy=:myID where comp_id=:employeeID AND apply_leave_id=:apply_leave_id";
             $query = $pdo->prepare($sql);
-            $query->execute(array('log'=>"recommended",'employeeID'=>$appliedEmployeeId,'apply_leave_id'=>$appliedLeaveId));
+            $query->execute(array('log'=>"recommended",'myID'=>$empName,'employeeID'=>$appliedEmployeeId,'apply_leave_id'=>$appliedLeaveId));
 
             header("Location:../view/site/confirm_leave.php?job=done");
 
@@ -111,24 +94,6 @@ try{
             //sendRejetSMS($textlocal,$mobileNumber,$result['name'],$result['apply_date']);
             //send email
             sendRejectEmail($result['email'],$result['name'],$result['apply_date']);
-
-            header("Location:../view/site/confirm_leave.php?job=done");
-
-        }else if($action == 'cancel'){
-
-
-            $sql = "UPDATE apply_leave SET status=:log where comp_id=:employeeID AND apply_leave_id=:apply_leave_id";
-            $query = $pdo->prepare($sql);
-            $query->execute(array('log'=>"canceled",'employeeID'=>$appliedEmployeeId,'apply_leave_id'=>$appliedLeaveId));
-
-            $var1 = +94;
-            $var2 = intval(substr($result['tel_no'],1));
-            $mobileNumber = sprintf( "%d%d", $var1, $var2 );
-
-            //send SMS for reject
-            sendCanceledSMS($textlocal,$mobileNumber,$result['name'],$result['apply_date']);
-            //send email
-            sendCanceledEmail($result['email'],$result['name'],$result['apply_date']);
 
             header("Location:../view/site/confirm_leave.php?job=done");
 
