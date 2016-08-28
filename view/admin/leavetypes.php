@@ -74,7 +74,7 @@ if(!$isLoggedin && $empRole!="admin"){
                                 <?php
                                 foreach($result as $rs){
                                     echo " <a href='#' class='list-group-item'>
-                                                <h5>".$rs['leave_name']."</h5>
+                                                <h5>".ucwords($rs['leave_name'])."</h5>
                                                 <span class=\"label label-danger\" style=\"float: right; margin-top:-24px;\">Delete <i class=\"fa fa-close\" aria-hidden=\"true\"></i></span>
                                                </a>";
                                 }
@@ -97,7 +97,7 @@ if(!$isLoggedin && $empRole!="admin"){
                                         <div class="form-group">
                                             <label class="col-xs-5 control-label form-lable">Leave Type :</label>
                                             <div class="col-xs-7">
-                                                <input id="service_name" name="leave_type" type="text" placeholder=""
+                                                <input id="service_name" name="leave_type" type="text" placeholder="Annual Leave"
                                                        class="form-control input-md" required>
                                             </div>
                                         </div>
@@ -135,7 +135,7 @@ if(!$isLoggedin && $empRole!="admin"){
                                 $result = $query->fetchAll();
 
                                 foreach($result as $rs){
-                                    echo "<a href='#' class='list-group-item'>".$rs['leave_name']."<span style='float:right;'>"; if($rs['currentStatus']=='waiting'){echo 'Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>';}else if($rs['currentStatus']=='approved'){ echo 'Approved <i class=\'fa fa-check\' aria-hidden=\'true\'></i></span></a>';}else{echo 'Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></a>';};
+                                    echo "<a href='#' class='list-group-item'>".ucwords($rs['leave_name'])."<span style='float:right;'>"; if($rs['currentStatus']=='waiting'){echo 'Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>';}else if($rs['currentStatus']=='approved'){ echo 'Approved <i class=\'fa fa-check\' aria-hidden=\'true\'></i></span></a>';}else{echo 'Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></a>';};
                                 }
                                 ?>
                             </div>

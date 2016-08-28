@@ -94,7 +94,7 @@ $pdo = connect();
                                         foreach($result as $rs) {
                                             echo "<tr>
                                                     <td style='text-align: center;'>" . $rs['start_date'] . " - " . $rs['end_date'] . "</td>
-                                                    <td style='text-align: center;'>" . $rs['leave_name'] . "</td>
+                                                    <td style='text-align: center;'>" . ucwords($rs['leave_name']) . "</td>
                                                     <td style='text-align: center;'>" . $rs['number_of_days'] . " day</td>
                                                     <td style='text-align: center;'>" . $rs['apply_date'] . "</td>
                                                     <td style='text-align: center;'><span>";

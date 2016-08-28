@@ -59,7 +59,7 @@ $departmentId = $result['dept_id'];
         </div>
 
         <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2" style="position: relative;">
-
+<!--            web navigator-->
             <div class="row padding-row">
                 <div class="row">
                     <div class="col-lg-12">
@@ -74,7 +74,7 @@ $departmentId = $result['dept_id'];
                     </div>
                 </div>
             </div>
-
+<!--            approve or reject medicals-->
             <div class="row padding-row">
                 <div class="col-sm-7 col-xs-12 padding-box">
                     <div class="row" style="<?php if($empRole != 'manager' && $empRole != 'admin' ){ echo 'display:none;';}?> margin-bottom:20px;">
@@ -88,9 +88,9 @@ $departmentId = $result['dept_id'];
                             $eName='';
                             if($applyMedicalID!=null){
                                 $sql = "SELECT * FROM medical_report JOIN apply_leave ON medical_report.apply_leave_id = apply_leave.apply_leave_id JOIN employee ON medical_report.comp_id = employee.comp_id WHERE
-                                            medical_report.med_id=:appLeaveID and employee.dept_id=:depId ";
+                                            medical_report.med_id=:appLeaveID";
                                 $query = $pdo->prepare($sql);
-                                $query->execute(array('appLeaveID'=>$applyMedicalID,'depId'=>$departmentId));
+                                $query->execute(array('appLeaveID'=>$applyMedicalID));
                                 $result = $query->fetchAll();
 
                                 foreach($result as $rs){
@@ -172,11 +172,14 @@ $departmentId = $result['dept_id'];
 
                         </div>
                     </div>
-
+<!--                    medical upload center-->
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-upload icon-margin-right" aria-hidden="true"></i>
                                 Upload Medical Center</h5>
+                            <div class="alert-user" style="<?php if(!isset($_GET['success'])){echo 'display:none;';}?>">Medical report send successfully!</div>
+                            <div class="alert-user" style="<?php if(!isset($_GET['fail'])){echo 'display:none;';}?> color:#c9302c;">Invalid Action!</div>
+                            <div class="alert-user" style="<?php if(!isset($_GET['uploadError'])){echo 'display:none;';}?> color:#c9302c;">File invalid format or too large!!</div>
                             <hr>
                             <div class="row">
                                 <div class="col-xs-10 col-xs-offset-1">
@@ -186,10 +189,17 @@ $departmentId = $result['dept_id'];
 
                                             <div class="col-xs-8">
                                                 <select name="apply_leave_id" class="form-control">
+
                                                     <?php
-                                                        $sql = "SELECT * FROM apply_leave WHERE comp_id=:empId AND status=:log AND medical_status=:state";
+                                                        $sqls = "SELECT leave_id FROM leave_type WHERE  leave_name=:state";
+                                                        $querys = $pdo->prepare($sqls);
+                                                        $querys->execute(array('state'=>"medical leave"));
+                                                        $results = $querys->fetch();
+                                                        $medicalID = $results['leave_id'];
+
+                                                        $sql = "SELECT * FROM apply_leave WHERE comp_id=:empId AND status=:log AND medical_status=:state AND leave_id=:lID";
                                                         $query = $pdo->prepare($sql);
-                                                        $query->execute(array('empId'=>$empID,'log'=>"approved",'state'=>"no"));
+                                                        $query->execute(array('empId'=>$empID,'log'=>"approved",'state'=>"no",'lID'=>$medicalID));
                                                         $result = $query->fetchAll();
                                                         $rowCount = $query->rowCount();
 
@@ -236,7 +246,7 @@ $departmentId = $result['dept_id'];
                         </div>
                     </div>
                 </div>
-
+<!--                waiting list for approval-->
                 <div class="col-sm-5 col-xs-12 padding-box">
                     <div class="row " style="<?php if($empRole != 'manager' && $empRole != 'admin' ){ echo 'display:none;';}?> margin-bottom:20px;">
                         <div class="col-xs-12 nortification-box-top">
@@ -246,14 +256,26 @@ $departmentId = $result['dept_id'];
 
                             <div class="list-group">
                                 <?php
+
+                                    $managersql = "select * from medical_report JOIN employee ON employee.comp_id = medical_report.comp_id
+                                                        JOIN manager ON manager.comp_id = employee.comp_id
+                                                      where medical_report.status =:state and medical_report.comp_id !=:myId";
+                                    $managerquery = $pdo->prepare($managersql);
+                                    $managerquery->execute(array('state'=>"waiting",'myId'=>$empID));
+                                    $managerrowCount = $managerquery->rowCount();
+                                    $managerresult = $managerquery->fetchAll();
+
                                     $sql = "select * from medical_report JOIN employee ON employee.comp_id = medical_report.comp_id where employee.dept_id=:log and medical_report.status =:state and medical_report.comp_id !=:myId";
                                     $query = $pdo->prepare($sql);
                                     $query->execute(array('log'=>$departmentId,'state'=>"waiting",'myId'=>$empID));
                                     $rowCount = $query->rowCount();
                                     $result = $query->fetchAll();
 
-                                    if($rowCount==0){
+                                    if($rowCount==0 && $managerrowCount==0){
                                         echo "There is no any pending request";
+                                    }
+                                    foreach($managerresult as $rs){
+                                        echo "<a href='?appId=".$rs['med_id']."' class=\"list-group-item\" style='border-left:10px solid blue;'>".$rs['name']."<span style=\"float:right;\">Waiting for Approve <i class=\"fa fa-question\" aria-hidden=\"true\"></i></span></a>";
                                     }
 
                                     foreach($result as $rs){
@@ -266,7 +288,7 @@ $departmentId = $result['dept_id'];
 
                         </div>
                     </div>
-
+<!--                    my uploads-->
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-cogs icon-margin-right" aria-hidden="true"></i>

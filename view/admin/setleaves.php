@@ -108,7 +108,7 @@ if(isset($_GET['id'])){
                                                     </thead>
                                                     <tbody>
                                                     <tr>
-                                                        <td>".$rs['leave_name']."</td>
+                                                        <td>".ucwords($rs['leave_name'])."</td>
                                                         <td>".$rs['leave_count']."</td>
                                                     </tr>
 
@@ -204,7 +204,7 @@ if(isset($_GET['id'])){
 
                                         foreach($result as $rs){
                                                 echo "<div class='form-group'>
-                                                        <label class='col-xs-5 control-label form-lable'>".$rs['leave_name']."</label>
+                                                        <label class='col-xs-5 control-label form-lable'>".ucwords($rs['leave_name'])."</label>
                                                         <div class='col-xs-7'>
                                                             <input id='service_name' name='leave_type[]' type='text' placeholder=''
                                                        class='form-control input-md' required>

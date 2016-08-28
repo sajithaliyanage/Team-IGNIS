@@ -82,9 +82,9 @@ $departmentId = $result['dept_id'];
                                 $eName='';
                                 if($applyLeaveID!=null){
                                     $sql = "SELECT * FROM apply_leave JOIN employee ON employee.comp_id = apply_leave.comp_id JOIN leave_type ON leave_type.leave_id=apply_leave.leave_id JOIN job_category ON job_category.job_cat_id=employee.job_cat_id WHERE
-                                            apply_leave.apply_leave_id=:appLeaveID and employee.dept_id=:depId ";
+                                            apply_leave.apply_leave_id=:appLeaveID";
                                     $query = $pdo->prepare($sql);
-                                    $query->execute(array('appLeaveID'=>$applyLeaveID,'depId'=>$departmentId));
+                                    $query->execute(array('appLeaveID'=>$applyLeaveID));
                                     $result = $query->fetchAll();
 
                                     foreach($result as $rs){
@@ -97,7 +97,7 @@ $departmentId = $result['dept_id'];
 
                                                 <div class=\"list-group\">
                                                     <li class=\"list-group-item\" style='";if($empRole !='manager' && $empRole !='admin'){echo 'display:none;';} echo"'>Recommand By :  <strong>".$rs['recommandBy']."</strong></li>
-                                                    <li class=\"list-group-item\">Leave Type :  <strong>".$rs['leave_name']."</strong></li>
+                                                    <li class=\"list-group-item\">Leave Type :  <strong>".ucwords($rs['leave_name'])."</strong></li>
                                                     <li class=\"list-group-item\">Leave Priority :  <strong>".$rs['leave_priority']."</strong></li>
                                                     <li class=\"list-group-item\">Duration :  <strong> ".$rs['start_date']." to ".$rs['end_date']."</strong></li>
                                                     <li class=\"list-group-item\">Number of Days:  <strong>".$rs['number_of_days']."</strong></li>
@@ -116,13 +116,13 @@ $departmentId = $result['dept_id'];
                                                             <div class=\"modal-content\">
                                                                 <div class=\"modal-header\">
                                                                     <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>
-                                                                    <h4 class=\"modal-title\">"; if($empRole=='manager'){echo "Approve";}else{ echo "Recommend";} echo" Leave</h4>
+                                                                    <h4 class=\"modal-title\">"; if($empRole=='manager' || $empRole=='admin'){echo "Approve";}else{ echo "Recommend";} echo" Leave</h4>
                                                                 </div>
                                                                 <div class=\"modal-body\">
-                                                                    <p>Are you sure you want to "; if($empRole=='manager'){echo "approve";}else{ echo "recommend";} echo" this leave ?</p>
+                                                                    <p>Are you sure you want to "; if($empRole=='manager' || $empRole=='admin'){echo "approve";}else{ echo "recommend";} echo" this leave ?</p>
                                                                 </div>
                                                                 <div class=\"modal-footer\">
-                                                                    <button class=\"btn btn-success\" type='submit' name=\"submit\" value='done'>"; if($empRole=='manager'){echo "Approve";}else{ echo "Recommend";} echo"</button>
+                                                                    <button class=\"btn btn-success\" type='submit' name=\"submit\" value='done'>"; if($empRole=='manager' || $empRole=='admin' ){echo "Approve";}else{ echo "Recommend";} echo"</button>
                                                                     <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>
                                                                 </div>
                                                             </div>
@@ -219,14 +219,27 @@ $departmentId = $result['dept_id'];
                             <div class="list-group">
                                 <?php
                                 if($empRole == 'manager'|| $empRole == 'admin' ){
-                                    $sql = "select * from apply_leave JOIN employee ON employee.comp_id = apply_leave.comp_id where employee.dept_id=:log and apply_leave.status =:state and apply_leave.comp_id !=:myId";
+
+                                    $managersql = "select * from apply_leave JOIN employee ON employee.comp_id = apply_leave.comp_id
+                                                    JOIN manager ON manager.comp_id = employee.comp_id
+                                                  where apply_leave.status =:state and apply_leave.comp_id !=:myId";
+                                    $managerquery = $pdo->prepare($managersql);
+                                    $managerquery->execute(array('state'=>"recommended",'myId'=>$empID));
+                                    $managerrowCount = $managerquery->rowCount();
+                                    $managerresult = $managerquery->fetchAll();
+
+                                    $sql = "select * from apply_leave JOIN employee ON employee.comp_id = apply_leave.comp_id
+                                            where employee.dept_id=:log and apply_leave.status =:state and apply_leave.comp_id !=:myId";
                                     $query = $pdo->prepare($sql);
                                     $query->execute(array('log'=>$departmentId,'state'=>"recommended",'myId'=>$empID));
                                     $rowCount = $query->rowCount();
                                     $result = $query->fetchAll();
 
-                                    if($rowCount==0){
+                                    if($rowCount==0 && $managerrowCount==0){
                                         echo "There is no any pending request";
+                                    }
+                                    foreach($managerresult as $rs){
+                                        echo "<a href='?appId=".$rs['apply_leave_id']."' class=\"list-group-item\" style='border-left:10px solid blue;'>".$rs['name']."<span style=\"float:right;\">Waiting for Approve <i class=\"fa fa-question\" aria-hidden=\"true\"></i></span></a>";
                                     }
 
                                     foreach($result as $rs){

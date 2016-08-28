@@ -2,7 +2,7 @@
 include('../../../config/connect.php');
 $pdo = connect();
 
-$leaveType = $_POST['leave_type'];
+$leaveType = strtolower($_POST['leave_type']);
 $leavePeriod = $_POST['leave_period'];
 
 try{

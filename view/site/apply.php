@@ -101,7 +101,7 @@ if(!$isLoggedin){
                                             $val = "0".$rs['leave_count'];
                                         }
                                         echo "<li class='list-group-item'>
-                                                ".$rs['leave_name']."<span class='badge' style='background-color:#2c3b42; font-size:15px;'>".$val." / <span style='font-size:11px;'>".$resultS2[$count]['leave_count']."</span><span style='font-size:9px;'> remaining</span> </span>
+                                                ".ucwords($rs['leave_name'])."<span class='badge' style='background-color:#2c3b42; font-size:15px;'>".$val."<span style='font-size:9px;'> remaining</span> / <span style='font-size:13px;'>";if($resultS2[$count]['leave_count']<10){echo '0'.$resultS2[$count]['leave_count'];}else{ echo $resultS2[$count]['leave_count'];} echo"</span><span style='font-size:9px;'></span> </span>
                                                 </li>";
                                         $count +=1;
                                     }
@@ -173,7 +173,7 @@ if(!$isLoggedin){
                                                         $result = $query->fetchAll();
 
                                                         foreach($result as $rs){
-                                                            echo "<option value='".$rs['leave_id']."'>".$rs['leave_name']."</option>";
+                                                            echo "<option value='".$rs['leave_id']."'>".ucwords($rs['leave_name'])."</option>";
                                                         }
                                                     ?>
 
@@ -270,7 +270,7 @@ if(!$isLoggedin){
                                 }
 
                                 foreach($result as $rs){
-                                    echo "<a  class='list-group-item'>".$rs['leave_name']." - ".$rs['apply_date']."<span style='float:right;'>"; if($rs['status']=='waiting'){echo 'Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>';}else if($rs['status']=='approved'){ echo 'Approved <i class=\'fa fa-check\' aria-hidden=\'true\'></i></span></a>';}else{echo 'Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></a>';};
+                                    echo "<a  class='list-group-item'>".ucwords($rs['leave_name'])." - ".$rs['apply_date']."<span style='float:right;'>"; if($rs['status']=='waiting'){echo 'Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>';}else if($rs['status']=='approved'){ echo 'Approved <i class=\'fa fa-check\' aria-hidden=\'true\'></i></span></a>';}else{echo 'Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></a>';};
                                 }
                                 ?>
                             </div>
