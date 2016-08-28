@@ -49,6 +49,10 @@ include('../../controller/siteController.php');
 
 				<div class="row padding-row">
                     <div class="col-sm-6 col-xs-12">
+
+
+                    <div class="mySlides">
+
                         <div class="col-xs-12 nortification-box-top">
                             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height:400px;">
 
@@ -63,11 +67,34 @@ include('../../controller/siteController.php');
                                                 <div class="form-group">
                                                     <label class="col-xs-4 control-label form-lable">Starting Date:</label>
 
-                                                    <div class="col-xs-8">
-                                                        <input id="example2" name="start_date" type="text"
-                                                               placeholder="dd/mm/yyyy"
-                                                               class="form-control input-md" required>
-                                                    </div>
+                                                    <table class='table-responsive'>
+                                                        <table class='table table-bordered table-striped '>
+                                                            <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Group Name</th>
+                                                                <th>Time Slot</th>
+                                                                <th>Number of Employees</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td>Shift 1</td>
+                                                                <td>Group 1</td>
+                                                                <td>7.00 - 12.00</td>
+                                                                <td>0</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>Shift 1</td>
+                                                                <td>Group 1</td>
+                                                                <td>7.00 - 12.00</td>
+                                                                <td>0</td>
+                                                            </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
@@ -96,13 +123,11 @@ include('../../controller/siteController.php');
                             </div>
                         </div>
 
-
-
-
                     </div>
+				</div>
 
-                    <div class="col-sm-6 col-xs-12">
-                        <div class="col-xs-12 nortification-box-top">
+				<div class="col-sm-6 col-xs-12">		
+					<div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-tag icon-margin-right" aria-hidden="true"></i>
                                 Shift Application</h5>
                             <hr>
