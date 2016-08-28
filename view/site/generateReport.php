@@ -1,6 +1,12 @@
 <?php
 $var = "reports";
 include('../../controller/siteController.php');
+include('../../config/connect.php');
+$pdo = connect();
+
+if(!$isLoggedin){
+    header('Location:../../index.php');
+}
 ?>
 
 <!DOCTYPE html>

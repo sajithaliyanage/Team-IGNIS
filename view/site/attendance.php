@@ -1,6 +1,12 @@
 <?php
 $var = "attendance";
 include('../../controller/siteController.php');
+include('../../config/connect.php');
+$pdo = connect();
+
+if(!$isLoggedin){
+    header('Location:../../index.php');
+}
 ?>
  <!DOCTYPE html>
 <html lang="en">

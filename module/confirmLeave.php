@@ -48,9 +48,9 @@ try{
             $mobileNumber = sprintf( "%d%d", $var1, $var2 );
 
             //send SMS for approved
-            sendApprovedSMS($textlocal,$mobileNumber,$result['name'],$result['number_of_days'],$result['start_date'],$result['end_date']);
+            //sendApprovedSMS($textlocal,$mobileNumber,$result['name'],$result['number_of_days'],$result['start_date'],$result['end_date']);
             //send email
-            sendApprovedEmail($result['email'],$result['name'],$result['number_of_days'],$result['start_date'],$result['end_date']);
+            //sendApprovedEmail($result['email'],$result['name'],$result['number_of_days'],$result['start_date'],$result['end_date']);
 
             header("Location:../view/site/confirm_leave.php?job=done");
 
@@ -93,7 +93,7 @@ try{
             //send SMS for reject
             //sendRejetSMS($textlocal,$mobileNumber,$result['name'],$result['apply_date']);
             //send email
-            sendRejectEmail($result['email'],$result['name'],$result['apply_date']);
+            //sendRejectEmail($result['email'],$result['name'],$result['apply_date']);
 
             header("Location:../view/site/confirm_leave.php?job=done");
 

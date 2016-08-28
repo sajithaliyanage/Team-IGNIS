@@ -1,3 +1,10 @@
+<?php
+    $newsql = "SELECT group_id from employee where comp_id=:empID";
+    $newquery = $pdo->prepare($newsql);
+    $newquery->execute(array('empID'=>$empID));
+    $newresult = $newquery->fetch();
+    $groupID = $newresult['group_id'];
+?>
 
 <div class="list-group" style="margin-top:-10px;">
     <center>
@@ -30,7 +37,7 @@
 
     <a href="" class="list-group-item left-menu left-menu<?php if($var=="calendar"){echo"-active";}?>"><i class="fa fa-calendar icon-bar" aria-hidden="true"></i><?php if($empRole=="director"){echo "Company Calendar";}else{ echo "My Calendar";}?><span class="<?php if($var=="calendar"){echo"selected";}?>"></span></a>
 
-    <a href="../site/roster.php" class="list-group-item left-menu left-menu<?php if($var=="roster"){echo"-active";}?>"><i class="fa fa-shirtsinbulk icon-bar" aria-hidden="true"></i><?php if($empRole=="director"){echo "Company Roster";}else{ echo "Roster System";}?><span class="<?php if($var=="roster"){echo"selected";}?>"></span></a>
+    <a href="../site/roster.php" style="<?php if($groupID==0){echo'display:none;';}?>" class="list-group-item left-menu left-menu<?php if($var=="roster"){echo"-active";}?>"><i class="fa fa-shirtsinbulk icon-bar" aria-hidden="true"></i><?php if($empRole=="director"){echo "Company Roster";}else{ echo "Roster System";}?><span class="<?php if($var=="roster"){echo"selected";}?>"></span></a>
 
     <a href="../site/chat.php" class="list-group-item left-menu left-menu<?php if($var=="chat"){echo"-active";}?>"><i class="fa fa-envelope icon-bar" aria-hidden="true"></i>Chat Box<span class="<?php if($var=="chat"){echo"selected";}?>"></span></a>
 

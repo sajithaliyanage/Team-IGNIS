@@ -154,6 +154,7 @@ if(!$isLoggedin){
                                 Leave Application</h5>
 
                             <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">Leave application send successfully!</div>
+                            <div class="alert-user" style="<?php if(!isset($_GET['count'])){echo 'display:none;';}?> color:#d43f3a">Leave count is not sufficient!</div>
 
                             <hr>
                             <form role="form" data-toggle="validator" action="../../module/applyLeave.php" method="post">

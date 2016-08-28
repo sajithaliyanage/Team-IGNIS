@@ -1,6 +1,23 @@
 <?php
 $var = "roster";
 include('../../controller/siteController.php');
+include('../../config/connect.php');
+$pdo = connect();
+
+if(!$isLoggedin){
+    header('Location:../../index.php');
+}
+
+$sql = "SELECT group_id from employee where comp_id=:empID";
+$query = $pdo->prepare($sql);
+$query->execute(array('empID'=>$empID));
+$result = $query->fetch();
+$groupID = $result['group_id'];
+
+if($groupID==0){
+    header('Location:../../index.php');
+}
+
 ?>
  <!DOCTYPE html>
 <html lang="en">
@@ -49,14 +66,58 @@ include('../../controller/siteController.php');
 
 				<div class="row padding-row">
                     <div class="col-sm-6 col-xs-12">
-
                         <div class="col-xs-12 nortification-box-top">
-                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height:400px;">
+                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height:300px;">
 
                                 <div class="carousel-inner" role="listbox">
                                     <div class="item active">
                                         <h5 class="nortification-box-heading" style="text-align: center;"><i class="fa fa-calendar-check-o icon-margin-right" aria-hidden="true"></i>
                                             Today Shift</h5>
+                                        <hr>
+
+                                        <div class="row">
+                                            <div class="col-xs-10 col-xs-offset-1">
+                                                <div class="form-group">
+
+                                                    <table class='table-responsive' style="margin-top:30px;">
+                                                        <table class='table table-bordered table-striped '>
+                                                            <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Group Name</th>
+                                                                <th>Time Slot</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td>Morning Session</td>
+                                                                <td>Group 1</td>
+                                                                <td>7.00 - 12.00</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>Evening Session</td>
+                                                                <td>Group 1</td>
+                                                                <td>7.00 - 12.00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Night Session</td>
+                                                                <td>Group 1</td>
+                                                                <td>7.00 - 12.00</td>
+                                                            </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="item">
+                                        <h5 class="nortification-box-heading" style="text-align: center;"><i class="fa fa-calendar-check-o icon-margin-right" aria-hidden="true"></i>
+                                            Tomorrow Shift</h5>
                                         <hr>
 
                                         <div class="row">
@@ -96,29 +157,104 @@ include('../../controller/siteController.php');
                                                 </div>
                                             </div>
                                         </div>
-
-
-                                    </div>
-                                    <div class="item">
-                                        <h5 class="nortification-box-heading" style="text-align: center;"><i class="fa fa-calendar-check-o icon-margin-right" aria-hidden="true"></i>
-                                            Tomorrow Shift</h5>
-                                        <hr>
                                     </div>
                                     <div class="item">
                                         <h5 class="nortification-box-heading" style="text-align: center;"><i class="fa fa-calendar-check-o icon-margin-right" aria-hidden="true"></i>
                                             Yesterday Shift</h5>
                                         <hr>
+
+                                        <div class="row">
+                                            <div class="col-xs-10 col-xs-offset-1">
+                                                <div class="form-group">
+
+                                                    <table class='table-responsive' style="margin-top:30px;">
+                                                        <table class='table table-bordered table-striped '>
+                                                            <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Group Name</th>
+                                                                <th>Time Slot</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td>Shift 1</td>
+                                                                <td>Group 1</td>
+                                                                <td>7.00 - 12.00</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>Shift 1</td>
+                                                                <td>Group 1</td>
+                                                                <td>7.00 - 12.00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Shift 1</td>
+                                                                <td>Group 1</td>
+                                                                <td>7.00 - 12.00</td>
+                                                            </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <!-- Controls -->
                                 <a class="left carousel-control" href="#carousel-example-generic" style="margin-left:-30px;background-image:none;" role="button" data-slide="prev">
-                                    <i class="fa fa-chevron-left fa-1x" style="margin-top:190px; color:#3498db;" aria-hidden="true"></i>
+                                    <i class="fa fa-chevron-left fa-1x" style="margin-top:150px; color:#3498db;" aria-hidden="true"></i>
                                 </a>
                                 <a class="right carousel-control" href="#carousel-example-generic"  style="margin-right:-30px;background-image:none;" role="button" data-slide="next">
-                                    <i class="fa fa-chevron-right fa-1x" style="margin-top:190px; color:#3498db;"  aria-hidden="true"></i>
+                                    <i class="fa fa-chevron-right fa-1x" style="margin-top:150px; color:#3498db;"  aria-hidden="true"></i>
                                 </a>
                             </div>
+                        </div>
+
+                        <div class="margin-top col-xs-12 nortification-box-top">
+                            <h5 class="nortification-box-heading"><i class="fa fa-clock-o icon-margin-right" aria-hidden="true"></i>
+                                My Workout In This Week</h5>
+                            <hr>
+
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                </div>
+                            </div>
+                            <p style="text-align:left; margin-top:-20px;">0h</p>
+                            <p style="text-align:right; margin-top:-30px;">60h</p>
+
+                            <div class="row">
+                                <div class="col-xs-10 col-xs-offset-1">
+                                    <div class="row">
+                                        <div class="col-xs-6" style="text-align: right;">
+                                            <p>Total Hours per week:</p>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <p><strong>60 hours</strong></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6" style="text-align: right;">
+                                            <p>Done Hours per week:</p>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <p style=" color:#00a65a;"><strong>36 hours</strong></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6" style="text-align: right;">
+                                            <p>Remaining Hours per week:</p>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <p style=" color:#d43f3a;"><strong>24 hours</strong></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 

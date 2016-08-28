@@ -44,7 +44,7 @@ if(!$isLoggedin && $empRole!="admin"){
                     <div class="col-lg-12">
                         <ol class="breadcrumb breadcrumb-style">
                             <li>
-                                <i class="fa fa-dashboard"></i> <a href="director.php">Admin Panel</a>
+                                <i class="fa fa-dashboard"></i> <a href="director.php">Take Your Leave</a>
                             </li>
                             <li class="active">
                                 <i class="fa fa-edit"></i> <a href="director.php">Overall Company</a>

@@ -47,7 +47,7 @@ try{
 
     }
 
-    $sql = "SELECT set_id FROM leave_set_job WHERE job_cat_id=:jobCat and level_name=:jobLevel";
+    $sql = "SELECT set_id FROM leave_set_job WHERE job_cat_id=:jobCat and level_id=:jobLevel";
     $query = $pdo->prepare($sql);
     $query->execute(array('jobCat'=>$empCategory,'jobLevel'=>$empLevel));
     $result = $query->fetchAll();
