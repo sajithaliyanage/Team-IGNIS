@@ -50,9 +50,6 @@ include('../../controller/siteController.php');
 				<div class="row padding-row">
                     <div class="col-sm-6 col-xs-12">
 
-
-                    <div class="mySlides">
-
                         <div class="col-xs-12 nortification-box-top">
                             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height:400px;">
 
@@ -65,16 +62,14 @@ include('../../controller/siteController.php');
                                         <div class="row">
                                             <div class="col-xs-10 col-xs-offset-1">
                                                 <div class="form-group">
-                                                    <label class="col-xs-4 control-label form-lable">Starting Date:</label>
 
-                                                    <table class='table-responsive'>
+                                                    <table class='table-responsive' style="margin-top:30px;">
                                                         <table class='table table-bordered table-striped '>
                                                             <thead>
                                                             <tr>
                                                                 <th></th>
                                                                 <th>Group Name</th>
                                                                 <th>Time Slot</th>
-                                                                <th>Number of Employees</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
@@ -82,14 +77,17 @@ include('../../controller/siteController.php');
                                                                 <td>Shift 1</td>
                                                                 <td>Group 1</td>
                                                                 <td>7.00 - 12.00</td>
-                                                                <td>0</td>
                                                             </tr>
 
                                                             <tr>
                                                                 <td>Shift 1</td>
                                                                 <td>Group 1</td>
                                                                 <td>7.00 - 12.00</td>
-                                                                <td>0</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Shift 1</td>
+                                                                <td>Group 1</td>
+                                                                <td>7.00 - 12.00</td>
                                                             </tr>
 
                                                             </tbody>
@@ -114,19 +112,17 @@ include('../../controller/siteController.php');
                                 </div>
 
                                 <!-- Controls -->
-                                <a class="left carousel-control" href="#carousel-example-generic" style="background-image:none;" role="button" data-slide="prev">
+                                <a class="left carousel-control" href="#carousel-example-generic" style="margin-left:-30px;background-image:none;" role="button" data-slide="prev">
                                     <i class="fa fa-chevron-left fa-1x" style="margin-top:190px; color:#3498db;" aria-hidden="true"></i>
                                 </a>
-                                <a class="right carousel-control" href="#carousel-example-generic"  style="background-image:none;" role="button" data-slide="next">
+                                <a class="right carousel-control" href="#carousel-example-generic"  style="margin-right:-30px;background-image:none;" role="button" data-slide="next">
                                     <i class="fa fa-chevron-right fa-1x" style="margin-top:190px; color:#3498db;"  aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>
-
                     </div>
-				</div>
 
-				<div class="col-sm-6 col-xs-12">		
+				    <div class="col-sm-6 col-xs-12">
 					<div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-tag icon-margin-right" aria-hidden="true"></i>
                                 Shift Application</h5>
@@ -218,8 +214,8 @@ include('../../controller/siteController.php');
                                     </div>
                                 </div>
                             </form>
-                        </div>
-				    </div>
+                    </div>
+                </div>
                 </div>
 
          </div>
