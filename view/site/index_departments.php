@@ -1,6 +1,8 @@
 <?php
 $var = "index";
 include('../../controller/siteController.php');
+include('../../config/connect.php');
+$pdo = connect();
 
 if(!$isLoggedin && $empRole!="admin"){
     header('Location:../../index.php');
@@ -42,7 +44,7 @@ if(!$isLoggedin && $empRole!="admin"){
                     <div class="col-lg-12">
                         <ol class="breadcrumb breadcrumb-style">
                             <li>
-                                <i class="fa fa-dashboard"></i> <a href="director.php">Take Your Leave</a>
+                                <i class="fa fa-dashboard"></i> <a href="director.php">Admin Panel</a>
                             </li>
                             <li class="active">
                                 <i class="fa fa-edit"></i> <a href="director.php">Overall Company</a>
@@ -55,125 +57,41 @@ if(!$isLoggedin && $empRole!="admin"){
                 </div>
             </div>
             <div class="row padding-row">
-                <div class="col-sm-3 col-xs-12 padding-box-inner">
-                    <div class="row">
-                        <div class="col-xs-12 main-box-1-1-inner">
-                            <div class="row">
-                                <div class="col-xs-8">
-                                    <h2 class="box-count">HR </h2>
 
-                                    <h3 class="box-head">Department</h3>
-                                </div>
-                                <div class="col-xs-4">
-                                    <i class="fa fa-building fa-5x box-icon" style="color:#00a65a;" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12  main-box-1-2-inner" style="background-color:#00a65a;">
-                            <div class="more-info">
-                                <a href="index_department_employee.php" style="color:#2c3b42;">View Employees <i class="fa fa-chevron-circle-right" style="color:#2c3b42;" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                    $sql = "SELECT * FROM department WHERE currentStatus=:log and roster_status=:state";
+                    $query = $pdo->prepare($sql);
+                    $query->execute(array('log'=>"approved",'state'=>"NO"));
+                    $result = $query->fetchAll();
 
-                <div class="col-sm-3 col-xs-12 padding-box-inner">
-                    <div class="row">
-                        <div class="col-xs-12 main-box-1-1-inner">
-                            <div class="row">
-                                <div class="col-xs-8">
-                                    <h2 class="box-count">Finance </h2>
+                    foreach($result as $rs){
+                        echo "<div class=\"col-sm-3 col-xs-12 padding-box-inner\">
+                                <div class=\"row\">
+                                    <div class=\"col-xs-12 main-box-1-1-inner\">
+                                        <div class=\"row\">
+                                            <div class=\"col-xs-8\">
+                                                <h2 class=\"box-count\">".explode(" ",$rs['dept_name'])[0]."</h2>
 
-                                    <h3 class="box-head">Department</h3>
+                                                <h3 class=\"box-head\">Department</h3>
+                                            </div>
+                                            <div class=\"col-xs-4\">
+                                                <i class=\"fa fa-building fa-5x box-icon\" style=\"color:".$rs['dept_color'].";\" aria-hidden=\"true\"></i>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-xs-4">
-                                    <i class="fa fa-building fa-5x box-icon" style="color:#d58512;" aria-hidden="true"></i>
+                                <div class=\"row\">
+                                    <div class=\"col-xs-12  main-box-1-2-inner\" style=\"background-color:".$rs['dept_color'].";\">
+                                        <div class=\"more-info\">
+                                            <a href='index_department_employee.php?id=".$rs['dept_id']."' style=\"color:#2c3b42;\">View Employees <i class=\"fa fa-chevron-circle-right\" style=\"color:#2c3b42;\" aria-hidden=\"true\"></i></a>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12  main-box-1-2-inner" style="background-color:#d58512;">
-                            <div class="more-info">
-                                <a href="index_department_employee.php" style="color:#2c3b42;">View Employees <i class="fa fa-chevron-circle-right" style="color:#2c3b42;" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            </div>";
+                    }
+                ?>
 
-                <div class="col-sm-3 col-xs-12 padding-box-inner">
-                    <div class="row">
-                        <div class="col-xs-12 main-box-1-1-inner">
-                            <div class="row">
-                                <div class="col-xs-8">
-                                    <h2 class="box-count">IT</h2>
 
-                                    <h3 class="box-head">Department</h3>
-                                </div>
-                                <div class="col-xs-4">
-                                    <i class="fa fa-building fa-5x box-icon" style="color:#8c8c8c;" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12  main-box-1-2-inner" style="background-color:#8c8c8c;">
-                            <div class="more-info">
-                                <a href="index_department_employee.php" style="color:#2c3b42;">View Employees <i class="fa fa-chevron-circle-right" style="color:#2c3b42;" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-3 col-xs-12 padding-box-inner">
-                    <div class="row">
-                        <div class="col-xs-12 main-box-1-1-inner">
-                            <div class="row">
-                                <div class="col-xs-8">
-                                    <h2 class="box-count">Salary</h2>
-
-                                    <h3 class="box-head">Department</h3>
-                                </div>
-                                <div class="col-xs-4">
-                                    <i class="fa fa-building fa-5x box-icon" style="color:#ac2925;" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12  main-box-1-2-inner" style="background-color:#ac2925;">
-                            <div class="more-info">
-                                <a href="index_department_employee.php" style="color:#2c3b42;">View Employees <i class="fa fa-chevron-circle-right" style="color:#2c3b42;" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-3 col-xs-12 padding-box-inner">
-                    <div class="row">
-                        <div class="col-xs-12 main-box-1-1-inner">
-                            <div class="row">
-                                <div class="col-xs-8">
-                                    <h2 class="box-count">Marketing</h2>
-
-                                    <h3 class="box-head">Department</h3>
-                                </div>
-                                <div class="col-xs-4">
-                                    <i class="fa fa-building fa-5x box-icon" style="color:#66512c;" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12  main-box-1-2-inner" style="background-color:#66512c;">
-                            <div class="more-info">
-                                <a href="index_department_employee.php" style="color:#2c3b42;">View Employees <i class="fa fa-chevron-circle-right" style="color:#2c3b42;" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
 

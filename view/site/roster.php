@@ -46,85 +46,63 @@ include('../../controller/siteController.php');
 						</div>
 					</div>
 				</div>
-				
-			<div class="col-sm-6 col-xs-12">
 
-
-
-                    <div class="mySlides">
+				<div class="row padding-row">
+                    <div class="col-sm-6 col-xs-12">
                         <div class="col-xs-12 nortification-box-top">
-                            <h5 class="nortification-box-heading" align="center"><i class="fa fa-paperclip icon-margin-right" aria-hidden="true">Today Shift</i>
-                            </h5>
-                            <hr>
+                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height:400px;">
 
-                            <p>Morning Shift</p><br>
-                            <p>Evening Shift</p><br>
-                            <p>Night Shift</p><br>
+                                <div class="carousel-inner" role="listbox">
+                                    <div class="item active">
+                                        <h5 class="nortification-box-heading" style="text-align: center;"><i class="fa fa-calendar-check-o icon-margin-right" aria-hidden="true"></i>
+                                            Today Shift</h5>
+                                        <hr>
+
+                                        <div class="row">
+                                            <div class="col-xs-10 col-xs-offset-1">
+                                                <div class="form-group">
+                                                    <label class="col-xs-4 control-label form-lable">Starting Date:</label>
+
+                                                    <div class="col-xs-8">
+                                                        <input id="example2" name="start_date" type="text"
+                                                               placeholder="dd/mm/yyyy"
+                                                               class="form-control input-md" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="item">
+                                        <h5 class="nortification-box-heading" style="text-align: center;"><i class="fa fa-calendar-check-o icon-margin-right" aria-hidden="true"></i>
+                                            Tomorrow Shift</h5>
+                                        <hr>
+                                    </div>
+                                    <div class="item">
+                                        <h5 class="nortification-box-heading" style="text-align: center;"><i class="fa fa-calendar-check-o icon-margin-right" aria-hidden="true"></i>
+                                            Yesterday Shift</h5>
+                                        <hr>
+                                    </div>
+                                </div>
+
+                                <!-- Controls -->
+                                <a class="left carousel-control" href="#carousel-example-generic" style="background-image:none;" role="button" data-slide="prev">
+                                    <i class="fa fa-chevron-left fa-1x" style="margin-top:190px; color:#3498db;" aria-hidden="true"></i>
+                                </a>
+                                <a class="right carousel-control" href="#carousel-example-generic"  style="background-image:none;" role="button" data-slide="next">
+                                    <i class="fa fa-chevron-right fa-1x" style="margin-top:190px; color:#3498db;"  aria-hidden="true"></i>
+                                </a>
+                            </div>
                         </div>
 
+
+
+
                     </div>
-                    <div class="mySlides">
+
+                    <div class="col-sm-6 col-xs-12">
                         <div class="col-xs-12 nortification-box-top">
-                            <h5 class="nortification-box-heading" align="center"><i class="fa fa-paperclip icon-margin-right" aria-hidden="true">Tomorrow Shift</i>
-                            </h5>
-                            <hr>
-
-                            <p>Morning Shift</p><br>
-                            <p>Evening Shift</p><br>
-                            <p>Night Shift</p><br>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <div class="mySlides">
-                      <div class="col-xs-12 nortification-box-top">
-                          <h5 class="nortification-box-heading" align="center"><i class="fa fa-paperclip icon-margin-right" aria-hidden="true">Yesterday Shift</i>
-                              </h5>
-                          <hr>
-
-                          <p>Morning Shift</p><br>
-                          <p>Evening Shift</p><br>
-                          <p>Night Shift</p><br>
-
-                      </div>
-
-                  </div>
-
-
-
-
-
-
-                    <a width="40px" height="40px"line-height="40px" style="position:absolute;top:45%;left:0" onclick="plusDivs(-1)">❮</a>
-                    <a class="w3-btn-floating" style="position:absolute;top:45%;right:0" onclick="plusDivs(1)">❯</a>
-
-                </div>
-
-                <script>
-                    var slideIndex = 1;
-                    showDivs(slideIndex);
-
-                    function plusDivs(n) {
-                        showDivs(slideIndex += n);
-                    }
-
-                    function showDivs(n) {
-                        var i;
-                        var x = document.getElementsByClassName("mySlides");
-                        if (n > x.length) {slideIndex = 1}
-                        if (n < 1) {slideIndex = x.length}
-                        for (i = 0; i < x.length; i++) {
-                            x[i].style.display = "none";
-                        }
-                        x[slideIndex-1].style.display = "block";
-                    }
-                </script>
-				</div>
-				<div class="col-sm-6 col-xs-12">		
-					<div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-tag icon-margin-right" aria-hidden="true"></i>
                                 Shift Application</h5>
                             <hr>
@@ -132,7 +110,7 @@ include('../../controller/siteController.php');
                                 <div class="department-add">
                                     <div class="col-xs-12">
                                         <!-- Text input-->
-										  <div class="form-group">
+                                        <div class="form-group">
                                             <label class="col-xs-4 control-label form-lable">Shifting Date :</label>
                                             <div class="col-xs-8">
                                                 <input id="service_name" name="job_category" type="text" placeholder="dd/mm/yyyy"
@@ -141,7 +119,7 @@ include('../../controller/siteController.php');
                                         </div>
                                         <br>
                                         <br>
-										  <div class="form-group">
+                                        <div class="form-group">
                                             <label class="col-xs-4 control-label form-lable">Shifting Time :</label>
                                             <div class="col-xs-8">
                                                 <input id="service_name" name="job_category" type="text" placeholder=""
@@ -150,7 +128,7 @@ include('../../controller/siteController.php');
                                         </div>
                                         <br>
                                         <br>
-										<div class="form-group">
+                                        <div class="form-group">
                                             <label class="col-xs-4 control-label form-lable">Shifting Group :</label>
                                             <div class="col-xs-8">
                                                 <select  name="emp_role" class="form-control">
@@ -164,7 +142,7 @@ include('../../controller/siteController.php');
                                         </div>
                                         <br>
                                         <br>
-										 <div class="form-group">
+                                        <div class="form-group">
                                             <label class="col-xs-4 control-label form-lable">Shifting Member ID :</label>
                                             <div class="col-xs-8">
                                                 <input id="service_name" name="job_category" type="text" placeholder=""
@@ -173,47 +151,51 @@ include('../../controller/siteController.php');
                                         </div>
                                         <br>
                                         <br>
-										<div class="form-group">
+                                        <div class="form-group">
                                             <label class="col-xs-4 control-label form-lable">Rework Date :</label>
                                             <div class="col-xs-8">
                                                 <input id="service_name" name="job_category" type="text" placeholder="dd/mm/yyyy"
                                                        class="form-control input-md" required>
                                             </div>
-                                        <br>
-                                        <br>
-										<br>
-
-										 <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">Rework Time :</label>
-                                            <div class="col-xs-8">
-                                                <input id="service_name" name="job_category" type="text" placeholder=""
-                                                       class="form-control input-md" required>
-                                            </div>
                                         </div>
-                                        <br>
-                                        <br>
-                                        
-										<div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">Reason :</label>
-                                            <div class="col-xs-8">
-                                                <input id="service_name" name="job_category" type="text" placeholder=""
-                                                       class="form-control input-md" required>
+                                            <br>
+                                            <br>
+                                            <br>
+
+                                            <div class="form-group">
+                                                <label class="col-xs-4 control-label form-lable">Rework Time :</label>
+                                                <div class="col-xs-8">
+                                                    <input id="service_name" name="job_category" type="text" placeholder=""
+                                                           class="form-control input-md" required>
+                                                </div>
                                             </div>
-                                        </div>
-										
-                                     
-										<br>
-                                        <br>
-                                        <br>
-                                        <br>
+                                            <br>
+                                            <br>
+
+                                            <div class="form-group">
+                                                <label class="col-xs-4 control-label form-lable">Reason :</label>
+                                                <div class="col-xs-8">
+                                                    <input id="service_name" name="job_category" type="text" placeholder=""
+                                                           class="form-control input-md" required>
+                                                </div>
+                                            </div>
+
+
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
 
 
 
-                                        <button class="btn btn-info btn-lg pull-right submit-button" type="submit">Apply Shift</button>
+                                            <button class="btn btn-info btn-lg pull-right submit-button" type="submit">Apply Shift</button>
+
                                     </div>
                                 </div>
                             </form>
-                    </div>   </div>
+                        </div>
+				    </div>
+                </div>
 
          </div>
       </div>
@@ -222,5 +204,10 @@ include('../../controller/siteController.php');
 
     <script src="../../public/js/jquery.js"></script>
     <script src="../../public/js/bootstrap.js"></script>
+    <script>
+        $('.carousel').carousel({
+            interval:0
+        })
+    </script>
 </body>
 </html>

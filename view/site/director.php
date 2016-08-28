@@ -60,7 +60,15 @@ if(!$isLoggedin && $empRole!="director"){
                         <div class="col-xs-12 main-box-1-1">
                             <div class="row">
                                 <div class="col-xs-8">
-                                    <h2 class="box-count">04</h2>
+                                    <?php
+                                        $sql="SELECT * FROM department WHERE currentStatus=:log and roster_status=:state";
+                                        $query = $pdo->prepare($sql);
+                                        $query->execute(array('log'=>"approved",'state'=>"NO"));
+                                        $numrow = $query->rowCount();
+                                        $numrows = intval($numrow);
+                                    ?>
+                                    <h2 class="box-count"><?php if($numrows<10){echo "0".$numrow;}else{echo $numrow;}?></h2>
+
 
                                     <h3 class="box-head">Departments</h3>
                                 </div>
@@ -83,7 +91,14 @@ if(!$isLoggedin && $empRole!="director"){
                         <div class="col-xs-12 main-box-2-1">
                             <div class="row">
                                 <div class="col-xs-8">
-                                    <h2 class="box-count">08</h2>
+                                    <?php
+                                        $sql="SELECT * FROM manager";
+                                        $query = $pdo->prepare($sql);
+                                        $query->execute();
+                                        $numrow = $query->rowCount();
+                                        $numrows = intval($numrow);
+                                    ?>
+                                    <h2 class="box-count"><?php if($numrows<10){echo "0".$numrow;}else{echo $numrow;}?></h2>
 
                                     <h3 class="box-head">Managers</h3>
                                 </div>
@@ -96,7 +111,7 @@ if(!$isLoggedin && $empRole!="director"){
                     <div class="row">
                         <div class="col-xs-12  main-box-2-2">
                             <div class="more-info">
-                                <a href="index_departments.php" style="color:#FFFFFF;">More Info <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                                <a href="managers.php" style="color:#FFFFFF;">More Info <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>
@@ -106,12 +121,19 @@ if(!$isLoggedin && $empRole!="director"){
                         <div class="col-xs-12 main-box-3-1">
                             <div class="row">
                                 <div class="col-xs-8">
-                                    <h2 class="box-count">54</h2>
+                                    <?php
+                                        $sql="SELECT * FROM admin";
+                                        $query = $pdo->prepare($sql);
+                                        $query->execute();
+                                        $numrow = $query->rowCount();
+                                        $numrows = intval($numrow);
+                                    ?>
+                                    <h2 class="box-count"><?php if($numrows<10){echo "0".$numrow;}else{echo $numrow;}?></h2>
 
-                                    <h3 class="box-head">Employees</h3>
+                                    <h3 class="box-head">Administrators</h3>
                                 </div>
                                 <div class="col-xs-4">
-                                    <i class="fa fa-user fa-5x box-icon" aria-hidden="true"></i>
+                                    <i class="fa fa-universal-access fa-5x box-icon" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +141,7 @@ if(!$isLoggedin && $empRole!="director"){
                     <div class="row">
                         <div class="col-xs-12  main-box-3-2">
                             <div class="more-info">
-                                <a href="index_departments.php" style="color:#FFFFFF;"> More Info <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                                <a href="administrators.php" style="color:#FFFFFF;"> More Info <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>
@@ -129,7 +151,14 @@ if(!$isLoggedin && $empRole!="director"){
                         <div class="col-xs-12 main-box-4-1">
                             <div class="row">
                                 <div class="col-xs-8">
-                                    <h2 class="box-count">1</h2>
+                                    <?php
+                                        $sql="SELECT * FROM department WHERE currentStatus=:log and roster_status=:state";
+                                        $query = $pdo->prepare($sql);
+                                        $query->execute(array('log'=>"approved",'state'=>"YES"));
+                                        $numrow = $query->rowCount();
+                                        $numrows = intval($numrow);
+                                    ?>
+                                    <h2 class="box-count"><?php if($numrows<10){echo "0".$numrow;}else{echo $numrow;}?></h2>
 
                                     <h3 class="box-head">Rosters</h3>
                                 </div>

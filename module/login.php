@@ -66,32 +66,34 @@ try{
     }
 
     //check is user role = manager
-    $sql = "SELECT * FROM manager JOIN employee ON manager.comp_id = employee.comp_id
-            WHERE manager.comp_id=:comp_id and employee.password=:password";
-    $query = $pdo->prepare($sql);
-    $query->execute(array('comp_id'=>$companyID, 'password'=>$password ));
-    $rowCount = $query->rowCount();
-    $results  = $query->fetchAll();
+    if( $isValidUser == false) {
+        $sql = "SELECT * FROM manager JOIN employee ON manager.comp_id = employee.comp_id
+                WHERE manager.comp_id=:comp_id and employee.password=:password";
+        $query = $pdo->prepare($sql);
+        $query->execute(array('comp_id' => $companyID, 'password' => $password));
+        $rowCount = $query->rowCount();
+        $results = $query->fetchAll();
 
-    if($rowCount==1){
-        $isValidUser = true;
+        if ($rowCount == 1) {
+            $isValidUser = true;
 
-        foreach($results as $rs){
-            $empID = $rs['comp_id'];
-            $empName = $rs['name'];
-            $empImage = $rs['image'];
+            foreach ($results as $rs) {
+                $empID = $rs['comp_id'];
+                $empName = $rs['name'];
+                $empImage = $rs['image'];
+            }
+
+            ini_set('session.cookie_httponly', true);
+
+            session_start();
+            $_SESSION['empName'] = $empName;
+            $_SESSION['empID'] = $empID;
+            $_SESSION['image'] = $empImage;
+            $_SESSION['empRole'] = "manager";
+            session_write_close();
+
+            header("Location:../view/site/apply.php?role=manager");
         }
-
-        ini_set('session.cookie_httponly',true);
-
-        session_start();
-        $_SESSION['empName'] =$empName;
-        $_SESSION['empID'] =$empID;
-        $_SESSION['image'] = $empImage;
-        $_SESSION['empRole'] = "manager";
-        session_write_close();
-
-        header("Location:../view/site/apply.php?role=manager");
     }
 
     //check is user role = executive

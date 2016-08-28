@@ -218,7 +218,7 @@ $departmentId = $result['dept_id'];
 
                             <div class="list-group">
                                 <?php
-                                if($empRole == 'manager'){
+                                if($empRole == 'manager'|| $empRole == 'admin' ){
                                     $sql = "select * from apply_leave JOIN employee ON employee.comp_id = apply_leave.comp_id where employee.dept_id=:log and apply_leave.status =:state and apply_leave.comp_id !=:myId";
                                     $query = $pdo->prepare($sql);
                                     $query->execute(array('log'=>$departmentId,'state'=>"recommended",'myId'=>$empID));

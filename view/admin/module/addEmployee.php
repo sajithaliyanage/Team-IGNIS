@@ -23,7 +23,7 @@ try{
             (:compId,:empName,:empNIC,:empGender,:empEmail,:empPassword,:empTel,:empImage,:empJob,:empLevel,:empDept)";
     $query = $pdo->prepare($sql);
     $query->execute(array('compId'=>$empId,'empName'=>$empName,'empNIC'=>$empNIC,'empGender'=>$empGender,'empEmail'=>$empEmail,
-        'empPassword'=>$empPassword,'empTel'=>$empTelephone,'empImage'=>"null",'empLevel'=>$empLevel,'empJob'=>$empCategory,'empDept'=>$deptId));
+        'empPassword'=>$empPassword,'empTel'=>$empTelephone,'empImage'=>"null",'empJob'=>$empCategory,'empLevel'=>$empLevel,'empDept'=>$deptId));
 
 
     if($empRole=='director'){
@@ -33,6 +33,10 @@ try{
 
     }else if($empRole=='admin'){
         $sql = "INSERT INTO admin (comp_id,dept_id) VALUES (:comp_id,:dept_id)";
+        $query = $pdo->prepare($sql);
+        $query->execute(array('comp_id'=>$empId, 'dept_id'=>$deptId));
+
+        $sql = "INSERT INTO manager (comp_id,dept_id) VALUES (:comp_id,:dept_id)";
         $query = $pdo->prepare($sql);
         $query->execute(array('comp_id'=>$empId, 'dept_id'=>$deptId));
 
@@ -53,7 +57,7 @@ try{
 
     }
 
-    $sql = "SELECT set_id FROM leave_set_job WHERE job_cat_id=:jobCat and level_name=:jobLevel";
+    $sql = "SELECT set_id FROM leave_set_job WHERE job_cat_id=:jobCat and level_id=:jobLevel";
     $query = $pdo->prepare($sql);
     $query->execute(array('jobCat'=>$empCategory,'jobLevel'=>$empLevel));
     $result = $query->fetchAll();

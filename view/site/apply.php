@@ -66,6 +66,26 @@ if(!$isLoggedin){
                             <ul class="list-group">
 
                                 <?php
+                                    $sqlS="SELECT * FROM employee WHERE comp_id=:empID";
+                                    $queryS = $pdo->prepare($sqlS);
+                                    $queryS->execute(array('empID'=> $empID));
+                                    $resultS = $queryS->fetch();
+
+                                    $levelID = $resultS['level_id'];
+                                    $jobID = $resultS['job_cat_id'];
+
+                                    $sqlS1="SELECT set_id FROM leave_set_job WHERE job_cat_id=:jobID AND level_id=:lID";
+                                    $queryS1 = $pdo->prepare($sqlS1);
+                                    $queryS1->execute(array('jobID'=> $jobID,'lID'=>$levelID));
+                                    $resultS1 = $queryS1->fetch();
+
+                                    $setID = $resultS1['set_id'];
+
+                                    $sqlS2="SELECT leave_count FROM leave_count_details WHERE set_id=:setID";
+                                    $queryS2 = $pdo->prepare($sqlS2);
+                                    $queryS2->execute(array('setID'=> $setID));
+                                    $resultS2 = $queryS2->fetchAll();
+
 
                                     $sql="SELECT employee_leave_count.leave_count ,leave_type.leave_name FROM employee_leave_count
                                           JOIN leave_type ON employee_leave_count.leave_id = leave_type.leave_id
@@ -74,16 +94,19 @@ if(!$isLoggedin){
                                     $query->execute(array('empID'=> $empID,'log'=>"approved"));
                                     $result = $query->fetchAll();
 
+                                    $count = 0;
                                     foreach($result as $rs){
                                         $val = intval($rs['leave_count']);
                                         if($val<10){
                                             $val = "0".$rs['leave_count'];
                                         }
                                         echo "<li class='list-group-item'>
-                                                ".$rs['leave_name']."<span class='badge' style='background-color:#2c3b42; font-size:15px;'>".$val." <span style='font-size:9px;'>remaining</span></span>
+                                                ".$rs['leave_name']."<span class='badge' style='background-color:#2c3b42; font-size:15px;'>".$val." / <span style='font-size:11px;'>".$resultS2[$count]['leave_count']."</span><span style='font-size:9px;'> remaining</span> </span>
                                                 </li>";
+                                        $count +=1;
                                     }
                                 ?>
+<!--                                -->
                             </ul>
                         </div>
                     </div>
