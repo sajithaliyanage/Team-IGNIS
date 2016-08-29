@@ -19,7 +19,7 @@ try{
     $leaveCount = $resultSmt['leave_count'];
 
     if($leaveCount>0){
-        if($empRole == 'executive' || $empRole == 'manager'){
+        if($empRole == 'executive' || $empRole == 'manager' || $empRole == 'admin'){
             $sql = "INSERT INTO apply_leave (comp_id,leave_id,leave_priority,apply_date,start_date,end_date,number_of_days,reason,status,recommandBy) VALUES
             (:comp_id,:leave_id,:leave_priority,:apply_date,:start_date,:end_date,:number_of_days,:reason,:status,:myID)";
             $query = $pdo->prepare($sql);

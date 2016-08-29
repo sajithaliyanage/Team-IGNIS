@@ -78,7 +78,7 @@ if(!$isLoggedin){
                                         <div class="nortification-box-status">
                                             <center>
                                                 <div>
-                                                    <img src='<?php if($result['image']!='null'){echo '../'.$result['image'];}else{echo "../../public/images/default.png";}?>' style="margin-bottom:40px; padding-top: 20px" width='80%' height='400'  />
+                                                    <img src='<?php if($result['image']!='null'){echo '../'.$result['image'];}else{echo "../../public/images/default.png";}?>' style="margin-bottom:40px; padding-top: 20px" width='73%' height='400'  />
                                                 </div>
                                             </center>
 
