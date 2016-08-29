@@ -118,7 +118,7 @@ try{
         session_start();
         $_SESSION['empName'] =$empName;
         $_SESSION['empID'] =$empID;
-//        $_SESSION['image'] = $empImage;
+        $_SESSION['image'] = $empImage;
         $_SESSION['empRole'] = "executive";
         session_write_close();
 
@@ -147,7 +147,7 @@ try{
         session_start();
         $_SESSION['empName'] =$empName;
         $_SESSION['empID'] =$empID;
-//        $_SESSION['image'] = $empImage;
+        $_SESSION['image'] = $empImage;
         $_SESSION['empRole'] = "director";
         session_write_close();
 
