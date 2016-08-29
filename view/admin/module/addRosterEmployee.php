@@ -2,6 +2,7 @@
 include('../../../config/connect.php');
 $pdo = connect();
 
+//post request data
 $deptId = $_POST['emp_department'];
 $empRole = $_POST['emp_role'];
 $empCategory = $_POST['emp_category'];
@@ -16,6 +17,7 @@ $empTelephone = $_POST['emp_tele'];
 $groupID = $_POST['group_id'];
 
 try{
+    //    incrment number of employee by 1
     $sql = "UPDATE department SET no_of_emp =no_of_emp+1 WHERE dept_id=:depID";
     $query = $pdo->prepare($sql);
     $query->execute(array('depID'=>$deptId));
@@ -24,12 +26,14 @@ try{
     $query = $pdo->prepare($sql);
     $query->execute(array('depID'=>$deptId,'gID'=>$groupID));
 
+    //    add employee to employee table
     $sql = "INSERT INTO employee (comp_id,name,nic,gender,email,password,tel_no,image,job_cat_id,level_id,group_id,dept_id) VALUES
             (:compId,:empName,:empNIC,:empGender,:empEmail,:empPassword,:empTel,:empImage,:empJob,:empLevel,:groupID,:empDept)";
     $query = $pdo->prepare($sql);
     $query->execute(array('compId'=>$empId,'empName'=>$empName,'empNIC'=>$empNIC,'empGender'=>$empGender,'empEmail'=>$empEmail,
         'empPassword'=>$empPassword,'empTel'=>$empTelephone,'empImage'=>"null",'empLevel'=>$empLevel,'empJob'=>$empCategory,'groupID'=>$groupID,'empDept'=>$deptId));
 
+    //    add employee to specific table
     if($empRole=='manager'){
         $sql = "INSERT INTO manager (comp_id,dept_id) VALUES (:comp_id,:dept_id)";
         $query = $pdo->prepare($sql);
@@ -47,6 +51,7 @@ try{
 
     }
 
+    //    get set id for create leave count
     $sql = "SELECT set_id FROM leave_set_job WHERE job_cat_id=:jobCat and level_id=:jobLevel";
     $query = $pdo->prepare($sql);
     $query->execute(array('jobCat'=>$empCategory,'jobLevel'=>$empLevel));
@@ -66,6 +71,7 @@ try{
         array_push($empLeaveCount,$rs['leave_count']);
     }
 
+    //    set leave types and count for new employee
     $sql0 = "SELECT leave_id FROM leave_type";
     $query0 = $pdo->prepare($sql0);
     $query0->execute();

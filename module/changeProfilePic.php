@@ -5,7 +5,7 @@ $pdo = connect();
 
 try{
     if(!empty($_FILES["fileToUpload"]["name"])){
-
+//        make folder named employee id
         mkdir('../uploads/profilePicture/' . $empID . '/', 0777, true);
         $target_dir = "../uploads/profilePicture/". $empID ."/";
 
@@ -32,7 +32,7 @@ try{
                 $newfilename = "profile" . '.' . $imageFileType;
                 $target_file = $target_dir.$newfilename;
                 if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-
+//                    update employee image column
                     $sql="UPDATE employee SET image=:target_file WHERE comp_id=:empID";
                     $query =$pdo->prepare($sql);
                     $query->execute(array('target_file'=>$target_file,'empID'=>$empID));
@@ -46,6 +46,6 @@ try{
     }
 
 }catch(PDOException $e){
-    echo $e;
-    //header("Location:../view/layouts/error.php");
+    //echo $e;
+    header("Location:../view/layouts/error.php");
 }

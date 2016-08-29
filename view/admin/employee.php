@@ -84,6 +84,7 @@ if(!$isLoggedin && $empRole!="admin"){
 
                 </div>
 
+<!--                add employee to department-->
                 <div class="col-sm-6 col-xs-12 padding-box">
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top">
@@ -242,7 +243,7 @@ if(!$isLoggedin && $empRole!="admin"){
                                         <br>
 
 
-                                            <button class="btn btn-info btn-lg pull-right submit-button" type="submit">Submit</button>
+                                            <button class="btn btn-info btn-lg pull-right submit-button" type="submit" >Submit</button>
                                     </div>
                                 </div>
                             </form>

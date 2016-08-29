@@ -55,6 +55,7 @@ if(!$isLoggedin && $empRole!="admin"){
                 </div>
             </div>
             <div class="row padding-row">
+<!--                show current departments-->
                 <div class="col-sm-6 col-xs-12 padding-box">
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top">
@@ -81,6 +82,8 @@ if(!$isLoggedin && $empRole!="admin"){
                         </div>
                     </div>
                 </div>
+
+<!--                add new department to company-->
                 <div class="col-sm-6 col-xs-12 padding-box">
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top">
@@ -134,6 +137,7 @@ if(!$isLoggedin && $empRole!="admin"){
                         </div>
                     </div>
 
+<!--                    shoe status of actions-->
                     <div class="row margin-top">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-cogs icon-margin-right" aria-hidden="true"></i>

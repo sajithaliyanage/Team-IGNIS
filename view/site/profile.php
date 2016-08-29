@@ -101,6 +101,7 @@ if(!$isLoggedin){
                                     <h5 class="nortification-box-heading"><i class="fa fa-edit icon-margin-right" aria-hidden="true"></i>
                                         Edit Profile</h5>
                                     <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">Your profile edited successfully!</div>
+                                    <div class="alert-user" style="<?php if(!isset($_GET['changed'])){echo 'display:none;';}?>">Password reset successfully!</div>
                                     <hr>
 
                                     <?php

@@ -8,6 +8,7 @@ $message= $_POST['message'];
 $dateSend = date('d/m/Y');
 
 try{
+//    insert chat data to conversation table
     $sql="INSERT INTO conversation (sender_id,receiver_id,message,send_date) VALUES (:sender_id,:receiver_id,:message,:send_date)";
     $query =$pdo->prepare($sql);
     $query->execute(array('sender_id'=>$empID,'receiver_id'=>$recId,'message'=>$message,'send_date'=>$dateSend));

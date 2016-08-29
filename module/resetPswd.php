@@ -14,12 +14,13 @@ $query->execute(array('empID'=>$empID));
 $result = $query->fetch();
 
 try{
+    //check passswrd ar equal or not
     if($result["password"]==$curPswd) {
         if ($newPswd == $conPswd) {
             $sql = "UPDATE employee SET password=:newPswd where comp_id=:empID ";
             $query = $pdo->prepare($sql);
             $query->execute(array('newPswd' => $newPswd, 'empID' => $empID));
-            header( 'Location:../view/site/profile.php?success' ) ;
+            header( 'Location:../view/site/profile.php?changed' ) ;
         }
     }
 

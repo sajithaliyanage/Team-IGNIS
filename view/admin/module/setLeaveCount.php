@@ -2,15 +2,18 @@
 include('../../../config/connect.php');
 $pdo = connect();
 
+//post request data
 $joc_cat_id = $_POST['job_cat'];
 $joc_cat_level_id = $_POST['job_level'];
 $leaveValues = $_POST['leave_type'];// Returns an array
 
 try{
+//    select leave id
     $sql0 = "SELECT leave_id FROM leave_type";
     $query0 = $pdo->prepare($sql0);
     $query0->execute();
     $result0 = $query0->fetchAll();
+
 
     $sql = "INSERT INTO leave_set_job (job_cat_id,level_id) VALUES (:job_cat_id,:level_id)";
     $query = $pdo->prepare($sql);
@@ -18,7 +21,7 @@ try{
 
     $last_set_job_id = $pdo->lastInsertId();
 
-
+//    set leave count related to job category and job level
     $sql2="";
     $expo = array();
     $count = 0;

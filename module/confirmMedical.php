@@ -5,6 +5,7 @@ include('../module/sendSMS.php');
 include('../module/sendEmail.php');
 $pdo = connect();
 
+//get post request from medicl upload form
 $action = $_POST['submit'];
 $appliedEmployeeId = $_GET['empId'];
 $appliedMedId = $_GET['app_medical_id'];
@@ -23,6 +24,7 @@ $result = $query0->fetch();
 
 try{
         if($action =='done'){
+//            approve medicl
             $sql = "UPDATE medical_report SET status=:log where comp_id=:employeeID AND med_id=:apply_med_id";
             $query = $pdo->prepare($sql);
             $query->execute(array('log'=>"approved",'employeeID'=>$appliedEmployeeId,'apply_med_id'=>$appliedMedId));
@@ -44,6 +46,7 @@ try{
             header("Location:../view/site/medicalUpload.php?job=done");
 
         }else if($action =='reject'){
+//            reject leave
             $sql = "UPDATE medical_report SET status=:log where comp_id=:employeeID AND med_id=:apply_med_id";
             $query = $pdo->prepare($sql);
             $query->execute(array('log'=>"rejected",'employeeID'=>$appliedEmployeeId,'apply_med_id'=>$appliedMedId));

@@ -2,6 +2,7 @@
 include('../config/connect.php');
 $pdo = connect();
 
+//director appovals
 try{
     if(isset($_GET['depAccept'])){
         $depId = $_GET['depAccept'];
