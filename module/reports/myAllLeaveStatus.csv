@@ -1,2 +1,8 @@
 leave_name,leave_priority,apply_date,start_date,end_date,status
-Medical Leave,medium,16/08/2016,21/10/2016,23/10/2016,rejected
+Annual Leave,high,27/08/2016,30/08/2016,31/08/2016,recommended
+Annual Leave,medium,28/08/2016,06/10/2016,07/10/2016,approved
+Casual Leave,medium,27/08/2016,31/08/2016,01/09/2016,canceled
+Medical Leave,medium,13/08/2016,21/11/2016,23/11/2016,approved
+Medical Leave,high,23/08/2016,03/12/2016,05/03/2016,approved
+Medical Leave,high,29/08/2016,31/08/2016,31/08/2016,approved
+Short Leaves,low,28/08/2016,31/08/2016,31/08/2016,approved

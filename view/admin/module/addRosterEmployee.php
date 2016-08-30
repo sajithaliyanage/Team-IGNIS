@@ -94,8 +94,8 @@ try{
     header("Location:../roster.php?job=done");
 
 }catch(PDOException $e){
-    //echo $e;
-    header("Location:../../layouts/error.php");
+    echo $e;
+    //header("Location:../../layouts/error.php");
 }
 
 

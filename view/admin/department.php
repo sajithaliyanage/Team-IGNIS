@@ -121,9 +121,8 @@ if(!$isLoggedin && $empRole!="admin"){
                                             <label class="col-xs-5 control-label form-lable">Roster Status :</label>
                                             <div class="col-xs-7">
                                                 <select  name="roster_status" class="form-control">
-                                                    <option>-Select-</option>
-                                                    <option value="YES">Yes</option>
                                                     <option value="NO">No</option>
+                                                    <option value="YES">Yes</option>
                                                 </select>
                                             </div>
                                         </div>
