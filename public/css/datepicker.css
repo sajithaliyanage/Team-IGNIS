@@ -179,3 +179,13 @@
   width: 16px;
   height: 16px;
 }
+
+.fc-center > h2{
+  font-size:25px !important;
+}
+.fc-unthemed .fc-today {
+  background-color:#bce8f1;
+}
+.fc-time{
+  display: none;
+}

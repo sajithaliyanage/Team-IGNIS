@@ -26,14 +26,6 @@ if(!$isLoggedin && $empRole!="admin"){
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/fullcalendar.min.css" rel="stylesheet">
     <link href="../../public/css/datepicker.css" rel="stylesheet">
-    <style>
-        .fc-center > h2{
-            font-size:25px !important;
-        }
-        .fc-unthemed .fc-today {
-            background-color:#bce8f1;
-        }
-    </style>
 
 </head>
 
@@ -365,12 +357,12 @@ if(!$isLoggedin && $empRole!="admin"){
 
     });
 </script>
-                    <?php
-                         $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE calendar.dept_id=:log";
-                         $query = $pdo->prepare($smt);
-                         $query ->execute(array('log'=>0));
-                         $result = $query->fetchAll();
-                    ?>
+<?php
+    $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE calendar.dept_id=:log";
+    $query = $pdo->prepare($smt);
+    $query->execute(array('log' => '0'));
+    $result = $query->fetchAll();
+?>
 
 <script>
     $(document).ready(function() {
@@ -392,7 +384,7 @@ if(!$isLoggedin && $empRole!="admin"){
                         foreach($result as $rs){
                             echo "{
                                     \"title\":\" ".$rs['title']." \",
-                                    \"description\":\"<p>".$rs['description']."</p><p>Posted by : <strong>".$rs['name']."</strong></p>\",
+                                    \"description\":\"<p>".$rs['description']."</p><p>Date -".$rs['start_date']."</p><br/><p>Posted by : <strong>".$rs['name']."</strong></p>\",
                                     \"start\":\" ".$rs['start_date']." \",
                                     \"end\":\" ".$rs['end_date']." \",
                                     \"color\": \" ".$rs['event_color']." \",
