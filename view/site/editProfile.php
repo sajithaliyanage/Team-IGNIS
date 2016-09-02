@@ -169,14 +169,14 @@ if(!$isLoggedin){
                                                         <label class=\"col-xs-5 control-label form-lable\">";
                                                         echo "Department:";
                                                         echo "</label>
-                                                        <lable class=\"col-xs-7\">".$rs['dept_name']."</lable>
+                                                        <lable class=\"col-xs-7 col-xs-12\">".$rs['dept_name']."</lable>
                                                     </div>";
 
                                                 echo "<br><br>
                                                 <div class=\"form-group\">
                                                     <label class=\"col-sm-5 col-xs-12 control-label form-lable\">Job Category :</label>
 
-                                                    <lable class=\"col-xs-7\">".$rs['job_cat_name']."</lable>
+                                                    <lable class=\"col-xs-7 col-xs-12\">".$rs['job_cat_name']."</lable>
 
                                                 </div>";
 
@@ -185,7 +185,7 @@ if(!$isLoggedin){
                                                      <label class=\"col-xs-5 control-label form-lable\">";
                                                         echo "Job Level:";
                                                         echo "</label>
-                                                       <lable class=\"col-xs-7\" style='text-transform: capitalize;'>".$rs['level_name']."</lable>
+                                                       <lable class=\"col-xs-7 col-xs-12\" style='text-transform: capitalize;'>".$rs['level_name']."</lable>
                                                     </div>";
 
                                                 echo "<br><br>

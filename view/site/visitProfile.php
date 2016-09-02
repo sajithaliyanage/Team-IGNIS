@@ -109,70 +109,84 @@ $visitID = $_GET['empId'];
                                 <h5 class="nortification-box-heading"><i class="fa fa-edit icon-margin-right" aria-hidden="true"></i>
                                     Profile Details</h5>
                                 <hr>
+                                <div class="col-xs-12">
+                                    <?php
 
-                                <?php
+                                    $sql = "select * from employee INNER JOIN department ON employee.dept_id=department.dept_id INNER JOIN job_category ON employee.job_cat_id=job_category.job_cat_id JOIN job_level ON employee.level_id = job_level.level_id WHERE comp_id=:empID";
+                                    $query = $pdo->prepare($sql);
+                                    $query->execute(array('empID'=>$visitID));
+                                    $result = $query->fetchAll();
 
-                                $sql = "select * from employee INNER JOIN department ON employee.dept_id=department.dept_id INNER JOIN job_category ON employee.job_cat_id=job_category.job_cat_id JOIN job_level ON employee.level_id = job_level.level_id WHERE comp_id=:empID";
-                                $query = $pdo->prepare($sql);
-                                $query->execute(array('empID'=>$visitID));
-                                $result = $query->fetchAll();
+                                    foreach($result as $rs) {
 
-                                foreach($result as $rs) {
+                                        echo "<div class=\"col-xs-12\">
+                                                <label class=\"col-xs-5 \">";
+                                        echo "Employee Name:";
+                                        echo " </label>
+                                                 <div class=\"col-xs-7\">" . $rs['name'] . "</div>
+                                            </div>";
+                                        echo "<br><br>";
 
-                                    echo "<div class=\"form-group\">
-                                            <label class=\"col-xs-5 control-label form-lable\">";
-                                    echo "User Name:";
-                                    echo " </label>
-                                             <lable>" . $rs['name'] . "</lable>
-                                    </div>";
+                                        echo "<div class=\"col-xs-12\">
+                                                <label class=\"col-xs-5 \">";
+                                        echo "Company ID:";
+                                        echo " </label>
+                                                <div class=\"col-xs-7\">" . $rs['comp_id'] . "</div>
+                                            </div>";
+                                        echo "<br><br>";
 
-                                    echo "<div class=\"form-group\">
-                                        <label class=\"col-xs-5 control-label form-lable\">";
-                                    echo "Email:";
-                                    echo " </label>
-                                        <lable>" . $rs['email'] . "</lable>
-                                    </div>";
-                                    echo "<div class=\"form-group\">
-                                        <label class=\"col-xs-5 control-label form-lable\">";
-                                    echo "Contact Number:";
-                                    echo " </label>
-                                        <lable>" . $rs['tel_no'] . "</lable>
-                                    </div>";
-                                    echo "<div class=\"form-group\">
-                                        <label class=\"col-xs-5 control-label form-lable\">";
-                                    echo "Company ID:";
-                                    echo " </label>
-                                        <lable>" . $rs['comp_id'] . "</lable>
-                                    </div>";
-                                    echo "<div class=\"form-group\">
-                                        <label class=\"col-xs-5 control-label form-lable\">";
-                                    echo "Job Level:";
-                                    echo" </label>
-                                        <lable>" . $rs['level_name'] . "</lable>
-                                    </div>";
-                                    echo "<div class=\"form-group\">
-                                        <label class=\"col-xs-5 control-label form-lable\">";
-                                    echo "NIC:";
-                                    echo" </label>
-                                        <lable>" . $rs['nic'] . "</lable>
-                                    </div>";
+                                        echo "<div class=\"col-xs-12\">
+                                                <label class=\"col-xs-5 \">";
+                                        echo "Email:";
+                                        echo " </label>
+                                                <div class=\"col-xs-7\">" . $rs['email'] . "</div>
+                                            </div>";
+                                        echo "<br><br>";
 
-                                    echo "<div class=\"form-group\">
-                                        <label class=\"col-xs-5 control-label form-lable\">";
-                                    echo "Department:";
-                                    echo " </label>
-                                        <lable>" . $rs['dept_name'] . "</lable>
-                                    </div>";
+                                        echo "<div class=\"col-xs-12\">
+                                                <label class=\"col-xs-5\">";
+                                        echo "Contact Number:";
+                                        echo " </label>
+                                                <div class=\"col-xs-7\">" . $rs['tel_no'] . "</div>
+                                             </div>";
+                                        echo "<br><br>";
 
-                                    echo "<div class=\"form-group\">
-                                        <label class=\"col-xs-5 control-label form-lable\">";
-                                    echo "Job Category:";
-                                    echo " </label>
-                                        <lable>" . $rs['job_cat_name'] . "</lable>
-                                    </div>";
-                                }
+                                        echo "<div class=\"col-xs-12\">
+                                                <label class=\"col-xs-5 \">";
+                                        echo "Department:";
+                                        echo " </label>
+                                                <div class=\"col-xs-7\">" . $rs['dept_name'] . "</div>
+                                            </div>";
+                                        echo "<br><br>";
 
-                                ?>
+                                        echo "<div class=\"col-xs-12\">
+                                                <label class=\"col-xs-5 \">";
+                                        echo "Job Category:";
+                                        echo " </label>
+                                                <div class=\"col-xs-7\">" . $rs['job_cat_name'] . "</div>
+                                            </div>";
+                                        echo "<br><br>";
+
+                                        echo "<div class=\"col-xs-12\">
+                                                <label class=\"col-xs-5 \">";
+                                        echo "Job Level:";
+                                        echo" </label>
+                                                <div class=\"col-xs-7\">" . $rs['level_name'] . "</div>
+                                            </div>";
+                                        echo "<br><br>";
+
+                                        echo "<div class=\"col-xs-12\">
+                                                <label class=\"col-xs-5 \">";
+                                        echo "NIC:";
+                                        echo" </label>
+                                                <div class=\"col-xs-7\">" . $rs['nic'] . "</div>
+                                            </div>";
+                                        echo "<br><br>";
+                                    }
+
+
+                                    ?>
+                                </div>
 
                                 <br><br>
                             </div>

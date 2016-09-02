@@ -20,6 +20,8 @@ try{
             $query = $pdo->prepare($sql);
             $query->execute(array('newPswd' => $newPswd, 'empID' => $empID));
             header( 'Location:../view/site/profile.php?success' ) ;
+        }else{
+            header("Location : ../view/layouts/error.php");
         }
     }
 
