@@ -1,7 +1,17 @@
+<?php
+    $newsql = "SELECT name,image from employee where comp_id=:empID";
+    $newquery = $pdo->prepare($newsql);
+    $newquery->execute(array('empID'=>$empID));
+    $newresult = $newquery->fetch();
+    $employeeName = $newresult['name'];
+    $employeeImage = $newresult['image'];
+?>
+
 <center>
     <img class="nav-image" src="../../public/images/admin-logo.png"/>
 </center>
 
+<!-- navigation bar-->
 <nav class="navbar navbar-inverse navbar-static-top nav-top nav-bar-custom navbar-fixed-top" style="margin-top:0px; box-shadow: 0 3px 7px -6px black !important;">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -38,7 +48,7 @@
                 <li class="list-side-menu"><a href="#">Edit Company Calendar</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle font new" data-toggle="dropdown" role="button"
-                       aria-haspopup="true" aria-expanded="false"><img src="../<?php if($empImage != 'null'){echo $empImage;}else{ echo '../public/images/default.png';}?>" class="img-circle image-user"  /><?php echo $empName;?><span class="caret"></span></a>
+                       aria-haspopup="true" aria-expanded="false"><img src="../<?php if($employeeImage != 'null'){echo $employeeImage;}else{ echo '../public/images/default.png';}?>" class="img-circle image-user"  /><?php echo $employeeName;?><span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-admin">
                         <li style="<?php if($empRole!='admin'){echo 'display:none;';}?>"><a href="../site/default_admin.php">Switch Profile</a></li>
                         <li><a href="../site/profile.php">My Profile</a></li>

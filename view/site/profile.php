@@ -77,7 +77,7 @@ if(!$isLoggedin){
                                         <div class="nortification-box-status">
                                             <center>
                                                 <div>
-                                                    <img src='<?php if($result['image']!='null'){echo '../'.$result['image'];}else{echo "../../public/images/default.png";}?>' style="margin-bottom:40px; padding-top: 20px" width='80%' height='400'  />
+                                                    <img src='<?php if($result['image']!='null'){echo '../'.$result['image'];}else{echo "../../public/images/default.png";}?>' style="margin-bottom:40px; padding-top: 20px" width='73%' height='400'  />
                                                 </div>
                                             </center>
 
@@ -100,6 +100,7 @@ if(!$isLoggedin){
                                     <h5 class="nortification-box-heading"><i class="fa fa-edit icon-margin-right" aria-hidden="true"></i>
                                         Edit Profile</h5>
                                     <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">Your profile edited successfully!</div>
+                                    <div class="alert-user" style="<?php if(!isset($_GET['changed'])){echo 'display:none;';}?>">Password reset successfully!</div>
                                     <hr>
 
                                         <div class="col-xs-12">

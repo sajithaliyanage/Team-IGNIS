@@ -3,7 +3,7 @@ include('../config/mySQLConnection.php');
 include('../controller/siteController.php');
 include('../module/fpdf/fpdf.php');
 
-
+//get post request data from generate form
 $reportType = $_POST['report_type'];
 $startDate = $_POST['start_date'];
 $endDate = $_POST['end_date'];

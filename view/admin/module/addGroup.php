@@ -3,10 +3,12 @@ include('../../../controller/siteController.php');
 include('../../../config/connect.php');
 $pdo = connect();
 
+//post request data
 $deptID = $_POST['groups'];
 $groupName = $_POST['group_name'];
 
 try {
+//    create new group for roster department
     $sql = "INSERT INTO group_detail(dept_id,group_name) VALUES (:depID,:groupName)";
     $query = $pdo->prepare($sql);
     $query->execute(array('depID' => $deptID,'groupName'=>$groupName));

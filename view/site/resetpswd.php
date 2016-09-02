@@ -59,8 +59,7 @@ if(!$isLoggedin){
                     </div>
 
                     <div class="row padding-row">
-                        <div class="col-xs-12 col-sm-1 padding-box"></div>
-                        <div class="col-xs-12 col-sm-10 padding-box">
+                        <div class="col-xs-12 padding-box">
 
                             <div class="col-xs-12 nortification-box-top">
                                 <h5 class="nortification-box-heading"><i class="fa fa-lock icon-margin-right" aria-hidden="true"></i>
@@ -94,6 +93,9 @@ if(!$isLoggedin){
             </div>
 
         </div>
+
+    <script src="../../public/js/jquery.js"></script>
+    <script src="../../public/js/bootstrap.js"></script>
 </body>
 
 </html>

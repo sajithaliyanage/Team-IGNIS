@@ -58,18 +58,18 @@ $numbers = array($mobileNumber);
     }
 }
 
-function sendCanceledSMS($textlocal,$mobileNumber,$employeeName,$appliedDate){
-
-    $numbers = array($mobileNumber);
-    $sender = 'Take Your Leave';
-    $message = "Hey ".$employeeName.", Your leave has been canceled applied on ".$appliedDate." \n \n
-            - Take Your Leave";
-
-    try {
-        $result = $textlocal->sendSms($numbers, $message, $sender);
-    } catch (Exception $e) {
-        die('Error: ' . $e->getMessage());
-    }
-}
+//function sendCanceledSMS($textlocal,$mobileNumber,$employeeName,$appliedDate){
+//
+//    $numbers = array($mobileNumber);
+//    $sender = 'Take Your Leave';
+//    $message = "Hey ".$employeeName.", Your leave has been canceled applied on ".$appliedDate." \n \n
+//            - Take Your Leave";
+//
+//    try {
+//        $result = $textlocal->sendSms($numbers, $message, $sender);
+//    } catch (Exception $e) {
+//        die('Error: ' . $e->getMessage());
+//    }
+//}
 
 ?>

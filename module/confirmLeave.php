@@ -5,6 +5,7 @@ include('../module/sendSMS.php');
 include('../module/sendEmail.php');
 $pdo = connect();
 
+//get post request from confirm leave form
 $action = $_POST['submit'];
 $note = $_POST['note'];
 $appliedEmployeeId = $_GET['empId'];
@@ -18,6 +19,7 @@ $result = $query0->fetch();
 try{
     if($empRole=='manager' || $empRole=='admin'){
         if($action =='done'){
+//            approve leave
             $sql = "UPDATE apply_leave SET status=:log, medical_status=:medical where comp_id=:employeeID AND apply_leave_id=:apply_leave_id";
             $query = $pdo->prepare($sql);
             $query->execute(array('log'=>"approved", 'medical'=>"no",'employeeID'=>$appliedEmployeeId,'apply_leave_id'=>$appliedLeaveId));
@@ -55,6 +57,7 @@ try{
             header("Location:../view/site/confirm_leave.php?job=done");
 
         }else if($action =='reject'){
+//            reject leave
             $sql = "UPDATE apply_leave SET status=:log, special_note=:note where comp_id=:employeeID AND apply_leave_id=:apply_leave_id";
             $query = $pdo->prepare($sql);
             $query->execute(array('note'=>$note,'log'=>"rejected",'employeeID'=>$appliedEmployeeId,'apply_leave_id'=>$appliedLeaveId));
@@ -73,7 +76,7 @@ try{
         }
     }else if($empRole=='executive'){
         if($action == 'done'){
-
+//            recommand leave
             $sql = "UPDATE apply_leave SET status=:log , recommandBy=:myID where comp_id=:employeeID AND apply_leave_id=:apply_leave_id";
             $query = $pdo->prepare($sql);
             $query->execute(array('log'=>"recommended",'myID'=>$empName,'employeeID'=>$appliedEmployeeId,'apply_leave_id'=>$appliedLeaveId));
@@ -81,7 +84,7 @@ try{
             header("Location:../view/site/confirm_leave.php?job=done");
 
         }else if($action == 'reject'){
-
+//            reject leave
             $sql = "UPDATE apply_leave SET status=:log,special_note=:note where comp_id=:employeeID AND apply_leave_id=:apply_leave_id";
             $query = $pdo->prepare($sql);
             $query->execute(array('note'=>$note,'log'=>"rejected",'employeeID'=>$appliedEmployeeId,'apply_leave_id'=>$appliedLeaveId));

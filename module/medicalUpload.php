@@ -8,7 +8,7 @@ $uploadDate = date("d/m/Y");
 
 try{
         if(!empty($_FILES["fileToUpload"]["name"]) && !empty($applyLeaveID)){
-
+//            create folder for medical upload
             mkdir('../uploads/medicalReport/' . $applyLeaveID . '/', 0777, true);
             $target_dir = "../uploads/medicalReport/". $applyLeaveID ."/";
 
@@ -40,7 +40,7 @@ try{
                 } else {
                     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                         echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
-
+//                        insert data to medical report table
                         $sql="INSERT INTO medical_report(comp_id,apply_leave_id,uploaded_date,status) VALUES (:comp_id,:apply_leave_id,:uploaded_date,:status)";
                         $query =$pdo->prepare($sql);
                         $query->execute(array('comp_id'=>$empID ,'apply_leave_id'=>$applyLeaveID,'uploaded_date'=>$uploadDate,'status'=>"waiting"));
