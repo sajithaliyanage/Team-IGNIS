@@ -40,7 +40,9 @@ try{
         $query->execute(array('title'=>$title, 'start_date'=>$start_date, 'end_date'=>$end_date,'event_color'=>"gold",
             'description' =>$description,'dept_id'=>'#','comp_id'=>$empID ));
 
-        header("Location:../../view/site/calendar.php?event=done");
+        header("Location:../view/site/calendar.php?event=done");
+    }else{
+        header("Location:../view/site/calendar.php?error=done");
     }
 
 
