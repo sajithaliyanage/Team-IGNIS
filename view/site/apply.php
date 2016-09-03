@@ -23,7 +23,7 @@ if(!$isLoggedin){
     <link href="../../public/css/leave-interface.css" rel="stylesheet">
     <link href="../../public/css/navbar-style.css" rel="stylesheet">
     <link href="../../public/css/font-awesome.min.css" rel="stylesheet">
-    <link href="../../public/css/calender.css" rel="stylesheet">
+    <link href="../../public/css/fullcalendar.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../public/css/datepicker.css">
 
 </head>
@@ -124,23 +124,25 @@ if(!$isLoggedin){
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-calendar icon-margin-right" aria-hidden="true"></i>
                                 Profile Calendar</h5>
+                            <hr>
 
-                            <div id="myId" class="jalendar mid img-responsive" style="width: 95% !important;">
-                                <div class="added-event" data-date="19/5/2016" data-time="20:45"
-                                     data-title="Tarkan İstanbul Concert on Harbiye Açık Hava Tiyatrosu"></div>
-                                <div class="added-event" data-date="17/5/2016" data-time="21:00"
-                                     data-title="CodeCanyon İstanbul Meeting on Starbucks, Kadıköy"></div>
-                                <div class="added-event" data-date="1/5/2016" data-time="22:00"
-                                     data-title="Front-End Design and Javascript Conferance on Haliç Kongre Merkezi"></div>
-                                <div class="added-event" data-date="17/5/2016" data-time="22:00"
-                                     data-title="Lorem ipsum dolor sit amet"></div>
-                                <div class="added-event" data-date="21/5/2016" data-time="22:00"
-                                     data-title="Lorem ipsum dolor sit amet"></div>
-                                <div class="added-event" data-date="21/6/2016" data-time="22:00"
-                                     data-title="Lorem ipsum dolor sit amet"></div>
-                                <div class="added-event" data-date="3/6/2016" data-time="22:00"
-                                     data-title="Lorem ipsum dolor sit amet"></div>
+                            <div style="margin-bottom:20px;">
+                                <div id="bootstrapModalFullCalendar"></div>
+                            </div>
 
+                            <div id="fullCalModal" class="modal fade">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                                            <h4 id="modalTitle" class="modal-title"></h4>
+                                        </div>
+                                        <div id="modalBody" class="modal-body"></div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
@@ -285,9 +287,9 @@ if(!$isLoggedin){
 </div>
 
 <script src="../../public/js/jquery.js"></script>
+<script src="../../public/js/moment.min.js"></script>
 <script src="../../public/js/bootstrap.js"></script>
-<script src="../../public/js/jalendar.js"></script>
-<script src="../../public/js/calendar.js"></script>
+<script src="../../public/js/fullcalendar.min.js"></script>
 <script src="../../public/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
     // When the document is ready
@@ -300,6 +302,53 @@ if(!$isLoggedin){
             format: "dd/mm/yyyy"
         });
 
+    });
+</script>
+<?php
+    $smts = "SELECT * FROM employee WHERE comp_id=:log2";
+    $querys = $pdo->prepare($smts);
+    $querys ->execute(array('log2'=>$empID));
+    $results = $querys->fetch();
+    $deptID = $results['dept_id'];
+
+    $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE calendar.dept_id IN (:log,:log2)";
+    $query = $pdo->prepare($smt);
+    $query ->execute(array('log'=>'0','log2'=>$deptID));
+    $result = $query->fetchAll();
+?>
+
+<script>
+    $(document).ready(function() {
+        $('#bootstrapModalFullCalendar').fullCalendar({
+            header: {
+                left: '',
+                center: 'prev title next',
+                right: ''
+            },
+            eventClick:  function(event, jsEvent, view) {
+                $('#modalTitle').html(event.title);
+                $('#modalBody').html(event.description);
+                $('#fullCalModal').modal();
+                return false;
+            },
+            events:
+                [
+                    <?php
+                        foreach($result as $rs){
+                            echo "{
+                                    \"title\":\" ".$rs['title']." \",
+                                    \"description\":\"<p>".$rs['description']."</p><p>Date -".$rs['start_date']."</p><br/><p>Posted by : <strong>".$rs['name']."</strong></p>\",
+                                    \"start\":\" ".$rs['start_date']." \",
+                                    \"end\":\" ".$rs['end_date']." \",
+                                    \"color\": \" ".$rs['event_color']." \",
+                                    \"textColor\": \"#ffffff\",
+                                    \"url\" : \"#\"
+                                 },";
+                         }
+                    ?>
+
+                ]
+        });
     });
 </script>
 

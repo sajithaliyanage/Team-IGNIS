@@ -24,8 +24,8 @@ if(!$isLoggedin && $empRole!="admin"){
     <link href="css/adminpanel-interface.css" rel="stylesheet">
     <link href="css/navbar-style.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../public/css/datepicker.css">
-
+    <link href="css/fullcalendar.min.css" rel="stylesheet">
+    <link href="../../public/css/datepicker.css" rel="stylesheet">
 
 </head>
 
@@ -187,15 +187,28 @@ if(!$isLoggedin && $empRole!="admin"){
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-calendar icon-margin-right" aria-hidden="true"></i>
                                 Company Calendar</h5>
+                                <div class="alert-user" style="<?php if(!isset($_GET['event'])){echo 'display:none;';}?>">Event added successfully!</div>
                                 <hr>
 
-                                <div>
-                                    <iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;ctz=Asia%2FColombo" style="border-width:0" width="100%" height="400" frameborder="0" scrolling="no"></iframe>
-                                </div>
+                            <div style="margin-bottom:20px;">
+                                <div id="bootstrapModalFullCalendar"></div>
+                            </div>
 
-                                <div style="background-color:#FFFFFF; z-index:2000; position:relative; margin-top:-31px; width:100%; height:40px;">
-
+                            <div id="fullCalModal" class="modal fade">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                                            <h4 id="modalTitle" class="modal-title"></h4>
+                                        </div>
+                                        <div id="modalBody" class="modal-body"></div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -212,9 +225,9 @@ if(!$isLoggedin && $empRole!="admin"){
                                         <div class="col-xs-12">
                                             <!-- Text input-->
                                             <div class="form-group">
-                                                <label class="col-xs-4 control-label form-lable">Event Name:</label>
+                                                <label class="col-xs-4 control-label form-lable">Event Title:</label>
                                                 <div class="col-xs-8">
-                                                    <input id="service_name" name="event_name" type="text" placeholder=""
+                                                    <input id="service_name" name="title" type="text" placeholder=""
                                                            class="form-control input-md" required>
                                                 </div>
                                             </div>
@@ -222,11 +235,24 @@ if(!$isLoggedin && $empRole!="admin"){
                                             <br>
 
                                             <div class="form-group">
-                                                <label class="col-xs-4 control-label form-lable">Event Date:</label>
+                                                <label class="col-xs-4 control-label form-lable">Start Date:</label>
 
                                                 <div class="col-xs-8">
-                                                    <input id="example1" name="event_date" type="text"
-                                                           placeholder="dd/mm/yyyy"
+                                                    <input id="example1" name="start_date" type="text"
+                                                           placeholder="yyyy-mm-dd"
+                                                           class="form-control input-md" required>
+
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <br>
+
+                                            <div class="form-group">
+                                                <label class="col-xs-4 control-label form-lable">End Date:</label>
+
+                                                <div class="col-xs-8">
+                                                    <input id="example2" name="end_date" type="text"
+                                                           placeholder="yyyy-mm-dd"
                                                            class="form-control input-md" required>
 
                                                 </div>
@@ -288,7 +314,10 @@ if(!$isLoggedin && $empRole!="admin"){
 </div>
 
 <script src="js/jquery.js"></script>
+<script src="js/moment.min.js"></script>
+<script src="js/fullcalendar.min.js"></script>
 <script src="js/bootstrap.js"></script>
+
 <script language="javascript" type="text/javascript">
     $('#iconified').on('keyup', function() {
         var input = $(this);
@@ -319,9 +348,54 @@ if(!$isLoggedin && $empRole!="admin"){
     $(document).ready(function () {
 
         $('#example1').datepicker({
-            format: "dd/mm/yyyy"
+            format: "yyyy-mm-dd"
         });
 
+        $('#example2').datepicker({
+            format: "yyyy-mm-dd"
+        });
+
+    });
+</script>
+<?php
+    $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE calendar.dept_id=:log";
+    $query = $pdo->prepare($smt);
+    $query->execute(array('log' => '0'));
+    $result = $query->fetchAll();
+?>
+
+<script>
+    $(document).ready(function() {
+        $('#bootstrapModalFullCalendar').fullCalendar({
+            header: {
+                left: '',
+                center: 'prev title next',
+                right: ''
+            },
+            eventClick:  function(event, jsEvent, view) {
+                $('#modalTitle').html(event.title);
+                $('#modalBody').html(event.description);
+                $('#fullCalModal').modal();
+                return false;
+            },
+            events:
+                [
+                    <?php
+                        foreach($result as $rs){
+                            echo "{
+                                    \"title\":\" ".$rs['title']." \",
+                                    \"description\":\"<p>".$rs['description']."</p><p>Date -".$rs['start_date']."</p><br/><p>Posted by : <strong>".$rs['name']."</strong></p>\",
+                                    \"start\":\" ".$rs['start_date']." \",
+                                    \"end\":\" ".$rs['end_date']." \",
+                                    \"color\": \" ".$rs['event_color']." \",
+                                    \"textColor\": \"#ffffff\",
+                                    \"url\" : \"#\"
+                                 },";
+                         }
+                    ?>
+
+                ]
+        });
     });
 </script>
 </body>
