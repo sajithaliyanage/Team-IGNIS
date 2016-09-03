@@ -221,7 +221,7 @@ if(!$isLoggedin){
                                                     <div class="form-group">
                                                         <label class="col-xs-4 control-label form-lable">Description:</label>
                                                         <div class="col-xs-8">
-                                                            <textarea class="form-control" name="description" rows="2" required></textarea>
+                                                            <textarea class="form-control" name="description" rows="2"></textarea>
                                                         </div>
                                                     </div>
                                                     <br>
@@ -273,10 +273,10 @@ if(!$isLoggedin){
     $(document).ready(function () {
 
         $('#example1').datepicker({
-            format: "dd/mm/yyyy"
+            format: "yyyy-mm-dd"
         });
         $('#example2').datepicker({
-            format: "dd/mm/yyyy"
+            format: "yyyy-mm-dd"
         });
 
     });
@@ -334,9 +334,9 @@ if(!$isLoggedin){
     $results = $querys->fetch();
     $deptID = $results['dept_id'];
 
-    $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE calendar.dept_id IN (:log,:log2)";
+    $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE calendar.dept_id =:log AND calendar.comp_id=:log2";
     $query = $pdo->prepare($smt);
-    $query ->execute(array('log'=>'','log2'=>$deptID));
+    $query ->execute(array('log'=>'#','log2'=>$empID));
     $result = $query->fetchAll();
 ?>
 
