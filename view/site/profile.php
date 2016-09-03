@@ -182,7 +182,7 @@ if(!$isLoggedin){
 
                                             <div class="col-xs-12">
                                                 <label class="col-xs-5 ">Password:</label>
-                                                <div class="col-xs-7"><a href="resetpswd.php">Reset Password</a></div>
+                                                <div class="col-xs-7"><a href="../../module/resetpswd.php">Reset Password</a></div>
                                             </div>
 
                                             <br><br>
