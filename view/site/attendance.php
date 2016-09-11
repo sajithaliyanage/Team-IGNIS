@@ -139,10 +139,12 @@ if(!$isLoggedin){
                                             <th>Work Time</th>
                                             <th>Over Time</th>
                                         </tr>
-                                        <?php include "excelRead.php"?>
+                                        <?php include "../../module/excelRead.php"?>
+                                        <?php include "../../module/FilterByEmp_Name.php"?>
 
 
                                     </table>
+
                                 </div>
                             </div>
                         </div>
