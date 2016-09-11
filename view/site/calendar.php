@@ -80,8 +80,8 @@ if(!$isLoggedin){
                                                         <h4 id="modalTitle" class="modal-title"></h4>
                                                     </div>
                                                     <div id="modalBody" class="modal-body"></div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <div id="ownFooter" class="modal-footer">
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -351,6 +351,11 @@ if(!$isLoggedin){
             eventClick:  function(event, jsEvent, view) {
                 $('#modalTitle').html(event.title);
                 $('#modalBody').html(event.description);
+                document.getElementById("ownFooter").innerHTML =
+                    " <button type='button' class='btn btn-success'>Edit Event</button>"+
+                    "<button type='button' class='btn btn-danger'>Delete</button>"+
+                    "<button type='button' class='btn btn-defaul' data-dismiss='modal'>Close</button>";
+
                 $('#fullCalModal').modal();
                 return false;
             },
