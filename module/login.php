@@ -45,15 +45,15 @@ try{
 
     //check is user role = administrator
     $sql = "SELECT * FROM admin JOIN employee ON admin.comp_id = employee.comp_id
-            WHERE admin.comp_id=:comp_id";
+            WHERE admin.comp_id=:comp_id and employee.password=:pwd";
     $query = $pdo->prepare($sql);
-    $query->execute(array('comp_id'=>$companyID ));
+    $query->execute(array('comp_id'=>$companyID,'pwd'=>$password ));
     $rowCount = $query->rowCount();
     $results  = $query->fetchAll();
-    $emp->empId =$companyID;
-    $hashed_password = $emp->fetchEmployeePassword($pdo);
+    //$emp->empId =$companyID;
+    //$hashed_password = $emp->fetchEmployeePassword($pdo);
 
-    if(password_verify($password, $hashed_password)){
+    //if(password_verify($password, $hashed_password)){
         if($rowCount==1){
             $isValidUser = true;
 
@@ -74,7 +74,7 @@ try{
 
             header("Location:../view/site/default_admin.php?role=admin");
         }
-    }
+    //}
 
     //check is user role = manager
     if( $isValidUser == false) {
