@@ -16,7 +16,7 @@ try{
     header("Location:../department.php?job=done");
 
 }catch(PDOException $e){
-    header("Location:../../view/layouts/error.php");
+    header("Location:../../layouts/error.php");
 }
 
 

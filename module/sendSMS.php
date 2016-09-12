@@ -6,7 +6,7 @@ function sendApprovedSMS($textlocal,$mobileNumber,$employeeName,$leaveCount,$sta
 
     $numbers = array($mobileNumber);
     $sender = 'Take Your Leave';
-    $message ="Hey ".$employeeName.", We are happy to say your manager has approved your ".$leaveCount."day leaves on ".$startDate." to ".$endDate." \n \n
+    $message ="Hey ".$employeeName.", We are happy to inform that your ".$leaveCount."day leave request is being APPROVED for the time period from ".$startDate." to ".$endDate." \n \n
             - Take Your Leave";
 
     try {
@@ -20,7 +20,7 @@ function sendMedicalApprovedSMS($textlocal,$mobileNumber,$employeeName,$leaveCou
 
     $numbers = array($mobileNumber);
     $sender = 'Take Your Leave';
-    $message ="Hey ".$employeeName.", We are happy to say your manager has approved your medical for ".$leaveCount."day leaves at ".$startDate." to ".$endDate." \n \n
+    $message ="Hey ".$employeeName.", We are happy to inform that your ".$leaveCount."day medical is being APPROVED for the time period from ".$startDate." to ".$endDate." \n \n
             - Take Your Leave";
 
     try {
@@ -34,7 +34,7 @@ function sendRejetSMS($textlocal,$mobileNumber,$employeeName,$appliedDate){
 
     $numbers = array($mobileNumber);
     $sender = 'Take Your Leave';
-    $message ="Hey ".$employeeName.", We are bad to say your leave has been rejected applied on ".$appliedDate." \n \n
+    $message ="Hey ".$employeeName.", we are regret to inform that your leave request is being REJECTED for the time period start on ".$appliedDate." \n \n
             - Take Your Leave";
 
     try {
