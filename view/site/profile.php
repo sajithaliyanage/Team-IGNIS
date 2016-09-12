@@ -121,7 +121,7 @@ if(!$isLoggedin){
                                                 ?>
                                                     <div class="form-group toped">
                                                         <label class="col-xs-5">Employee Name:</label>
-                                                         <div class="col-xs-7"><?php echo $result['name']?></div>
+                                                        <div class="col-xs-7"><?php echo $result['name']?></div>
                                                     </div>
                                                     <br/>
 
