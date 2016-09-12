@@ -125,7 +125,7 @@
   background-color:#FF8717;
 }
 
-@media (max-width:678px){
+@media screen and(max-device-width:678px){
   .nortifications{
     display:none !important;
   }
