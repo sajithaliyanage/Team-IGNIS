@@ -304,4 +304,11 @@ input[type="file"] {
     z-index:4000;
     position: relative;
 }
+
+@media(max-width:678px){
+    .toped{
+        margin-top:25px !important;
+        font-size:12px;
+    }
+}
 /*...*/
