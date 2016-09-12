@@ -51,7 +51,7 @@ if(!$isLoggedin || $empRole!="admin"){
                                     <a href="../admin/index.php">
                                         <div class="box">
                                             <i class="fa fa-wrench icon" aria-hidden="true"></i>
-                                            <h4 style="color: #FFFFFF; margin-top:30px;">As a Administrator</h4>
+                                            <h4 style="color: #FFFFFF; margin-top:30px;">As an Administrator</h4>
                                         </div>
                                     </a>
                                 </div>
@@ -62,7 +62,7 @@ if(!$isLoggedin || $empRole!="admin"){
                                     <a href="apply.php">
                                         <div class="box">
                                             <i class="fa fa-user icon" aria-hidden="true"></i>
-                                            <h4 style="color: #FFFFFF; margin-top:30px;">As a Employee</h4>
+                                            <h4 style="color: #FFFFFF; margin-top:30px;">As an Employee</h4>
                                         </div>
                                     </a>
                                 </div>

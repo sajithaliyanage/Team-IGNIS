@@ -225,7 +225,7 @@ if(!$isLoggedin){
                                         <br>
 
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">Number of Days:</label>
+                                            <label class="col-xs-4 control-label form-lable">Day Count:</label>
 
                                             <div class="col-xs-8">
                                                 <input id="service_name" name="numDays" type="text"
