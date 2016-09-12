@@ -125,7 +125,7 @@
   background-color:#FF8717;
 }
 
-@media (max-width:678px){
+@media (min-width:678px){
   .nortifications{
     display:none !important;
   }
