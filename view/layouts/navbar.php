@@ -28,16 +28,34 @@
         </div>
         <div style="height: 1px;" aria-expanded="false" id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left nortifications" style="margin-left:17%; padding-top:4px; position: fixed;">
-                <li >
-                    <i class="fa fa-bell-o" style="border:1px solid #d2d2d2; border-radius:100%; padding:14px; margin-left:10px;"></i><span class="badge postition-alert">4</span>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle nortification-button" data-toggle="dropdown">
+                        <i class="fa fa-bell-o" style="border:1px solid #d2d2d2; border-radius:100%; padding:14px;"></i><span class="badge postition-alert">0</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-admin" style="margin-top:2px;">
+                        <div class="arrow-up"></div>
+                        <li style="text-align: center;">No any alerts yet!</li>
+                    </ul>
                 </li>
 
-                <li >
-                    <i class="fa fa-envelope-o" style="border:1px solid #d2d2d2; border-radius:100%; padding:14px; margin-left:10px;"></i><span class="badge postition-message">3</span>
+                <li  class="dropdown">
+                    <a href="#" class="dropdown-toggle nortification-button" data-toggle="dropdown">
+                        <i class="fa fa-envelope-o" style="border:1px solid #d2d2d2; border-radius:100%; padding:14px;"></i><span class="badge postition-message">0</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-admin" style="margin-top:2px;">
+                        <div class="arrow-up"></div>
+                        <li style="text-align: center;">No any messages yet!</li>
+                    </ul>
                 </li>
 
-                <li >
-                    <i class="fa fa-binoculars" style="border:1px solid #d2d2d2; border-radius:100%; padding:14px; margin-left:10px;"></i><span class="badge postition-remind">5</span>
+                <li  class="dropdown">
+                    <a href="#" class="dropdown-toggle nortification-button" data-toggle="dropdown">
+                        <i class="fa fa-binoculars" style="border:1px solid #d2d2d2; border-radius:100%; padding:14px;"></i><span class="badge postition-remind">0</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-admin" style="margin-top:2px;">
+                        <div class="arrow-up"></div>
+                        <li style="text-align: center;">No any messages remind!</li>
+                    </ul>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
