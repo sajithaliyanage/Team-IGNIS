@@ -123,7 +123,7 @@ if(!$isLoggedin){
                     <div class="row margin-top">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-calendar icon-margin-right" aria-hidden="true"></i>
-                                Profile Calendar</h5>
+                                Overall Calendar</h5>
                             <hr>
 
                             <div style="margin-bottom:20px;">
