@@ -318,4 +318,11 @@ input[type="file"] {
         font-size:12px;
     }
 }
+
+@media(max-width:678px){
+    .profilepic{
+       height:auto !important;
+    }
+}
+
 /*...*/

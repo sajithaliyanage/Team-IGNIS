@@ -5,7 +5,7 @@
 <nav class="navbar navbar-inverse navbar-static-top nav-top nav-bar-custom navbar-fixed-top" style="margin-top:0px; box-shadow: 0 3px 7px -6px black !important;">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" style="background-color:#3498db; border:1px solid #3ea2e5;"
                     aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
@@ -48,12 +48,13 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="list-side-menu"><a href="#">Overall Company</a></li>
-                <li class="list-side-menu"><a href="#">Edit Departments</a></li>
-                <li class="list-side-menu"><a href="#">Edit Employees</a></li>
-                <li class="list-side-menu"><a href="#">Edit Job Categories</a></li>
-                <li class="list-side-menu"><a href="#">Edit Roster System</a></li>
-                <li class="list-side-menu"><a href="#">Edit Company Calendar</a></li>
+                <li class="list-side-menu"><a href="index.php">Overall Company</a></li>
+                <li class="list-side-menu"><a href="department.php">Edit Departments</a></li>
+                <li class="list-side-menu"><a href="employee.php">Edit Employees</a></li>
+                <li class="list-side-menu"><a href=setleaves.php">Edit Set Leaves</a></li>
+                <li class="list-side-menu"><a href="jobcategory.php">Edit Job Categories</a></li>
+                <li class="list-side-menu"><a href="leavetypes.php">Edit Leave Types</a></li>
+                <li class="list-side-menu"><a href="roster.php">Edit Roster System</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle font new" data-toggle="dropdown" role="button"
                        aria-haspopup="true" aria-expanded="false"><img src="../<?php if($empImage != 'null'){echo $empImage;}else{ echo '../public/images/default.png';}?>" class="img-circle image-user"  /><?php echo $empName?> <span class="caret"></span></a>
