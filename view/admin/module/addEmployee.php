@@ -30,16 +30,12 @@ try{
 
 //    add employee to specific table
     if($empRole=='director'){
-        $sql = "INSERT INTO director (comp_id,dept_id) VALUES (:comp_id,:dept_id)";
+        $sql = "INSERT INTO director (comp_id) VALUES (:comp_id)";
         $query = $pdo->prepare($sql);
-        $query->execute(array('comp_id'=>$empId, 'dept_id'=>$deptId));
+        $query->execute(array('comp_id'=>$empId));
 
     }else if($empRole=='admin'){
         $sql = "INSERT INTO admin (comp_id,dept_id) VALUES (:comp_id,:dept_id)";
-        $query = $pdo->prepare($sql);
-        $query->execute(array('comp_id'=>$empId, 'dept_id'=>$deptId));
-
-        $sql = "INSERT INTO manager (comp_id,dept_id) VALUES (:comp_id,:dept_id)";
         $query = $pdo->prepare($sql);
         $query->execute(array('comp_id'=>$empId, 'dept_id'=>$deptId));
 

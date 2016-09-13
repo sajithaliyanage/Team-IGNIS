@@ -272,7 +272,7 @@ if(!$isLoggedin){
                                 }
 
                                 foreach($result as $rs){
-                                    echo "<a  class='list-group-item'>".ucwords($rs['leave_name'])." - ".$rs['apply_date']."<span style='float:right;'>"; if($rs['status']=='waiting'){echo 'Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>';}else if($rs['status']=='approved'){ echo 'Approved <i class=\'fa fa-check\' aria-hidden=\'true\'></i></span></a>';}else{echo 'Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></a>';};
+                                    echo "<a  class='list-group-item'>".ucwords($rs['leave_name'])." - ".$rs['apply_date']."<span style='float:right;'>"; if($rs['status']=='waiting' || $rs['status']=='recommended' ){echo 'Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>';}else if($rs['status']=='approved'){ echo 'Approved <i class=\'fa fa-check\' aria-hidden=\'true\'></i></span></a>';}else{echo 'Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></a>';};
                                 }
                                 ?>
                             </div>

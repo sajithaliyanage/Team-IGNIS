@@ -156,9 +156,9 @@ if(isset($_GET['id'])){
                                                         $query->execute();
                                                         $rowNUM = $query->rowCount();
 
-                                                        $sql = "select * from job_category WHERE job_cat_id NOT IN (SELECT job_cat_id FROM leave_set_job GROUP BY job_cat_id HAVING COUNT(*) =:log)";
+                                                        $sql = "select * from job_category WHERE job_cat_id NOT IN (SELECT job_cat_id FROM leave_set_job GROUP BY job_cat_id HAVING COUNT(*) =:log) AND currentStatus=:log2";
                                                         $query = $pdo->prepare($sql);
-                                                        $query->execute(array('log'=>$rowNUM));
+                                                        $query->execute(array('log'=>$rowNUM,'log2'=>"approved"));
                                                         $result = $query->fetchAll();
 
                                                         foreach($result as $rs){
