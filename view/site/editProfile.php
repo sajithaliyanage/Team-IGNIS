@@ -85,7 +85,7 @@ if(!$isLoggedin){
 
                                             <input type="file" name="fileToUpload" id="fileToUpload" onchange="readURL(this)"/>
 
-                                            <p style="margin-top:-30px;">(PNG,JPG,JPEG files only allowed - Max Size 3MB (320x400))</p>
+                                            <p style="margin-top:-30px; color: #FF0000;">(PNG,JPG,JPEG files only allowed - Max Size 3MB (320x400))</p>
 
                                             <div id="myProgress" style="margin-top:20px;">
                                                 <div id="myBar">
