@@ -1,4 +1,5 @@
 <?php
+
 $var = "resetpswd";
 include('../controller/siteController.php');
 include('../config/connect.php');
@@ -10,6 +11,7 @@ if(!$isLoggedin){
 
 if(isset($_POST['submit']))
 {
+    //Check whether the new pass word matches with confirm password, if it is matches reset the password
     $newpassword=$_POST['new_pswd'];
     $confirmpasssword=$_POST['con_pswd'];
     if($newpassword==$confirmpasssword)
@@ -28,37 +30,8 @@ if(isset($_POST['submit']))
 }
 
 ?>
+<!--script for check whether current password matches with existing password-->
 
-<script type="text/javascript">
-    function showUser(str)
-    {
-        if (str=="")
-        {
-            document.getElementById("txtHint").innerHTML="";
-            return;
-        }
-        if (window.XMLHttpRequest)
-        {// code for IE7+, Firefox, Chrome, Opera, Safari
-
-            xmlhttp=new XMLHttpRequest();
-        }
-        else
-        {// code for IE6, IE5
-
-            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange=function()
-        {
-            if (xmlhttp.readyState==4 && xmlhttp.status==200)
-            {
-                document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
-            }
-        }
-        xmlhttp.open("GET","checkPswd.php?q="+str,true);
-
-        xmlhttp.send();
-    }
-</script>
 
 <script type="text/javascript">
     function pass()
