@@ -176,7 +176,7 @@ if(!$isLoggedin){
 
                                                     <div class="form-group toped">
                                                         <label class="col-xs-5 ">Password:</label>
-                                                        <div class="col-xs-7"><a href="../../module/resetPswd.php">Reset Password</a></div>
+                                                        <div class="col-xs-7"><a href="resetPswd.php">Reset Password</a></div>
                                                     </div>
                                                     <br>
 

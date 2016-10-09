@@ -1,8 +1,8 @@
 <?php
 
-$var = "resetpswd";
-include('../controller/siteController.php');
-include('../config/connect.php');
+$var = "profile";
+include('../../controller/siteController.php');
+include('../../config/connect.php');
 $pdo = connect();
 
 if(!$isLoggedin){
@@ -20,7 +20,7 @@ if(isset($_POST['submit']))
         $query = $pdo->prepare($sql);
         $query->execute(array('newpassword' => $newpassword, 'empID' => $empID));
 
-        header( 'Location:../view/site/profile.php?success' ) ;
+        header( 'Location: profile.php?success' ) ;
         //echo "<script> alert('Your password is changed');</script>";
     }
     else
@@ -100,23 +100,23 @@ if(isset($_POST['submit']))
 
     <title>Take Your Leave | Online</title>
 
-    <link href="../public/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../public/css/interface-leftmenu.css" rel="stylesheet">
-    <link href="../public/css/leave-interface.css" rel="stylesheet">
-    <link href="../public/css/navbar-style.css" rel="stylesheet">
-    <link href="../public/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../public/css/interface-leftmenu.css" rel="stylesheet">
+    <link href="../../public/css/leave-interface.css" rel="stylesheet">
+    <link href="../../public/css/navbar-style.css" rel="stylesheet">
+    <link href="../../public/css/font-awesome.min.css" rel="stylesheet">
 
 </head>
 
 <body style=" background-color: #eceff4 !important;">
 
-    <?php include ("../view/layouts/navbar.php")?>
+    <?php include ("../layouts/navbar.php")?>
 
     <div class="container-fluid ">
         <div class="row ">
 
             <div class="col-sm-2 col-xs-12 left-menu-div side-bar-display">
-                <?php include ("../view/layouts/leftbar.php")?>
+                <?php include ("../layouts/leftbar.php")?>
             </div>
 
             <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2" style="position: relative;">
@@ -125,10 +125,10 @@ if(isset($_POST['submit']))
                             <div class="col-lg-12">
                                 <ol class="breadcrumb breadcrumb-style">
                                     <li>
-                                        <i class="fa fa-dashboard"></i>  <a href="../index.php">Take Your Leave</a>
+                                        <i class="fa fa-dashboard"></i>  <a href="../../index.php">Take Your Leave</a>
                                     </li>
                                     <li class="active">
-                                        <i class="fa fa-user-md"></i> <a href="../view/site/profile.php">My Profile</a>
+                                        <i class="fa fa-user-md"></i> <a href="profile.php">My Profile</a>
                                     </li>
                                     <li class="active">
                                         <i class="fa fa-user-plus"></i> Reset Password
@@ -177,8 +177,8 @@ if(isset($_POST['submit']))
 
         </div>
 
-    <script src="../public/js/jquery.js"></script>
-    <script src="../public/js/bootstrap.js"></script>
+    <script src="../../public/js/jquery.js"></script>
+    <script src="../../public/js/bootstrap.js"></script>
 </body>
 
 </html>
