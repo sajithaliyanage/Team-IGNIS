@@ -1,6 +1,5 @@
 <?php
 
-$var = "profile";
 include('../../controller/siteController.php');
 include('../../config/connect.php');
 $pdo = connect();
