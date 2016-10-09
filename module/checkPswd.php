@@ -12,12 +12,12 @@ $query->execute(array('empID'=>$empID));
 $result = $query->fetch();
 
 try{
-    //check passswrd ar equal or not
+    //check passswrd is equal or not with existing password
     if($result["password"]==$password) {
-        echo "<font color=\"green\">Password match</font>!";
+        echo "<font color=\"green\">Password matches</font>!";
 
     }else{
-        echo "<font color=\"green\">Provide valid password</font>!";
+        echo "<font color=\"red\">Provide existing password</font>!";
     }
 
 

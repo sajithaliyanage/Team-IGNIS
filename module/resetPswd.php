@@ -30,9 +30,40 @@ if(isset($_POST['submit']))
 }
 
 ?>
+
 <!--script for check whether current password matches with existing password-->
+<script type="text/javascript">
+    function showUser(str)
+    {
+        if (str=="")
+        {
+            document.getElementById("txtHint").innerHTML="";
+            return;
+        }
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
 
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {// code for IE6, IE5
 
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","checkPswd.php?q="+str,true);
+
+        xmlhttp.send();
+    }
+</script>
+
+<!--script for check whether new password matches with confirm password-->
 <script type="text/javascript">
     function pass()
     {
@@ -41,7 +72,7 @@ if(isset($_POST['submit']))
         if(pwd==cpwd)
         {
             var t1=document.getElementById('pass');
-            t1.innerHTML="Password match!";
+            t1.innerHTML="Password matches!";
             t1.style.color="green";
 
 
@@ -51,7 +82,7 @@ if(isset($_POST['submit']))
         {
             var t1=document.getElementById('pass');
             t1.innerHTML="Does not match with New password!";
-            t1.style.color="green";
+            t1.style.color="red";
             /* t1.style.display='block';*/
             document.form.password.focus();
         }
