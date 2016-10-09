@@ -304,4 +304,25 @@ input[type="file"] {
     z-index:4000;
     position: relative;
 }
+
+@media(max-width:678px)and (min-width:400px){
+    .toped{
+        margin-top:25px !important;
+        font-size:12px;
+    }
+}
+
+@media(max-width:400px){
+    .toped{
+        margin-top:45px !important;
+        font-size:12px;
+    }
+}
+
+@media(max-width:678px){
+    .profilepic{
+       height:auto !important;
+    }
+}
+
 /*...*/

@@ -68,7 +68,7 @@ if(!$isLoggedin && $empRole!="admin"){
                                 $result = $query->fetchAll();
                                 $rowCount = $query->rowCount();
                             ?>
-                            <h5 style="text-align: right;">Total Job Categories : <span class="badge"><?php if($rowCount<10){echo "0".$rowCount;}else{echo $rowCount;} ?></span></h5>
+                            <h5 style="text-align: right;">Total Leave Types : <span class="badge"><?php if($rowCount<10){echo "0".$rowCount;}else{echo $rowCount;} ?></span></h5>
                             <div class="list-group">
 
                                 <?php

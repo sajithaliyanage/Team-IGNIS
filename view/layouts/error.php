@@ -31,7 +31,7 @@
                                     Take Your Leave is online leave management system for all kind of companies and include lots of facilities and services
                             	</p>
                                 <h1 style="text-align: center; font-size:85px; margin-top:60px;">Error!</h1>
-                                <h1 style="text-align: center">Somting went wrong</h1>
+                                <h1 style="text-align: center">Somthing went wrong</h1>
 
                                 <a href="../../index.php"><h3 style="color:#2e6da4;"><i class="fa fa-home" aria-hidden="true" style="margin-right:5px;"></i>Back to home</h3></a>
                             </div>

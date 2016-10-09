@@ -27,7 +27,7 @@
 
     <a href="../site/apply.php"  style="<?php if($empRole=="director"){echo "display:none;";}?>" class="list-group-item left-menu left-menu<?php if($var=="apply"){echo"-active";}?>"><i class="fa fa-edit icon-bar" aria-hidden="true"></i>Apply Leave<span class="<?php if($var=="apply"){echo"selected";}?>"></span></a>
 
-    <a href="../site/confirm_leave.php"  style="<?php if($empRole=="director" ||$empRole=="employee" ){echo "display:none;";}?>" class="list-group-item left-menu left-menu<?php if($var=="approve"){echo"-active";}?>"><i class="fa fa-building icon-bar" aria-hidden="true"></i><?php if($empRole=="executive"){echo "Recommend Leave";}else{ echo "Confirm Leave";}?><span class="<?php if($var=="approve"){echo"selected";}?>"></span></a>
+    <a href="../site/confirm_leave.php"  style="<?php if($empRole=="director" ||$empRole=="employee" || $empRole=="admin" ){echo "display:none;";}?>" class="list-group-item left-menu left-menu<?php if($var=="approve"){echo"-active";}?>"><i class="fa fa-building icon-bar" aria-hidden="true"></i><?php if($empRole=="executive"){echo "Recommend Leave";}else{ echo "Confirm Leave";}?><span class="<?php if($var=="approve"){echo"selected";}?>"></span></a>
 
     <a href="../site/leave_status.php" style="<?php if($empRole=="director"){echo "display:none;";}?>" class="list-group-item left-menu left-menu<?php if($var=="status"){echo"-active";}?>"><i class="fa fa-paperclip icon-bar" aria-hidden="true"></i>Leave Status<span class="<?php if($var=="status"){echo"selected";}?>"></span></a>
 

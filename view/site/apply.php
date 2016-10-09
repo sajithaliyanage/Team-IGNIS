@@ -123,7 +123,7 @@ if(!$isLoggedin){
                     <div class="row margin-top">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-calendar icon-margin-right" aria-hidden="true"></i>
-                                Profile Calendar</h5>
+                                Overall Calendar</h5>
                             <hr>
 
                             <div style="margin-bottom:20px;">
@@ -225,7 +225,7 @@ if(!$isLoggedin){
                                         <br>
 
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">Number of Days:</label>
+                                            <label class="col-xs-4 control-label form-lable">Day Count:</label>
 
                                             <div class="col-xs-8">
                                                 <input id="service_name" name="numDays" type="text"
@@ -272,7 +272,7 @@ if(!$isLoggedin){
                                 }
 
                                 foreach($result as $rs){
-                                    echo "<a  class='list-group-item'>".ucwords($rs['leave_name'])." - ".$rs['apply_date']."<span style='float:right;'>"; if($rs['status']=='waiting'){echo 'Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>';}else if($rs['status']=='approved'){ echo 'Approved <i class=\'fa fa-check\' aria-hidden=\'true\'></i></span></a>';}else{echo 'Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></a>';};
+                                    echo "<a  class='list-group-item'>".ucwords($rs['leave_name'])." - ".$rs['apply_date']."<span style='float:right;'>"; if($rs['status']=='waiting' || $rs['status']=='recommended' ){echo 'Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>';}else if($rs['status']=='approved'){ echo 'Approved <i class=\'fa fa-check\' aria-hidden=\'true\'></i></span></a>';}else{echo 'Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></a>';};
                                 }
                                 ?>
                             </div>

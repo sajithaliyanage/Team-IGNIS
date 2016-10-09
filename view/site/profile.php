@@ -84,7 +84,7 @@ if(!$isLoggedin){
                                                 <div class="nortification-box-status">
                                                     <center>
                                                         <div>
-                                                            <img src='<?php if($result['image']!='null'){echo '../'.$result['image'];}else{echo "../../public/images/default.png";}?>' style="margin-bottom:40px; padding-top: 20px" width='73%' height='400'  />
+                                                            <img class="profilepic" src='<?php if($result['image']!='null'){echo '../'.$result['image'];}else{echo "../../public/images/default.png";}?>' style="margin-bottom:40px; padding-top: 20px" width='73%' height='400'  />
                                                         </div>
                                                     </center>
 
@@ -103,8 +103,6 @@ if(!$isLoggedin){
 
                                 <div class="row">
 
-                                    <div class="col-xs-12">
-
                                         <div class="col-xs-12 nortification-box-top">
                                             <h5 class="nortification-box-heading"><i class="fa fa-edit icon-margin-right" aria-hidden="true"></i>
                                                 Edit Profile</h5>
@@ -118,83 +116,69 @@ if(!$isLoggedin){
                                                 $sql = "select * from employee INNER JOIN department ON employee.dept_id=department.dept_id INNER JOIN job_category ON employee.job_cat_id=job_category.job_cat_id JOIN job_level ON job_level.level_id=employee.level_id WHERE comp_id=:empID";
                                                 $query = $pdo->prepare($sql);
                                                 $query->execute(array('empID'=>$empID));
-                                                $result = $query->fetchAll();
-
-                                                foreach($result as $rs) {
-
-                                                    echo "<div class=\"col-xs-12\">
-                                                        <label class=\"col-xs-5 \">";
-                                                            echo "Employee Name:";
-                                                        echo " </label>
-                                                         <div class=\"col-xs-7\">" . $rs['name'] . "</div>
-                                                    </div>";
-                                                    echo "<br><br>";
-
-                                                    echo "<div class=\"col-xs-12\">
-                                                        <label class=\"col-xs-5 \">";
-                                                            echo "Company ID:";
-                                                        echo " </label>
-                                                        <div class=\"col-xs-7\">" . $rs['comp_id'] . "</div>
-                                                    </div>";
-                                                    echo "<br><br>";
-
-                                                    echo "<div class=\"col-xs-12\">
-                                                        <label class=\"col-xs-5 \">";
-                                                            echo "Email:";
-                                                        echo " </label>
-                                                        <div class=\"col-xs-7\">" . $rs['email'] . "</div>
-                                                    </div>";
-                                                    echo "<br><br>";
-
-                                                    echo "<div class=\"col-xs-12\">
-                                                        <label class=\"col-xs-5\">";
-                                                            echo "Contact Number:";
-                                                        echo " </label>
-                                                        <div class=\"col-xs-7\">" . $rs['tel_no'] . "</div>
-                                                     </div>";
-                                                    echo "<br><br>";
-
-                                                    echo "<div class=\"col-xs-12\">
-                                                        <label class=\"col-xs-5 \">";
-                                                            echo "Department:";
-                                                        echo " </label>
-                                                        <div class=\"col-xs-7\">" . $rs['dept_name'] . "</div>
-                                                    </div>";
-                                                    echo "<br><br>";
-
-                                                    echo "<div class=\"col-xs-12\">
-                                                        <label class=\"col-xs-5 \">";
-                                                            echo "Job Category:";
-                                                        echo " </label>
-                                                        <div class=\"col-xs-7\">" . $rs['job_cat_name'] . "</div>
-                                                    </div>";
-                                                    echo "<br><br>";
-
-                                                    echo "<div class=\"col-xs-12\">
-                                                        <label class=\"col-xs-5 \">";
-                                                            echo "Job Level:";
-                                                        echo" </label>
-                                                        <div class=\"col-xs-7\">" . $rs['level_name'] . "</div>
-                                                    </div>";
-                                                    echo "<br><br>";
-
-                                                    echo "<div class=\"col-xs-12\">
-                                                        <label class=\"col-xs-5 \">";
-                                                            echo "NIC:";
-                                                        echo" </label>
-                                                        <div class=\"col-xs-7\">" . $rs['nic'] . "</div>
-                                                    </div>";
-                                                    echo "<br><br>";
-                                             }
+                                                $result = $query->fetch();
 
                                                 ?>
-
-                                                    <div class="col-xs-12">
-                                                        <label class="col-xs-5 ">Password:</label>
-                                                        <div class="col-xs-7"><a href="../../module/resetpswd.php">Reset Password</a></div>
+                                                    <div class="form-group toped">
+                                                        <label class="col-xs-5">Employee Name:</label>
+                                                        <div class="col-xs-7"><?php echo $result['name']?></div>
                                                     </div>
+                                                    <br/>
 
-                                                    <br><br>
+                                                    <div class="form-group toped">
+                                                        <label class="col-xs-5">Company ID:</label>
+                                                        <div class="col-xs-7"><?php echo $result['comp_id']?></div>
+                                                    </div>
+                                                    <br/>
+
+                                                    <div class="form-group toped">
+                                                        <label class="col-xs-5">Employee Name:</label>
+                                                        <div class="col-xs-7"><?php echo $result['name']?></div>
+                                                    </div>
+                                                    <br/>
+
+                                                    <div class="form-group toped">
+                                                        <label class="col-xs-5">Email:</label>
+                                                        <div class="col-xs-7"><?php echo $result['email']?></div>
+                                                    </div>
+                                                    <br/>
+
+                                                    <div class="form-group toped">
+                                                        <label class="col-xs-5">Contact Number:</label>
+                                                        <div class="col-xs-7"><?php echo $result['tel_no']?></div>
+                                                    </div>
+                                                    <br/>
+
+                                                    <div class="form-group toped">
+                                                        <label class="col-xs-5">Department:</label>
+                                                        <div class="col-xs-7"><?php echo $result['dept_name']?></div>
+                                                    </div>
+                                                    <br/>
+
+                                                    <div class="form-group toped">
+                                                        <label class="col-xs-5">Job Category:</label>
+                                                        <div class="col-xs-7"><?php echo $result['job_cat_name']?></div>
+                                                    </div>
+                                                    <br/>
+
+
+                                                    <div class="form-group toped">
+                                                        <label class="col-xs-5">Job Level:</label>
+                                                        <div class="col-xs-7" style="text-transform: capitalize;"><?php echo $result['level_name']?></div>
+                                                    </div>
+                                                    <br/>
+
+                                                    <div class="form-group toped">
+                                                        <label class="col-xs-5">NIC:</label>
+                                                        <div class="col-xs-7"><?php echo $result['nic']?></div>
+                                                    </div>
+                                                    <br/>
+
+                                                    <div class="form-group toped">
+                                                        <label class="col-xs-5 ">Password:</label>
+                                                        <div class="col-xs-7"><a href="../../module/resetPswd.php">Reset Password</a></div>
+                                                    </div>
+                                                    <br>
 
                                                     <a href="editProfile.php"><button class="btn btn-info btn-lg pull-right submit-button" type="submit" >Edit Profile Details</button></a>
                                                 </div>
@@ -202,7 +186,6 @@ if(!$isLoggedin){
 
                                         </div>
 
-                                    </div>
                                 </div>
                         </div>
                         <!--content of Edit Profile ends-->

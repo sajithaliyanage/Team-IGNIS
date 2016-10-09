@@ -11,8 +11,8 @@ $empId = $_POST['emp_id'];
 $empName = $_POST['emp_name'];
 $empNIC = $_POST['emp_nic'];
 $empGender = $_POST['emp_gender'];
-$empEmail = $_POST['emp_email'];
-$empPassword = $_POST['emp_password'];
+$empEmail =  $_POST['emp_email'];
+$empPassword = password_hash($_POST['emp_password'], PASSWORD_DEFAULT);
 $empTelephone = $_POST['emp_tele'];
 $groupID = $_POST['group_id'];
 

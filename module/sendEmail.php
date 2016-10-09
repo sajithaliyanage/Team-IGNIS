@@ -4,7 +4,7 @@ function sendApprovedEmail($email,$employeeName,$leaveCount,$startDate,$endDate)
     // Set up parameters
     $to = $email;
     $subject = "Take Your Leave - Online Leave Management System";
-    $message ="Hey ".$employeeName.", We are happy to say your Manager has approved your ".$leaveCount."day leaves on ".$startDate." to ".$endDate." \n \n";
+    $message ="Hey ".$employeeName.", We are happy to inform that your ".$leaveCount."day medical is being APPROVED for the time period from ".$startDate." to ".$endDate." \n \n";
     $message .= <<<EOF
                 <html>
                 <body>
