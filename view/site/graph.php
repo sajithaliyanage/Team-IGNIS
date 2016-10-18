@@ -1,14 +1,14 @@
 <?php
-//$var = "graphs";
-//include('../../controller/siteController.php');
-//include('../../config/connect.php');
-//$pdo = connect();
-//
-//if(!$isLoggedin && $empRole!="director"){
-//    header('Location:../../index.php');
-//}
-//
-//?>
+$var = "graphs";
+include('../../controller/siteController.php');
+include('../../config/connect.php');
+$pdo = connect();
+
+if(!$isLoggedin && $empRole!="director"){
+    header('Location:../../index.php');
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

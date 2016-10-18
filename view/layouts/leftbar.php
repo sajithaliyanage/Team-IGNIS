@@ -45,6 +45,7 @@
 
     <a href="../site/profile.php" class="list-group-item left-menu left-menu<?php if($var=="profile"){echo"-active";}?>"><i class="fa fa-user icon-bar" aria-hidden="true"></i>My Profile<span class="<?php if($var=="profile"){echo"selected";}?>"></span></a>
 
+    <a href="../site/graph.php" style="<?php if($empRole!="director"){echo "display:none;";}?>" class="list-group-item left-menu left-menu<?php if($var=="graph"){echo"-active";}?>"><i class="fa fa-edit icon-bar" aria-hidden="true"></i><?php if($empRole=="director"){echo "Analyse Overall Company Attendance";}?><span class="<?php if($var=="graph"){echo"selected";}?>"></span></a>
 
 
 </div>
