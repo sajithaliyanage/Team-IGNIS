@@ -47,7 +47,7 @@ if(!$isLoggedin && $empRole!="director"){
                                 <i class="fa fa-dashboard"></i> <a href="director.php">Take Your Leave</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-edit"></i> Overall Company
+                                <i class="fa fa-edit"></i> Company Attendance Analyse
                             </li>
                         </ol>
                     </div>
