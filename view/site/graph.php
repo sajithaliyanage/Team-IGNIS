@@ -1,16 +1,16 @@
 <?php
-$var = "graphs";
-include('../../controller/siteController.php');
-include('../../config/connect.php');
-$pdo = connect();
-
-if(!$isLoggedin && $empRole!="director"){
-    header('Location:../../index.php');
-}
-
-?>
-    <!DOCTYPE html>
-    <html lang="en">
+//$var = "graphs";
+//include('../../controller/siteController.php');
+//include('../../config/connect.php');
+//$pdo = connect();
+//
+//if(!$isLoggedin && $empRole!="director"){
+//    header('Location:../../index.php');
+//}
+//
+//?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
@@ -66,10 +66,4 @@ if(!$isLoggedin && $empRole!="director"){
     <script src="../admin/js/bootstrap.js"></script>
 
 </body>
-    </html><?php
-/**
- * Created by PhpStorm.
- * User: Gothami
- * Date: 10/18/2016
- * Time: 8:06 PM
- */
+</html>
