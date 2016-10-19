@@ -58,48 +58,17 @@ if(!$isLoggedin && $empRole!="director"){
 
             <div class="row padding-row">
 
-                <script type="text/javascript">
-                    var emp_chart = new AwesomeChart('emp_graph');
-                    emp_chart.data = [
-                        <?php
-                        //display no of employees belongs to a particular department
-                        $sql1 = "SELECT * from department";
-                        $query1 = $pdo->prepare($sql1);
-                        $query1->execute(array());
-                        $row1 = $query1->rowCount();
-                        $rows1 = intval($row1);
-                        $result1 = $query1->fetch();
+                <div class="hero-unit-table">
+                    <div class="charts_container">
+                        <div class="chart_container">
+                            <div class="alert alert-info">Number of employees in a department</div>
+                            <canvas id="emp_graph" width="1100" height="400">
+                                Your web-browser does not support the HTML 5 canvas element.
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
 
-                        while ($rows1) {
-
-                            echo $result1['no_of_emp'] . ',';
-                            $rows1=$rows1-1;
-                        }; ?>
-                    ];
-
-                    emp_chart.labels = [
-                        <?php
-                        //display the department name
-                        $sql2 = "SELECT * from department";
-                        $query2 = $pdo->prepare($sql2);
-                        $query2->execute(array());
-                        $row2 = $query2->rowCount();
-                        $rows2 = intval($row2);
-                        $result2 = $query2->fetch();
-                        while ($rows2) {
-
-                            echo "'" . $result2['dept_name'] . "'" . ',';
-                            $rows2=$rows2-1;
-                        }; ?>
-                    ];
-
-                    <!--    to change the color of the graph-->
-                    emp_chart.colors = ['gold', 'skyblue', '#FF6600', 'pink', 'darkblue', 'lightpink', 'green'];
-                    emp_chart.randomColors = true;
-                    emp_chart.animate = true;
-                    emp_chart.animationFrames = 20;
-                    emp_chart.draw();
-                </script>
 
 
             </div>
@@ -110,8 +79,75 @@ if(!$isLoggedin && $empRole!="director"){
 
     </div>
 
+
+
+<script type="application/javascript">
+      var emp_chart = new AwesomeChart('emp_graph');
+      emp_chart.data = [
+   <?php
+            //display no of employees belongs to a particular department
+          $query = mysql_query("select * from department") ;
+          while ($row = mysql_fetch_array($query)) {
+          ?>
+          <?php echo $row['no_of_emp'] . ','; ?>
+          <?php }; ?>
+        ];
+
+        emp_chart.labels = [
+            <?php
+            //display the department name
+            $query = mysql_query("select * from department") ;
+            while ($row = mysql_fetch_array($query)) {
+            ?>
+            <?php echo "'" . $row['dept_name'] . "'" . ','; ?>
+            <?php };  ?>
+        ];
+
+        <!--    to change the color of the graph-->
+        emp_chart.colors = ['gold', 'skyblue', '#FF6600', 'pink', 'darkblue', 'lightpink', 'green'];
+        emp_chart.randomColors = true;
+        emp_chart.animate = true;
+        emp_chart.animationFrames = 20;
+        emp_chart.draw();
+    </script>
+
+<!--    <script type="application/javascript">-->
+<!--        var emp_chart = new AwesomeChart('emp_graph');-->
+<!--        emp_chart.data = [-->
+<!--            --><?php
+//            //display no of employees belongs to a particular department
+//            $sql1 = "SELECT * from department";
+//            $query1 = $pdo->prepare($sql1);
+//            $result1 = $query1->fetch();
+//            while (false) {
+//
+//                echo $result1['no_of_emp'] . ',';
+//            }; ?>
+//        ];
+//
+//        emp_chart.labels = [
+//            <?php
+//            //display the department name
+//            $sql2 = "SELECT * from department";
+//            $query2 = $pdo->prepare($sql2);
+//            $result2 = $query2->fetch();
+//            while (false) {
+//
+//                echo "'" . $result2['dept_name'] . "'" . ',';
+//            }; ?>
+//        ];
+//
+//        <!--    to change the color of the graph-->
+//        emp_chart.colors = ['gold', 'skyblue', '#FF6600', 'pink', 'darkblue', 'lightpink', 'green'];
+//        emp_chart.randomColors = true;
+//        emp_chart.animate = true;
+//        emp_chart.animationFrames = 20;
+//        emp_chart.draw();
+//    </script>
+
     <script src="../admin/js/jquery.js"></script>
     <script src="../admin/js/bootstrap.js"></script>
+    <script type="application/javascript" src="../../public/js/awesomechart.js"> </script>
 
 </body>
 </html>
