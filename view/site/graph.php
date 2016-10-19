@@ -56,6 +56,54 @@ if(!$isLoggedin && $empRole!="director"){
 
             <hr style="border-bottom:1px solid #e3e3e3;">
 
+            <div class="row padding-row">
+
+                <script type="text/javascript">
+                    var emp_chart = new AwesomeChart('emp_graph');
+                    emp_chart.data = [
+                        <?php
+                        //display no of employees belongs to a particular department
+                        $sql1 = "SELECT * from department";
+                        $query1 = $pdo->prepare($sql1);
+                        $query1->execute(array());
+                        $row1 = $query1->rowCount();
+                        $rows1 = intval($row1);
+                        $result1 = $query1->fetch();
+
+                        while ($rows1) {
+
+                            echo $result1['no_of_emp'] . ',';
+                            $rows1=$rows1-1;
+                        }; ?>
+                    ];
+
+                    emp_chart.labels = [
+                        <?php
+                        //display the department name
+                        $sql2 = "SELECT * from department";
+                        $query2 = $pdo->prepare($sql2);
+                        $query2->execute(array());
+                        $row2 = $query2->rowCount();
+                        $rows2 = intval($row2);
+                        $result2 = $query2->fetch();
+                        while ($rows2) {
+
+                            echo "'" . $result2['dept_name'] . "'" . ',';
+                            $rows2=$rows2-1;
+                        }; ?>
+                    ];
+
+                    <!--    to change the color of the graph-->
+                    emp_chart.colors = ['gold', 'skyblue', '#FF6600', 'pink', 'darkblue', 'lightpink', 'green'];
+                    emp_chart.randomColors = true;
+                    emp_chart.animate = true;
+                    emp_chart.animationFrames = 20;
+                    emp_chart.draw();
+                </script>
+
+
+            </div>
+
 
         </div>
 
