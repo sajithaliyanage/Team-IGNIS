@@ -65,6 +65,18 @@ if(!$isLoggedin && $empRole!="director"){
                             <canvas id="emp_graph" width="1100" height="400">
                                 Your web-browser does not support the HTML 5 canvas element.
                             </canvas>
+                            <?php
+                            //display no of employees belongs to a particular department
+                            $sql="SELECT * from department where currentStatus=:approve ";
+                            $query = $pdo->prepare($sql);
+                            $query->execute(array('approve'=>"approved"));
+                            $result = $query->fetchAll();
+                            $rows = $query->rowCount();
+                            while ($rows>0) {
+                                echo $result[$rows-1]['no_of_emp'] . ',';
+                                $rows=$rows-1;
+                            }; ?>
+
                         </div>
                     </div>
                 </div>
