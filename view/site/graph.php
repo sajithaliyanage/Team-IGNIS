@@ -47,7 +47,7 @@ if(!$isLoggedin && $empRole!="director"){
                                 <i class="fa fa-dashboard"></i> <a href="director.php">Take Your Leave</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-edit"></i> Company Attendance Analyse
+                                <i class="fa fa-bar-chart"></i> Company Attendance Analyse
                             </li>
                         </ol>
                     </div>
@@ -120,7 +120,8 @@ if(!$isLoggedin && $empRole!="director"){
 
     <script src="../admin/js/jquery.js"></script>
     <script src="../admin/js/bootstrap.js"></script>
-    <script type="application/javascript" src="../../public/js/awesomechart.js"> </script>
+    <script src="../layouts/graph.js" type="text/javascript"></script>
+    <script type="application/javascript" src="../layouts/awesomechart.js"> </script>
 
 </body>
 </html>
