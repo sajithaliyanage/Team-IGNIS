@@ -277,6 +277,29 @@ if(!$isLoggedin && $empRole!="admin"){
                         </div>
                     </div>
                 </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="col-xs-12 col-sm-5 padding-box">
+                    <div class="row">
+                        <div class="col-xs-12 nortification-box-top">
+                            <h5 class="nortification-box-heading"><i class="fa fa-pencil icon-margin-right"aria-hidden="true"></i>
+                                Sync Attendance</h5>
+                            <hr>
+                            <div class="list-group">
+                                <form role="form"  action="../../module/excelRead.php" >
+                                        <p>Update today attendance to the database</p>
+
+
+                                    <button class="btn btn-info btn-lg center-block submit-button" type="submit" style="margin-top:20px;">Sync</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>

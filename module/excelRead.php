@@ -1,10 +1,10 @@
 <?php
 
-    require_once "../../module/PHPExcel/PHPExcel.php";
+    require_once "../module/PHPExcel/PHPExcel.php";
 
 
-$objPHPExcel1 = PHPExcel_IOFactory::load("new.xlsx");
-$objPHPExcel2 = PHPExcel_IOFactory::load("testing.xlsx");
+$objPHPExcel1 = PHPExcel_IOFactory::load("../view/site/new.xlsx");
+$objPHPExcel2 = PHPExcel_IOFactory::load("../view/site/testing.xlsx");
 
 $objPHPExcel2->getActiveSheet()->removeRow(1,1);
 $objPHPExcel1->getActiveSheet()->fromArray(
@@ -14,7 +14,10 @@ $objPHPExcel1->getActiveSheet()->fromArray(
 );
 
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel1, 'Excel2007');
-$objWriter->save('new.xlsx');
+$objWriter->save('../view/site/new.xlsx');
+
+
+echo "Success";
 
 
 
