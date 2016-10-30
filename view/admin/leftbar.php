@@ -14,6 +14,7 @@
         </div>
     </center>
     <a href="index.php" class="list-group-item left-menu left-menu<?php if($var=="index"){echo"-active";}?>"><i class="fa fa-edit icon-bar" aria-hidden="true"></i>Overall Company<span class="<?php if($var=="index"){echo"selected";}?>"></span></a>
+    <a href="attendanceSync.php" class="list-group-item left-menu left-menu<?php if($var=="attendance"){echo"-active";}?>"><i class="fa fa-clock-o icon-bar" aria-hidden="true"></i>Update Attendance<span class="<?php if($var=="attendance"){echo"selected";}?>"></span></a>
     <a href="department.php" class="list-group-item left-menu left-menu<?php if($var=="department"){echo"-active";}?>"><i class="fa fa-building icon-bar" aria-hidden="true"></i>Edit Department<span class="<?php if($var=="department"){echo"selected";}?>"></span></a>
     <a href="employee.php" class="list-group-item left-menu left-menu<?php if($var=="employee"){echo"-active";}?>"><i class="fa fa-user-plus icon-bar" aria-hidden="true"></i>Edit Employees<span class="<?php if($var=="employee"){echo"selected";}?>"></span></a>
     <a href="setleaves.php" class="list-group-item left-menu left-menu<?php if($var=="set"){echo"-active";}?>"><i class="fa fa-plus icon-bar" aria-hidden="true"></i>Set Leaves<span class="<?php if($var=="set"){echo"selected";}?>"></span></a>
