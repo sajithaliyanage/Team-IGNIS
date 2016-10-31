@@ -55,20 +55,14 @@ if(!$isLoggedin && $empRole!="director"){
             </div>
 
             <hr style="border-bottom:1px solid #e3e3e3;">
-
             <div class="row padding-row">
-                <div class="hero-unit-table">
                     <div class="alert alert-info">Number of employees in a department</div>
-                    <canvas id="emp_graph"  height="400">
-                        Your web-browser does not support the HTML 5 canvas element.
-                    </canvas>
-                </div>
 
                     <div id="columnchart_material" style="width: 900px; height: 500px;"></div>
-                </div>
-        </div>
+            </div>
 
 
+    </div>
     </div>
 </div>
 
