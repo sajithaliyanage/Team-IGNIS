@@ -57,66 +57,47 @@ if(!$isLoggedin && $empRole!="director"){
             <hr style="border-bottom:1px solid #e3e3e3;">
 
             <div class="row padding-row">
-                <div class="span12">
                 <div class="hero-unit-table">
-                    <div class="charts_container">
-                        <div class="chart_container">
-                            <div class="alert alert-info">Number of employees in a department</div>
-                            <canvas id="emp_graph"  height="400">
-                                Your web-browser does not support the HTML 5 canvas element.
-                            </canvas>
-
-                        </div>
-                    </div>
+                    <div class="alert alert-info">Number of employees in a department</div>
+                    <canvas id="emp_graph"  height="400">
+                        Your web-browser does not support the HTML 5 canvas element.
+                    </canvas>
                 </div>
 
-                <script type="application/javascript">
-                    var emp_chart = new AwesomeChart('emp_graph');
-                    emp_chart.data = [
-                        <?php
-                        //display no of employees belongs to a particular department
-                        $sql="SELECT * from department where currentStatus=:approve ";
-                        $query = $pdo->prepare($sql);
-                        $query->execute(array('approve'=>"approved"));
-                        $result = $query->fetchAll();
-                        $rows = $query->rowCount();
-                        while ($rows>0) {
-                            echo $result[$rows-1]['no_of_emp'] . ',';
-                            $rows=$rows-1;
-                        }; ?>
-                    ];
-
-                    emp_chart.labels = [
-                        <?php
-                        //display the department name
-                        $sql1="SELECT * from department where currentStatus=:approve ";
-                        $query1 = $pdo->prepare($sql1);
-                        $query1->execute(array('approve'=>"approved"));
-                        $result1 = $query1->fetchAll();
-                        $rows1 = $query1->rowCount();
-                        while ($rows1>0) {
-                            echo $result1[$rows1-1]['dept_name'] . ',';
-                            $rows1=$rows1-1;
-                        }; ?>
-                    ];
-
-                    <!--    to change the color of the graph-->
-                    emp_chart.colors = ['gold', 'skyblue', 'darkblue', 'lightpink', 'green'];
-                    emp_chart.randomColors = true;
-                    emp_chart.animate = true;
-                    emp_chart.animationFrames = 20;
-                    emp_chart.draw();
-                </script>
-
+                    <div id="columnchart_material" style="width: 900px; height: 500px;"></div>
                 </div>
-            </div>
-
-
         </div>
 
 
     </div>
 </div>
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['bar']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Year', 'Sales', 'Expenses', 'Profit'],
+                ['2014', 1000, 400, 200],
+                ['2015', 1170, 460, 250],
+                ['2016', 660, 1120, 300],
+                ['2017', 1030, 540, 350]
+            ]);
+
+            var options = {
+                chart: {
+                    title: 'Company Performance',
+                    subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                }
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+            chart.draw(data, options);
+        }
+    </script>
 
     <script src="../admin/js/jquery.js"></script>
     <script src="../admin/js/bootstrap.js"></script>
