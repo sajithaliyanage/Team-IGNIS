@@ -73,7 +73,7 @@ if(!$isLoggedin && $empRole!="director"){
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
 
-            <?php
+           <?php
             //display no of employees belongs to a particular department
                 $sql="SELECT * from department where currentStatus=:approve ";
                 $query = $pdo->prepare($sql);
