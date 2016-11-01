@@ -71,8 +71,7 @@ if(!$isLoggedin && $empRole!="director"){
                         array_push($data,$rs['dept_name'],$rs['no_of_emp'],$rs['no_of_emp']+100);
                         array_push($result, $data);
                     }
-
-                  print_r($result);
+                    //                 print_r($result);
 //                    $rows = $query->rowCount();
 //                    $depName=[];
 //                    $emps=[];
@@ -84,7 +83,7 @@ if(!$isLoggedin && $empRole!="director"){
 //                        $i=$i+1;
 //                    };
                     ?>
-<!--                    <div id="columnchart_material" style="width: 900px; height: 500px;"></div>-->
+                    <div id="columnchart_material" style="width: 900px; height: 500px;"></div>
             </div>
 
 
