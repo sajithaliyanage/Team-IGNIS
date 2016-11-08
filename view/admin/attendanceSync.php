@@ -77,7 +77,7 @@ if(isset($_GET['number'])){
                                     echo '<button type="button" class="btn btn-primary" style="float:right; margin-top:-35px;" disabled="disabled"><i class="fa fa-refresh fa-x" style="margin-right:5px;"></i>Sync</button>';
                                 }
                                 else{
-                                    echo "<form action='attendanceSync.php' method='GET'>
+                                    echo "<form action='../../module/excelRead.php' method='GET'>
                                             <input type='hidden' name='number' value='1' />
                                             <button type=\"submit\" class=\"btn btn-primary\" style=\"float:right; margin-top:-35px;\"><i class=\"fa fa-refresh fa-spin fa-x\" style=\"margin-right:5px;\"></i>Sync</button>
                                            </form>";
@@ -90,11 +90,13 @@ if(isset($_GET['number'])){
                                     <table class="table table-responsive">
                                         <tr>
                                             <th>Date</th>
+                                            <th>Employee Id</th>
                                             <th>In Time</th>
                                             <th>Out Time</th>
                                             <th>Work Time</th>
                                             <th>Over Time</th>
                                         </tr>
+                                        <?php include "../../module/getTodayAttendance.php"?>
 
 
                                     </table>
