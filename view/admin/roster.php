@@ -131,7 +131,7 @@ if(isset($_GET['id'])){
                                         <div class="row margin-top">
                                             <div class="col-xs-12 nortification-box-top">
                                                 <h5 class="nortification-box-heading"><i class="fa fa-hourglass-half icon-margin-right" aria-hidden="true"></i>
-                                                    Show Sifts</h5>
+                                                    Show Shifts</h5>
                                                 <hr>
 
                                                 <div class="form-group" style="margin-bottom:20px !important;">
