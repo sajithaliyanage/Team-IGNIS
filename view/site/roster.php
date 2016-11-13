@@ -411,7 +411,7 @@ if($groupID==0){
 
                 $('#startdate').datepicker({
                    // format: "dd/mm/yyyy"
-                    minDate:0
+                    minDate:+1
                 });
                 $('#enddate').datepicker({
                     format: "dd/mm/yyyy"
