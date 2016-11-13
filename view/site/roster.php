@@ -78,6 +78,30 @@ if($groupID==0){
                                         <div class="row">
                                             <div class="col-xs-10 col-xs-offset-1">
                                                 <div class="form-group">
+                                                    <?php
+
+
+                                                    $smt = "SELECT * FROM employee WHERE comp_id=:log";
+                                                    $query = $pdo->prepare($smt);
+                                                    $query ->execute(array('log'=>$empID));
+                                                    $result = $query->fetchAll();
+
+                                                    foreach ($result as $value) {
+                                                       $dep=$value["dept_id"];
+                                                    }
+                                                    $smt = "SELECT * FROM group_detail WHERE dept_id=:log1";
+                                                    $query = $pdo->prepare($smt);
+                                                    $query ->execute(array('log1'=>$dep));
+                                                    $result = $query->fetchAll();
+
+                                                    foreach ($result as $rs) {
+                                                        echo($rs["group_name"]."<br>");
+                                                    }
+
+                                                    ?>
+
+
+
 
                                                     <table class='table-responsive' style="margin-top:30px;">
                                                         <table class='table table-bordered table-striped '>
@@ -259,9 +283,18 @@ if($groupID==0){
                     </div>
 
 				    <div class="col-sm-6 col-xs-12">
+
+                                <div class="col-xs-12 nortification-box-top">
+                                    <h5 class="nortification-box-heading"><i class="fa fa-cogs icon-margin-right" aria-hidden="true"></i>
+                                        Pending Requests For Changing Shifts</h5>
+                                    <hr>
+                                        <div>
+
+
+
 					<div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-tag icon-margin-right" aria-hidden="true"></i>
-                                Shift Application</h5>
+                                Shift Changing Application</h5>
                             <hr>
                             <form role="form" data-toggle="validator" action="" method="post">
                                 <div class="department-add">
