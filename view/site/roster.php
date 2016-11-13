@@ -30,10 +30,12 @@ if($groupID==0){
     <title>Take Your Leave | Online</title>
 
     <link href="../../public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../public/css/jquery-ui.css" rel="stylesheet">
     <link href="../../public/css/interface-leftmenu.css" rel="stylesheet">
     <link href="../../public/css/leave-interface.css" rel="stylesheet">
     <link href="../../public/css/navbar-style.css" rel="stylesheet">
     <link href="../../public/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../public/css/datepicker.css">
 
   </head>
 
@@ -303,7 +305,7 @@ if($groupID==0){
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label form-lable">Shifting Date :</label>
                                             <div class="col-xs-8">
-                                                <input id="service_name" name="job_category" type="text" placeholder="dd/mm/yyyy"
+                                                <input id="startdate" name="startdate" type="text" placeholder="dd/mm/yyyy"
                                                        class="form-control input-md" required>
                                             </div>
                                         </div>
@@ -344,7 +346,7 @@ if($groupID==0){
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label form-lable">Rework Date :</label>
                                             <div class="col-xs-8">
-                                                <input id="service_name" name="job_category" type="text" placeholder="dd/mm/yyyy"
+                                                <input id="enddate" name="enddate " type="text" placeholder="dd/mm/yyyy"
                                                        class="form-control input-md" required>
                                             </div>
                                         </div>
@@ -394,10 +396,30 @@ if($groupID==0){
 
     <script src="../../public/js/jquery.js"></script>
     <script src="../../public/js/bootstrap.js"></script>
+    <script src="../../public/js/bootstrap-datepicker.js"></script>
+    <script src="../../public/js/jquery-ui.js"></script>
     <script>
         $('.carousel').carousel({
             interval:0
         })
     </script>
+
+    <script type="text/javascript">
+            // When the document is ready
+            $(document).ready(function () {
+
+
+                $('#startdate').datepicker({
+                   // format: "dd/mm/yyyy"
+                    minDate:0
+                });
+                $('#enddate').datepicker({
+                    format: "dd/mm/yyyy"
+                });
+
+            });
+    </script>
+
+
 </body>
 </html>
