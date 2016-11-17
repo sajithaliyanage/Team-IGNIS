@@ -150,6 +150,7 @@ if($groupID==0){
                                                                 }
 
                                                                 $minGroupId = min($groupIds);
+                                                                $maxGroupId = max($groupIds);
                                                                 $groupCount = count($groupIds);
                                                                 ?>
 
@@ -298,37 +299,90 @@ if($groupID==0){
                                         <div class="row">
                                             <div class="col-xs-10 col-xs-offset-1">
                                                 <div class="form-group">
-
-                                                    <table class='table-responsive' style="margin-top:30px;">
-                                                        <table class='table table-bordered table-striped '>
+                                                    <div class="row">
+                                                        <div class="col-xs-4" style="padding-left:0 !important; padding-right:0 !important;">
+                                                            <table class='table table-responsive table-bordered table-striped '" >
                                                             <thead>
                                                             <tr>
-                                                                <th></th>
-                                                                <th>Group Name</th>
-                                                                <th>Time Slot</th>
+                                                                <th>Shift name</th>
+
                                                             </tr>
                                                             </thead>
                                                             <tbody>
                                                             <tr>
                                                                 <td>Shift 1</td>
-                                                                <td>Group 1</td>
-                                                                <td>7.00 - 12.00</td>
+
                                                             </tr>
 
                                                             <tr>
-                                                                <td>Shift 1</td>
-                                                                <td>Group 1</td>
-                                                                <td>7.00 - 12.00</td>
+                                                                <td>Shift 2</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Shift 1</td>
-                                                                <td>Group 1</td>
-                                                                <td>7.00 - 12.00</td>
+                                                                <td>Shift 3</td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Holiday</td>
+
                                                             </tr>
 
                                                             </tbody>
-                                                        </table>
-                                                    </table>
+                                                            </table>
+                                                        </div>
+                                                        <div class="col-xs-4"  style="padding-left:0 !important;padding-right:0 !important;">
+                                                            <table class='table table-responsive table-bordered table-striped ' style="float: left !important;" >
+
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Group name</th>
+
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <?php
+
+                                                                foreach ($result as $rs) {
+                                                                    echo'<tr>';
+                                                                    echo'<td>';if(intval($rs["group_id"])!= $maxGroupId){echo $groupNames[intval($rs["group_id"])];}else{echo  $groupNames[intval($rs["group_id"])-($groupCount-1)-1];}'</td>';
+                                                                    echo'</tr>';
+                                                                }
+                                                                ?>
+
+                                                                </tbody>
+
+                                                            </table>
+                                                        </div>
+                                                        <div class="col-xs-4"  style="padding-left:0 !important;padding-right:0 !important;">
+                                                            <table class='table table-responsive table-bordered table-striped ' style="float: left !important;" >
+
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Time slot</th>
+
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td>8.00a.m-2.00p.m</td>
+
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>2.00ppm-8.00p.m</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>8.00p.m-2.00a.m</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>..</td>
+
+                                                                </tr>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
