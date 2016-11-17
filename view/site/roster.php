@@ -8,6 +8,10 @@ if(!$isLoggedin){
     header('Location:../../index.php');
 }
 
+$groupIds = array();
+$groupNames = array();
+
+
 $sql = "SELECT group_id from employee where comp_id=:empID";
 $query = $pdo->prepare($sql);
 $query->execute(array('empID'=>$empID));
@@ -17,6 +21,8 @@ $groupID = $result['group_id'];
 if($groupID==0){
     header('Location:../../index.php');
 }
+
+
 
 ?>
  <!DOCTYPE html>
@@ -123,33 +129,28 @@ if($groupID==0){
                                                                 <?php
 
 
-                                                                $smt = "SELECT * FROM employee WHERE comp_id=:log";
+                                                                $smt = "SELECT dept_id FROM employee WHERE comp_id=:log";
                                                                 $query = $pdo->prepare($smt);
                                                                 $query ->execute(array('log'=>$empID));
-                                                                $result = $query->fetchAll();
+                                                                $result = $query->fetch();
 
-                                                                foreach ($result as $value) {
-                                                                    $dep=$value["dept_id"];
-                                                                }
+                                                                $dep= $result["dept_id"];
+
                                                                 $smt = "SELECT * FROM group_detail WHERE dept_id=:log1";
                                                                 $query = $pdo->prepare($smt);
                                                                 $query ->execute(array('log1'=>$dep));
                                                                 $result = $query->fetchAll();
 
                                                                 foreach ($result as $rs) {
-
-
+                                                                    array_push($groupIds,intval($rs["group_id"]));
+                                                                    array_push($groupNames,$rs["group_name"]);
                                                                     echo'<tr>';
-                                                                    echo'<td>'.$rs["group_name"].'</td>';
-
+                                                                        echo'<td>'.$rs["group_name"].'</td>';
                                                                     echo'</tr>';
-
-
-
-
-
-
                                                                 }
+
+                                                                $minGroupId = min($groupIds);
+                                                                $groupCount = count($groupIds);
                                                                 ?>
 
                                                                 </tbody>
@@ -201,40 +202,90 @@ if($groupID==0){
                                         <div class="row">
                                             <div class="col-xs-10 col-xs-offset-1">
                                                 <div class="form-group">
-                                                    <table class='table-responsive' style="margin-top:30px;">
-                                                        <table class='table table-bordered table-striped ' >
+                                                    <div class="row">
+                                                        <div class="col-xs-4" style="padding-left:0 !important; padding-right:0 !important;">
+                                                            <table class='table table-responsive table-bordered table-striped '" >
                                                             <thead>
                                                             <tr>
-                                                                <th></th>
-                                                                <th>Group Name</th>
-                                                                <th>Time Slot</th>
+                                                                <th>Shift name</th>
+
                                                             </tr>
                                                             </thead>
                                                             <tbody>
                                                             <tr>
                                                                 <td>Shift 1</td>
-                                                                <td>Group 1</td>
-                                                                <td>7.00 - 12.00</td>
+
                                                             </tr>
 
                                                             <tr>
-                                                                <td>Shift 1</td>
-                                                                <td>Group 1</td>
-                                                                <td>7.00 - 12.00</td>
+                                                                <td>Shift 2</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Shift 1</td>
-                                                                <td>Group 1</td>
-                                                                <td>7.00 - 12.00</td>
+                                                                <td>Shift 3</td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Holiday</td>
+
                                                             </tr>
 
                                                             </tbody>
-                                                        </table>
-                                                        </table>
+                                                            </table>
+                                                        </div>
+                                                        <div class="col-xs-4"  style="padding-left:0 !important;padding-right:0 !important;">
+                                                            <table class='table table-responsive table-bordered table-striped ' style="float: left !important;" >
 
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Group name</th>
 
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <?php
 
+                                                                    foreach ($result as $rs) {
+                                                                        echo'<tr>';
+                                                                            echo'<td>';if(intval($rs["group_id"])!= $minGroupId){echo $groupNames[intval($rs["group_id"])-2];}else{echo  $groupNames[intval($rs["group_id"])+$groupCount-2];}'</td>';
+                                                                        echo'</tr>';
+                                                                    }
+                                                                ?>
 
+                                                                </tbody>
+
+                                                            </table>
+                                                        </div>
+                                                        <div class="col-xs-4"  style="padding-left:0 !important;padding-right:0 !important;">
+                                                            <table class='table table-responsive table-bordered table-striped ' style="float: left !important;" >
+
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Time slot</th>
+
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td>8.00a.m-2.00p.m</td>
+
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>2.00ppm-8.00p.m</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>8.00p.m-2.00a.m</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>..</td>
+
+                                                                </tr>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
