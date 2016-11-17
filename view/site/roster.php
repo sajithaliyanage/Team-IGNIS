@@ -80,119 +80,113 @@ if($groupID==0){
                                         <div class="row">
                                             <div class="col-xs-10 col-xs-offset-1">
                                                 <div class="form-group">
-                                                    <table class='table-responsive' style="margin-top:30px;">
-                                                        <table class='table table-bordered table-striped ' style="float: left !important;" >
+                                                    <div class="row">
+                                                        <div class="col-xs-4">
+                                                            <table class='table table-responsive table-bordered table-striped '" >
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Shift name</th>
 
-                                                        <thead>
-                                                        <tr>
-                                                            <th>Shift name</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td>Shift 1</td>
 
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        <tr>
-                                                            <td>Shift 1</td>
+                                                                </tr>
 
-                                                        </tr>
+                                                                <tr>
+                                                                    <td>Shift 2</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Shift 3</td>
 
-                                                        <tr>
-                                                            <td>Shift 2</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Shift 3</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Holiday</td>
 
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Holiday</td>
+                                                                </tr>
 
-                                                        </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="col-xs-4">
+                                                            <table class='table table-responsive table-bordered table-striped ' style="float: left !important;" >
 
-                                                        </tbody>
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Group name</th>
 
-                                                    </table>
-                                                    </table>
-
-
-                                                    <table class='table-responsive' style="margin-top:30px;">
-                                                        <table class='table table-bordered table-striped ' style="float: left !important;" >
-
-                                                        <thead>
-                                                        <tr>
-                                                            <th>Group name</th>
-
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        <?php
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <?php
 
 
-                                                        $smt = "SELECT * FROM employee WHERE comp_id=:log";
-                                                        $query = $pdo->prepare($smt);
-                                                        $query ->execute(array('log'=>$empID));
-                                                        $result = $query->fetchAll();
+                                                                $smt = "SELECT * FROM employee WHERE comp_id=:log";
+                                                                $query = $pdo->prepare($smt);
+                                                                $query ->execute(array('log'=>$empID));
+                                                                $result = $query->fetchAll();
 
-                                                        foreach ($result as $value) {
-                                                            $dep=$value["dept_id"];
-                                                        }
-                                                        $smt = "SELECT * FROM group_detail WHERE dept_id=:log1";
-                                                        $query = $pdo->prepare($smt);
-                                                        $query ->execute(array('log1'=>$dep));
-                                                        $result = $query->fetchAll();
+                                                                foreach ($result as $value) {
+                                                                    $dep=$value["dept_id"];
+                                                                }
+                                                                $smt = "SELECT * FROM group_detail WHERE dept_id=:log1";
+                                                                $query = $pdo->prepare($smt);
+                                                                $query ->execute(array('log1'=>$dep));
+                                                                $result = $query->fetchAll();
 
-                                                        foreach ($result as $rs) {
+                                                                foreach ($result as $rs) {
 
 
-                                                            echo'<tr>';
-                                                            echo'<td>'.$rs["group_name"].'</td>';
+                                                                    echo'<tr>';
+                                                                    echo'<td>'.$rs["group_name"].'</td>';
 
-                                                            echo'</tr>';
+                                                                    echo'</tr>';
 
 
 
 
 
 
-                                                        }
-                                                        ?>
+                                                                }
+                                                                ?>
 
-                                                        </tbody>
+                                                                </tbody>
 
-                                                    </table>
-                                                    </table>
-                                                    <table class='table-responsive' style="margin-top:30px;">
-                                                        <table class='table table-bordered table-striped ' style="float: left !important;" >
+                                                            </table>
+                                                        </div>
+                                                        <div class="col-xs-4">
+                                                            <table class='table table-responsive table-bordered table-striped ' style="float: left !important;" >
 
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Time slot</th>
 
-                                                        <thead>
-                                                        <tr>
-                                                            <th>Time slot</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td>8.00a.m-2.00p.m</td>
 
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        <tr>
-                                                            <td>8.00a.m-2.00p.m</td>
+                                                                </tr>
 
-                                                        </tr>
+                                                                <tr>
+                                                                    <td>2.00ppm-8.00p.m</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>8.00p.m-2.00a.m</td>
 
-                                                        <tr>
-                                                            <td>2.00ppm-8.00p.m</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>8.00p.m-2.00a.m</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>..</td>
 
-                                                        </tr>
-                                                        <tr>
-                                                            <td>..</td>
+                                                                </tr>
 
-                                                        </tr>
-
-                                                        </tbody>
-
-
-                                                    </table>
-                                                    </table>
-
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
