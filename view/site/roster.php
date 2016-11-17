@@ -81,7 +81,7 @@ if($groupID==0){
                                             <div class="col-xs-10 col-xs-offset-1">
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <div class="col-xs-4">
+                                                        <div class="col-xs-4" style="padding-left:0 !important; padding-right:0 !important;">
                                                             <table class='table table-responsive table-bordered table-striped '" >
                                                                 <thead>
                                                                 <tr>
@@ -110,7 +110,7 @@ if($groupID==0){
                                                                 </tbody>
                                                             </table>
                                                         </div>
-                                                        <div class="col-xs-4">
+                                                        <div class="col-xs-4"  style="padding-left:0 !important;padding-right:0 !important;">
                                                             <table class='table table-responsive table-bordered table-striped ' style="float: left !important;" >
 
                                                                 <thead>
@@ -156,7 +156,7 @@ if($groupID==0){
 
                                                             </table>
                                                         </div>
-                                                        <div class="col-xs-4">
+                                                        <div class="col-xs-4"  style="padding-left:0 !important;padding-right:0 !important;">
                                                             <table class='table table-responsive table-bordered table-striped ' style="float: left !important;" >
 
                                                                 <thead>
