@@ -80,61 +80,119 @@ if($groupID==0){
                                         <div class="row">
                                             <div class="col-xs-10 col-xs-offset-1">
                                                 <div class="form-group">
-                                                    <?php
+                                                    <table class='table-responsive' style="margin-top:30px;">
+                                                        <table class='table table-bordered table-striped ' style="float: left !important;" >
 
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Shift name</th>
 
-                                                    $smt = "SELECT * FROM employee WHERE comp_id=:log";
-                                                    $query = $pdo->prepare($smt);
-                                                    $query ->execute(array('log'=>$empID));
-                                                    $result = $query->fetchAll();
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>Shift 1</td>
 
-                                                    foreach ($result as $value) {
-                                                       $dep=$value["dept_id"];
-                                                    }
-                                                    $smt = "SELECT * FROM group_detail WHERE dept_id=:log1";
-                                                    $query = $pdo->prepare($smt);
-                                                    $query ->execute(array('log1'=>$dep));
-                                                    $result = $query->fetchAll();
+                                                        </tr>
 
-                                                    foreach ($result as $rs) {
-                                                        echo($rs["group_name"]."<br>");
-                                                    }
+                                                        <tr>
+                                                            <td>Shift 2</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Shift 3</td>
 
-                                                    ?>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Holiday</td>
 
+                                                        </tr>
 
+                                                        </tbody>
+
+                                                    </table>
+                                                    </table>
 
 
                                                     <table class='table-responsive' style="margin-top:30px;">
-                                                        <table class='table table-bordered table-striped '>
-                                                            <thead>
-                                                            <tr>
-                                                                <th></th>
-                                                                <th>Group Name</th>
-                                                                <th>Time Slot</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <tr>
-                                                                <td>Morning Session</td>
-                                                                <td>Group 1</td>
-                                                                <td>7.00 - 12.00</td>
-                                                            </tr>
+                                                        <table class='table table-bordered table-striped ' style="float: left !important;" >
 
-                                                            <tr>
-                                                                <td>Evening Session</td>
-                                                                <td>Group 1</td>
-                                                                <td>7.00 - 12.00</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Night Session</td>
-                                                                <td>Group 1</td>
-                                                                <td>7.00 - 12.00</td>
-                                                            </tr>
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Group name</th>
 
-                                                            </tbody>
-                                                        </table>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <?php
+
+
+                                                        $smt = "SELECT * FROM employee WHERE comp_id=:log";
+                                                        $query = $pdo->prepare($smt);
+                                                        $query ->execute(array('log'=>$empID));
+                                                        $result = $query->fetchAll();
+
+                                                        foreach ($result as $value) {
+                                                            $dep=$value["dept_id"];
+                                                        }
+                                                        $smt = "SELECT * FROM group_detail WHERE dept_id=:log1";
+                                                        $query = $pdo->prepare($smt);
+                                                        $query ->execute(array('log1'=>$dep));
+                                                        $result = $query->fetchAll();
+
+                                                        foreach ($result as $rs) {
+
+
+                                                            echo'<tr>';
+                                                            echo'<td>'.$rs["group_name"].'</td>';
+
+                                                            echo'</tr>';
+
+
+
+
+
+
+                                                        }
+                                                        ?>
+
+                                                        </tbody>
+
                                                     </table>
+                                                    </table>
+                                                    <table class='table-responsive' style="margin-top:30px;">
+                                                        <table class='table table-bordered table-striped ' style="float: left !important;" >
+
+
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Time slot</th>
+
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>8.00a.m-2.00p.m</td>
+
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>2.00ppm-8.00p.m</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>8.00p.m-2.00a.m</td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td>..</td>
+
+                                                        </tr>
+
+                                                        </tbody>
+
+
+                                                    </table>
+                                                    </table>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -149,9 +207,8 @@ if($groupID==0){
                                         <div class="row">
                                             <div class="col-xs-10 col-xs-offset-1">
                                                 <div class="form-group">
-
                                                     <table class='table-responsive' style="margin-top:30px;">
-                                                        <table class='table table-bordered table-striped '>
+                                                        <table class='table table-bordered table-striped ' >
                                                             <thead>
                                                             <tr>
                                                                 <th></th>
@@ -179,7 +236,11 @@ if($groupID==0){
 
                                                             </tbody>
                                                         </table>
-                                                    </table>
+                                                        </table>
+
+
+
+
                                                 </div>
                                             </div>
                                         </div>
