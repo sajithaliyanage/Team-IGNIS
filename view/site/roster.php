@@ -96,21 +96,23 @@ if($groupID==0){
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                <tr>
-                                                                    <td>Shift 1</td>
+                                                                <?php
+                                                                $stm="SELECT shift_name FROM shift_type";
+                                                                $query1 = $pdo->prepare($stm);
+                                                                $query1->execute();
+                                                                $result1=$query1->fetchAll();
 
-                                                                </tr>
 
-                                                                <tr>
-                                                                    <td>Shift 2</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Shift 3</td>
+                                                                foreach ($result1 as $rs1){
 
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Holiday</td>
+                                                                    echo"<tr>";
+                                                                    echo"<td>".$rs1['shift_name']."</td>";
 
+                                                                    echo"</tr>";
+                                                                }
+
+                                                                ?>
+                                                                <tr><td>Holiday group</td>
                                                                 </tr>
 
                                                                 </tbody>
@@ -168,20 +170,25 @@ if($groupID==0){
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                <tr>
-                                                                    <td>8.00a.m-2.00p.m</td>
+                                                                <?php
+                                                                $stm1="SELECT start_time,end_time FROM shift_type";
+                                                                $query2 = $pdo->prepare($stm1);
+                                                                $query2->execute();
+                                                                $result2=$query2->fetchAll();
 
-                                                                </tr>
+
+                                                                foreach ($result2 as $rs2){
+
+                                                                    echo"<tr>";
+                                                                    echo"<td>".$rs2['start_time']." to ".$rs2['end_time']."</td>";
+
+                                                                    echo"</tr>";
+                                                                }
+
+                                                                ?>
 
                                                                 <tr>
-                                                                    <td>2.00ppm-8.00p.m</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>8.00p.m-2.00a.m</td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>..</td>
+                                                                    <td align="center">Full Day</td>
 
                                                                 </tr>
 
@@ -213,21 +220,23 @@ if($groupID==0){
                                                             </tr>
                                                             </thead>
                                                             <tbody>
-                                                            <tr>
-                                                                <td>Shift 1</td>
+                                                            <?php
+                                                            $stm2="SELECT shift_name FROM shift_type";
+                                                            $query3 = $pdo->prepare($stm2);
+                                                            $query3->execute();
+                                                            $result3=$query3->fetchAll();
 
-                                                            </tr>
 
-                                                            <tr>
-                                                                <td>Shift 2</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Shift 3</td>
+                                                            foreach ($result3 as $rs3){
 
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Holiday</td>
+                                                                echo"<tr>";
+                                                                echo"<td>".$rs3['shift_name']."</td>";
 
+                                                                echo"</tr>";
+                                                            }
+
+                                                            ?>
+                                                            <tr><td>Holiday group</td>
                                                             </tr>
 
                                                             </tbody>
@@ -266,23 +275,27 @@ if($groupID==0){
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
+                                                                <?php
+                                                                $stm2="SELECT start_time,end_time FROM shift_type";
+                                                                $query4 = $pdo->prepare($stm2);
+                                                                $query4->execute();
+                                                                $result4=$query4->fetchAll();
+
+
+                                                                foreach ($result4 as $rs4){
+
+                                                                    echo"<tr>";
+                                                                    echo"<td>".$rs4['start_time']." to ".$rs4['end_time']."</td>";
+
+                                                                    echo"</tr>";
+                                                                }
+
+                                                                ?>
+
                                                                 <tr>
-                                                                    <td>8.00a.m-2.00p.m</td>
+                                                                    <td align="center">Full Day</td>
 
                                                                 </tr>
-
-                                                                <tr>
-                                                                    <td>2.00ppm-8.00p.m</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>8.00p.m-2.00a.m</td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>..</td>
-
-                                                                </tr>
-
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -309,21 +322,23 @@ if($groupID==0){
                                                             </tr>
                                                             </thead>
                                                             <tbody>
-                                                            <tr>
-                                                                <td>Shift 1</td>
+                                                            <?php
+                                                            $stm3="SELECT shift_name FROM shift_type";
+                                                            $query5 = $pdo->prepare($stm3);
+                                                            $query5->execute();
+                                                            $result5=$query5->fetchAll();
 
-                                                            </tr>
 
-                                                            <tr>
-                                                                <td>Shift 2</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Shift 3</td>
+                                                            foreach ($result5 as $rs5){
 
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Holiday</td>
+                                                                echo"<tr>";
+                                                                echo"<td>".$rs5['shift_name']."</td>";
 
+                                                                echo"</tr>";
+                                                            }
+
+                                                            ?>
+                                                            <tr><td>Holiday group</td>
                                                             </tr>
 
                                                             </tbody>
@@ -362,23 +377,27 @@ if($groupID==0){
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
+                                                                <?php
+                                                                $stm4="SELECT start_time,end_time FROM shift_type";
+                                                                $query6 = $pdo->prepare($stm4);
+                                                                $query6->execute();
+                                                                $result6=$query6->fetchAll();
+
+
+                                                                foreach ($result6 as $rs6){
+
+                                                                    echo"<tr>";
+                                                                    echo"<td>".$rs6['start_time']." to ".$rs6['end_time']."</td>";
+
+                                                                    echo"</tr>";
+                                                                }
+
+                                                                ?>
+
                                                                 <tr>
-                                                                    <td>8.00a.m-2.00p.m</td>
+                                                                    <td align="center">Full Day</td>
 
                                                                 </tr>
-
-                                                                <tr>
-                                                                    <td>2.00ppm-8.00p.m</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>8.00p.m-2.00a.m</td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>..</td>
-
-                                                                </tr>
-
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -446,15 +465,18 @@ if($groupID==0){
 
 				    <div class="col-sm-6 col-xs-12">
 
+
                                 <div class="col-xs-12 nortification-box-top">
                                     <h5 class="nortification-box-heading"><i class="fa fa-cogs icon-margin-right" aria-hidden="true"></i>
                                         Pending Requests For Changing Shifts</h5>
                                     <hr>
-                                        <div>
+                                        </div>
 
 
 
-					<div class="col-xs-12 nortification-box-top">
+
+
+					    <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-tag icon-margin-right" aria-hidden="true"></i>
                                 Shift Changing Application</h5>
                             <hr>
@@ -546,7 +568,7 @@ if($groupID==0){
 
                                     </div>
                                 </div>
-                            </form>
+                         </form>
                     </div>
                 </div>
                 </div>

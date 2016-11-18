@@ -11,9 +11,9 @@ $end_time = $_POST['end_time'];
 
 try {
 //    create new shift for roster department
-    $sql = "INSERT INTO shift_type(dept_id,shift_name,start_time,end_time) VALUES (:depID,:shiftName,:start,:ends)";
+    $sql = "INSERT INTO shift_type(shift_name,start_time,end_time) VALUES (:shiftName,:start,:ends)";
     $query = $pdo->prepare($sql);
-    $query->execute(array('depID' => $deptID,'shiftName'=>$shiftName,'start'=>$start_time,'ends'=>$end_time));
+    $query->execute(array('shiftName'=>$shiftName,'start'=>$start_time,'ends'=>$end_time));
 
     header("Location:../roster.php?shift=done");
 

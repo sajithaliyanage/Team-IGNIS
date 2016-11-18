@@ -417,25 +417,6 @@ if(isset($_GET['id'])){
                                                     <div class="department-add">
                                                         <div class="col-xs-12">
                                                             <!-- Text input-->
-                                                            <div class="form-group">
-                                                                <label class="col-sm-5 col-xs-12 control-label form-lable">Department :</label>
-                                                                <div class="col-sm-7 col-xs-12">
-                                                                    <select  name="dept_id" class="form-control">
-                                                                        <?php
-                                                                            $sql = "select * from department WHERE currentStatus=:log and roster_status=:state";
-                                                                            $query = $pdo->prepare($sql);
-                                                                            $query->execute(array('log'=>"approved",'state'=>"YES"));
-                                                                            $result = $query->fetchAll();
-
-                                                                            foreach($result as $rs){
-                                                                                echo " <option value='".$rs['dept_id']."'>".$rs['dept_name']."</option>";
-                                                                            }
-                                                                        ?>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <br>
-                                                            <br>
 
                                                             <div class="form-group">
                                                                 <label class="col-xs-5 control-label form-lable">Shift Name :</label>
