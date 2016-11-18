@@ -466,7 +466,8 @@ if($groupID==0){
                                             <label class="col-xs-4 control-label form-lable">Shifting Date :</label>
                                             <div class="col-xs-8">
                                                 <input id="startdate" name="startdate" type="text" placeholder="dd/mm/yyyy"
-                                                       class="form-control input-md" required>
+                                                       class="form-control input-md" required >
+
                                             </div>
                                         </div>
                                         <br>
@@ -474,14 +475,14 @@ if($groupID==0){
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label form-lable">Shifting Time :</label>
                                             <div class="col-xs-8">
-                                                <input id="service_name" name="job_category" type="text" placeholder=""
-                                                       class="form-control input-md" required>
+                                                <input id="service_name,anmda" name="job_category" type="text" placeholder=""
+                                                       class="form-control input-md" required onclick="displayTime()">
                                             </div>
                                         </div>
                                         <br>
                                         <br>
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">Shifting Group :</label>
+                                            <label class="col-xs-4 control-label form-lable">Shifting Group:</label>
                                             <div class="col-xs-8">
                                                 <select  name="emp_role" class="form-control">
                                                     <option>-Select-</option>
@@ -531,6 +532,7 @@ if($groupID==0){
                                                            class="form-control input-md" required>
                                                 </div>
                                             </div>
+                                            
 
 
                                             <br>
@@ -570,15 +572,24 @@ if($groupID==0){
 
 
                 $('#startdate').datepicker({
-                   // format: "dd/mm/yyyy"
-                    minDate:+1
+                   dateFormat: "dd/mm/yy",
+                   minDate: +1
                 });
                 $('#enddate').datepicker({
-                    format: "dd/mm/yyyy"
+                    minDate: +1,
+                    dateFormat: "dd/mm/yy"
                 });
 
+
+
             });
+
+
+
     </script>
+   
+    
+    
 
 
 </body>
