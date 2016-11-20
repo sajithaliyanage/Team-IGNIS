@@ -56,74 +56,67 @@ if(!$isLoggedin && $empRole!="director"){
 
           <!---start top boxes--->
           <div class="row padding-row">
-              <div class="col-sm-3 col-xs-12 padding-box">
+              <div class="col-sm-5 col-xs-12 padding-box">
                   <div class="row">
-                      <div class="col-xs-12 main-box-1-1">
+                      <div class="col-xs-8 main-box-1-1">
                           <div class="row">
-                              <div class="col-xs-8">
-                                  <?php
-                                      $sql="SELECT * FROM department WHERE currentStatus=:log and roster_status=:state";
-                                      $query = $pdo->prepare($sql);
-                                      $query->execute(array('log'=>"approved",'state'=>"NO"));
-                                      $numrow = $query->rowCount();
-                                      $numrows = intval($numrow);
-                                  ?>
-                                  <h2 class="box-count"><?php if($numrows<10){echo "0".$numrow;}else{echo $numrow;}?></h2>
-
-                                  <h3 class="box-head">Departments</h3>
-                              </div>
-                              <div class="col-xs-4">
-                                  <i class="fa fa-building fa-5x box-icon" aria-hidden="true"></i>
-                              </div>
+                            <div class="col-xs-4">
+                                  <i class="fa fa-group fa-5x box-icon" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-xs-8">
+                                  <center><h3 class="box-head">Today<br> Prensents</h3></center>
+                            </div>
                           </div>
                       </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-xs-12  main-box-1-2">
-                          <div class="more-info">
-                             <a href="index_departments.php" style="color:#FFFFFF;"> More Info <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                  <div class="col-xs-4" style="background-color:#FFFFFF; height:110px;">
+                          <div class="row">
+                            <?php
+                                $sql="SELECT * FROM department WHERE currentStatus=:log and roster_status=:state";
+                                $query = $pdo->prepare($sql);
+                                $query->execute(array('log'=>"approved",'state'=>"NO"));
+                                $numrow = $query->rowCount();
+                                $numrows = intval($numrow);
+                            ?>
+                            <center><h2 class="box-count"><?php if($numrows<10){echo "0".$numrow;}else{echo $numrow;}?><br>78%</h2></center>
                           </div>
-                      </div>
                   </div>
               </div>
-              <div class="col-sm-3 col-xs-12 padding-box">
+            </div>
+              <div class="col-sm-2 col-xs-12 padding-box">
                   <div class="row">
-                      <div class="col-xs-12 main-box-2-1">
-                          <div class="row">
-                              <div class="col-xs-8">
-                                  <?php
-                                      $sql="SELECT * FROM manager";
-                                      $query = $pdo->prepare($sql);
-                                      $query->execute();
-                                      $numrow = $query->rowCount();
-                                      $numrows = intval($numrow);
-                                  ?>
-                                  <h2 class="box-count"><?php if($numrows<10){echo "0".$numrow;}else{echo $numrow;}?></h2>
+                  </div>
+              </div>
 
-                                  <h3 class="box-head">Managers</h3>
-                              </div>
-                              <div class="col-xs-4">
-                                  <i class="fa fa-user-secret fa-5x box-icon" aria-hidden="true"></i>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
+              <div class="col-sm-5 col-xs-12 padding-box">
                   <div class="row">
-                      <div class="col-xs-12  main-box-2-2">
-                          <div class="more-info">
-                              <a href="managers.php" style="color:#FFFFFF;">More Info <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                      <div class="col-sm-8 col-xs-12 main-box-4-1">
+                          <div class="row">
+                            <div class="col-xs-4">
+                                  <i class="fa fa-eye fa-5x box-icon" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-xs-8">
+                                  <center><h3 class="box-head">Today<br> Absentees</h3></center>
+                            </div>
                           </div>
                       </div>
-                  </div>
+                      <div class="col-sm-4 col-xs-12" style="background-color:#ffffff; height:110px;">
+                          <div class="raw">
+                            <?php
+                                $sql="SELECT * FROM manager";
+                                $query = $pdo->prepare($sql);
+                                $query->execute();
+                                $numrow = $query->rowCount();
+                                $numrows = intval($numrow);
+                            ?>
+                            <center><h2 class="box-count"><?php if($numrows<10){echo "0".$numrow;}else{echo $numrow;}?><br>22%</h2></center>
+                          </div>
               </div>
           </div>
-        <hr style="border-bottom:1px solid #e3e3e3;">
+        </div>
+      </div>
         <!---end top boxes--->
-
             <hr style="border-bottom:1px solid #e3e3e3;">
             <div class="row padding-row">
-                    <div class="alert alert-info">Number of employees in a department</div>
-
                     <?php
                     //display no of employees belongs to a particular department
                     $sql="SELECT * from department where currentStatus=:approve ";
