@@ -39,20 +39,86 @@ if(!$isLoggedin && $empRole!="director"){
         </div>
 
         <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2" style="position: relative;">
-            <div class="row padding-row">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <ol class="breadcrumb breadcrumb-style">
-                            <li>
-                                <i class="fa fa-dashboard"></i> <a href="director.php">Take Your Leave</a>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-bar-chart"></i> Company Attendance Analyse
-                            </li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
+          <div class="row padding-row">
+              <div class="row">
+                  <div class="col-lg-12">
+                      <ol class="breadcrumb breadcrumb-style">
+                          <li>
+                              <i class="fa fa-dashboard"></i> <a href="director.php">Take Your Leave</a>
+                          </li>
+                          <li class="active">
+                              <i class="fa fa-bar-chart"></i> Company Attendance Analyse
+                          </li>
+                      </ol>
+                  </div>
+              </div>
+          </div>
+
+          <!---start top boxes--->
+          <div class="row padding-row">
+              <div class="col-sm-3 col-xs-12 padding-box">
+                  <div class="row">
+                      <div class="col-xs-12 main-box-1-1">
+                          <div class="row">
+                              <div class="col-xs-8">
+                                  <?php
+                                      $sql="SELECT * FROM department WHERE currentStatus=:log and roster_status=:state";
+                                      $query = $pdo->prepare($sql);
+                                      $query->execute(array('log'=>"approved",'state'=>"NO"));
+                                      $numrow = $query->rowCount();
+                                      $numrows = intval($numrow);
+                                  ?>
+                                  <h2 class="box-count"><?php if($numrows<10){echo "0".$numrow;}else{echo $numrow;}?></h2>
+
+                                  <h3 class="box-head">Departments</h3>
+                              </div>
+                              <div class="col-xs-4">
+                                  <i class="fa fa-building fa-5x box-icon" aria-hidden="true"></i>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-xs-12  main-box-1-2">
+                          <div class="more-info">
+                             <a href="index_departments.php" style="color:#FFFFFF;"> More Info <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-sm-3 col-xs-12 padding-box">
+                  <div class="row">
+                      <div class="col-xs-12 main-box-2-1">
+                          <div class="row">
+                              <div class="col-xs-8">
+                                  <?php
+                                      $sql="SELECT * FROM manager";
+                                      $query = $pdo->prepare($sql);
+                                      $query->execute();
+                                      $numrow = $query->rowCount();
+                                      $numrows = intval($numrow);
+                                  ?>
+                                  <h2 class="box-count"><?php if($numrows<10){echo "0".$numrow;}else{echo $numrow;}?></h2>
+
+                                  <h3 class="box-head">Managers</h3>
+                              </div>
+                              <div class="col-xs-4">
+                                  <i class="fa fa-user-secret fa-5x box-icon" aria-hidden="true"></i>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-xs-12  main-box-2-2">
+                          <div class="more-info">
+                              <a href="managers.php" style="color:#FFFFFF;">More Info <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        <hr style="border-bottom:1px solid #e3e3e3;">
+        <!---end top boxes--->
 
             <hr style="border-bottom:1px solid #e3e3e3;">
             <div class="row padding-row">
