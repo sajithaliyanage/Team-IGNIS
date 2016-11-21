@@ -71,13 +71,13 @@ if(!$isLoggedin && $empRole!="director"){
                   <div class="col-xs-4" style="background-color:#FFFFFF; height:110px;">
                           <div class="row">
                             <?php
-                                $sql="SELECT * FROM department WHERE currentStatus=:log and roster_status=:state";
+                                $sql="SELECT * FROM employee";
                                 $query = $pdo->prepare($sql);
-                                $query->execute(array('log'=>"approved",'state'=>"NO"));
+                                $query->execute();
                                 $numrow = $query->rowCount();
-                                $numrows = intval($numrow);
+                                $numrows = intval($numrow)+100;
                             ?>
-                            <center><h2 class="box-count"><?php if($numrows<10){echo "0".$numrow;}else{echo $numrow;}?><br>78%</h2></center>
+                            <center><h2 class="box-count"><?php if($numrows<10){echo "0".$numrows;}else{echo $numrows;}?><br>94%</h2></center>
                           </div>
                   </div>
               </div>
@@ -102,13 +102,13 @@ if(!$isLoggedin && $empRole!="director"){
                       <div class="col-sm-4 col-xs-12" style="background-color:#ffffff; height:110px;">
                           <div class="raw">
                             <?php
-                                $sql="SELECT * FROM manager";
-                                $query = $pdo->prepare($sql);
-                                $query->execute();
-                                $numrow = $query->rowCount();
-                                $numrows = intval($numrow);
+                            $sql="SELECT * FROM employee";
+                            $query = $pdo->prepare($sql);
+                            $query->execute();
+                            $numrow = $query->rowCount();
+                            $numrows = intval($numrow);
                             ?>
-                            <center><h2 class="box-count"><?php if($numrows<10){echo "0".$numrow;}else{echo $numrow;}?><br>22%</h2></center>
+                            <center><h2 class="box-count"><?php if($numrows<10){echo "0".$numrows;}else{echo $numrows;}?><br>06%</h2></center>
                           </div>
               </div>
           </div>
@@ -127,7 +127,7 @@ if(!$isLoggedin && $empRole!="director"){
                     array_push($result, ['Department', 'Attendance','Absentees']);
                     foreach ($dept as $rs){
                         $data=array();
-                        array_push($data,$rs['dept_name'],$rs['no_of_emp'],$rs['no_of_emp']+100);
+                        array_push($data,$rs['dept_name'],$rs['no_of_emp']+100,$rs['no_of_emp']);
                         array_push($result, $data);
                     }
                     //                 print_r($result);
@@ -159,17 +159,16 @@ if(!$isLoggedin && $empRole!="director"){
         google.charts.load('current', {'packages':['bar']});
         google.charts.setOnLoadCallback(drawChart);
 
+        var currentdate = new Date();
+        var datetime = currentdate.getDate() + "/"+ (currentdate.getMonth()+1)  + "/" + currentdate.getFullYear();
 
         function drawChart() {
 
             var data = google.visualization.arrayToDataTable(result);
-
-
             var options = {
                 chart: {
-                    title: 'Company Attendance',
-                    subtitle: 'Performance and the attendance in each department: 2016',
-                    is3D: true,
+                    title: 'Overoll Company Attendance',
+                    subtitle: 'Attendance in each department:'+datetime,
                 }
             };
 
