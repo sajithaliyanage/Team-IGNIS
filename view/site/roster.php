@@ -75,6 +75,16 @@ if($groupID==0){
 				<div class="row padding-row">
                     <div class="col-sm-6 col-xs-12">
                         <div class="col-xs-12 nortification-box-top">
+                            <div>
+                                <?php
+                                $smt7 = "SELECT group_name FROM group_detail JOIN employee ON group_detail.group_id=employee.group_id  WHERE employee.comp_id=:log3";
+                                $query8 = $pdo->prepare($smt7);
+                                $query8 ->execute(array('log3'=>$empID));
+                                $result8 = $query8->fetch();
+                                $group=$result8['group_name'];
+                                echo $group;
+                                ?>
+                            </div>
                             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height:300px;">
 
                                 <div class="carousel-inner" role="listbox">
@@ -144,8 +154,8 @@ if($groupID==0){
                                                                 $result = $query->fetchAll();
 
                                                                 foreach ($result as $rs) {
-                                                                    array_push($groupIds,intval($rs["group_id"]));
-                                                                    array_push($groupNames,$rs["group_name"]);
+                                                                    array_push($groupIds[intval($rs["group_id"])-1],intval($rs["group_id"]));
+                                                                    array_push($groupNames[intval($rs["group_id"])-1],$rs["group_name"]);
                                                                     echo'<tr>';
                                                                         echo'<td>'.$rs["group_name"].'</td>';
                                                                     echo'</tr>';
@@ -463,82 +473,70 @@ if($groupID==0){
                         </div>
                     </div>
 
-				    <div class="col-sm-6 col-xs-12">
-
-
-                                <div class="col-xs-12 nortification-box-top">
-                                    <h5 class="nortification-box-heading"><i class="fa fa-cogs icon-margin-right" aria-hidden="true"></i>
-                                        Pending Requests For Changing Shifts</h5>
-                                    <hr>
-                                        </div>
-
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12">
+                            <div class="col-xs-12 nortification-box-top">
+                                <h5 class="nortification-box-heading"><i class="fa fa-cogs icon-margin-right" aria-hidden="true"></i>
+                                    Pending Requests For Changing Shifts</h5>
+                                <hr>
+                            </div>
 
 
 
 
-					    <div class="col-xs-12 nortification-box-top">
-                            <h5 class="nortification-box-heading"><i class="fa fa-tag icon-margin-right" aria-hidden="true"></i>
-                                Shift Changing Application</h5>
-                            <hr>
-                            <form role="form" data-toggle="validator" action="" method="post">
-                                <div class="department-add">
-                                    <div class="col-xs-12">
-                                        <!-- Text input-->
-                                        <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">Shifting Date :</label>
-                                            <div class="col-xs-8">
-                                                <input id="startdate" name="startdate" type="text" placeholder="dd/mm/yyyy"
-                                                       class="form-control input-md" required >
-
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <br>
-                                        <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">Shifting Time :</label>
-                                            <div class="col-xs-8">
-                                                <input id="service_name,anmda" name="job_category" type="text" placeholder=""
-                                                       class="form-control input-md" required onclick="displayTime()">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <br>
-                                        <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">Shifting Group:</label>
-                                            <div class="col-xs-8">
-                                                <select  name="emp_role" class="form-control">
-                                                    <option>-Select-</option>
-                                                    <option value="YES">Group A</option>
-                                                    <option value="NO">Group B</option>
-                                                    <option value="NO">Group C</option>
-                                                    <option value="NO">Group D</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <br>
-                                        <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">Shifting Member ID :</label>
-                                            <div class="col-xs-8">
-                                                <input id="service_name" name="job_category" type="text" placeholder=""
-                                                       class="form-control input-md" required>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <br>
-                                        <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">Rework Date :</label>
-                                            <div class="col-xs-8">
-                                                <input id="enddate" name="enddate " type="text" placeholder="dd/mm/yyyy"
-                                                       class="form-control input-md" required>
-                                            </div>
-                                        </div>
-                                            <br>
-                                            <br>
-                                            <br>
-
+                            <div class="col-xs-12 nortification-box-top">
+                                <h5 class="nortification-box-heading"><i class="fa fa-tag icon-margin-right" aria-hidden="true"></i>
+                                    Shift Changing Application</h5>
+                                <hr>
+                                <form role="form" data-toggle="validator" action="" method="post">
+                                    <div class="department-add">
+                                        <div class="col-xs-12">
+                                            <!-- Text input-->
                                             <div class="form-group">
-                                                <label class="col-xs-4 control-label form-lable">Rework Time :</label>
+                                                <label class="col-xs-4 control-label form-lable">Shifting Date :</label>
+                                                <div class="col-xs-8">
+                                                    <input id="startdate" name="startdate" type="text" placeholder="dd/mm/yyyy"
+                                                           class="form-control input-md" required >
+
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <div class="form-group">
+                                                <label class="col-xs-4 control-label form-lable">Shifting Time :</label>
+                                                <div class="col-xs-8">
+                                                    <input id="service_name,anmda" name="job_category" type="text" placeholder=""
+                                                           class="form-control input-md" required onclick="displayTime()">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <div class="form-group">
+                                                <label class="col-xs-4 control-label form-lable">Shifting Group:</label>
+                                                <div class="col-xs-8">
+                                                    <select  name="emp_role" class="form-control">
+                                                        <option>--Select--</option>
+                                                        <?php
+                                                        foreach ($result as $rs) {
+
+                                                            echo'<option>'.$rs["group_name"].'</option>';
+
+                                                        }
+
+
+                                                        ?>
+
+
+
+
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <div class="form-group">
+                                                <label class="col-xs-4 control-label form-lable">Shifting Member ID :</label>
                                                 <div class="col-xs-8">
                                                     <input id="service_name" name="job_category" type="text" placeholder=""
                                                            class="form-control input-md" required>
@@ -546,31 +544,54 @@ if($groupID==0){
                                             </div>
                                             <br>
                                             <br>
-
                                             <div class="form-group">
-                                                <label class="col-xs-4 control-label form-lable">Reason :</label>
+                                                <label class="col-xs-4 control-label form-lable">Rework Date :</label>
                                                 <div class="col-xs-8">
-                                                    <input id="service_name" name="job_category" type="text" placeholder=""
+                                                    <input id="enddate" name="enddate " type="text" placeholder="dd/mm/yyyy"
                                                            class="form-control input-md" required>
                                                 </div>
                                             </div>
-                                            
+                                                <br>
+                                                <br>
+                                                <br>
+
+                                                <div class="form-group">
+                                                    <label class="col-xs-4 control-label form-lable">Rework Time :</label>
+                                                    <div class="col-xs-8">
+                                                        <input id="service_name" name="job_category" type="text" placeholder=""
+                                                               class="form-control input-md" required>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <br>
+
+                                                <div class="form-group">
+                                                    <label class="col-xs-4 control-label form-lable">Reason :</label>
+                                                    <div class="col-xs-8">
+                                                        <input id="service_name" name="job_category" type="text" placeholder=""
+                                                               class="form-control input-md" required>
+                                                    </div>
+                                                </div>
 
 
-                                            <br>
-                                            <br>
-                                            <br>
-                                            <br>
+
+                                                <br>
+                                                <br>
+                                                <br>
+                                                <br>
 
 
 
-                                            <button class="btn btn-info btn-lg pull-right submit-button" type="submit">Apply Shift</button>
+                                                <button class="btn btn-info btn-lg pull-right submit-button" type="submit">Apply Shift</button>
 
+                                        </div>
                                     </div>
-                                </div>
-                         </form>
+                             </form>
+                        </div>
+
+
                     </div>
-                </div>
+
                 </div>
 
          </div>
