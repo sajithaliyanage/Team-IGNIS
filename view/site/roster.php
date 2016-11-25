@@ -74,16 +74,20 @@ if($groupID==0){
 
 				<div class="row padding-row">
                     <div class="col-sm-6 col-xs-12">
+
+
                         <div class="col-xs-12 nortification-box-top">
                             <div>
+
                                 <?php
                                 $smt7 = "SELECT group_name FROM group_detail JOIN employee ON group_detail.group_id=employee.group_id  WHERE employee.comp_id=:log3";
                                 $query8 = $pdo->prepare($smt7);
                                 $query8 ->execute(array('log3'=>$empID));
                                 $result8 = $query8->fetch();
                                 $group=$result8['group_name'];
-                                echo $group;
+                                echo '<h5>'. $group .'</h5>';
                                 ?>
+
                             </div>
                             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height:300px;">
 
@@ -154,8 +158,8 @@ if($groupID==0){
                                                                 $result = $query->fetchAll();
 
                                                                 foreach ($result as $rs) {
-                                                                    array_push($groupIds[intval($rs["group_id"])-1],intval($rs["group_id"]));
-                                                                    array_push($groupNames[intval($rs["group_id"])-1],$rs["group_name"]);
+                                                                    array_push($groupIds,intval($rs["group_id"]));
+                                                                    array_push($groupNames,$rs["group_name"]);
                                                                     echo'<tr>';
                                                                         echo'<td>'.$rs["group_name"].'</td>';
                                                                     echo'</tr>';
@@ -484,7 +488,7 @@ if($groupID==0){
 
 
 
-                            <div class="col-xs-12 nortification-box-top">
+                            <div class="margin-top col-xs-12 nortification-box-top">
                                 <h5 class="nortification-box-heading"><i class="fa fa-tag icon-margin-right" aria-hidden="true"></i>
                                     Shift Changing Application</h5>
                                 <hr>
