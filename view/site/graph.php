@@ -115,8 +115,14 @@ if(!$isLoggedin && $empRole!="director"){
         </div>
       </div>
         <!---end top boxes--->
-            <hr style="border-bottom:1px solid #e3e3e3;">
-            <div class="row padding-row">
+      <div class="row padding-row"  >
+          <div class="col-sm-12 col-xs-12 padding-row">
+              <div class="row">
+                  <div class="col-xs-12 nortification-box-top">
+                      <h5 class="nortification-box-heading"><i class="fa fa-bar-chart icon-margin-right" aria-hidden="true"></i>
+                            Overall Attendance Analysis</h5>
+                        <hr>
+
                     <?php
                     //display no of employees belongs to a particular department
                     $sql="SELECT * from department where currentStatus=:approve ";
@@ -144,12 +150,14 @@ if(!$isLoggedin && $empRole!="director"){
                     ?>
                     <div id="columnchart_material" style="width: 900px; height: 500px;"></div>
             </div>
+          </div>
+        </div>
+      </div>
 
 
     </div>
     </div>
 </div>
-
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -167,7 +175,7 @@ if(!$isLoggedin && $empRole!="director"){
             var data = google.visualization.arrayToDataTable(result);
             var options = {
                 chart: {
-                    title: 'Overoll Company Attendance',
+                    // title: 'Overoll Company Attendance',
                     subtitle: 'Attendance in each department:'+datetime,
                 }
             };
