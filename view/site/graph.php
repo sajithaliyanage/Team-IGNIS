@@ -114,6 +114,7 @@ if(!$isLoggedin && $empRole!="director"){
           </div>
         </div>
       </div>
+      <br><br>
         <!---end top boxes--->
       <div class="row padding-row"  >
           <div class="col-sm-12 col-xs-12 padding-row">
@@ -148,7 +149,7 @@ if(!$isLoggedin && $empRole!="director"){
 //                        $i=$i+1;
 //                    };
                     ?>
-                    <div id="columnchart_material" style="width: 900px; height: 500px;"></div>
+                    <center><div id="dual_y_div" style="width: 900px; height: 500px;"></div></center>
             </div>
           </div>
         </div>
@@ -165,22 +166,34 @@ if(!$isLoggedin && $empRole!="director"){
         var result=JSON.parse('<?php echo json_encode($result)?>');
 
         google.charts.load('current', {'packages':['bar']});
-        google.charts.setOnLoadCallback(drawChart);
+        google.charts.setOnLoadCallback(drawStuff);
 
         var currentdate = new Date();
         var datetime = currentdate.getDate() + "/"+ (currentdate.getMonth()+1)  + "/" + currentdate.getFullYear();
 
-        function drawChart() {
+        function drawStuff() {
 
             var data = google.visualization.arrayToDataTable(result);
-            var options = {
-                chart: {
-                    // title: 'Overoll Company Attendance',
-                    subtitle: 'Attendance in each department:'+datetime,
-                }
-            };
 
-            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+            var options = {
+          width: 900,
+          chart: {
+            // title: 'Overoll Company Attendance',
+            subtitle: 'Attendance in each department:'+datetime,
+          },
+          series: {
+            0: { axis: 'attendance' }, // Bind series 0 to an axis named 'attendance'.
+            1: { axis: 'absentees' } // Bind series 1 to an axis named 'absentees'.
+          },
+          axes: {
+            y: {
+              attendance: {label: 'Attendance'}, // Left y-axis.
+              absentees: {side: 'right', label: 'Absentees'} // Right y-axis.
+            }
+          }
+        };
+
+            var chart = new google.charts.Bar(document.getElementById('dual_y_div'));
 
             chart.draw(data, options);
         }
@@ -188,7 +201,7 @@ if(!$isLoggedin && $empRole!="director"){
 
     <script src="../admin/js/jquery.js"></script>
     <script src="../admin/js/bootstrap.js"></script>
-    <script src="../layouts/graph.js" type="text/javascript"></script>
+    <!-- <script src="../layouts/graph.js" type="text/javascript"></script> -->
     <script type="application/javascript" src="../layouts/awesomechart.js"> </script>
 
 </body>
