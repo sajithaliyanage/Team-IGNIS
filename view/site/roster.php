@@ -85,7 +85,8 @@ if($groupID==0){
                                 $query8 ->execute(array('log3'=>$empID));
                                 $result8 = $query8->fetch();
                                 $group=$result8['group_name'];
-                                echo '<h5>'. $group .'</h5>';
+                                echo '<h5 class="nortification-box-heading" style="text-align:left;">'.'<i class="fa fa-users icon-margin-right" aria-hidden="true" >'.' '.'Your are in '.$group.'</i>'.'</h5>';
+
                                 ?>
 
                             </div>
@@ -159,11 +160,12 @@ if($groupID==0){
 
                                                                 foreach ($result as $rs) {
                                                                     array_push($groupIds,intval($rs["group_id"]));
-                                                                    array_push($groupNames,$rs["group_name"]);
+                                                                    $groupNames[intval($rs['group_id']-1)]=$rs['group_name'];
                                                                     echo'<tr>';
                                                                         echo'<td>'.$rs["group_name"].'</td>';
                                                                     echo'</tr>';
                                                                 }
+
 
                                                                 $minGroupId = min($groupIds);
                                                                 $maxGroupId = max($groupIds);
@@ -492,14 +494,14 @@ if($groupID==0){
                                 <h5 class="nortification-box-heading"><i class="fa fa-tag icon-margin-right" aria-hidden="true"></i>
                                     Shift Changing Application</h5>
                                 <hr>
-                                <form role="form" data-toggle="validator" action="" method="post">
+                                <form role="form" data-toggle="validator" action="../../module/rosterapply.php" method="post">
                                     <div class="department-add">
                                         <div class="col-xs-12">
                                             <!-- Text input-->
                                             <div class="form-group">
                                                 <label class="col-xs-4 control-label form-lable">Shifting Date :</label>
                                                 <div class="col-xs-8">
-                                                    <input id="startdate" name="startdate" type="text" placeholder="dd/mm/yyyy"
+                                                    <input id="startdate" name="shift_tdate" type="text" placeholder="dd/mm/yyyy"
                                                            class="form-control input-md" required >
 
                                                 </div>
@@ -509,31 +511,37 @@ if($groupID==0){
                                             <div class="form-group">
                                                 <label class="col-xs-4 control-label form-lable">Shifting Time :</label>
                                                 <div class="col-xs-8">
-                                                    <input id="service_name,anmda" name="job_category" type="text" placeholder=""
-                                                           class="form-control input-md" required onclick="displayTime()">
+
+
+
+
+
+
+
+
+
                                                 </div>
                                             </div>
                                             <br>
                                             <br>
+
                                             <div class="form-group">
                                                 <label class="col-xs-4 control-label form-lable">Shifting Group:</label>
                                                 <div class="col-xs-8">
-                                                    <select  name="emp_role" class="form-control">
-                                                        <option>--Select--</option>
-                                                        <?php
-                                                        foreach ($result as $rs) {
 
-                                                            echo'<option>'.$rs["group_name"].'</option>';
+                                                    <select  name="shift_group" class="form-control">
+                                                        <?php
+
+                                                        foreach ($result as $rs) {
+                                                            if ($groupID!= $rs['group_id']){
+
+                                                                echo'<option>'.$rs["group_name"].'</option>';
+                                                            }
 
                                                         }
 
 
                                                         ?>
-
-
-
-
-
                                                     </select>
                                                 </div>
                                             </div>
@@ -542,7 +550,7 @@ if($groupID==0){
                                             <div class="form-group">
                                                 <label class="col-xs-4 control-label form-lable">Shifting Member ID :</label>
                                                 <div class="col-xs-8">
-                                                    <input id="service_name" name="job_category" type="text" placeholder=""
+                                                    <input id="example1" name="member_id" type="text" placeholder=""
                                                            class="form-control input-md" required>
                                                 </div>
                                             </div>
@@ -551,7 +559,7 @@ if($groupID==0){
                                             <div class="form-group">
                                                 <label class="col-xs-4 control-label form-lable">Rework Date :</label>
                                                 <div class="col-xs-8">
-                                                    <input id="enddate" name="enddate " type="text" placeholder="dd/mm/yyyy"
+                                                    <input id="enddate" name="rework_date " type="text" placeholder="dd/mm/yyyy"
                                                            class="form-control input-md" required>
                                                 </div>
                                             </div>
@@ -562,8 +570,13 @@ if($groupID==0){
                                                 <div class="form-group">
                                                     <label class="col-xs-4 control-label form-lable">Rework Time :</label>
                                                     <div class="col-xs-8">
-                                                        <input id="service_name" name="job_category" type="text" placeholder=""
-                                                               class="form-control input-md" required>
+
+
+
+
+
+
+
                                                     </div>
                                                 </div>
                                                 <br>
