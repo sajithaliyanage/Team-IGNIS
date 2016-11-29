@@ -24,6 +24,9 @@ if(!$isLoggedin && $empRole!="director"){
     <link href="../admin/css/adminpanel-interface.css" rel="stylesheet">
     <link href="../admin/css/navbar-style.css" rel="stylesheet">
     <link href="../admin/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../public/css/datepicker.css">
+    <link rel="stylesheet" href="../../public/css/attendance.css">
+
 
 </head>
 
@@ -64,7 +67,7 @@ if(!$isLoggedin && $empRole!="director"){
                                   <i class="fa fa-group fa-5x box-icon" aria-hidden="true"></i>
                             </div>
                             <div class="col-xs-8">
-                                  <center><h3 class="box-head">Today<br> Prensents</h3></center>
+                                  <center><h3 class="box-head">Today<br> Presents</h3></center>
                             </div>
                           </div>
                       </div>
@@ -76,8 +79,9 @@ if(!$isLoggedin && $empRole!="director"){
                                 $query->execute();
                                 $numrow = $query->rowCount();
                                 $numrows = intval($numrow)+100;
+                                $precetage=($numrows/($numrows+($numrow)))*100;
                             ?>
-                            <center><h2 class="box-count"><?php if($numrows<10){echo "0".$numrows;}else{echo $numrows;}?><br>94%</h2></center>
+                            <center><h2 class="box-count"><?php if($numrows<10){echo "0".$numrows;}else{echo $numrows;}?><br><?php echo round($precetage);?>%</h2></center>
                           </div>
                   </div>
               </div>
@@ -95,7 +99,7 @@ if(!$isLoggedin && $empRole!="director"){
                                   <i class="fa fa-eye fa-5x box-icon" aria-hidden="true"></i>
                             </div>
                             <div class="col-xs-8">
-                                  <center><h3 class="box-head">Today<br> Absentees</h3></center>
+                                  <center><h3 class="box-head">Today<br> Absents</h3></center>
                             </div>
                           </div>
                       </div>
@@ -107,8 +111,9 @@ if(!$isLoggedin && $empRole!="director"){
                             $query->execute();
                             $numrow = $query->rowCount();
                             $numrows = intval($numrow);
+                            $precetage=($numrow/($numrows+100+($numrow)))*100;
                             ?>
-                            <center><h2 class="box-count"><?php if($numrows<10){echo "0".$numrows;}else{echo $numrows;}?><br>06%</h2></center>
+                            <center><h2 class="box-count"><?php if($numrows<10){echo "0".$numrows;}else{echo $numrows;}?><br><?php echo round($precetage);?>%</h2></center>
                           </div>
               </div>
           </div>
@@ -123,7 +128,59 @@ if(!$isLoggedin && $empRole!="director"){
                       <h5 class="nortification-box-heading"><i class="fa fa-bar-chart icon-margin-right" aria-hidden="true"></i>
                             Overall Attendance Analysis</h5>
                         <hr>
+                        <!-- filtering option start -->
+                        <form role="form" data-toggle="validator" action="../../module/graphGenerator.php" method="post">
+                            <div class="department-add">
 
+                                <div class="col-xs-12">
+                                  <div class="form-group">
+                                      <label class="col-xs-1 control-label form-lable">Department:</label>
+
+                                      <div class="col-xs-3">
+                                          <select name="emp_role" class="form-control">
+                                            <option value="YES">-All-</option>
+                                          <?php
+                                            $sql="SELECT dept_name from department where currentStatus=:approve";
+                                            $query = $pdo->prepare($sql);
+                                            $query->execute(array('approve'=>"approved"));
+                                            $d_name = $query->fetchAll();
+                                            foreach ($d_name as $r){
+                                              echo "<option value=". "YES".">"; echo $r['dept_name']; echo "</option>";
+
+                                            }
+                                              ?>
+                                          </select>
+                                      </div>
+                                  </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-2 control-label form-lable">Start Date:</label>
+
+                                        <div class="col-xs-2">
+                                            <input id="example1" name="example1" type="text"
+                                                   placeholder="dd/mm/yyyy"
+                                                   class="form-control input-md" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-2 control-label form-lable">End date:</label>
+
+                                        <div class="col-xs-2">
+                                            <input id="example2" name="example2" type="text"
+                                                   placeholder="dd/mm/yyyy"
+                                                   class="form-control input-md" required>
+
+                                        </div>
+                                    </div>
+
+                                    <br><br><br>
+                                    <button class="btn btn-primary btn-lg pull-right submit-button" style="width: 150px " type="submit">Fitler</button>
+                                </div>
+                            </div>
+                        </form>
+                      <!-- filtering option end -->
+                      <br><br><br><br><br><br>
                     <?php
                     //display no of employees belongs to a particular department
                     $sql="SELECT dept_name,dept_id,no_of_emp from department where currentStatus=:approve  ORDER BY dept_id";
@@ -144,7 +201,7 @@ if(!$isLoggedin && $empRole!="director"){
                     array_unshift($dept, array('Department', 'Present','Absent'));
 
                     ?>
-                    <center><div id="chart_div" style="width: 900px; height: 500px;"></div></center>
+                    <center><div id="columnchart_material" style="width: 900px; height: 500px;"></div></center>
             </div>
           </div>
         </div>
@@ -155,10 +212,10 @@ if(!$isLoggedin && $empRole!="director"){
     </div>
 </div>
 
-    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
-    <!-- <script type="text/javascript">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
+    <script type="text/javascript">
 
-        var result=JSON.parse('<?php //echo json_encode($result)?>');
+        var result=JSON.parse('<?php echo json_encode($dept)?>');
 
         google.charts.load('current', {'packages':['bar']});
         google.charts.setOnLoadCallback(drawChart);
@@ -169,23 +226,6 @@ if(!$isLoggedin && $empRole!="director"){
         function drawChart() {
 
             var data = google.visualization.arrayToDataTable(result);
-            // var data = google.visualization.arrayToDataTable([
-            //   ['Year', 'Attendance', 'Absentees'],
-            //   ['2014', 1000, 4],
-            //   ['2015', 1170, 4],
-            //   ['2016', 660, 1],
-            //   ['2017', 1030, 0]
-            // ]);
-
-            // var options = {
-            //   width: 900,
-            //   height: 500,
-            //   isStacked:'percent',
-            //   legend: {position: 'top',maxLines:3},
-            //   vAxis:{
-            //     minValue:0,
-            //     ticks:[0, .2, .4, .6, .8, 1]
-            //   }
             var options = {
             chart: {
             // title: 'Overoll Company Attendance',
@@ -197,12 +237,12 @@ if(!$isLoggedin && $empRole!="director"){
 
             chart.draw(data, options);
         }
-    </script> -->
+    </script>
 
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <!-- <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
 
-      var result=JSON.parse('<?php echo json_encode($dept)?>');
+      var result=JSON.parse('<?php //echo json_encode($dept)?>');
 
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
@@ -222,11 +262,24 @@ if(!$isLoggedin && $empRole!="director"){
         var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
-    </script>
+    </script> -->
 
     <script src="../admin/js/jquery.js"></script>
     <script src="../admin/js/bootstrap.js"></script>
-    <!-- <script src="../layouts/graph.js" type="text/javascript"></script> -->
+    <script src="../../public/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        // When the document is ready
+        $(document).ready(function () {
+
+            $('#example1').datepicker({
+                format: "dd/mm/yyyy"
+            });
+            $('#example2').datepicker({
+                format: "dd/mm/yyyy"
+            });
+
+        });
+    </script>
     <script type="application/javascript" src="../layouts/awesomechart.js"> </script>
 
 </body>
