@@ -126,30 +126,25 @@ if(!$isLoggedin && $empRole!="director"){
 
                     <?php
                     //display no of employees belongs to a particular department
-                    $sql="SELECT * from department where currentStatus=:approve  ORDER BY dept_id";
+                    $sql="SELECT dept_name,dept_id,no_of_emp from department where currentStatus=:approve  ORDER BY dept_id";
                     $query = $pdo->prepare($sql);
                     $query->execute(array('approve'=>"approved"));
-                    $dept = $query->fetchAll();
-                    $result=array();
-                    array_push($result, ['Department', 'Attendance','Absentees']);
-                    foreach ($dept as $rs){
-                        $data=array();
-                        array_push($data,$rs['dept_name'],$rs['dept_id'],$rs['no_of_emp']);
-                        array_push($result, $data);
+                    $dept = $query->fetchAll(PDO::FETCH_NUM);
+                    for($i=0;$i<count($dept);$i++)
+                    {
+                      $dept[$i][1] = intval($dept[$i][1]);
+                      $dept[$i][2] = intval($dept[$i][2]);
                     }
-                      //print_r($result);
-//                    $rows = $query->rowCount();
-//                    $depName=[];
-//                    $emps=[];
-//                    $i=0;
-//                    while ($rows>0) {
-//                        $depName[$i]=$result[$rows-1]['dept_name'] . ',';
-//                        $emps[$i]=$result[$rows-1]['no_of_emp'] . ',';
-//                        $rows=$rows-1;
-//                        $i=$i+1;
-//                    };
+
+                    // foreach ($dept as $rs){
+                    //     //$data=array();
+                    //     //array_push($data,$rs['dept_name'],$rs['dept_id'],$rs['no_of_emp']);
+                    //     //array_push($result, $data);
+                    // }
+                    array_unshift($dept, array('Department', 'Present','Absent'));
+
                     ?>
-                    <center><div id="columnchart_material" style="width: 900px; height: 500px;"></div></center>
+                    <center><div id="chart_div" style="width: 900px; height: 500px;"></div></center>
             </div>
           </div>
         </div>
@@ -160,10 +155,10 @@ if(!$isLoggedin && $empRole!="director"){
     </div>
 </div>
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
+    <!-- <script type="text/javascript">
 
-        var result=JSON.parse('<?php echo json_encode($result)?>');
+        var result=JSON.parse('<?php //echo json_encode($result)?>');
 
         google.charts.load('current', {'packages':['bar']});
         google.charts.setOnLoadCallback(drawChart);
@@ -202,6 +197,31 @@ if(!$isLoggedin && $empRole!="director"){
 
             chart.draw(data, options);
         }
+    </script> -->
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+      var result=JSON.parse('<?php echo json_encode($dept)?>');
+
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+
+      var currentdate = new Date();
+      var datetime = currentdate.getDate() + "/"+ (currentdate.getMonth()+1)  + "/" + currentdate.getFullYear();
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable(result);
+
+        var options = {
+          title: 'Attendance in each department:'+datetime,
+          hAxis: {title: 'Departments', titleTextStyle: {color: 'black'}}
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
     </script>
 
     <script src="../admin/js/jquery.js"></script>
