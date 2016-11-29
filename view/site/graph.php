@@ -126,7 +126,7 @@ if(!$isLoggedin && $empRole!="director"){
 
                     <?php
                     //display no of employees belongs to a particular department
-                    $sql="SELECT * from department where currentStatus=:approve ";
+                    $sql="SELECT * from department where currentStatus=:approve  ORDER BY dept_id";
                     $query = $pdo->prepare($sql);
                     $query->execute(array('approve'=>"approved"));
                     $dept = $query->fetchAll();
@@ -134,10 +134,10 @@ if(!$isLoggedin && $empRole!="director"){
                     array_push($result, ['Department', 'Attendance','Absentees']);
                     foreach ($dept as $rs){
                         $data=array();
-                        array_push($data,$rs['dept_name'],$rs['no_of_emp']+100,$rs['no_of_emp']);
+                        array_push($data,$rs['dept_name'],$rs['dept_id'],$rs['no_of_emp']);
                         array_push($result, $data);
                     }
-                    //                 print_r($result);
+                      //print_r($result);
 //                    $rows = $query->rowCount();
 //                    $depName=[];
 //                    $emps=[];
@@ -149,7 +149,7 @@ if(!$isLoggedin && $empRole!="director"){
 //                        $i=$i+1;
 //                    };
                     ?>
-                    <center><div id="columnchart_values" style="width: 900px; height: 500px;"></div></center>
+                    <center><div id="columnchart_material" style="width: 900px; height: 500px;"></div></center>
             </div>
           </div>
         </div>
@@ -165,7 +165,7 @@ if(!$isLoggedin && $empRole!="director"){
 
         var result=JSON.parse('<?php echo json_encode($result)?>');
 
-        google.charts.load('current', {'packages':['corechart']});
+        google.charts.load('current', {'packages':['bar']});
         google.charts.setOnLoadCallback(drawChart);
 
         var currentdate = new Date();
@@ -174,34 +174,31 @@ if(!$isLoggedin && $empRole!="director"){
         function drawChart() {
 
             var data = google.visualization.arrayToDataTable(result);
+            // var data = google.visualization.arrayToDataTable([
+            //   ['Year', 'Attendance', 'Absentees'],
+            //   ['2014', 1000, 4],
+            //   ['2015', 1170, 4],
+            //   ['2016', 660, 1],
+            //   ['2017', 1030, 0]
+            // ]);
 
+            // var options = {
+            //   width: 900,
+            //   height: 500,
+            //   isStacked:'percent',
+            //   legend: {position: 'top',maxLines:3},
+            //   vAxis:{
+            //     minValue:0,
+            //     ticks:[0, .2, .4, .6, .8, 1]
+            //   }
             var options = {
-              width: 900,
-              height: 500,
-              isStacked:'percent',
-              legend: {position: 'top',maxLines:3},
-              vAxis:{
-                minValue:0,
-                ticks:[0, .2, .4, .6, .8, 1]
-              }
-
-          // chart: {
-          //   // title: 'Overoll Company Attendance',
-          //   subtitle: 'Attendance in each department:'+datetime,
-          // },
-          // series: {
-          //   0: { axis: 'attendance' }, // Bind series 0 to an axis named 'attendance'.
-          //   1: { axis: 'absentees' } // Bind series 1 to an axis named 'absentees'.
-          // },
-          // axes: {
-          //   y: {
-          //     attendance: {label: 'Attendance'}, // Left y-axis.
-          //     absentees: {side: 'right', label: 'Absentees'} // Right y-axis.
-          //   }
-          // }
+            chart: {
+            // title: 'Overoll Company Attendance',
+            subtitle: 'Attendance in each department:'+datetime,
+            }
         };
 
-            var chart = new google.charts.Bar(document.getElementById('columnchart_values'));
+            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
             chart.draw(data, options);
         }
