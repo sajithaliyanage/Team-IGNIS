@@ -70,7 +70,7 @@ if(isset($_GET['id'])){
                     <ul class="nav nav-tabs navbar-right" role="tablist">
                             <li role="presentation" class="active tab-box-1"><a href="#home" class="tab-box-1" aria-controls="home" role="tab" data-toggle="tab"">Manage Roster</a></li>
                             <li role="presentation"><a href="#profile" aria-controls="profile" class="tab-box-2" role="tab" data-toggle="tab">Adding Roster</a></li>
-                        </ul>
+                    </ul>
 
                         <!-- Tab panes -->
                         <div class="tab-content">
@@ -135,24 +135,39 @@ if(isset($_GET['id'])){
                                                 <hr>
 
                                                 <div class="form-group" style="margin-bottom:20px !important;">
-                                                    <label class="col-sm-5 col-xs-12 control-label form-lable">Select Department :</label>
-                                                    <div class="col-sm-7 col-xs-12">
-                                                        <select  name="emp_role" class="form-control"  onchange = 'showUser2(this.value)'>
-                                                            <option value="empty">- Select -</option>
-                                                            <?php
-                                                                $sql = "select * from department WHERE currentStatus=:log and roster_status=:state";
-                                                                $query = $pdo->prepare($sql);
-                                                                $query->execute(array('log'=>"approved",'state'=>"YES"));
-                                                                $result = $query->fetchAll();
+                                                    <?php
+                                                        $sql = "SELECT * FROM shift_type";
+                                                        $query = $pdo->prepare($sql);
+                                                        $query->execute();
+                                                        $result = $query->fetchAll();
+                                                        $rowCount = $query->rowCount();
 
-                                                                foreach($result as $rs){
-                                                                    echo " <option value='".$rs['dept_id']."'>".$rs['dept_name']."</option>";
-                                                                }
-                                                            ?>
-                                                        </select>
-                                                    </div>
+                                                        if($rowCount == 0){
+                                                            echo "<center>No any shift added yet!</center>";
+                                                        }else {
+                                                            echo "<table  class=\"table table-striped table-responsive\">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th style='text-align: center;'>Shift Name</th>
+                                                                    <th style='text-align: center;'>Start Time</th>
+                                                                    <th style='text-align: center;'>End Time</th>
+                                                                </tr>
+                                                                </thead>";
+
+                                                            echo "<tbody>";
+                                                            foreach ($result as $rs) {
+                                                                echo "<tr>";
+                                                                echo "<td style='text-align: center;'>" . $rs['shift_name'] . "</td>";
+                                                                echo "<td style='text-align: center;'>" . $rs['start_time'] . "</td>";
+                                                                echo "<td style='text-align: center;'>" . $rs['end_time'] . "</td>";
+                                                                echo "</tr>";
+                                                            }
+                                                            echo "</tbody>";
+
+                                                            echo "</table>";
+                                                        }
+                                                    ?>
                                                 </div>
-                                                <div id="demo"><center><label style="margin-top:15px; font-weight:100;">Select any Department</label></center></div>
                                             </div>
                                         </div>
 
@@ -499,5 +514,6 @@ if(isset($_GET['id'])){
             }
         }
     </script>
+
 </body>
 </html>

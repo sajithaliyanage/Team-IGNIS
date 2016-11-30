@@ -68,61 +68,111 @@ if(isset($_GET['id'])){
                                 Show Leave Count</h5>
                             <hr>
                             <?php
-                            $sql = "select * from job_category
-                                    JOIN leave_set_job ON leave_set_job.job_cat_id = job_category.job_cat_id
-                                    JOIN job_level ON job_level.level_id = leave_set_job.level_id
-                                    JOIN leave_count_details ON leave_count_details.set_id=leave_set_job.set_id
-                                    JOIN leave_type ON leave_type.leave_id = leave_count_details.leave_id
-                                    WHERE job_category.currentStatus=:log ORDER BY job_category.job_cat_name DESC ";
+                            $sql = "select * from job_category where currentStatus=:log";
                             $query = $pdo->prepare($sql);
                             $query->execute(array('log'=>"approved"));
                             $result = $query->fetchAll();
-                            $rowCount = $query->rowCount();
+                            ?>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-5">
+                                    <select id="catName" class="form-control">
+                                        <?php
+                                        foreach($result as $rs){
+                                            echo " <option value='".$rs['job_cat_id']."'>".$rs['job_cat_name']."</option>";
+                                        }
+                                        ?>
 
-                            echo"<h5 style=\"text-align: right;\">Total Job Set Leaves : <span class=\"badge\">";if($rowCount<10){echo "0".$rowCount;}else{echo $rowCount;} echo"</span></h5>
+                                    </select>
+                                </div>
+                                <?php
+                                $sql = "select * from job_level";
+                                $query = $pdo->prepare($sql);
+                                $query->execute();
+                                $result = $query->fetchAll();
+                                ?>
+                                <div class="col-xs-12 col-sm-4">
+                                    <select id="catLevel"  class="form-control">
+                                        <?php
+                                        foreach($result as $rs){
+                                            echo " <option value='".$rs['level_id']."'>".$rs['level_name']."</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="col-xs-12 col-sm-3">
+                                    <button class="btn btn-info pull-right filter-button"  onclick ='leaveCount()'>Get Details
+                                    </button>
+                                </div>
 
-                            <div class=\"panel-group\" id=\"accordion\" role=\"tablist\" aria-multiselectable=\"true\">
-                                <input id=\"iconified\" class=\"form-control empty\" type=\"text\" placeholder=\"&#xF002; Search\" onkeyup=\"filter(this,'theList')\" style=\"width:260px; background-color:#f4f4f4; height:30px; margin-top:-34px; margin-bottom:20px;\" />";
+                                <div id="demos" style="margin-top:10px;margin-bottom:20px;"><center><label style="margin-top:15px; font-weight:100;">- Click 'Get Details' button for results -</label></center></div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="row">
+                        <div class="col-xs-12 nortification-box-top margin-top">
+                            <h5 class="nortification-box-heading"><i class="fa fa-trash icon-margin-right" aria-hidden="true"></i>
+                                Delete Leave Count</h5>
+                            <div class="alert-user-D" style="<?php if(!isset($_GET['delete'])){echo 'display:none;';}?>">Leave type deleted successfully!</div>
+                            <hr>
+                            <form action="module/deleteSetLeave.php" method="POST">
+                                <?php
+                                $sql = "select * from job_category where currentStatus=:log";
+                                $query = $pdo->prepare($sql);
+                                $query->execute(array('log'=>"approved"));
+                                $result = $query->fetchAll();
+                                ?>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-5">
+                                        <select id="catName" name="catid" class="form-control">
+                                            <?php
+                                            foreach($result as $rs){
+                                                echo " <option value='".$rs['job_cat_id']."'>".$rs['job_cat_name']."</option>";
+                                            }
+                                            ?>
 
-                                foreach($result as $rs){
-
-                                    echo "   <div class='panel panel-default asd'>
-                                    <div class='panel-heading' role='tab' id='headingTwo'>
-                                        <h4 class='panel-title'>
-                                            <a class='collapsed' role='button' data-toggle='collapse' data-parent='#accordion' href='#collapseOne".$rs['set_id'].$rs['leave_id']."' aria-expanded='false' aria-controls='collapseTwo'>
-                                                <h5>".$rs['job_cat_name']." - ".$rs['level_name']."<span style='margin-left:10px;'><i class='fa fa-chevron-down' aria-hidden='true'></i></span></h5></a>
-                                            <span class='label label-danger' style='float: right; margin-top:-24px; margin-right:50px !important;'>Delete <i class='fa fa-close' aria-hidden='true'></i></span>
-                                            <span class='label label-success' style='float: right; margin-top:-24px;'>Edit <i class='fa fa-close' aria-hidden='true'></i></span>
-                                        </h4>
+                                        </select>
                                     </div>
-                                    <div id='collapseOne".$rs['set_id'].$rs['leave_id']."' class='panel-collapse collapse' role='tabpanel' aria-labelledby='headingTwo'>
-                                        <div class='panel-body'>
-                                            <table class='table-responsive'>
-                                                <table class='table table-bordered table-striped '>
-                                                    <thead>
-                                                    <tr>
-                                                        <th></th>
-                                                        <th>Leave Count</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>".ucwords($rs['leave_name'])."</td>
-                                                        <td>".$rs['leave_count']."</td>
-                                                    </tr>
+                                    <?php
+                                    $sql = "select * from job_level";
+                                    $query = $pdo->prepare($sql);
+                                    $query->execute();
+                                    $result = $query->fetchAll();
+                                    ?>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <select id="catLevel" name="levelid"  class="form-control">
+                                            <?php
+                                            foreach($result as $rs){
+                                                echo " <option value='".$rs['level_id']."'>".$rs['level_name']."</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-3">
+                                        <input type="button" style="background-color:#900000;" class="btn btn-info pull-right filter-button" value="Delete Selects" data-toggle="modal" data-target="#myModal" />
+                                    </div>
+                                    <div id="myModal" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
 
-                                                    </tbody>
-                                                </table>
-                                            </table>
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Delete Item</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to delete this leave counts?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <input class="btn btn-danger pull-right" value="Delete" type="submit" />
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
-                                </div>";
-                                }
-                                ?>
-
-
-                            </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -260,6 +310,21 @@ if(isset($_GET['id'])){
                 var javascriptVariable = str;
                 window.location.href = "setleaves.php?id=" + javascriptVariable;
             }
+        }
+
+        function leaveCount(){
+            var catName = document.getElementById('catName').value;
+            var catLevel = document.getElementById('catLevel').value;
+            var str =catName+','+catLevel;
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if(xhttp.readyState==4 && xhttp.status==200){
+                    document.getElementById("demos").innerHTML = xhttp.responseText;
+                }
+            }
+            xhttp.open("GET","module/getLeaveCount.php?q1="+str ,true);
+            xhttp.send();
         }
     </script>
 </body>

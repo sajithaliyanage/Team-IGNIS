@@ -62,6 +62,11 @@ if(!$isLoggedin && $empRole!="admin"){
                                 Count of Employees</h5>
                             <hr>
                             <ul class="list-group" >
+                                <a href='allEmployee.php' style="margin-bottom:20px !important;">
+                                    <li class="list-group-item"  style='border-radius:0 !important; color:#333;margin-bottom:20px !important;border:2px solid #05aad7;'>
+                                        <b>See All Employees</b><h5 style='float: right; margin-top:4px;'>More Info <i class='fa fa-chevron-circle-right' style=' margin-right:5px;' aria-hidden='true'></i>
+                                    </li>
+                                </a>
                                 <?php
                                     $sql="SELECT * FROM department WHERE currentStatus=:log";
                                     $query = $pdo->prepare($sql);

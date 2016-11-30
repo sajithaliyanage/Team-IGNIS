@@ -61,6 +61,7 @@ if(!$isLoggedin && $empRole!="admin"){
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-check icon-margin-right" aria-hidden="true"></i>
                                 Added Job Categories</h5>
+                            <div class="alert-user-D" style="<?php if(!isset($_GET['delete'])){echo 'display:none;';}?>">Job Category deleted successfully!</div>
                             <hr>
                             <?php
                                 $sql = "select * from job_category where currentStatus=:log ";
@@ -74,10 +75,34 @@ if(!$isLoggedin && $empRole!="admin"){
 
                                 <?php
                                 foreach($result as $rs){
-                                    echo " <a href='#' class='list-group-item'>
-                                                <h5>".$rs['job_cat_name']."</h5>
-                                                <span class=\"label label-danger\" style=\"float: right; margin-top:-24px;\">Delete <i class=\"fa fa-close\" aria-hidden=\"true\"></i></span>
-                                               </a>";
+                                    ?>
+                                    <li class='list-group-item'>
+                                        <h5><?php echo ucwords($rs['job_cat_name']);?></h5>
+                                        <a href="#" type="button" class="label label-danger" data-toggle="modal" data-target="#myModal<?php echo $rs['job_cat_id'];?>" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></a>
+
+                                    </li>
+
+                                    <div id="myModal<?php echo $rs['job_cat_id'];?>" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Delete Item<?php echo $rs['job_cat_id'];?></h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to delete this Job Category?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="module/deleteJobCategory.php?id=<?php echo $rs['job_cat_id'];?>"><button type="button" class="btn btn-danger">Delete</button></a>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <?php
                                 }
                                 ?>
                             </div>
@@ -88,6 +113,7 @@ if(!$isLoggedin && $empRole!="admin"){
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-check icon-margin-right" aria-hidden="true"></i>
                                 Added Job Levels</h5>
+                            <div class="alert-user-D" style="<?php if(!isset($_GET['delete1'])){echo 'display:none;';}?>">Job Level deleted successfully!</div>
                             <hr>
                             <?php
                                 $sql = "select * from job_level";
@@ -101,10 +127,34 @@ if(!$isLoggedin && $empRole!="admin"){
 
                                 <?php
                                 foreach($result as $rs){
-                                    echo " <a href='#' class='list-group-item'>
-                                                <h5>".$rs['level_name']."</h5>
-                                                <span class=\"label label-danger\" style=\"float: right; margin-top:-24px;\">Delete <i class=\"fa fa-close\" aria-hidden=\"true\"></i></span>
-                                               </a>";
+                                    ?>
+                                    <li class='list-group-item'>
+                                        <h5><?php echo ucwords($rs['level_name']);?></h5>
+                                        <a href="#" type="button" class="label label-danger" data-toggle="modal" data-target="#myModal<?php echo $rs['level_id'];?>" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></a>
+
+                                    </li>
+
+                                    <div id="myModal<?php echo $rs['level_id'];?>" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Delete Item<?php echo $rs['level_id'];?></h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to delete this Job Level?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="module/deleteJobLevel.php?id=<?php echo $rs['level_id'];?>"><button type="button" class="btn btn-danger">Delete</button></a>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <?php
                                 }
                                 ?>
                             </div>
@@ -179,7 +229,40 @@ if(!$isLoggedin && $empRole!="admin"){
                                 $result = $query->fetchAll();
 
                                 foreach($result as $rs){
-                                    echo "<a href='#' class='list-group-item'>".$rs['job_cat_name']."<span style='float:right;'>"; if($rs['currentStatus']=='waiting'){echo 'Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>';}else if($rs['currentStatus']=='approved'){ echo 'Approved <i class=\'fa fa-check\' aria-hidden=\'true\'></i></span></a>';}else{echo 'Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></a>';};
+                                    ?>
+                                    <a href='#' class='list-group-item'><?php echo ucwords($rs['job_cat_name']); ?>
+                                        <span style='float:right;'>
+                                            <?php if ($rs['currentStatus'] == 'waiting') {
+                                                echo "Waiting for Approve <button type='button' style='background-color:transparent;border:none;' data-toggle='modal' data-target='#myModal".$rs['job_cat_id']."'><i class='fa fa-question' style='color:orange;' aria-hidden='true'></i></button>";
+                                            } else if ($rs['currentStatus'] == 'approved') {
+                                                echo "Approved <i class='fa fa-check' aria-hidden='true'></i>";
+                                            }else {
+                                                echo "Rejected <button type='button' style='background-color:transparent;border:none;' data-toggle='modal' data-target='#myModal" . $rs['job_cat_id'] . "'><i class='fa fa-close'  style='color:red;' aria-hidden='true'></i></button>";
+                                            }?>
+                                        </span>
+                                    </a>
+
+                                    <div id="myModal<?php echo $rs['job_cat_id'];?>" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Delete Item</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to delete this Job Category?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="module/deleteJobCategory.php?id=<?php echo $rs['job_cat_id'];?>"><button type="button" class="btn btn-danger">Delete</button></a>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <?php
                                 }
                                 ?>
                             </div>

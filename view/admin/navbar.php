@@ -37,15 +37,6 @@
                     </ul>
                 </li>
 
-                <li  class="dropdown">
-                    <a href="#" class="dropdown-toggle nortification-button" data-toggle="dropdown">
-                        <i class="fa fa-binoculars" style="border:1px solid #d2d2d2; border-radius:100%; padding:14px;"></i><span class="badge postition-remind">0</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-admin" style="margin-top:2px;">
-                        <div class="arrow-up"></div>
-                        <li style="text-align: center;">No any messages remind!</li>
-                    </ul>
-                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="list-side-menu"><a href="index.php">Overall Company</a></li>

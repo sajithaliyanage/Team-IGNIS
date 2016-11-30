@@ -60,6 +60,7 @@ if(!$isLoggedin && $empRole!="admin"){
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-check icon-margin-right" aria-hidden="true"></i>
                                 Added Leave Types</h5>
+                            <div class="alert-user-D" style="<?php if(!isset($_GET['delete'])){echo 'display:none;';}?>">Leave type deleted successfully!</div>
                             <hr>
                             <?php
                                 $sql = "select * from leave_type where currentStatus=:log ";
@@ -72,12 +73,36 @@ if(!$isLoggedin && $empRole!="admin"){
                             <div class="list-group">
 
                                 <?php
-                                foreach($result as $rs){
-                                    echo " <a href='#' class='list-group-item'>
-                                                <h5>".ucwords($rs['leave_name'])."</h5>
-                                                <span class=\"label label-danger\" style=\"float: right; margin-top:-24px;\">Delete <i class=\"fa fa-close\" aria-hidden=\"true\"></i></span>
-                                               </a>";
-                                }
+                                    foreach($result as $rs){
+                                ?>
+                                    <li class='list-group-item'>
+                                       <h5><?php echo ucwords($rs['leave_name']);?></h5>
+                                       <a href="#" type="button" class="label label-danger" data-toggle="modal" data-target="#myModal<?php echo $rs['leave_id'];?>" style="float: right; margin-top:-24px;">Delete <i class="fa fa-close" aria-hidden="true"></i></a>
+
+                                    </li>
+
+                                        <div id="myModal<?php echo $rs['leave_id'];?>" class="modal fade" role="dialog">
+                                            <div class="modal-dialog">
+
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">Delete Item</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Are you sure you want to delete this leave type?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a href="module/deleteLeaveTypes.php?id=<?php echo $rs['leave_id'];?>"><button type="button" class="btn btn-danger">Delete</button></a>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                <?php
+                                    }
                                 ?>
                             </div>
                         </div>
@@ -135,7 +160,40 @@ if(!$isLoggedin && $empRole!="admin"){
                                 $result = $query->fetchAll();
 
                                 foreach($result as $rs){
-                                    echo "<a href='#' class='list-group-item'>".ucwords($rs['leave_name'])."<span style='float:right;'>"; if($rs['currentStatus']=='waiting'){echo 'Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>';}else if($rs['currentStatus']=='approved'){ echo 'Approved <i class=\'fa fa-check\' aria-hidden=\'true\'></i></span></a>';}else{echo 'Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></a>';};
+                                ?>
+                                <a href='#' class='list-group-item'><?php echo ucwords($rs['leave_name']); ?>
+                                    <span style='float:right;'>
+                                            <?php if ($rs['currentStatus'] == 'waiting') {
+                                                echo "Waiting for Approve <button type='button' style='background-color:transparent;border:none;' data-toggle='modal' data-target='#myModal".$rs['leave_id']."'><i class='fa fa-question' style='color:orange;' aria-hidden='true'></i></button>";
+                                            } else if ($rs['currentStatus'] == 'approved') {
+                                                echo "Approved <i class='fa fa-check' aria-hidden='true'></i>";
+                                            }else {
+                                                echo "Rejected <button type='button' style='background-color:transparent;border:none;' data-toggle='modal' data-target='#myModal" . $rs['leave_id'] . "'><i class='fa fa-close'  style='color:red;' aria-hidden='true'></i></button>";
+                                            }?>
+                                        </span>
+                                    </a>
+
+                                    <div id="myModal<?php echo $rs['leave_id'];?>" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Delete Item</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to delete this leave type?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="module/deleteLeaveTypes.php?id=<?php echo $rs['leave_id'];?>"><button type="button" class="btn btn-danger">Delete</button></a>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                <?php
                                 }
                                 ?>
                             </div>
@@ -149,7 +207,6 @@ if(!$isLoggedin && $empRole!="admin"){
     </div>
 
     <script src="js/jquery.js"></script>
-    <script src="js/jscolor.min.js"></script>
     <script src="js/bootstrap.js"></script>
 </body>
 </html>

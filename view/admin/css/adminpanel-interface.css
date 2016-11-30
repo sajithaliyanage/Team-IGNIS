@@ -158,6 +158,19 @@
     margin-bottom:10px ;
 }
 
+.filter-button{
+    background-color: #2c3b42;
+    border: none;
+    font-size:13px;
+    margin-bottom:10px ;
+}
+.filter-button:hover{
+    background-color: #204d74;
+    border: none;
+    font-size:13px;
+
+}
+
 .submit-button:hover{
     background-color: #204d74;
     border: none;
@@ -174,6 +187,21 @@
     margin-top:-28px;
     margin-bottom:-2px;
     color:#00a65a;
+    font-weight:500;
+    -webkit-animation: seconds 1.0s forwards;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-delay: 5s;
+    animation: seconds 1.0s forwards;
+    animation-iteration-count: 1;
+    animation-delay: 5s;
+    position: relative;
+}
+
+.alert-user-D{
+    text-align: right;
+    margin-top:-28px;
+    margin-bottom:-2px;
+    color:#900000;
     font-weight:500;
     -webkit-animation: seconds 1.0s forwards;
     -webkit-animation-iteration-count: 1;

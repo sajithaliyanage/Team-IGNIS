@@ -61,6 +61,8 @@ if(!$isLoggedin && $empRole!="admin"){
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-building icon-margin-right" aria-hidden="true"></i>
                                 Current Departments</h5>
+                            <div class="alert-user-D" style="<?php if(!isset($_GET['delete'])){echo 'display:none;';}?>">Department deleted successfully!</div>
+                            <div class="alert-user" style="<?php if(!isset($_GET['edit'])){echo 'display:none;';}?>">Department edited successfully!</div>
                             <hr>
                             <div class="list-group">
                                 <?php
@@ -70,11 +72,94 @@ if(!$isLoggedin && $empRole!="admin"){
                                     $result = $query->fetchAll();
 
                                     foreach($result as $rs){
-                                        echo " <a href='index_department_employee.php?id=".$rs['dept_id']."' class='list-group-item'>
+                                        echo " <li  class='list-group-item'>
                                                 <div style='height:25px; width:25px; background-color:".$rs['dept_color']."; float: left; margin-right:10px; margin-top:5px;'></div>
                                                 <h5>".$rs['dept_name']."</h5>
-                                                <h5 style='float: right; margin-top:-24px;'>More Info <i class='fa fa-chevron-circle-right' aria-hidden='true'></i></h5>
-                                               </a>";
+                                                <h5 style='float: right; margin-top:-24px;'><a href='index_department_employee.php?id=".$rs['dept_id']."' style='color:#555;'>More Info <i class='fa fa-chevron-circle-right' style=' margin-right:5px;' aria-hidden='true'></i></a>
+                                                <button type='button' style='background-color:transparent;border:none; float:right;' data-toggle='modal' data-target='#myModal".$rs['dept_id']."'><i class='fa fa-trash'  style='color:#900000;' aria-hidden='true'></i></button>
+                                                <button type='button' style='background-color:transparent;border:none; float:right;' data-toggle='modal' data-target='#myEdit".$rs['dept_id']."'><i class='fa fa-pencil'  style='color:#604000;' aria-hidden='true'></i></button>
+                                                </h5>
+
+                                               </li>";
+                                ?>
+                                        <div id="myModal<?php echo $rs['dept_id'];?>" class="modal fade" role="dialog">
+                                            <div class="modal-dialog">
+
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">Delete Item <?php echo $rs['dept_id'];?></h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Are you sure you want to delete this deprtment?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a href="module/deleteDepartment.php?id=<?php echo $rs['dept_id'];?>"><button type="button" class="btn btn-danger">Delete</button></a>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div id="myEdit<?php echo $rs['dept_id'];?>" class="modal fade" role="dialog">
+                                            <div class="modal-dialog">
+
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">Edit Item</h4>
+                                                    </div>
+                                                    <div class="modal-body" style="height:250px;">
+                                                        <p>Are you sure you want to edit this department?</p>
+
+                                                            <form action="module/editDepartment.php?id=<?php echo $rs['dept_id'];?>" method="POST">
+                                                                <div class="row"  style="margin-top:30px;">
+                                                                    <div class="form-group">
+                                                                    <label class="col-xs-4 control-label form-lable">Department Name:</label>
+
+                                                                    <div class="col-xs-8">
+                                                                        <input id="example2" name="deptName" type="text" value="<?php echo $rs['dept_name']?>"
+                                                                               class="form-control input-md" required>
+                                                                    </div>
+                                                                </div>
+                                                                </div>
+                                                                <div class="row" style="margin-top:20px;">
+                                                                    <div class="form-group">
+                                                                        <label class="col-xs-4 control-label form-lable"  style="margin-bottom:10px !important;">Department Color:</label>
+
+                                                                        <div class="col-xs-8">
+                                                                            <input  style="margin-bottom:10px !important;" type="color" id="service_name" name="dept_color" value="<?php echo $rs['dept_color']?>"  class="form-control input-md jscolor" required>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row" style="margin-top:20px;">
+                                                                    <div class="form-group">
+                                                                        <label class="col-xs-4 control-label form-lable"  style="margin-bottom:10px !important;">Roster Status:</label>
+
+                                                                        <div class="col-xs-8">
+                                                                            <select  name="dept_status" class="form-control">
+                                                                                <option value="NO" <?php if($rs['roster_status'] === 'NO') echo 'selected="selected"';?> >No</option>
+                                                                                <option value="YES" <?php if($rs['roster_status'] === 'YES') echo 'selected="selected"';?>>Yes</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-success">Edit</button>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                <?php
                                     }
                                 ?>
 
@@ -149,9 +234,42 @@ if(!$isLoggedin && $empRole!="admin"){
                                     $query->execute();
                                     $result = $query->fetchAll();
 
-                                    foreach($result as $rs){
-                                        echo "<a href='#' class='list-group-item'>".$rs['dept_name']."<span style='float:right;'>"; if($rs['currentStatus']=='waiting'){echo 'Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>';}else if($rs['currentStatus']=='approved'){ echo 'Approved <i class=\'fa fa-check\' aria-hidden=\'true\'></i></span></a>';}else{echo 'Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></a>';};
-                                    }
+                                foreach($result as $rs){
+                                    ?>
+                                    <a href='#' class='list-group-item'><?php echo ucwords($rs['dept_name']); ?>
+                                        <span style='float:right;'>
+                                            <?php if ($rs['currentStatus'] == 'waiting') {
+                                                echo "Waiting for Approve <button type='button' style='background-color:transparent;border:none;' data-toggle='modal' data-target='#myModal".$rs['dept_id']."'><i class='fa fa-question' style='color:orange;' aria-hidden='true'></i></button>";
+                                            } else if ($rs['currentStatus'] == 'approved') {
+                                                echo "Approved <i class='fa fa-check' aria-hidden='true'></i>";
+                                            }else {
+                                                echo "Rejected <button type='button' style='background-color:transparent;border:none;' data-toggle='modal' data-target='#myModal" . $rs['dept_id'] . "'><i class='fa fa-close'  style='color:red;' aria-hidden='true'></i></button>";
+                                            }?>
+                                        </span>
+                                    </a>
+
+                                    <div id="myModal<?php echo $rs['dept_id'];?>" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Delete Item</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to delete this department?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="module/deleteDepartment.php?id=<?php echo $rs['dept_id'];?>"><button type="button" class="btn btn-danger">Delete</button></a>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
                                 ?>
                             </div>
                         </div>
