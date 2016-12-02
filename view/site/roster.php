@@ -461,7 +461,46 @@ if($groupID==0){
                                             <p>Done Hours per week:</p>
                                         </div>
                                         <div class="col-xs-6">
-                                            <p style=" color:#00a65a;"><strong>36 hours</strong></p>
+                                            <p style=" color:#00a65a;"><strong>
+                                            <?php
+                                                require_once "../../module/PHPExcel/PHPExcel.php";
+
+                                                try{
+                                                $empID = $_SESSION["empID"];
+                                                $tempFile = "new.xlsx";
+                                                $objPHPExcel = PHPExcel_IOFactory::load($tempFile);
+
+                                                $objPHPExcel->getActiveSheet()->setAutoFilter($objPHPExcel->getActiveSheet()->calculateWorksheetDimension());
+
+                                                $autoFilter = $objPHPExcel->getActiveSheet()->getAutoFilter();
+                                                $columnFilter = $autoFilter->getColumn('A');
+
+                                                $columnFilter->setFilterType(PHPExcel_Worksheet_AutoFilter_Column::AUTOFILTER_FILTERTYPE_FILTER);
+                                                $columnFilter->createRule()->setRule(PHPExcel_Worksheet_AutoFilter_Column_Rule::AUTOFILTER_COLUMN_RULE_EQUAL,$empID);
+
+                                                $autoFilter = $objPHPExcel->getActiveSheet()->getAutoFilter();
+                                                $autoFilter->showHideRows();
+                                                $timesum=0;
+
+                                                foreach($objPHPExcel->getActiveSheet()->getRowIterator() as $row){
+
+                                                    if ($objPHPExcel->getActiveSheet()->getRowDimension($row->getRowIndex())->getVisible() and $row->getRowIndex()!=1) {
+
+                                                         $timesum += $objPHPExcel->getActiveSheet()->getCell(
+                                                            'E'.$row->getRowIndex()
+                                                        )->getValue() ;
+                                                        
+
+                                                    }
+
+
+
+
+                                                }
+                                                echo $timesum;
+                                            }
+                                            catch(Exception $e){}
+                                                ?> hours</strong></p> 
                                         </div>
                                     </div>
                                     <div class="row">
