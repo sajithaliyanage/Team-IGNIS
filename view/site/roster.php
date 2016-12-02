@@ -470,6 +470,10 @@ if($groupID==0){
                                                 $tempFile = "new.xlsx";
                                                 $objPHPExcel = PHPExcel_IOFactory::load($tempFile);
 
+                                                echo $monday = date( 'Y-m-d', strtotime( 'monday this week' ) ).'</br>';
+                                                echo $sunday = date( 'Y-m-d', strtotime( 'sunday this week' ) ).'</br>';
+                                                echo $today = date("Y-m-d").'</br>';
+
                                                 $objPHPExcel->getActiveSheet()->setAutoFilter($objPHPExcel->getActiveSheet()->calculateWorksheetDimension());
 
                                                 $autoFilter = $objPHPExcel->getActiveSheet()->getAutoFilter();
@@ -486,9 +490,16 @@ if($groupID==0){
 
                                                     if ($objPHPExcel->getActiveSheet()->getRowDimension($row->getRowIndex())->getVisible() and $row->getRowIndex()!=1) {
 
-                                                         $timesum += $objPHPExcel->getActiveSheet()->getCell(
-                                                            'E'.$row->getRowIndex()
+                                                        $Date = $objPHPExcel->getActiveSheet()->getCell(
+                                                            'B'.$row->getRowIndex()
                                                         )->getValue() ;
+
+                                                        if ($monday <= $Date and $Date >= $sunday) {
+                                                            $timesum += $objPHPExcel->getActiveSheet()->getCell('E'.$row->getRowIndex())->getValue() ;
+                                                            echo $timesum;
+                                                        }
+
+                                                         
                                                         
 
                                                     }
@@ -508,7 +519,7 @@ if($groupID==0){
                                             <p>Remaining Hours per week:</p>
                                         </div>
                                         <div class="col-xs-6">
-                                            <p style=" color:#d43f3a;"><strong>24 hours</strong></p>
+                                            <p style=" color:#d43f3a;"><strong><?php echo (56-$timesum) ?>hours</strong></p>
                                         </div>
                                     </div>
 
