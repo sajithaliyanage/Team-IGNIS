@@ -57,6 +57,28 @@ if(!$isLoggedin && $empRole!="director"){
               </div>
           </div>
 
+          <!-- get the attendance from excel sheet -->
+          <?php
+          require_once "../../module/PHPExcel/PHPExcel.php";
+          try {
+              $tempFile = "testing.xlsx";
+              $objPHPExcel = PHPExcel_IOFactory::load($tempFile);
+              $i=0;
+              $id=array();
+              foreach ($objPHPExcel->getActiveSheet()->getRowIterator() as $row) {
+                  if ($objPHPExcel->getActiveSheet()->getRowDimension($row->getRowIndex())->getVisible() and $row->getRowIndex() !=1) {
+                      $id[$i]= $objPHPExcel->getActiveSheet()->getCell('A'.$row->getRowIndex())->getValue()."<br>";
+                      $i+=1;
+                  }
+              }
+              $num=count($id);
+              //print_r($id);
+              //print_r($num);
+          }catch(Exception $e){
+              echo $e;
+          }
+          ?>
+
           <!---start top boxes--->
           <div class="row padding-row">
               <div class="col-sm-5 col-xs-12 padding-box">
@@ -78,10 +100,10 @@ if(!$isLoggedin && $empRole!="director"){
                                 $query = $pdo->prepare($sql);
                                 $query->execute();
                                 $numrow = $query->rowCount();
-                                $numrows = intval($numrow)+100;
-                                $precetage=($numrows/($numrows+($numrow)))*100;
+                                $numrows = intval($numrow);
+                                $precetage=($num/($numrows))*100;
                             ?>
-                            <center><h2 class="box-count"><?php if($numrows<10){echo "0".$numrows;}else{echo $numrows;}?><br><?php echo round($precetage);?>%</h2></center>
+                            <center><h2 class="box-count"><?php if($num<10){echo "0".$num;}else{echo $num;}?><br><?php echo round($precetage);?>%</h2></center>
                           </div>
                   </div>
               </div>
@@ -111,9 +133,10 @@ if(!$isLoggedin && $empRole!="director"){
                             $query->execute();
                             $numrow = $query->rowCount();
                             $numrows = intval($numrow);
-                            $precetage=($numrow/($numrows+100+($numrow)))*100;
+                            $absent=intval($numrows-$num);
+                            $precetage=($absent/($numrows))*100;
                             ?>
-                            <center><h2 class="box-count"><?php if($numrows<10){echo "0".$numrows;}else{echo $numrows;}?><br><?php echo round($precetage);?>%</h2></center>
+                            <center><h2 class="box-count"><?php if($absent<10){echo "0".$absent;}else{echo $absent;}?><br><?php echo round($precetage);?>%</h2></center>
                           </div>
               </div>
           </div>
