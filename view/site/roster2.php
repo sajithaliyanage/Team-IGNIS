@@ -504,9 +504,9 @@ if (isset($_GET['id'])) {
                                     $workinghours = 60;
                                     $timesum=0;
 
-                                    $monday = date( 'Y-m-d', strtotime( 'monday this week' ) ).'</br>';
-                                    $sunday = date( 'Y-m-d', strtotime( 'sunday this week' ) ).'</br>';
-                                    $today = date("Y-m-d").'</br>';
+                                    $monday = date( 'Y/m/d', strtotime( 'monday this week' ) ).'</br>';
+                                    $sunday = date( 'Y/m/d', strtotime( 'sunday this week' ) ).'</br>';
+                                    $today = date("Y/m/d").'</br>';
 
                                     $objPHPExcel->getActiveSheet()->setAutoFilter($objPHPExcel->getActiveSheet()->calculateWorksheetDimension());
 
@@ -546,12 +546,12 @@ if (isset($_GET['id'])) {
                                 }
                                 catch(Exception $e){}
                             ?>
-                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                 aria-valuemax="100" style="width: 60%;">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo ($timesum/$workinghours)*100;?>%" aria-valuemin="0"
+                                 aria-valuemax="100" style="width: <?php echo ($timesum/$workinghours)*100;?>%">
                             </div>
                         </div>
                         <p style="text-align:left; margin-top:-20px;">0h</p>
-                        <p style="text-align:right; margin-top:-30px;">60h</p>
+                        <p style="text-align:right; margin-top:-30px;"><?php print $workinghours;?>h</p>
 
                         <div class="row">
                             <div class="col-xs-10 col-xs-offset-1">
@@ -560,7 +560,7 @@ if (isset($_GET['id'])) {
                                         <p>Total Hours per week:</p>
                                     </div>
                                     <div class="col-xs-6">
-                                        <p><strong>60 hours</strong></p>
+                                        <p><strong><?php echo $workinghours;?> hours</strong></p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -576,7 +576,25 @@ if (isset($_GET['id'])) {
                                         <p>Remaining Hours per week:</p>
                                     </div>
                                     <div class="col-xs-6">
-                                        <p style=" color:#d43f3a;"><strong><?php echo(56 - $timesum) ?>hours</strong>
+                                        <p style=" color:#d43f3a;"><strong><?php echo($workinghours - $timesum) ?>hours</strong>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6" style="text-align: right;">
+                                        <p>Days remains in this week:</p>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <p style=" color:#d43f3a;"><strong>
+                                        <?php 
+                                        $date1=date_create(date('Y/m/d',strtotime( 'sunday this week' )));
+                                        $date2=date_create(date('Y/m/d'));
+                                        $diff=date_diff($date2,$date1);
+                                        echo $diff->format("%a");
+                                        
+                                        
+                                        
+                                        ?>Days</strong>
                                         </p>
                                     </div>
                                 </div>
