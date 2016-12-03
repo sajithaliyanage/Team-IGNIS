@@ -63,17 +63,27 @@ if(!$isLoggedin && $empRole!="director"){
           try {
               $tempFile = "testing.xlsx";
               $objPHPExcel = PHPExcel_IOFactory::load($tempFile);
+              $j=0;
+
+              $dep=array();
+              $sql="SELECT dept_id from department where currentStatus=:approve";
+              $query = $pdo->prepare($sql);
+              $query->execute(array('approve'=>"approved"));
+              foreach ($query as $r){
+                $dep[$j]=0;
+                $j+=1;
+              }
               $i=0;
               $id=array();
               foreach ($objPHPExcel->getActiveSheet()->getRowIterator() as $row) {
                   if ($objPHPExcel->getActiveSheet()->getRowDimension($row->getRowIndex())->getVisible() and $row->getRowIndex() !=1) {
-                      $id[$i]= $objPHPExcel->getActiveSheet()->getCell('A'.$row->getRowIndex())->getValue()."<br>";
+                      $id[$i]= $objPHPExcel->getActiveSheet()->getCell('A'.$row->getRowIndex())->getValue();
                       $i+=1;
                   }
               }
               $num=count($id);
-              //print_r($id);
-              //print_r($num);
+              echo($num);
+
           }catch(Exception $e){
               echo $e;
           }
@@ -205,8 +215,17 @@ if(!$isLoggedin && $empRole!="director"){
                       <!-- filtering option end -->
                       <br><br><br><br><br><br>
                     <?php
+
+                    //take the attendance count of each department
+                    for ($k=0; $k <$num ; $k++) {
+                      $sql="SELECT dept_id from employee where comp_id=:c_id ";
+                      $query = $pdo->prepare($sql);
+                      $query->execute(array('c_id'=>"c_id"));
+                      print_r($query);echo "<br>";
+                    }
+
                     //display no of employees belongs to a particular department
-                    $sql="SELECT dept_name,dept_id,no_of_emp from department where currentStatus=:approve  ORDER BY dept_id";
+                    $sql="SELECT dept_name from department where currentStatus=:approve ";
                     $query = $pdo->prepare($sql);
                     $query->execute(array('approve'=>"approved"));
                     $dept = $query->fetchAll(PDO::FETCH_NUM);
