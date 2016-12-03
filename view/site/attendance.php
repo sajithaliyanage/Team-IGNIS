@@ -8,6 +8,35 @@ if(!$isLoggedin){
     header('Location:../../index.php');
 }
 ?>
+
+<script>
+function tableToJson(table) {
+var data = [];
+
+// first row needs to be headers
+var headers = [];
+for (var i=0; i<table.rows[0].cells.length; i++) {
+headers[i] = table.rows[0].cells[i].innerHTML.toUpperCase().replace(/ /gi,'');
+}
+data.push(headers);
+// go through cells
+for (var i=1; i<table.rows.length; i++) {
+
+var tableRow = table.rows[i];
+var rowData = {};
+
+for (var j=0; j<tableRow.cells.length; j++) {
+
+rowData[ headers[j] ] = tableRow.cells[j].innerHTML;
+
+}
+
+data.push(rowData);
+}
+
+return data;
+}
+</script>
  <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,7 +139,7 @@ if(!$isLoggedin){
 
                                         <button class="btn btn-primary btn-lg pull-left submit-button" style="width: 150px " type="submit">Fitler
                                         </button>
-                                        <button class="btn btn-info btn-lg pull-right submit-button" style="width: 150px" type="submit">Download
+                                        <button class="btn btn-info btn-lg pull-right submit-button" style="width: 150px" type="submit" onclick="callme();">Download
                                         </button>
                                     </div>
                                 </div>
@@ -131,7 +160,7 @@ if(!$isLoggedin){
                             <hr>
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <table class="table table-responsive">
+                                    <table class="table table-responsive" id="table-id">
                                         <tr>
                                             <th>Date</th>
                                             <th>In Time</th>
@@ -157,7 +186,28 @@ if(!$isLoggedin){
 
     </div>
 
+   <script> function callme(){
+    var table = tableToJson($('#table-id').get(0));
+    var doc = new jsPDF('l','pt','letter',true);
 
+
+    $.each(table, function(i, row){
+    $.each(row, function(j,cell){
+    if(j=="DATE" | i==0){
+    doc.cell(20,50,150,30,cell,i);
+    }
+    else{
+    doc.cell(20,50,150,30,cell,i);
+    }
+
+    });
+    });
+
+    doc.save('Report.pdf');
+    }
+       </script>
+
+    <script src="../../public/js/jspdf.js"></script>
     <script src="../../public/js/jquery.js"></script>
     <script src="../../public/js/bootstrap.js"></script>
         <script src="../../public/js/bootstrap-datepicker.js"></script>
