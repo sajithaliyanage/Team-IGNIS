@@ -595,6 +595,8 @@ if (isset($_GET['id'])) {
                             <h5 class="nortification-box-heading"><i class="fa fa-tag icon-margin-right"
                                                                      aria-hidden="true"></i>
                                 Shift Changing Application</h5>
+                            <div class="alert-user" style="<?php if(!isset($_GET['error'])){echo 'display:none;';}?> color:#d43f3a">Invalid Form Actions!</div>
+                            <div class="alert-user" style="<?php if(!isset($_GET['requested'])){echo 'display:none;';}?> color:green;">Request sent successfully!</div>
                             <hr>
                             <form role="form" data-toggle="validator" action="../../module/rosterapply.php"
                                   method="post">
@@ -604,9 +606,9 @@ if (isset($_GET['id'])) {
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label form-lable">Shifting Date :</label>
                                             <div class="col-xs-8">
-                                                <input id="startdate" name="shift_tdate" type="text"
+                                                <input id="startdate" name="shift_date" type="text"
                                                        placeholder="dd/mm/yyyy"
-                                                       class="form-control input-md" onfocusout="myFunction()">
+                                                       class="form-control input-md" onchange="showUser(this.value)">
 
                                             </div>
                                         </div>
@@ -615,6 +617,9 @@ if (isset($_GET['id'])) {
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label form-lable">Shifting Time :</label>
                                             <div class="col-xs-8">
+                                                <input id="demo" name="shift_my_time" type="text"
+                                                       class="form-control input-md" readonly="readonly" >
+
 
 
                                             </div>
@@ -626,31 +631,22 @@ if (isset($_GET['id'])) {
                                             <label class="col-xs-4 control-label form-lable">Shifting Group:</label>
                                             <div class="col-xs-8">
 
-                                                <select name="shift_group" class="form-control"
-                                                        onchange='takevalue(this.value)'>
+                                                <select name="shift_group" class="form-control" onchange="showUser1(this.value)">
 
                                                     <?php
-                                                    if (isset($_GET['id'])) {
+
                                                         $sql = "SELECT * from group_detail where group_id =:log1";
                                                         $query = $pdo->prepare($sql);
                                                         $query->execute(array('log1' => $emp_group_id));
                                                         $result0 = $query->fetch();
 
-                                                        echo "<option>" . $result0['group_name'] . "</option>";
-
-
-                                                    } else {
-                                                        echo "<option value=\"empty\">--Select--</option>";
+                                                        echo "<option value='0'>--Select--</option>";
                                                         foreach ($result as $rs) {
                                                             if ($groupID != $rs['group_id']) {
                                                                 echo "<option value='" . $rs['group_id'] . "'>" . $rs['group_name'] . '</option>';
                                                             }
 
                                                         }
-
-
-                                                    }
-
 
                                                     ?>
                                                 </select>
@@ -662,31 +658,8 @@ if (isset($_GET['id'])) {
                                             <label class="col-xs-4 control-label form-lable">Shifting Member ID
                                                 :</label>
                                             <div class="col-xs-8">
-                                                <select name="job_level" class="form-control">
-                                                    <?php
-                                                    if (isset($_GET['id'])) {
-                                                        $sql = "select * from employee WHERE group_id=:log1";
-                                                        $query = $pdo->prepare($sql);
-                                                        $query->execute(array('log1' => $emp_group_id));
-                                                        $result = $query->fetchAll();
-                                                        $rcount = $query->rowCount();
+                                                <div id="demo1"></div>
 
-                                                        if ($rcount == 0) {
-                                                            echo "<option >- No any Employees in this Group -</option>";
-
-
-                                                        } else {
-
-                                                            foreach ($result as $rs) {
-                                                                echo " <option>" . $rs['comp_id'] . ' - ' . $rs['name'] . "</option>";
-                                                            }
-                                                        }
-
-                                                    } else {
-                                                        echo "<option >- Select Job Category First -</option>";
-                                                    }
-                                                    ?>
-                                                </select>
 
                                             </div>
                                         </div>
@@ -695,9 +668,9 @@ if (isset($_GET['id'])) {
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label form-lable">Rework Date :</label>
                                             <div class="col-xs-8">
-                                                <input id="enddate" name="rework_date " type="text"
+                                                <input id="enddate" name="rework_date" type="text"
                                                        placeholder="dd/mm/yyyy"
-                                                       class="form-control input-md" required>
+                                                       class="form-control input-md" onchange="showUser2(this.value)">
                                             </div>
                                         </div>
                                         <br>
@@ -707,6 +680,8 @@ if (isset($_GET['id'])) {
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label form-lable">Rework Time :</label>
                                             <div class="col-xs-8">
+                                                <input id="demo2" name="shift_his_time" type="text"
+                                                       class="form-control input-md" readonly="readonly" >
 
 
                                             </div>
@@ -717,8 +692,8 @@ if (isset($_GET['id'])) {
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label form-lable">Reason :</label>
                                             <div class="col-xs-8">
-                                                <input id="service_name" name="job_category" type="text" placeholder=""
-                                                       class="form-control input-md" required>
+                                                <input id="service_name" name="reason" type="text" placeholder=""
+                                                       class="form-control input-md" >
                                             </div>
                                         </div>
 
@@ -765,35 +740,59 @@ if (isset($_GET['id'])) {
 
 
         $('#startdate').datepicker({
-            dateFormat: "dd/mm/yy",
+            dateFormat: "yy/mm/dd",
             minDate: +1
         });
         $('#enddate').datepicker({
             minDate: +1,
-            dateFormat: "dd/mm/yy"
+            dateFormat: "yy/mm/dd"
         });
 
 
     });
-    function takevalue(str) {
-        if (str != 'empty') {
-            var javascriptVariable = str;
-            window.location.href = "roster.php?id=" + javascriptVariable;
+
+
+</script>
+<script>
+    var groupId= null;
+    function showUser(str){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if(xhttp.readyState==4 && xhttp.status==200){
+                document.getElementById("demo").value = xhttp.responseText;
+            }
         }
+        xhttp.open("GET","../../module/ajxroster.php?q="+str ,true);
+        xhttp.send();
     }
-    function myFunction() {
-        var x = document.getElementById("startdate").value;
-        <?php
-        $today = date('Y-m-d');
+    function showUser1(str){
+        groupId = str;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if(xhttp.readyState==4 && xhttp.status==200){
+                document.getElementById("demo1").innerHTML = xhttp.responseText;
+            }
+        }
+        xhttp.open("GET","../../module/ajxroster.php?r="+str ,true);
+        xhttp.send();
+    }
+    function showUser2(str){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if(xhttp.readyState==4 && xhttp.status==200){
+                if(xhttp.responseText == 'Holiday'){
+                    document.getElementById("demo2").value ="<h5>"+xhttp.responseText+"<span  style='color:red; margin-left:5px;'>Please select another date</span></h5>";
+                }else{
+                    document.getElementById("demo2").value = xhttp.responseText;
+                }
 
-
-
-
-
-        ?>
-
+            }
+        }
+        xhttp.open("GET","../../module/ajxroster.php?p="+str+"&gid="+groupId,true);
+        xhttp.send();
     }
 </script>
+
 
 
 </body>
