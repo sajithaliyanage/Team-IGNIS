@@ -16,7 +16,7 @@ try {
     $id=array();
     $name=array();
     foreach ($objPHPExcel->getActiveSheet()->getRowIterator() as $row) {
-        if ($objPHPExcel->getActiveSheet()->getRowDimension($row->getRowIndex())->getVisible() and $row->getRowIndex() !=1) {
+        if ($objPHPExcel->getActiveSheet()->getRowDimension($row->getRowIndex())->getVisible() and $row->getRowIndex() !=1 and $objPHPExcel->getActiveSheet()->getCell('A'.$row->getRowIndex())->getValue()!= null ) {
 
             //echo $objPHPExcel->getActiveSheet()->getCell('A'.$row->getRowIndex())->getValue(), "<br>";
             $id[$i]= $objPHPExcel->getActiveSheet()->getCell('A'.$row->getRowIndex())->getValue();
@@ -24,9 +24,10 @@ try {
         }
 
     }
+
     $num=count($id);
    // print_r($id);
-   // print_r($num);
+    print_r($num);
     $result0 = array();
 
 
@@ -42,6 +43,7 @@ try {
 
 
     }
+    print_r(count($result0));
 
 
 

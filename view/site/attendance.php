@@ -10,37 +10,37 @@ if(!$isLoggedin){
 ?>
 
 <script>
-function tableToJson(table) {
-var data = [];
+    function tableToJson(table) {
+        var data = [];
 
 // first row needs to be headers
-var headers = [];
-for (var i=0; i<table.rows[0].cells.length; i++) {
-headers[i] = table.rows[0].cells[i].innerHTML.toUpperCase().replace(/ /gi,'');
-}
-data.push(headers);
+        var headers = [];
+        for (var i=0; i<table.rows[0].cells.length; i++) {
+            headers[i] = table.rows[0].cells[i].innerHTML.toUpperCase().replace(/ /gi,'');
+        }
+        data.push(headers);
 // go through cells
-for (var i=1; i<table.rows.length; i++) {
+        for (var i=1; i<table.rows.length; i++) {
 
-var tableRow = table.rows[i];
-var rowData = {};
+            var tableRow = table.rows[i];
+            var rowData = {};
 
-for (var j=0; j<tableRow.cells.length; j++) {
+            for (var j=0; j<tableRow.cells.length; j++) {
 
-rowData[ headers[j] ] = tableRow.cells[j].innerHTML;
+                rowData[ headers[j] ] = tableRow.cells[j].innerHTML;
 
-}
+            }
 
-data.push(rowData);
-}
+            data.push(rowData);
+        }
 
-return data;
-}
+        return data;
+    }
 </script>
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -56,14 +56,14 @@ return data;
     <link rel="stylesheet" href="../../public/css/attendance.css">
 
 
-  </head>
+</head>
 
 <body style=" background-color: #eceff4 !important;">
 
-    <?php include("../layouts/navbar.php") ?>
+<?php include("../layouts/navbar.php") ?>
 
-    <div class="container-fluid">
-      <div class="row">
+<div class="container-fluid">
+    <div class="row">
 
         <div class="col-sm-2 col-xs-12 left-menu-div side-bar-display">
             <?php include("../layouts/leftbar.php") ?>
@@ -148,10 +148,10 @@ return data;
                     </div>
 
                 </div>
-                </div>
-                <br>
+            </div>
+            <br>
 
-<div class="row padding-row">
+            <div class="row padding-row">
                 <div class="col-sm-12 col-xs-12 padding-box">
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top">
@@ -181,49 +181,49 @@ return data;
                 </div>
 
             </div>
-         </div>
-      </div>
-
+        </div>
     </div>
 
-   <script> function callme(){
-    var table = tableToJson($('#table-id').get(0));
-    var doc = new jsPDF('l','pt','letter',true);
+</div>
+
+<script> function callme(){
+        var table = tableToJson($('#table-id').get(0));
+        var doc = new jsPDF('l','pt','letter',true);
 
 
-    $.each(table, function(i, row){
-    $.each(row, function(j,cell){
-    if(j=="DATE" | i==0){
-    doc.cell(20,50,150,30,cell,i);
-    }
-    else{
-    doc.cell(20,50,150,30,cell,i);
-    }
-
-    });
-    });
-
-    doc.save('Report.pdf');
-    }
-       </script>
-
-    <script src="../../public/js/jspdf.js"></script>
-    <script src="../../public/js/jquery.js"></script>
-    <script src="../../public/js/bootstrap.js"></script>
-        <script src="../../public/js/bootstrap-datepicker.js"></script>
-        <script type="text/javascript">
-            // When the document is ready
-            $(document).ready(function () {
-
-                $('#example1').datepicker({
-                    format: "dd/mm/yyyy"
-                });
-                $('#example2').datepicker({
-                    format: "dd/mm/yyyy"
-                });
+        $.each(table, function(i, row){
+            $.each(row, function(j,cell){
+                if(j=="DATE" | i==0){
+                    doc.cell(20,50,150,30,cell,i);
+                }
+                else{
+                    doc.cell(20,50,150,30,cell,i);
+                }
 
             });
-        </script>
+        });
+
+        doc.save('Report.pdf');
+    }
+</script>
+
+<script src="../../public/js/jspdf.js"></script>
+<script src="../../public/js/jquery.js"></script>
+<script src="../../public/js/bootstrap.js"></script>
+<script src="../../public/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+    // When the document is ready
+    $(document).ready(function () {
+
+        $('#example1').datepicker({
+            format: "dd/mm/yyyy"
+        });
+        $('#example2').datepicker({
+            format: "dd/mm/yyyy"
+        });
+
+    });
+</script>
 
 </body>
 </html>
