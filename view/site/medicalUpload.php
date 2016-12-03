@@ -193,7 +193,7 @@ $departmentId = $result['dept_id'];
                                                     <?php
                                                         $sqls = "SELECT leave_id FROM leave_type WHERE  leave_name=:state";
                                                         $querys = $pdo->prepare($sqls);
-                                                        $querys->execute(array('state'=>"medical leave"));
+                                                        $querys->execute(array('state'=>"casual leave"));
                                                         $results = $querys->fetch();
                                                         $medicalID = $results['leave_id'];
 

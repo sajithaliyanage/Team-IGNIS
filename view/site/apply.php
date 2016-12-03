@@ -169,7 +169,7 @@ if(!$isLoggedin){
                                             <div class="col-xs-8">
                                                 <select name="leave_type" class="form-control">
                                                     <?php
-                                                        $sql = "select * from leave_type where currentStatus=:log ";
+                                                        $sql = "select * from leave_type where currentStatus=:log AND leave_name !='Medical Leave'";
                                                         $query = $pdo->prepare($sql);
                                                         $query->execute(array('log'=>"approved"));
                                                         $result = $query->fetchAll();
@@ -294,6 +294,9 @@ if(!$isLoggedin){
 <script type="text/javascript">
     // When the document is ready
     $(document).ready(function () {
+        var date = new Date();
+        date.setDate(date.getDate()-1);
+
         $('#example1').datepicker({
             format: "dd/mm/yyyy"
         });
