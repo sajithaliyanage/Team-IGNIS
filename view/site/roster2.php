@@ -494,6 +494,58 @@ if (isset($_GET['id'])) {
                         <hr>
 
                         <div class="progress">
+                         <?php
+                                require_once "../../module/PHPExcel/PHPExcel.php";
+
+                                try{
+                                    $empID = $_SESSION["empID"];
+                                    $tempFile = "new.xlsx";
+                                    $objPHPExcel = PHPExcel_IOFactory::load($tempFile);
+                                    $workinghours = 60;
+                                    $timesum=0;
+
+                                    $monday = date( 'Y-m-d', strtotime( 'monday this week' ) ).'</br>';
+                                    $sunday = date( 'Y-m-d', strtotime( 'sunday this week' ) ).'</br>';
+                                    $today = date("Y-m-d").'</br>';
+
+                                    $objPHPExcel->getActiveSheet()->setAutoFilter($objPHPExcel->getActiveSheet()->calculateWorksheetDimension());
+
+                                    $autoFilter = $objPHPExcel->getActiveSheet()->getAutoFilter();
+                                    $columnFilter = $autoFilter->getColumn('A');
+
+                                    $columnFilter->setFilterType(PHPExcel_Worksheet_AutoFilter_Column::AUTOFILTER_FILTERTYPE_FILTER);
+                                    $columnFilter->createRule()->setRule(PHPExcel_Worksheet_AutoFilter_Column_Rule::AUTOFILTER_COLUMN_RULE_EQUAL,$empID);
+
+                                    $autoFilter = $objPHPExcel->getActiveSheet()->getAutoFilter();
+                                    $autoFilter->showHideRows();
+                                    
+
+                                    foreach($objPHPExcel->getActiveSheet()->getRowIterator() as $row){
+
+                                        if ($objPHPExcel->getActiveSheet()->getRowDimension($row->getRowIndex())->getVisible() and $row->getRowIndex()!=1) {
+
+                                            $Date = $objPHPExcel->getActiveSheet()->getCell(
+                                                    'B'.$row->getRowIndex())->getValue() ;
+
+                                            if ($monday <= $Date and $Date <= $sunday) {
+                                                $timesum += $objPHPExcel->getActiveSheet()->getCell('E'.$row->getRowIndex())->getValue() ;
+
+                                                
+                                            }
+
+                                                         
+                                                        
+
+                                        }
+
+
+
+
+                                     } 
+                                                
+                                }
+                                catch(Exception $e){}
+                            ?>
                             <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
                                  aria-valuemax="100" style="width: 60%;">
                             </div>
@@ -516,53 +568,7 @@ if (isset($_GET['id'])) {
                                         <p>Done Hours per week:</p>
                                     </div>
                                     <div class="col-xs-6">
-                                        <p style=" color:#00a65a;"><strong>
-                                                <?php
-                                                require_once "../../module/PHPExcel/PHPExcel.php";
-
-                                                try {
-                                                    $empID = $_SESSION["empID"];
-                                                    $tempFile = "new.xlsx";
-                                                    $objPHPExcel = PHPExcel_IOFactory::load($tempFile);
-
-                                                    echo $monday = date('Y-m-d', strtotime('monday this week')) . '</br>';
-                                                    echo $sunday = date('Y-m-d', strtotime('sunday this week')) . '</br>';
-                                                    echo $today = date("Y-m-d") . '</br>';
-
-                                                    $objPHPExcel->getActiveSheet()->setAutoFilter($objPHPExcel->getActiveSheet()->calculateWorksheetDimension());
-
-                                                    $autoFilter = $objPHPExcel->getActiveSheet()->getAutoFilter();
-                                                    $columnFilter = $autoFilter->getColumn('A');
-
-                                                    $columnFilter->setFilterType(PHPExcel_Worksheet_AutoFilter_Column::AUTOFILTER_FILTERTYPE_FILTER);
-                                                    $columnFilter->createRule()->setRule(PHPExcel_Worksheet_AutoFilter_Column_Rule::AUTOFILTER_COLUMN_RULE_EQUAL, $empID);
-
-                                                    $autoFilter = $objPHPExcel->getActiveSheet()->getAutoFilter();
-                                                    $autoFilter->showHideRows();
-                                                    $timesum = 0;
-
-                                                    foreach ($objPHPExcel->getActiveSheet()->getRowIterator() as $row) {
-
-                                                        if ($objPHPExcel->getActiveSheet()->getRowDimension($row->getRowIndex())->getVisible() and $row->getRowIndex() != 1) {
-
-                                                            $Date = $objPHPExcel->getActiveSheet()->getCell(
-                                                                'B' . $row->getRowIndex()
-                                                            )->getValue();
-
-                                                            if ($monday <= $Date and $Date >= $sunday) {
-                                                                $timesum += $objPHPExcel->getActiveSheet()->getCell('E' . $row->getRowIndex())->getValue();
-                                                                echo $timesum;
-                                                            }
-
-
-                                                        }
-
-
-                                                    }
-                                                    echo $timesum;
-                                                } catch (Exception $e) {
-                                                }
-                                                ?> hours</strong></p>
+                                        <p style=" color:#00a65a;"><strong> <?php echo $timesum;?>hours</strong></p>
                                     </div>
                                 </div>
                                 <div class="row">
