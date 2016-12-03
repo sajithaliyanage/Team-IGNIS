@@ -12,6 +12,12 @@
     $newquery1->execute(array('val'=>0, 'empID'=>$empID));
     $nortifictions = $newquery1->fetchAll();
     $nortifictionsCount = $newquery1->rowCount();
+
+    $statement2 = "SELECT * from apply_leave where seen=:val AND comp_id=:empID";
+    $newquery2 = $pdo->prepare($statement2);
+    $newquery2->execute(array('val'=>0, 'empID'=>$empID));
+    $nortifictions2 = $newquery2->fetchAll();
+    $nortifictionsCount2 = $newquery2->rowCount();
 ?>
 
 <center>
@@ -44,9 +50,10 @@
                             if($nortifictionsCount !=0){
                                 foreach($nortifictions as $rs){
                                     echo "
-                                        <button id='".$rs['apply_leave_id']."'  class='nort' role=\"button\" value='".$rs['apply_leave_id']."' style='border:none;'>
+                                        <button id='".$rs['apply_leave_id']."'  class='nort' role=\"button\" value='".$rs['apply_leave_id']."'
+                                        style='border:none;padding:10px 10px;border-bottom:1px solid; margin-left:2.5px; width:200px; border-left:4px solid ";if($rs['leave_priority']=='medium'){echo 'green';}else if($rs['leave_priority']=='high'){ echo 'red';}else{ echo 'yellow';} echo "'>
 
-                                                   ". $rs['number_of_days'] ." Days leave applied
+                                                   ". $rs['number_of_days'] ." Days leave applied - <b>";if($rs['status']=='waiting' || $rs['status'] == 'recommended'){echo 'Pending';}else if($rs['status']=='approved'){echo 'Approved';}else if($rs['status']=='rejected'){echo 'Rejected';}else if($rs['status']=='canceled'){ echo 'Canceled';} echo"</b>
 
                                         </button>
 
@@ -67,7 +74,24 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-admin" style="margin-top:2px;">
                         <div class="arrow-up"></div>
-                        <li style="text-align: center;">No any messages yet!</li>
+                        <?php
+                        if($nortifictionsCount2 !=0){
+                            foreach($nortifictions2 as $rs){
+                                echo "
+                                        <button id='".$rs['apply_leave_id']."'  class='nort' role=\"button\" value='".$rs['apply_leave_id']."'
+                                        style='border:none;padding:10px 10px;border-bottom:1px solid; margin-left:2.5px; width:200px; border-left:4px solid ";if($rs['leave_priority']=='medium'){echo 'green';}else if($rs['leave_priority']=='high'){ echo 'red';}else{ echo 'yellow';} echo "'>
+
+                                                   ". $rs['number_of_days'] ." Days leave applied - <b>";if($rs['status']=='waiting' || $rs['status'] == 'recommended'){echo 'Pending';}else if($rs['status']=='approved'){echo 'Approved';}else if($rs['status']=='rejected'){echo 'Rejected';}else if($rs['status']=='canceled'){ echo 'Canceled';} echo"</b>
+
+                                        </button>
+
+                                ";
+                            }
+                        }else{
+                            echo "<li style=\"text-align: center;\">No any nortifications</li>";
+                        }
+
+                        ?>
                     </ul>
                 </li>
             </ul>

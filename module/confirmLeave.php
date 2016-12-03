@@ -20,9 +20,9 @@ try{
     if($empRole=='manager' || $empRole=='admin'){
         if($action =='done'){
 //            approve leave
-            $sql = "UPDATE apply_leave SET status=:log, medical_status=:medical where comp_id=:employeeID AND apply_leave_id=:apply_leave_id";
+            $sql = "UPDATE apply_leave SET status=:log, medical_status=:medical,seen=:seen where comp_id=:employeeID AND apply_leave_id=:apply_leave_id";
             $query = $pdo->prepare($sql);
-            $query->execute(array('log'=>"approved", 'medical'=>"no",'employeeID'=>$appliedEmployeeId,'apply_leave_id'=>$appliedLeaveId));
+            $query->execute(array('log'=>"approved", 'medical'=>"no",'employeeID'=>$appliedEmployeeId,'apply_leave_id'=>$appliedLeaveId ,'seen'=>0));
 
             $sql = "SELECT leave_id,number_of_days FROM apply_leave where comp_id=:employeeID AND apply_leave_id=:apply_leave_id";
             $query = $pdo->prepare($sql);
