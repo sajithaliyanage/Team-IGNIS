@@ -6,6 +6,12 @@
     $employeeName = $newresult['name'];
     $employeeImage = $newresult['image'];
     $groupID = $newresult['group_id'];
+
+    $statement = "SELECT * from apply_leave where seen=:val AND comp_id=:empID";
+    $newquery1 = $pdo->prepare($statement);
+    $newquery1->execute(array('val'=>0, 'empID'=>$empID));
+    $nortifictions = $newquery1->fetchAll();
+    $nortifictionsCount = $newquery1->rowCount();
 ?>
 
 <center>
@@ -30,11 +36,28 @@
             <ul class="nav navbar-nav navbar-left nortifications" style="margin-left:17%; padding-top:4px; position: fixed;">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle nortification-button" data-toggle="dropdown">
-                        <i class="fa fa-bell-o" style="border:1px solid #d2d2d2; border-radius:100%; padding:14px;"></i><span class="badge postition-alert">0</span>
+                        <i class="fa fa-bell-o" style="border:1px solid #d2d2d2; border-radius:100%; padding:14px;"></i><span class="badge postition-alert"><?php echo $nortifictionsCount;?></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-admin" style="margin-top:2px;">
                         <div class="arrow-up"></div>
-                        <li style="text-align: center;">No any alerts yet!</li>
+                        <?php
+                            if($nortifictionsCount !=0){
+                                foreach($nortifictions as $rs){
+                                    echo "
+                                        <button id='".$rs['apply_leave_id']."'  class='nort' role=\"button\" value='".$rs['apply_leave_id']."' style='border:none;'>
+
+                                                   ". $rs['number_of_days'] ." Days leave applied
+
+                                        </button>
+
+                                ";
+                                }
+                            }else{
+                                echo "<li style=\"text-align: center;\">No any nortifications</li>";
+                            }
+
+                        ?>
+
                     </ul>
                 </li>
 
@@ -73,3 +96,24 @@
         </div>
     </div>
 </nav>
+
+<script>
+    $(document).ready(function(){
+
+        $(".nort").click(function() {
+            var id = $(this).attr('value');
+            $.ajax({
+                type: "POST",
+                url: "../../module/nortification.php",
+                data: {leaveID:id},
+                dataType: "text",
+                cache:false,
+                success:
+                    function(data){
+                        location.reload();
+                    }
+            });
+            return false;
+        });
+    });
+</script>

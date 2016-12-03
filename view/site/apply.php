@@ -25,7 +25,7 @@ if(!$isLoggedin){
     <link href="../../public/css/font-awesome.min.css" rel="stylesheet">
     <link href="../../public/css/fullcalendar.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../public/css/datepicker.css">
-
+    <script src="../../public/js/jquery.js"></script>
 </head>
 
 <body style=" background-color: #eceff4 !important;">
@@ -286,7 +286,7 @@ if(!$isLoggedin){
 
 </div>
 
-<script src="../../public/js/jquery.js"></script>
+
 <script src="../../public/js/moment.min.js"></script>
 <script src="../../public/js/bootstrap.js"></script>
 <script src="../../public/js/fullcalendar.min.js"></script>
