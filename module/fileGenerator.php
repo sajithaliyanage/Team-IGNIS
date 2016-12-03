@@ -250,6 +250,19 @@ try{
             //type1
             if($reportType == "company_emp"){
                 class PDF extends FPDF{
+                    function Header()
+                    {
+                        // Logo
+                        $this->Image('../public/images/lms-logo.png',100,5,10);
+                        // Arial bold 15
+                        $this->SetFont('Arial','B',15);
+                        // Move to the right
+                        $this->Cell(80);
+                        // Title
+                        $this->Cell(40,20,'All Employees of the Company',0,-10,'C');
+                        // Line break
+                        $this->Ln(0);
+                    }
                     function BasicTable($header,$data){
                         $this->SetFillColor(30,144,255);
                         $this->SetDrawColor(0,0,0);
@@ -271,6 +284,7 @@ try{
                 }
 
                 $pdf=new PDF();
+                //$pdf->SetTitle('All Employees of the Company'[, isUTF8]);
                 $header=array('ID','Employee Name','Employee Email','Department','Job Category');
 
                 $sqls = "SELECT employee.comp_id,employee.name,employee.email,department.dept_name,job_category.job_cat_name FROM employee JOIN job_category ON employee.job_cat_id = job_category.job_cat_id JOIN department ON department.dept_id=employee.dept_id";
@@ -295,6 +309,19 @@ try{
             //type2
             }else if($reportType == "dept_details"){
                 class PDF extends FPDF{
+                    function Header()
+                    {
+                        // Logo
+                        $this->Image('../public/images/lms-logo.png',100,5,10);
+                        // Arial bold 15
+                        $this->SetFont('Arial','B',15);
+                        // Move to the right
+                        $this->Cell(80);
+                        // Title
+                        $this->Cell(40,20,'Department Details of the Company',0,-10,'C');
+                        // Line break
+                        $this->Ln(0);
+                    }
                     function BasicTable($header,$data){
                         $this->SetFillColor(30,144,255);
                         $this->SetDrawColor(0,0,0);
@@ -338,6 +365,19 @@ try{
                 //type3
             } else if($reportType == "own_all"){
                 class PDF extends FPDF{
+                    function Header()
+                    {
+                        // Logo
+                        $this->Image('../public/images/lms-logo.png',100,5,10);
+                        // Arial bold 15
+                        $this->SetFont('Arial','B',15);
+                        // Move to the right
+                        $this->Cell(80);
+                        // Title
+                        $this->Cell(40,20,'My Leave Report',0,-10,'C');
+                        // Line break
+                        $this->Ln(0);
+                    }
                     function BasicTable($header,$data){
                         $this->SetFillColor(30,144,255);
                         $this->SetDrawColor(0,0,0);
@@ -391,6 +431,19 @@ try{
                 //type4
             }else if($reportType == "own_approved"){
                 class PDF extends FPDF{
+                    function Header()
+                    {
+                        // Logo
+                        $this->Image('../public/images/lms-logo.png',100,5,10);
+                        // Arial bold 15
+                        $this->SetFont('Arial','B',15);
+                        // Move to the right
+                        $this->Cell(80);
+                        // Title
+                        $this->Cell(40,20,'My approved Leaves',0,-10,'C');
+                        // Line break
+                        $this->Ln(0);
+                    }
                     function BasicTable($header,$data){
                         $this->SetFillColor(30,144,255);
                         $this->SetDrawColor(0,0,0);
@@ -444,6 +497,19 @@ try{
                 //type5
             }else if($reportType == "dept_emp"){
                 class PDF extends FPDF{
+                    function Header()
+                    {
+                        // Logo
+                        $this->Image('../public/images/lms-logo.png',100,5,10);
+                        // Arial bold 15
+                        $this->SetFont('Arial','B',15);
+                        // Move to the right
+                        $this->Cell(80);
+                        // Title
+                        $this->Cell(40,20,'All Employees of the Department',0,-10,'C');
+                        // Line break
+                        $this->Ln(0);
+                    }
                     function BasicTable($header,$data){
                         $this->SetFillColor(30,144,255);
                         $this->SetDrawColor(0,0,0);
