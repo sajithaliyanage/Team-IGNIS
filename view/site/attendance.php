@@ -85,8 +85,10 @@ if(!$isLoggedin){
                 </div>
             </div>
 
-            <div class="row padding-row" style="height: 200px" >
-                <div class="col-sm-12 col-xs-12 padding-row">
+
+            <br>
+            <div class="row padding-row">
+                <div class="col-xs-12 padding-box">
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-paperclip icon-margin-right" aria-hidden="true"></i>
@@ -95,52 +97,32 @@ if(!$isLoggedin){
                             <form role="form" data-toggle="validator" action="" method="post">
                                 <div class="department-add">
                                     <div class="col-xs-12">
+                                        <div class="row">
 
-                                        <div class="form-group">
-                                            <label class="col-xs-6 control-label form-lable">Start Date:</label>
 
-                                            <div class="col-xs-6">
+                                            <div class="col-xs-12 col-sm-3" >
                                                 <input id="example1" name="example1" type="text"
-                                                       placeholder="dd/mm/yyyy"
+                                                       placeholder="Start Date"
                                                        class="form-control input-md" required>
                                             </div>
+                                            <div class="col-xs-12 col-sm-1" ></div>
+                                            <div class="col-xs-12 col-sm-3"  ">
+                                            <input id="example2" name="example2" type="text"
+                                                   placeholder="End date"
+                                                   class="form-control input-md" required>
+                                            </div>
+                                        <div class="col-xs-12 col-sm-1" ></div>
+                                        <div class="col-xs-12 col-sm-2">
+                                            <button class="btn btn-info btn-lg pull-right submit-button" type="submit" onclick="callme();" style="padding:15px 25px; margin-top:-5px ;width: 180px">Filter Dates
+                                            </button>
                                         </div>
-                                        <br>
-                                        <br>
-
-                                        <div class="form-group">
-                                            <label class="col-xs-6 control-label form-lable">End date:</label>
-
-                                            <div class="col-xs-6">
-                                                <input id="example2" name="example2" type="text"
-                                                       placeholder="dd/mm/yyyy"
-                                                       class="form-control input-md" required>
-
+                                        <div class="col-xs-12 col-sm-1" ></div>
+                                            <div class="col-xs-12 col-sm-2">
+                                                <button class="btn btn-info btn-lg pull-right submit-button" type="submit" onclick="callme();" style="padding:15px 25px; margin-top:-5px;">Download As PDF
+                                                </button>
                                             </div>
                                         </div>
 
-                                        <br>
-                                        <br>
-
-                                        <div class="form-group">
-                                            <label class="col-xs-6 control-label form-lable">File Type:</label>
-
-                                            <div class="col-xs-6">
-                                                <select name="emp_role" class="form-control">
-                                                    <option value="YES">PDF</option>
-                                                    <option value="NO">Excel Sheet</option>
-                                                    <option value="NO">Word Sheet</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <br>
-
-
-                                        <button class="btn btn-primary btn-lg pull-left submit-button" style="width: 150px " type="submit">Fitler
-                                        </button>
-                                        <button class="btn btn-info btn-lg pull-right submit-button" style="width: 150px" type="submit" onclick="callme();">Download
-                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -149,7 +131,6 @@ if(!$isLoggedin){
 
                 </div>
             </div>
-            <br>
 
             <div class="row padding-row">
                 <div class="col-sm-12 col-xs-12 padding-box">
