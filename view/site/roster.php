@@ -607,7 +607,7 @@ if (isset($_GET['id'])) {
                                             <label class="col-xs-4 control-label form-lable">Shifting Date :</label>
                                             <div class="col-xs-8">
                                                 <input id="startdate" name="shift_date" type="text"
-                                                       placeholder="dd/mm/yyyy"
+                                                       placeholder="yyyy/mm/dd"
                                                        class="form-control input-md" onchange="showUser(this.value)">
 
                                             </div>
@@ -659,7 +659,7 @@ if (isset($_GET['id'])) {
                                                 :</label>
                                             <div class="col-xs-8">
                                                 <div id="demo1">
-                                                    <input  type="text"
+                                                    <input  type="text" placeholder="- Select a Group Id -  "
                                                            class="form-control input-md" readonly="readonly" >
                                                 </div>
 
@@ -672,7 +672,7 @@ if (isset($_GET['id'])) {
                                             <label class="col-xs-4 control-label form-lable">Rework Date :</label>
                                             <div class="col-xs-8">
                                                 <input id="enddate" name="rework_date" type="text"
-                                                       placeholder="dd/mm/yyyy"
+                                                       placeholder="yyyy/mm/dd"
                                                        class="form-control input-md" onchange="showUser2(this.value)">
                                             </div>
                                         </div>
@@ -789,6 +789,8 @@ if (isset($_GET['id'])) {
                     document.getElementById("demo3").innerHTML ="<span style='color:red; margin-left:5px;'>(Please select another date)</span>";
                 }else{
                     document.getElementById("demo2").value = xhttp.responseText;
+                    document.getElementById("demo3").innerHTML ="";
+
                 }
 
             }
