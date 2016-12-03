@@ -548,7 +548,7 @@ if($groupID==0){
                                     Shift Changing Application</h5>
                                 <hr>
                                 <form role="form" data-toggle="validator" action="../../module/rosterapply.php" method="post">
-                                    <div class="department-add">
+                                    <div class="">
                                         <div class="col-xs-12">
                                             <!-- Text input-->
                                             <div class="form-group">
@@ -579,10 +579,10 @@ if($groupID==0){
                                             <br>
 
                                             <div class="form-group">
-                                                <label class="col-xs-4 control-label form-lable">Shifting Group:</label>
+                                                <label class="col-xs-4 control-label form-lable" >Shifting Group:</label>
                                                 <div class="col-xs-8">
 
-                                                    <select  name="shift_group" class="form-control">
+                                                    <select  name="shift_group" class="form-control" onchange = 'showUser3(this.value)'>
                                                         <?php
 
                                                         foreach ($result as $rs) {
