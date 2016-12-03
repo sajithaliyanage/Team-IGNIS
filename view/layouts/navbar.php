@@ -13,7 +13,8 @@
     $nortifictions = $newquery1->fetchAll();
     $nortifictionsCount = $newquery1->rowCount();
 
-    $statement2 = "SELECT * from apply_leave where seen=:val AND comp_id=:empID";
+    $statement2 = "SELECT conversation.message, MAX(conversation.sender_id) as sender_id,conversation.chat_id,employee.image,employee.name
+FROM conversation JOIN employee ON conversation.receiver_id=employee.comp_id WHERE receiver_id=:empID AND seen=:val GROUP BY sender_id ";
     $newquery2 = $pdo->prepare($statement2);
     $newquery2->execute(array('val'=>0, 'empID'=>$empID));
     $nortifictions2 = $newquery2->fetchAll();
@@ -70,7 +71,7 @@
 
                 <li  class="dropdown">
                     <a href="#" class="dropdown-toggle nortification-button" data-toggle="dropdown">
-                        <i class="fa fa-envelope-o" style="border:1px solid #d2d2d2; border-radius:100%; padding:14px;"></i><span class="badge postition-message">0</span>
+                        <i class="fa fa-envelope-o" style="border:1px solid #d2d2d2; border-radius:100%; padding:14px;"></i><span class="badge postition-message"><?php echo $nortifictionsCount2;?></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-admin" style="margin-top:2px;">
                         <div class="arrow-up"></div>
@@ -78,17 +79,17 @@
                         if($nortifictionsCount2 !=0){
                             foreach($nortifictions2 as $rs){
                                 echo "
-                                        <button id='".$rs['apply_leave_id']."'  class='nort' role=\"button\" value='".$rs['apply_leave_id']."'
-                                        style='border:none;padding:10px 10px;border-bottom:1px solid; margin-left:2.5px; width:200px; border-left:4px solid ";if($rs['leave_priority']=='medium'){echo 'green';}else if($rs['leave_priority']=='high'){ echo 'red';}else{ echo 'yellow';} echo "'>
+                                        <button id='".$rs['chat_id']."'  class='msg' role=\"button\" value='".$rs['chat_id'].",".$rs['sender_id']."'
+                                        style='border:none;padding:10px 10px;border-bottom:1px solid; margin-left:2.5px; width:250px;'>
 
-                                                   ". $rs['number_of_days'] ." Days leave applied - <b>";if($rs['status']=='waiting' || $rs['status'] == 'recommended'){echo 'Pending';}else if($rs['status']=='approved'){echo 'Approved';}else if($rs['status']=='rejected'){echo 'Rejected';}else if($rs['status']=='canceled'){ echo 'Canceled';} echo"</b>
+                                                   <img src='../../public/images/msg.png' style='width:40px; height:40px; margin-right:20px;margin-left:-60px; margin-top:10px;' /> From :".$rs['sender_id']."<br/> <h5 style='margin-top:-10px;margin-left:-30px;'>'".$rs['message']."'</h5>
 
                                         </button>
 
                                 ";
                             }
                         }else{
-                            echo "<li style=\"text-align: center;\">No any nortifications</li>";
+                            echo "<li style=\"text-align: center;\">No any Messages</li>";
                         }
 
                         ?>
@@ -135,6 +136,27 @@
                 success:
                     function(data){
                         location.reload();
+                    }
+            });
+            return false;
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+
+        $(".msg").click(function() {
+            var id = $(this).attr('value');
+            var done = id.split(',');
+            $.ajax({
+                type: "POST",
+                url: "../../module/nortificationMsg.php",
+                data: {msgID:id},
+                dataType: "text",
+                cache:false,
+                success:
+                    function(data){
+                        window.location.href='../site/chat.php?id='+done[1];
                     }
             });
             return false;
