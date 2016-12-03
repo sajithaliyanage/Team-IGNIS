@@ -655,10 +655,13 @@ if (isset($_GET['id'])) {
                                         <br>
                                         <br>
                                         <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">Shifting Member ID
+                                            <label class="col-xs-4 control-label form-lable">Shifter ID
                                                 :</label>
                                             <div class="col-xs-8">
-                                                <div id="demo1"></div>
+                                                <div id="demo1">
+                                                    <input  type="text"
+                                                           class="form-control input-md" readonly="readonly" >
+                                                </div>
 
 
                                             </div>
@@ -677,12 +680,12 @@ if (isset($_GET['id'])) {
                                         <br>
                                         <br>
 
-                                        <div class="form-group">
+                                        <div class="form-group" style="margin-top:-20px;">
                                             <label class="col-xs-4 control-label form-lable">Rework Time :</label>
                                             <div class="col-xs-8">
                                                 <input id="demo2" name="shift_his_time" type="text"
                                                        class="form-control input-md" readonly="readonly" >
-
+                                                <h6 id="demo3"></h6>
 
                                             </div>
                                         </div>
@@ -781,7 +784,9 @@ if (isset($_GET['id'])) {
         xhttp.onreadystatechange = function(){
             if(xhttp.readyState==4 && xhttp.status==200){
                 if(xhttp.responseText == 'Holiday'){
-                    document.getElementById("demo2").value ="<h5>"+xhttp.responseText+"<span  style='color:red; margin-left:5px;'>Please select another date</span></h5>";
+                    var val = xhttp.responseText;
+                    document.getElementById("demo2").value =val;
+                    document.getElementById("demo3").innerHTML ="<span style='color:red; margin-left:5px;'>(Please select another date)</span>";
                 }else{
                     document.getElementById("demo2").value = xhttp.responseText;
                 }
