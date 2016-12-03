@@ -381,7 +381,6 @@ if (isset($_GET['id'])) {
                                                         $result5 = $query5->fetchAll();
 
 
-<<<<<<< HEAD
                                                         foreach ($result5 as $rs5) {
 
                                                             echo "<tr>";
@@ -449,56 +448,11 @@ if (isset($_GET['id'])) {
                                                             $query6->execute();
                                                             $result6 = $query6->fetchAll();
 
-=======
-                            <div class="progress">
-                            <?php
-                                require_once "../../module/PHPExcel/PHPExcel.php";
-
-                                try{
-                                    $empID = $_SESSION["empID"];
-                                    $tempFile = "new.xlsx";
-                                    $objPHPExcel = PHPExcel_IOFactory::load($tempFile);
-                                    $workinghours = 60;
-                                    $timesum=0;
-
-                                    $monday = date( 'Y-m-d', strtotime( 'monday this week' ) ).'</br>';
-                                    $sunday = date( 'Y-m-d', strtotime( 'sunday this week' ) ).'</br>';
-                                    $today = date("Y-m-d").'</br>';
-
-                                    $objPHPExcel->getActiveSheet()->setAutoFilter($objPHPExcel->getActiveSheet()->calculateWorksheetDimension());
-
-                                    $autoFilter = $objPHPExcel->getActiveSheet()->getAutoFilter();
-                                    $columnFilter = $autoFilter->getColumn('A');
-
-                                    $columnFilter->setFilterType(PHPExcel_Worksheet_AutoFilter_Column::AUTOFILTER_FILTERTYPE_FILTER);
-                                    $columnFilter->createRule()->setRule(PHPExcel_Worksheet_AutoFilter_Column_Rule::AUTOFILTER_COLUMN_RULE_EQUAL,$empID);
-
-                                    $autoFilter = $objPHPExcel->getActiveSheet()->getAutoFilter();
-                                    $autoFilter->showHideRows();
-                                    
-
-                                    foreach($objPHPExcel->getActiveSheet()->getRowIterator() as $row){
-
-                                        if ($objPHPExcel->getActiveSheet()->getRowDimension($row->getRowIndex())->getVisible() and $row->getRowIndex()!=1) {
-
-                                            $Date = $objPHPExcel->getActiveSheet()->getCell(
-                                                    'B'.$row->getRowIndex())->getValue() ;
-
-                                            if ($monday <= $Date and $Date <= $sunday) {
-                                                $timesum += $objPHPExcel->getActiveSheet()->getCell('E'.$row->getRowIndex())->getValue() ;
-
-                                                
-                                            }
->>>>>>> origin/master
 
                                                             foreach ($result6 as $rs6) {
 
-<<<<<<< HEAD
                                                                 echo "<tr>";
                                                                 echo "<td>" . $rs6['start_time'] . " to " . $rs6['end_time'] . "</td>";
-=======
-                                        }
->>>>>>> origin/master
 
                                                                 echo "</tr>";
                                                             }
@@ -508,51 +462,12 @@ if (isset($_GET['id'])) {
                                                             <tr>
                                                                 <td align="center">Full Day</td>
 
-<<<<<<< HEAD
                                                             </tr>
                                                             </tbody>
                                                         </table>
                                                     </div>
                                                 </div>
                                             </div>
-=======
-                                     } 
-                                                
-                                }
-                                catch(Exception $e){}
-                            ?>
-                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo ($timesum/$workinghours)*100;?>%;">
-                                </div>
-                            </div>
-                            <p style="text-align:left; margin-top:-20px;">0h</p>
-                            <p style="text-align:right; margin-top:-30px;">60h</p>
-
-                            <div class="row">
-
-                                <div class="col-xs-10 col-xs-offset-1">
-                                    <div class="row">
-                                        <div class="col-xs-6" style="text-align: right;">
-                                            <p>Total Hours per week:</p>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <p><strong><?php echo $workinghours;?> hours</strong></p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-6" style="text-align: right;">
-                                            <p>Done Hours per week:</p>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <p style=" color:#00a65a;"><strong><?php echo $timesum;?> hours</strong></p> 
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-6" style="text-align: right;">
-                                            <p>Remaining Hours per week:</p>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <p style=" color:#d43f3a;"><strong><?php echo ($workinghours-$timesum); ?> hours</strong></p>
->>>>>>> origin/master
                                         </div>
                                     </div>
                                 </div>
