@@ -92,20 +92,27 @@ if(isset($_GET['shiftid'])){
                         <hr>
 
                         <?php
-                        
-                            echo " <div class=\"list-group\">
-                                                <li class=\"list-group-item\" style=\"background-color:#d6e9c6\"><h5 >Shift change request by : NOT SELECT ANY ONE </h5></li>
-                                            </div>
-
-                                            <div class=\"list-group\">
-                                                <li class=\"list-group-item\">Request Date : </li>
-                                                <li class=\"list-group-item\">Request Session : </li>
-                                                <li class=\"list-group-item\">Rework Date :</li>
-                                                <li class=\"list-group-item\">Rework Session: </li>
-                                                <li class=\"list-group-item\" style='margin-bottom:10px;'>Reason :</li>
+                        $sql15 = "select * from employee JOIN shifting ON employee.comp_id=shifting.emp_id where shifting.status=:log and shifting.replace_emp_id =:comp_id";
+                        $query15 = $pdo->prepare($sql15);
+                        $query15->execute(array('log'=>"waiting",'comp_id'=>$empID));
+                        $result15= $query15->fetchAll();
+                        foreach ($result15 as $rs){
+                            echo "
+                                           <div class=\"list-group\">
+                                                <li class=\"list-group-item\">Request Date : <strong>".$rs['shiftingForDate']."</strong> </li>
+                                                <li class=\"list-group-item\">Request Session : <strong>".$rs['shitingForSession']."</strong></li>
+                                                <li class=\"list-group-item\">Rework Date :<strong>".$rs['recovery_date']."</strong></li>
+                                                <li class=\"list-group-item\">Rework Session:<strong>".$rs['recovery_time']."</strong> </li>
+                                                <li class=\"list-group-item\" style='margin-bottom:10px;'>Reason :<strong>".$rs['reason']."</strong></li>
                                                     <button class=\"btn btn-success btn-sm\" style='float:right;'>Approved</button>
                                                     <button class=\"btn btn-danger btn-sm\" style='float:right; margin-right:10px;margin-bottom:10px;'>Reject</button></li>
                                             </div>";
+
+
+
+                        }
+
+
 
                         ?>
 
