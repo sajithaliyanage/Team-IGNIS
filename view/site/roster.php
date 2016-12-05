@@ -92,13 +92,7 @@ if(isset($_GET['shiftid'])){
                         <hr>
 
                         <?php
-                            $smt = "select * from shifting WHERE emp_id=:empID";
-                            $query9 = $pdo->prepare($sql9);
-                            $query9->execute(array('empID' => $empID));
-                            $result9 = $query9->fetchAll();
-                            $rowCount9 = $query9->rowCount();
-
-
+                        
                             echo " <div class=\"list-group\">
                                                 <li class=\"list-group-item\" style=\"background-color:#d6e9c6\"><h5 >Shift change request by : NOT SELECT ANY ONE </h5></li>
                                             </div>
