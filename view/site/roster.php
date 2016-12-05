@@ -28,7 +28,10 @@ if ($groupID == 0) {
     header('Location:../../index.php');
 }
 
-
+$applyRosterID='';
+if(isset($_GET['shiftid'])){
+    $applyRosterID = $_GET['shiftid'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,16 +82,41 @@ if ($groupID == 0) {
 
             <div class="row padding-row">
                 <div class="col-sm-6 col-xs-12">
-                    <div style="<?php if(!isset($_GET['shiftid'])){echo 'display:none';}?>"class=" col-xs-12 nortification-box-top">
+                    <div class="col-xs-12 nortification-box-top" style="<?php if(!isset($_GET['shiftid'])){echo 'display:none;';}?> margin-bottom:20px;">
+                        <h5 class="nortification-box-heading"><i class="fa fa-calendar-check-o icon-margin-right"aria-hidden="true"></i>
+                            Take Your Decision</h5>
+
+                        <div class="alert-user" style="<?php if (!isset($_GET['job'])){echo 'display:none;';} ?>">Your action done successfully!
+                        </div>
+                       <a href="roster.php"><i class="fa fa-close icon-margin-right pull-right" aria-hidden="true" style="margin-top:-30px;"></i></a>
+                        <hr>
+
                         <?php
+                            $smt = "select * from shifting WHERE emp_id=:empID";
+                            $query9 = $pdo->prepare($sql9);
+                            $query9->execute(array('empID' => $empID));
+                            $result9 = $query9->fetchAll();
+                            $rowCount9 = $query9->rowCount();
 
 
+                            echo " <div class=\"list-group\">
+                                                <li class=\"list-group-item\" style=\"background-color:#d6e9c6\"><h5 >Shift change request by : NOT SELECT ANY ONE </h5></li>
+                                            </div>
+
+                                            <div class=\"list-group\">
+                                                <li class=\"list-group-item\">Request Date : </li>
+                                                <li class=\"list-group-item\">Request Session : </li>
+                                                <li class=\"list-group-item\">Rework Date :</li>
+                                                <li class=\"list-group-item\">Rework Session: </li>
+                                                <li class=\"list-group-item\" style='margin-bottom:10px;'>Reason :</li>
+                                                    <button class=\"btn btn-success btn-sm\" style='float:right;'>Approved</button>
+                                                    <button class=\"btn btn-danger btn-sm\" style='float:right; margin-right:10px;margin-bottom:10px;'>Reject</button></li>
+                                            </div>";
 
                         ?>
 
 
                     </div>
-
 
                     <div class="col-xs-12 nortification-box-top">
 
@@ -624,7 +652,6 @@ if ($groupID == 0) {
                             </div>
 
                         </div>
-
 
                         <div class="margin-top col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-tag icon-margin-right"
