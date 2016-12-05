@@ -76,13 +76,12 @@ if(!$isLoggedin && $empRole!="director"){
               $i=0;
               $id=array();
               foreach ($objPHPExcel->getActiveSheet()->getRowIterator() as $row) {
-                  if ($objPHPExcel->getActiveSheet()->getRowDimension($row->getRowIndex())->getVisible() and $row->getRowIndex() !=1) {
+                  if ($objPHPExcel->getActiveSheet()->getRowDimension($row->getRowIndex())->getVisible() and $row->getRowIndex() !=1 && $objPHPExcel->getActiveSheet()->getCell('A'.$row->getRowIndex())->getValue()!= null) {
                       $id[$i]= $objPHPExcel->getActiveSheet()->getCell('A'.$row->getRowIndex())->getValue();
                       $i+=1;
                   }
               }
               $num=count($id);
-              echo($num);
 
           }catch(Exception $e){
               echo $e;
@@ -187,28 +186,29 @@ if(!$isLoggedin && $empRole!="director"){
                                   </div>
 
                                     <div class="form-group">
-                                        <label class="col-xs-2 control-label form-lable">Start Date:</label>
+                                        <!-- <label class="col-xs-1 control-label form-lable">Start Date:</label> -->
 
-                                        <div class="col-xs-2">
+                                        <div class="col-xs-3">
                                             <input id="example1" name="start_date" type="text"
-                                                   placeholder="dd/mm/yyyy"
+                                                   placeholder="Start Date"
                                                    class="form-control input-md" required>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-xs-2 control-label form-lable">End date:</label>
+                                        <!-- <label class="col-xs-1 control-label form-lable">End date:</label> -->
 
-                                        <div class="col-xs-2">
+                                        <div class="col-xs-3">
                                             <input id="example2" name="end_date" type="text"
-                                                   placeholder="dd/mm/yyyy"
+                                                   placeholder="End Date"
                                                    class="form-control input-md" required>
 
                                         </div>
                                     </div>
 
-                                    <br><br><br>
-                                    <button class="btn btn-primary btn-lg pull-right submit-button" style="width: 150px " type="submit">Fitler</button>
+                                    <div class="col-xs-2">
+                                      <button class="btn btn-primary btn-lg pull-right submit-button" style="width: 150px " type="submit">Fitler</button>
+                                  </div>
                                 </div>
                             </div>
                         </form>
@@ -217,15 +217,16 @@ if(!$isLoggedin && $empRole!="director"){
                     <?php
 
                     //take the attendance count of each department
-                    for ($k=0; $k <$num ; $k++) {
-                      $sql="SELECT dept_id from employee where comp_id=:c_id ";
-                      $query = $pdo->prepare($sql);
-                      $query->execute(array('c_id'=>"c_id"));
-                      print_r($query);echo "<br>";
+                    for ($n=0; $n <$num ; $n++) {
+                      $sql1="SELECT dept_id from employee where comp_id=:c_id Limit 1 ";
+                      $query1 = $pdo->prepare($sql1);
+                      $query1->execute(array('c_id'=>$id[$n]));
+                      $q = $query1->fetch();
+                      print_r($q);echo "<br>";
                     }
 
                     //display no of employees belongs to a particular department
-                    $sql="SELECT dept_name from department where currentStatus=:approve ";
+                    $sql="SELECT dept_name,dept_id,no_of_emp from department where currentStatus=:approve ";
                     $query = $pdo->prepare($sql);
                     $query->execute(array('approve'=>"approved"));
                     $dept = $query->fetchAll(PDO::FETCH_NUM);
