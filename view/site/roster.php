@@ -8,6 +8,12 @@ if (!$isLoggedin) {
     header('Location:../../index.php');
 }
 
+$appliedShiftId='';
+if (isset($_GET['shiftid'])){
+    $appliedShiftId=$_GET['shiftid'];
+
+}
+
 $groupIds = array();
 $groupNames = array();
 
@@ -20,10 +26,6 @@ $groupID = $result['group_id'];
 
 if ($groupID == 0) {
     header('Location:../../index.php');
-}
-if (isset($_GET['id'])) {
-    $emp_group_id = $_GET['id'];
-
 }
 
 
@@ -77,9 +79,19 @@ if (isset($_GET['id'])) {
 
             <div class="row padding-row">
                 <div class="col-sm-6 col-xs-12">
+                    <div style="<?php if(!isset($_GET['shiftid'])){echo 'display:none';}?>"class=" col-xs-12 nortification-box-top">
+                        <?php
+
+
+
+                        ?>
+
+
+                    </div>
 
 
                     <div class="col-xs-12 nortification-box-top">
+
                         <div>
 
                             <?php
@@ -161,16 +173,16 @@ if (isset($_GET['id'])) {
                                                             $smt = "SELECT dept_id FROM employee WHERE comp_id=:log";
                                                             $query = $pdo->prepare($smt);
                                                             $query->execute(array('log' => $empID));
-                                                            $result = $query->fetch();
+                                                            $result13 = $query->fetch();
 
-                                                            $dep = $result["dept_id"];
+                                                            $dep = $result13["dept_id"];
 
                                                             $smt = "SELECT * FROM group_detail WHERE dept_id=:log1";
                                                             $query = $pdo->prepare($smt);
                                                             $query->execute(array('log1' => $dep));
-                                                            $result = $query->fetchAll();
+                                                            $result12 = $query->fetchAll();
 
-                                                            foreach ($result as $rs) {
+                                                            foreach ($result12 as $rs) {
                                                                 array_push($groupIds, intval($rs["group_id"]));
                                                                 $groupNames[intval($rs['group_id'] - 1)] = $rs['group_name'];
                                                                 echo '<tr>';
@@ -293,7 +305,7 @@ if (isset($_GET['id'])) {
                                                             <tbody>
                                                             <?php
 
-                                                            foreach ($result as $rs) {
+                                                            foreach ($result12 as $rs) {
                                                                 echo '<tr>';
                                                                 echo '<td>';
                                                                 if (intval($rs["group_id"]) != $minGroupId) {
@@ -301,7 +313,7 @@ if (isset($_GET['id'])) {
                                                                 } else {
                                                                     echo $groupNames[intval($rs["group_id"]) + $groupCount - 2];
                                                                 }
-                                                                '</td>';
+                                                                echo '</td>';
                                                                 echo '</tr>';
                                                             }
                                                             ?>
@@ -412,7 +424,7 @@ if (isset($_GET['id'])) {
                                                             <tbody>
                                                             <?php
 
-                                                            foreach ($result as $rs) {
+                                                            foreach ($result12 as $rs) {
                                                                 echo '<tr>';
                                                                 echo '<td>';
                                                                 if (intval($rs["group_id"]) != $maxGroupId) {
@@ -420,7 +432,7 @@ if (isset($_GET['id'])) {
                                                                 } else {
                                                                     echo $groupNames[intval($rs["group_id"]) - ($groupCount - 1) - 1];
                                                                 }
-                                                                '</td>';
+                                                                echo '</td>';
                                                                 echo '</tr>';
                                                             }
                                                             ?>
@@ -583,11 +595,34 @@ if (isset($_GET['id'])) {
 
                 <div class="row">
                     <div class="col-sm-6 col-xs-12">
-                        <div class="col-xs-12 nortification-box-top">
-                            <h5 class="nortification-box-heading"><i class="fa fa-cogs icon-margin-right"
-                                                                     aria-hidden="true"></i>
-                                Pending Requests For Changing Shifts</h5>
+                        <div class="col-xs-12 nortification-box-top ">
+                            <h5 class="nortification-box-heading"><i class="fa fa-cogs icon-margin-right" aria-hidden="true"></i>
+                                Pending Requests For Shifts</h5>
                             <hr>
+                            <div class="list-group">
+                                <?php
+                                $sql8 = "select * from employee JOIN shifting ON employee.comp_id=shifting.emp_id where shifting.status=:log and shifting.replace_emp_id =:comp_id";
+                                $query8 = $pdo->prepare($sql8);
+                                $query8->execute(array('log'=>"waiting",'comp_id'=>$empID));
+                                $result8= $query8->fetchAll();
+                                $rowCount8 = $query8->rowCount();
+
+                                if($rowCount8==0){
+                                    echo "No any requests yet!";
+                                }
+
+
+                                foreach ($result8 as $rs) {
+                                    echo "<a href='?shiftid=".$rs['shifting_id']."' class=\"list-group-item\" style='";echo"'>".$rs['name']."<span style=\"float:right;\">Waiting for Approve <i class=\"fa fa-question\" aria-hidden=\"true\"></i></span></a>";
+                                }
+
+
+
+
+
+                                ?>
+                            </div>
+
                         </div>
 
 
@@ -595,8 +630,14 @@ if (isset($_GET['id'])) {
                             <h5 class="nortification-box-heading"><i class="fa fa-tag icon-margin-right"
                                                                      aria-hidden="true"></i>
                                 Shift Changing Application</h5>
-                            <div class="alert-user" style="<?php if(!isset($_GET['error'])){echo 'display:none;';}?> color:#d43f3a">Invalid Form Actions!</div>
-                            <div class="alert-user" style="<?php if(!isset($_GET['requested'])){echo 'display:none;';}?> color:green;">Request sent successfully!</div>
+                            <div class="alert-user" style="<?php if (!isset($_GET['error'])) {
+                                echo 'display:none;';
+                            } ?> color:#d43f3a">Invalid Form Actions!
+                            </div>
+                            <div class="alert-user" style="<?php if (!isset($_GET['requested'])) {
+                                echo 'display:none;';
+                            } ?> color:green;">Request sent successfully!
+                            </div>
                             <hr>
                             <form role="form" data-toggle="validator" action="../../module/rosterapply.php"
                                   method="post">
@@ -618,8 +659,8 @@ if (isset($_GET['id'])) {
                                             <label class="col-xs-4 control-label form-lable">Shifting Time :</label>
                                             <div class="col-xs-8">
                                                 <input id="demo" name="shift_my_time" type="text"
-                                                       class="form-control input-md" readonly="readonly" >
-
+                                                       class="form-control input-md" readonly="readonly">
+                                                <h6 id="demo4"></h6>
 
 
                                             </div>
@@ -631,22 +672,18 @@ if (isset($_GET['id'])) {
                                             <label class="col-xs-4 control-label form-lable">Shifting Group:</label>
                                             <div class="col-xs-8">
 
-                                                <select name="shift_group" class="form-control" onchange="showUser1(this.value)">
+                                                <select name="shift_group" class="form-control"
+                                                        onchange="showUser1(this.value)">
 
                                                     <?php
 
-                                                        $sql = "SELECT * from group_detail where group_id =:log1";
-                                                        $query = $pdo->prepare($sql);
-                                                        $query->execute(array('log1' => $emp_group_id));
-                                                        $result0 = $query->fetch();
-
-                                                        echo "<option value='0'>--Select--</option>";
-                                                        foreach ($result as $rs) {
-                                                            if ($groupID != $rs['group_id']) {
-                                                                echo "<option value='" . $rs['group_id'] . "'>" . $rs['group_name'] . '</option>';
-                                                            }
-
+                                                    echo "<option value='0'>--Select--</option>";
+                                                    foreach ($result12 as $rs) {
+                                                        if ($groupID != $rs['group_id']) {
+                                                            echo "<option value='" . $rs['group_id'] . "'>" . $rs['group_name'] . '</option>';
                                                         }
+
+                                                    }
 
                                                     ?>
                                                 </select>
@@ -659,8 +696,8 @@ if (isset($_GET['id'])) {
                                                 :</label>
                                             <div class="col-xs-8">
                                                 <div id="demo1">
-                                                    <input  type="text" placeholder="- Select a Group Id -  "
-                                                           class="form-control input-md" readonly="readonly" >
+                                                    <input type="text" placeholder="- Select a Group Id -  "
+                                                           class="form-control input-md" readonly="readonly">
                                                 </div>
 
 
@@ -684,7 +721,7 @@ if (isset($_GET['id'])) {
                                             <label class="col-xs-4 control-label form-lable">Rework Time :</label>
                                             <div class="col-xs-8">
                                                 <input id="demo2" name="shift_his_time" type="text"
-                                                       class="form-control input-md" readonly="readonly" >
+                                                       class="form-control input-md" readonly="readonly">
                                                 <h6 id="demo3"></h6>
 
                                             </div>
@@ -696,7 +733,7 @@ if (isset($_GET['id'])) {
                                             <label class="col-xs-4 control-label form-lable">Reason :</label>
                                             <div class="col-xs-8">
                                                 <input id="service_name" name="reason" type="text" placeholder=""
-                                                       class="form-control input-md" >
+                                                       class="form-control input-md">
                                             </div>
                                         </div>
 
@@ -716,15 +753,47 @@ if (isset($_GET['id'])) {
                             </form>
                         </div>
 
+                        <div class="margin-top col-xs-12 nortification-box-top">
+                            <h5 class="nortification-box-heading"><i class="fa fa-list icon-margin-right"
+                                                                     aria-hidden="true"></i>
+                                Past Shift Notifications</h5>
+                            <hr>
+                            <div class="list-group">
+                                <?php
+                                $sql9 = "select * from shifting WHERE emp_id=:empID";
+                                $query9 = $pdo->prepare($sql9);
+                                $query9->execute(array('empID' => $empID));
+                                $result9 = $query9->fetchAll();
+                                $rowCount9 = $query9->rowCount();
 
+                                if ($rowCount9 == 0) {
+                                    echo "There are no any past shift requests";
+                                }
+
+                                foreach ($result9 as $rs) {
+                                    echo "<a  class='list-group-item'>" . ($rs['shitingForSession']) . " - " . $rs['shiftingForDate'] . "<span style='float:right;'>";
+                                    if ($rs['status'] == 'waiting') {
+                                        echo 'Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>';
+                                    } else if ($rs['status'] == 'approved') {
+                                        echo 'Approved <i class=\'fa fa-check\' aria-hidden=\'true\'></i></span></a>';
+                                    } else {
+                                        echo 'Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></a>';
+                                    };
+                                }
+                                ?>
+                            </div>
+                        </div>
                     </div>
+
 
                 </div>
 
             </div>
-        </div>
 
+        </div>
     </div>
+
+</div>
 </div>
 
 <script src="../../public/js/jquery.js"></script>
@@ -757,49 +826,57 @@ if (isset($_GET['id'])) {
 
 </script>
 <script>
-    var groupId= null;
-    function showUser(str){
+    var groupId = null;
+    function showUser(str) {
         var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function(){
-            if(xhttp.readyState==4 && xhttp.status==200){
-                document.getElementById("demo").value = xhttp.responseText;
-            }
-        }
-        xhttp.open("GET","../../module/ajxroster.php?q="+str ,true);
-        xhttp.send();
-    }
-    function showUser1(str){
-        groupId = str;
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function(){
-            if(xhttp.readyState==4 && xhttp.status==200){
-                document.getElementById("demo1").innerHTML = xhttp.responseText;
-            }
-        }
-        xhttp.open("GET","../../module/ajxroster.php?r="+str ,true);
-        xhttp.send();
-    }
-    function showUser2(str){
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function(){
-            if(xhttp.readyState==4 && xhttp.status==200){
-                if(xhttp.responseText == 'Holiday'){
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                if (xhttp.responseText == 'Holiday') {
                     var val = xhttp.responseText;
-                    document.getElementById("demo2").value =val;
-                    document.getElementById("demo3").innerHTML ="<span style='color:red; margin-left:5px;'>(Please select another date)</span>";
-                }else{
-                    document.getElementById("demo2").value = xhttp.responseText;
-                    document.getElementById("demo3").innerHTML ="";
+                    document.getElementById("demo").value = val;
+                    document.getElementById("demo4").innerHTML = "<span style='color:red; margin-left:5px;'>(Please select another date)</span>";
+                } else {
+                    document.getElementById("demo").value = xhttp.responseText;
+                    document.getElementById("demo4").innerHTML = "";
 
                 }
 
             }
         }
-        xhttp.open("GET","../../module/ajxroster.php?p="+str+"&gid="+groupId,true);
+        xhttp.open("GET", "../../module/ajxroster.php?q=" + str, true);
+        xhttp.send();
+    }
+    function showUser1(str) {
+        groupId = str;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                document.getElementById("demo1").innerHTML = xhttp.responseText;
+            }
+        }
+        xhttp.open("GET", "../../module/ajxroster.php?r=" + str, true);
+        xhttp.send();
+    }
+    function showUser2(str) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                if (xhttp.responseText == 'Holiday') {
+                    var val = xhttp.responseText;
+                    document.getElementById("demo2").value = val;
+                    document.getElementById("demo3").innerHTML = "<span style='color:red; margin-left:5px;'>(Please select another date)</span>";
+                } else {
+                    document.getElementById("demo2").value = xhttp.responseText;
+                    document.getElementById("demo3").innerHTML = "";
+
+                }
+
+            }
+        }
+        xhttp.open("GET", "../../module/ajxroster.php?p=" + str + "&gid=" + groupId, true);
         xhttp.send();
     }
 </script>
-
 
 
 </body>

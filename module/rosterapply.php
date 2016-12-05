@@ -27,15 +27,18 @@ if(empty($shift_date)){
     $flag=0;
 }else if(empty($reason)){
     $flag=0;
+}else if($shift_time=="Holiday"){
+    $flag=0;
+}else if($shifter_time=="Holiday"){
+    $flag=0;
 }
 
 if($flag==1){
     //put database
-    $sql="INSERT INTO shifting(shift_date,shift_time,replace_emp_id,recovery_date,recover_time,reason,comp_id,status,shift_group_id) VALUES
+    $sql="INSERT INTO shifting(shiftingForDate,shitingForSession,replace_emp_id,recovery_date,recovery_time,reason,emp_id,status,changingGroup) VALUES
     (:shiftDate,:shiftTime,:shifter,:reworkDate,:reworkTime,:reason,:comp_id,:status,:shift_group)";
     $query = $pdo->prepare($sql);
-    $query->execute(array('shiftDate'=>$shift_date,'shiftTime'=>$shift_time,'shifter'=>$shifter,'reworkDate'=>$rework_date,'reworkTime'=>$shifter_time,'reason'=>$reason,
-        'comp_id'=>$empID,'status'=>"waiting",'shift_group'=>"$shift_group"));
+    $query->execute(array('shiftDate'=>$shift_date,'shiftTime'=>$shift_time,'shifter'=>$shifter,'reworkDate'=>$rework_date,'reworkTime'=>$shifter_time,'reason'=>$reason,'comp_id'=>$empID,'status'=>"waiting",'shift_group'=>"$shift_group"));
 
 
     header("Location:../view/site/roster.php?requested");
