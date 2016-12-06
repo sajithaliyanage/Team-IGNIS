@@ -535,8 +535,60 @@ if(isset($_GET['shiftid'])){
                         <hr>
 
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                 aria-valuemax="100" style="width: 60%;">
+                        <?php
+                                require_once "../../module/PHPExcel/PHPExcel.php";
+
+                                try{
+                                    $empID = $_SESSION["empID"];
+                                    $tempFile = "new.xlsx";
+                                    $objPHPExcel = PHPExcel_IOFactory::load($tempFile);
+                                    $workinghours = 60;
+                                    $timesum=0;
+
+                                    $monday = date( 'Y-m-d', strtotime( 'monday this week' ) ).'</br>';
+                                    $sunday = date( 'Y-m-d', strtotime( 'sunday this week' ) ).'</br>';
+                                    $today = date("Y-m-d").'</br>';
+
+                                    $objPHPExcel->getActiveSheet()->setAutoFilter($objPHPExcel->getActiveSheet()->calculateWorksheetDimension());
+
+                                    $autoFilter = $objPHPExcel->getActiveSheet()->getAutoFilter();
+                                    $columnFilter = $autoFilter->getColumn('A');
+
+                                    $columnFilter->setFilterType(PHPExcel_Worksheet_AutoFilter_Column::AUTOFILTER_FILTERTYPE_FILTER);
+                                    $columnFilter->createRule()->setRule(PHPExcel_Worksheet_AutoFilter_Column_Rule::AUTOFILTER_COLUMN_RULE_EQUAL,$empID);
+
+                                    $autoFilter = $objPHPExcel->getActiveSheet()->getAutoFilter();
+                                    $autoFilter->showHideRows();
+                                    
+
+                                    foreach($objPHPExcel->getActiveSheet()->getRowIterator() as $row){
+
+                                        if ($objPHPExcel->getActiveSheet()->getRowDimension($row->getRowIndex())->getVisible() and $row->getRowIndex()!=1) {
+
+                                            $Date = $objPHPExcel->getActiveSheet()->getCell(
+                                                    'B'.$row->getRowIndex())->getValue() ;
+
+                                            if ($monday <= $Date and $Date <= $sunday) {
+                                                $timesum += $objPHPExcel->getActiveSheet()->getCell('E'.$row->getRowIndex())->getValue() ;
+
+                                                
+                                            }
+
+                                                         
+                                                        
+
+                                        }
+
+
+
+
+                                     } 
+                                                
+                                }
+                                catch(Exception $e){}
+                            ?>
+                            <div class="progress-bar" role="progressbar" aria-valuenow=":<?php echo ($timesum/$workinghours)*100;?>%;" aria-valuemin="0"
+                                 aria-valuemax="100" style="width:<?php echo ($timesum/$workinghours)*100;?>%;">:<?php echo ($timesum/$workinghours)*100;?>%;
                             </div>
                         </div>
                         <p style="text-align:left; margin-top:-20px;">0h</p>
@@ -549,7 +601,7 @@ if(isset($_GET['shiftid'])){
                                         <p>Total Hours per week:</p>
                                     </div>
                                     <div class="col-xs-6">
-                                        <p><strong>60 hours</strong></p>
+                                        <p><strong><?php echo $workinghours;?> hours</strong></p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -557,53 +609,7 @@ if(isset($_GET['shiftid'])){
                                         <p>Done Hours per week:</p>
                                     </div>
                                     <div class="col-xs-6">
-                                        <p style=" color:#00a65a;"><strong>
-                                                <?php
-                                                require_once "../../module/PHPExcel/PHPExcel.php";
-
-                                                try {
-                                                    $empID = $_SESSION["empID"];
-                                                    $tempFile = "new.xlsx";
-                                                    $objPHPExcel = PHPExcel_IOFactory::load($tempFile);
-
-                                                    echo $monday = date('Y-m-d', strtotime('monday this week')) . '</br>';
-                                                    echo $sunday = date('Y-m-d', strtotime('sunday this week')) . '</br>';
-                                                    echo $today = date("Y-m-d") . '</br>';
-
-                                                    $objPHPExcel->getActiveSheet()->setAutoFilter($objPHPExcel->getActiveSheet()->calculateWorksheetDimension());
-
-                                                    $autoFilter = $objPHPExcel->getActiveSheet()->getAutoFilter();
-                                                    $columnFilter = $autoFilter->getColumn('A');
-
-                                                    $columnFilter->setFilterType(PHPExcel_Worksheet_AutoFilter_Column::AUTOFILTER_FILTERTYPE_FILTER);
-                                                    $columnFilter->createRule()->setRule(PHPExcel_Worksheet_AutoFilter_Column_Rule::AUTOFILTER_COLUMN_RULE_EQUAL, $empID);
-
-                                                    $autoFilter = $objPHPExcel->getActiveSheet()->getAutoFilter();
-                                                    $autoFilter->showHideRows();
-                                                    $timesum = 0;
-
-                                                    foreach ($objPHPExcel->getActiveSheet()->getRowIterator() as $row) {
-
-                                                        if ($objPHPExcel->getActiveSheet()->getRowDimension($row->getRowIndex())->getVisible() and $row->getRowIndex() != 1) {
-
-                                                            $Date = $objPHPExcel->getActiveSheet()->getCell(
-                                                                'B' . $row->getRowIndex()
-                                                            )->getValue();
-
-                                                            if ($monday <= $Date and $Date >= $sunday) {
-                                                                $timesum += $objPHPExcel->getActiveSheet()->getCell('E' . $row->getRowIndex())->getValue();
-                                                                echo $timesum;
-                                                            }
-
-
-                                                        }
-
-
-                                                    }
-                                                    echo $timesum;
-                                                } catch (Exception $e) {
-                                                }
-                                                ?> hours</strong></p>
+                                        <p style=" color:#00a65a;"><strong><?php echo $timesum;?> hours</strong></p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -611,9 +617,23 @@ if(isset($_GET['shiftid'])){
                                         <p>Remaining Hours per week:</p>
                                     </div>
                                     <div class="col-xs-6">
-                                        <p style=" color:#d43f3a;"><strong><?php echo(56 - $timesum) ?>hours</strong>
+                                        <p style=" color:#d43f3a;"><strong><?php echo ($workinghours-$timesum); ?> hours</strong>
                                         </p>
                                     </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-xs-6" style="text-align: right;">
+                                            <p>Days left in this week:</p>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <p style=" color:#00a65a;"><strong>
+                                            <?php 
+                                            $date1=date_create(date('Y/m/d',strtotime( 'sunday this week' )));
+                                            $date2=date_create(date('Y/m/d'));
+                                            $diff=date_diff($date2,$date1);
+                                            echo $diff->format("%a");
+                                            ?>Days</strong></p> 
+                                        </div>
                                 </div>
 
                             </div>
