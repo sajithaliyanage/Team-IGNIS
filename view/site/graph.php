@@ -224,12 +224,10 @@ if(!$isLoggedin && $empRole!="director"){
                       $query1->execute(array('c_id'=>$id[$n]));
                       $query1 = $query1->fetch();
                       $q[$n]=$query1[0];
-                      //print_r($q[0]);echo "<br>";
                     }
                     $q=(array_count_values($q));
-                    //print_r($q);echo "<br>";
-
-                    //display absent present belongs to a particular department
+                    
+                  //display absent present belongs to a particular department
                     $sql="SELECT dept_name,dept_id,no_of_emp from department where currentStatus=:approve ";
                     $query = $pdo->prepare($sql);
                     $query->execute(array('approve'=>"approved"));
