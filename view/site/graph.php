@@ -214,16 +214,9 @@ if(!$isLoggedin && $empRole!="director"){
                         </form>
                       <!-- filtering option end -->
                       <br><br><br><br><br><br>
+                      <!---chart start-->
                     <?php
-
-                    //take the attendance count of each department
-                    $sql="SELECT dept_id from department where currentStatus=:approve ";
-                    $query = $pdo->prepare($sql);
-                    $query->execute(array('approve'=>"approved"));
-                    $d = $query->fetchAll(PDO::FETCH_NUM);
-                    //print_r($d[0][0]);echo "<br>";
-
-                    //check the department of each employee
+                    //check the department of each employee and count it
                     $q=array();
                     for ($n=0; $n <$num ; $n++) {
                       $sql1="SELECT dept_id from employee where comp_id=:c_id Limit 1 ";
@@ -231,29 +224,26 @@ if(!$isLoggedin && $empRole!="director"){
                       $query1->execute(array('c_id'=>$id[$n]));
                       $query1 = $query1->fetch();
                       $q[$n]=$query1[0];
-
                       //print_r($q[0]);echo "<br>";
                     }
                     $q=(array_count_values($q));
-                    print_r($q);echo "<br>";
+                    //print_r($q);echo "<br>";
 
-                      // if (intval($q[0])==intval($d[0][0])) {
-                      //   $count[0]+=1;
-                      // }
-
-                    //display no of employees belongs to a particular department
+                    //display absent present belongs to a particular department
                     $sql="SELECT dept_name,dept_id,no_of_emp from department where currentStatus=:approve ";
                     $query = $pdo->prepare($sql);
                     $query->execute(array('approve'=>"approved"));
                     $dept = $query->fetchAll(PDO::FETCH_NUM);
                     for($i=0;$i<count($dept);$i++)
                     {
-                      $dept[$i][1] = intval($dept[$i][1]);
-                      $dept[$i][2] = intval($dept[$i][2]);
+                      $d_id=$dept[$i][1];
+                      $dept[$i][1] = intval($q[$d_id]);
+                      $absnt= $dept[$i][2]-$dept[$i][1];
+                      $dept[$i][2] =intval($absnt);
                     }
 
                    array_unshift($dept, array('Department', 'Present','Absent'));
-
+                   //print_r($dept);
                     ?>
                     <center><div id="columnchart_material" style="width: 900px; height: 500px;"></div></center>
             </div>
@@ -292,31 +282,6 @@ if(!$isLoggedin && $empRole!="director"){
             chart.draw(data, options);
         }
     </script>
-
-    <!-- <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-
-      var result=JSON.parse('<?php //echo json_encode($dept)?>');
-
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-
-      var currentdate = new Date();
-      var datetime = currentdate.getDate() + "/"+ (currentdate.getMonth()+1)  + "/" + currentdate.getFullYear();
-
-      function drawChart() {
-
-        var data = google.visualization.arrayToDataTable(result);
-
-        var options = {
-          title: 'Attendance in each department:'+datetime,
-          hAxis: {title: 'Departments', titleTextStyle: {color: 'black'}}
-        };
-
-        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script> -->
 
     <script src="../admin/js/jquery.js"></script>
     <script src="../admin/js/bootstrap.js"></script>

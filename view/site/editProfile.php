@@ -29,13 +29,13 @@ if(!$isLoggedin){
 
 <body style=" background-color: #eceff4 !important;">
 
-<?php include ("../layouts/navbar.php")?>
+<?php include ("../layouts/navbar.php");?>
 
 <div class="container-fluid ">
     <div class="row ">
 
         <div class="col-sm-2 col-xs-12 left-menu-div side-bar-display">
-            <?php include ("../layouts/leftbar.php")?>
+            <?php include ("../layouts/leftbar.php");?>
         </div>
 
         <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2" style="position: relative;">
@@ -69,7 +69,7 @@ if(!$isLoggedin){
                         <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">Profile picture changed successfully!</div>
                         <hr>
                             <div class="col-xs-12">
-                                <?php
+                            <?php
                                     $sql = "SELECT image from employee WHERE comp_id=:empID";
                                     $query = $pdo->prepare($sql);
                                     $query->execute(array('empID'=>$empID));

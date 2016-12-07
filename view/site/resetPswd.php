@@ -15,9 +15,10 @@ if(isset($_POST['submit']))
     $confirmpasssword=$_POST['con_pswd'];
     if($newpassword==$confirmpasssword)
     {
+        $pswd=password_hash($_POST['new_pswd'], PASSWORD_DEFAULT);
         $sql = "UPDATE employee SET password=:newpassword where comp_id=:empID ";
         $query = $pdo->prepare($sql);
-        $query->execute(array('newpassword' => $newpassword, 'empID' => $empID));
+        $query->execute(array('newpassword' => $pswd, 'empID' => $empID));
 
         header( 'Location: profile.php?success' ) ;
         //echo "<script> alert('Your password is changed');</script>";
