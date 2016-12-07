@@ -217,13 +217,29 @@ if(!$isLoggedin && $empRole!="director"){
                     <?php
 
                     //take the attendance count of each department
+                    $sql="SELECT dept_id from department where currentStatus=:approve ";
+                    $query = $pdo->prepare($sql);
+                    $query->execute(array('approve'=>"approved"));
+                    $d = $query->fetchAll(PDO::FETCH_NUM);
+                    //print_r($d[0][0]);echo "<br>";
+
+                    //check the department of each employee
+                    $q=array();
                     for ($n=0; $n <$num ; $n++) {
                       $sql1="SELECT dept_id from employee where comp_id=:c_id Limit 1 ";
                       $query1 = $pdo->prepare($sql1);
                       $query1->execute(array('c_id'=>$id[$n]));
-                      $q = $query1->fetch();
-                      print_r($q);echo "<br>";
+                      $query1 = $query1->fetch();
+                      $q[$n]=$query1[0];
+
+                      //print_r($q[0]);echo "<br>";
                     }
+                    $q=(array_count_values($q));
+                    print_r($q);echo "<br>";
+
+                      // if (intval($q[0])==intval($d[0][0])) {
+                      //   $count[0]+=1;
+                      // }
 
                     //display no of employees belongs to a particular department
                     $sql="SELECT dept_name,dept_id,no_of_emp from department where currentStatus=:approve ";
@@ -236,12 +252,7 @@ if(!$isLoggedin && $empRole!="director"){
                       $dept[$i][2] = intval($dept[$i][2]);
                     }
 
-                    // foreach ($dept as $rs){
-                    //     //$data=array();
-                    //     //array_push($data,$rs['dept_name'],$rs['dept_id'],$rs['no_of_emp']);
-                    //     //array_push($result, $data);
-                    // }
-                    array_unshift($dept, array('Department', 'Present','Absent'));
+                   array_unshift($dept, array('Department', 'Present','Absent'));
 
                     ?>
                     <center><div id="columnchart_material" style="width: 900px; height: 500px;"></div></center>
