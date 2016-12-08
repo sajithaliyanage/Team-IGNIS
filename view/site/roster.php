@@ -636,7 +636,7 @@ if(isset($_GET['shiftid'])){
                                 catch(Exception $e){}
                             ?>
                             <div class="progress-bar" role="progressbar" aria-valuenow=":<?php echo ($timesum/$workinghours)*100;?>%;" aria-valuemin="0"
-                                 aria-valuemax="100" style="width:<?php echo ($timesum/$workinghours)*100;?>%;">:<?php echo ($timesum/$workinghours)*100;?>%;
+                                 aria-valuemax="100" style="width:<?php echo ($timesum/$workinghours)*100;?>%;"><?php echo ($timesum/$workinghours)*100;?>%
                             </div>
                         </div>
                         <p style="text-align:left; margin-top:-20px;">0h</p>
