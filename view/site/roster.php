@@ -671,16 +671,16 @@ if(isset($_GET['shiftid'])){
                                 </div>
                                 <div class="row">
                                         <div class="col-xs-6" style="text-align: right;">
-                                            <p>Days left in this week:</p>
+                                            <p>Days remaining in this week:</p>
                                         </div>
                                         <div class="col-xs-6">
-                                            <p style=" color:#00a65a;"><strong>
+                                            <p style=" color:#00a65a;margin-top: 9px"><strong>
                                             <?php 
                                             $date1=date_create(date('Y/m/d',strtotime( 'sunday this week' )));
                                             $date2=date_create(date('Y/m/d'));
                                             $diff=date_diff($date2,$date1);
                                             echo $diff->format("%a");
-                                            ?>Days</strong></p> 
+                                            ?> days</strong></p> 
                                         </div>
                                 </div>
 
