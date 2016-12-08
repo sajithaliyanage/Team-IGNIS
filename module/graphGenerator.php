@@ -6,7 +6,6 @@ $department = $_POST['dept_name'];
 $startDate = $_POST['start_date'];
 $endDate = $_POST['end_date'];
 
-$empID = $_SESSION["empID"];
 $tempFile = "new.xlsx";
 $objPHPExcel = PHPExcel_IOFactory::load($tempFile);
 
