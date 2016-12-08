@@ -82,7 +82,7 @@ if(isset($_GET['shiftid'])){
 
             <div class="row padding-row">
                 <div class="col-sm-6 col-xs-12">
-                    <div class="col-xs-12 nortification-box-top" style="<?php if(!isset($_GET['shiftid'])){echo 'display:none;';}?> margin-bottom:20px;">
+                    <div class="col-xs-12 nortification-box-top" style="<?php if(!isset($_GET['shiftid'])){echo 'display:none;';}?> margin-bottom:30px;">
                         <h5 class="nortification-box-heading"><i class="fa fa-calendar-check-o icon-margin-right"aria-hidden="true"></i>
                             Take Your Decision</h5>
 
@@ -98,15 +98,19 @@ if(isset($_GET['shiftid'])){
                         $result15= $query15->fetchAll();
                         foreach ($result15 as $rs){
                             echo "
+                                           <form action='../../module/rosterconfirm.php?shiftid=".$appliedShiftId."' method='POST'>
                                            <div class=\"list-group\">
+                                                <li class=\"list-group-item\">Name : <strong>".$rs['name']."</strong> </li>
                                                 <li class=\"list-group-item\">Request Date : <strong>".$rs['shiftingForDate']."</strong> </li>
                                                 <li class=\"list-group-item\">Request Session : <strong>".$rs['shitingForSession']."</strong></li>
                                                 <li class=\"list-group-item\">Rework Date :<strong>".$rs['recovery_date']."</strong></li>
                                                 <li class=\"list-group-item\">Rework Session:<strong>".$rs['recovery_time']."</strong> </li>
                                                 <li class=\"list-group-item\" style='margin-bottom:10px;'>Reason :<strong>".$rs['reason']."</strong></li>
-                                                    <button class=\"btn btn-success btn-sm\" style='float:right;'>Approved</button>
-                                                    <button class=\"btn btn-danger btn-sm\" style='float:right; margin-right:10px;margin-bottom:10px;'>Reject</button></li>
-                                            </div>";
+                                                    <button class=\"btn btn-danger btn-sm\" style='float:right;'type='submit' name='submit' value='reject' >Reject</button></li>
+                                                    <button class=\"btn btn-success btn-sm\" style='float:right; margin-right:10px;margin-bottom:10px;' type='submit'name='submit' value='done'>Approve</button>
+                                                    
+                                            </div>
+                            </form>";
 
 
 
