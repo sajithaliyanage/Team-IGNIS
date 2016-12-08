@@ -105,18 +105,62 @@ if(isset($_GET['shiftid'])){
                                                 <li class=\"list-group-item\">Request Session : <strong>".$rs['shitingForSession']."</strong></li>
                                                 <li class=\"list-group-item\">Rework Date :<strong>".$rs['recovery_date']."</strong></li>
                                                 <li class=\"list-group-item\">Rework Session:<strong>".$rs['recovery_time']."</strong> </li>
-                                                <li class=\"list-group-item\" style='margin-bottom:10px;'>Reason :<strong>".$rs['reason']."</strong></li>
-                                                    <button class=\"btn btn-danger btn-sm\" style='float:right;'type='submit' name='submit' value='reject' >Reject</button></li>
-                                                    <button class=\"btn btn-success btn-sm\" style='float:right; margin-right:10px;margin-bottom:10px;' type='submit'name='submit' value='done'>Approve</button>
-                                                    
-                                            </div>
-                            </form>";
+                                                <li class=\"list-group-item\" style='margin-bottom:10px;'>Reason :<strong>".$rs['reason']."</strong></li>                                                  
+                                                    <a class=\"btn btn-success btn-sm\" data-toggle=\"modal\" data-target='#approve-shift".$rs['shifting_id']."' style='float:right;'>Approve</a>  
+                                                    <a class=\"btn btn-danger btn-sm\" data-toggle=\"modal\" data-target='#reject-shift".$rs['shifting_id']."' style='float:right; margin-right:10px;margin-bottom:10px;'  >Reject</a>  
+                                                                                                      
+                                                
+                                            </div>";
+                                           
+                        ?>
+                            <!-- Modal -->
+                            <div id="approve-shift<?php echo $rs['shifting_id'];?>" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
 
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Approve Shift</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure you want to Approve this Shift?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="sumbit" class="btn btn-success" name='submit' value='approve'>Approve</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
 
+                                </div>
+                            </div>
 
+<!--                           reject-->
+<!-- Modal -->
+                            <div id="reject-shift<?php echo $rs['shifting_id'];?>" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Reject Shift</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure you want to Reject this Shift ?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="sumbit" class="btn btn-danger" name='submit' value='reject'>Reject</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        <?php
+                                echo "</form>";
                         }
-
-
 
                         ?>
 
@@ -648,21 +692,19 @@ if(isset($_GET['shiftid'])){
 
                 <div class="row">
                     <div class="col-sm-6 col-xs-12">
-                        <div class="col-xs-12 nortification-box-top ">
+                        <?php
+                        $sql8 = "select * from employee JOIN shifting ON employee.comp_id=shifting.emp_id where shifting.status=:log and shifting.replace_emp_id =:comp_id";
+                        $query8 = $pdo->prepare($sql8);
+                        $query8->execute(array('log'=>"waiting",'comp_id'=>$empID));
+                        $result8= $query8->fetchAll();
+                        $rowCount8 = $query8->rowCount();
+                        ?>
+                        <div class="col-xs-12 nortification-box-top " style="<?php if($rowCount8 == 0){echo 'display:none;';}?>">
                             <h5 class="nortification-box-heading"><i class="fa fa-cogs icon-margin-right" aria-hidden="true"></i>
                                 Pending Requests For Shifts</h5>
                             <hr>
                             <div class="list-group">
-                                <?php
-                                $sql8 = "select * from employee JOIN shifting ON employee.comp_id=shifting.emp_id where shifting.status=:log and shifting.replace_emp_id =:comp_id";
-                                $query8 = $pdo->prepare($sql8);
-                                $query8->execute(array('log'=>"waiting",'comp_id'=>$empID));
-                                $result8= $query8->fetchAll();
-                                $rowCount8 = $query8->rowCount();
-
-                                if($rowCount8==0){
-                                    echo "No any requests yet!";
-                                }
+                               <?php
 
 
                                 foreach ($result8 as $rs) {
@@ -678,7 +720,7 @@ if(isset($_GET['shiftid'])){
 
                         </div>
 
-                        <div class="margin-top col-xs-12 nortification-box-top">
+                        <div class="col-xs-12 nortification-box-top <?php if($rowCount8 !=0){ echo 'margin-top';}?>">
                             <h5 class="nortification-box-heading"><i class="fa fa-tag icon-margin-right"
                                                                      aria-hidden="true"></i>
                                 Shift Changing Application</h5>

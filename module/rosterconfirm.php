@@ -6,7 +6,7 @@ $pdo = connect();
 
 $appliedShiftId = $_GET['shiftid'];
 
-if ($_POST['submit'] == 'done') {
+if ($_POST['submit'] == 'approve') {
 
     $sql = "UPDATE shifting SET status=:log where shifting_id=:shiftId ";
     $query = $pdo->prepare($sql);
