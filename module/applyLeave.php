@@ -13,14 +13,14 @@ $reason = $_POST['reason'];
 $todayDate = date("d/m/Y");
 
 try{
-//    check leave count is suffient or not
-    $smt = "SELECT leave_count FROM employee_leave_count WHERE comp_id=:empID AND leave_id=:lID";
-    $querySmt = $pdo->prepare($smt);
-    $querySmt->execute(array('empID'=>$empID,'lID'=>$leaveType));
-    $resultSmt = $querySmt->fetch();
-    $leaveCount = $resultSmt['leave_count'];
+////    check leave count is suffient or not
+//    $smt = "SELECT leave_count FROM employee_leave_count WHERE comp_id=:empID AND leave_id=:lID";
+//    $querySmt = $pdo->prepare($smt);
+//    $querySmt->execute(array('empID'=>$empID,'lID'=>$leaveType));
+//    $resultSmt = $querySmt->fetch();
+//    $leaveCount = $resultSmt['leave_count'];
 
-    if($leaveCount>0){
+
         if($empRole == 'executive' || $empRole == 'manager' || $empRole == 'admin'){
 //            insert data to apply leave table
             $sql = "INSERT INTO apply_leave (comp_id,leave_id,leave_priority,apply_date,start_date,end_date,number_of_days,reason,status,recommandBy) VALUES
@@ -39,9 +39,6 @@ try{
         }
 
         header("Location:../view/site/apply.php?job=done");
-    }else{
-        header("Location:../view/site/apply.php?count=error");
-    }
 
 
 

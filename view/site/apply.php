@@ -97,11 +97,11 @@ if(!$isLoggedin){
                                     $count = 0;
                                     foreach($result as $rs){
                                         $val = intval($rs['leave_count']);
-                                        if($val<10){
+                                        if($val<10 && $val>0){
                                             $val = "0".$rs['leave_count'];
                                         }
                                         echo "<li class='list-group-item'>
-                                                ".ucwords($rs['leave_name'])."<span class='badge' style='background-color:#2c3b42; font-size:15px;'>".$val."<span style='font-size:9px;'> remaining</span> / <span style='font-size:13px;'>";if($resultS2[$count]['leave_count']<10){echo '0'.$resultS2[$count]['leave_count'];}else{ echo $resultS2[$count]['leave_count'];} echo"</span><span style='font-size:9px;'></span> </span>
+                                                ".ucwords($rs['leave_name'])."<span class=\"label label-danger\" style='margin-left:10px;";if($val>=0){echo'display:none;'; }echo "'>".abs($val)." No Pay Leave!!</span><span class='badge' style='background-color:#2c3b42; font-size:15px;'>".$val."<span style='font-size:9px;'> remaining</span> / <span style='font-size:13px;'>";if($resultS2[$count]['leave_count']<10){echo '0'.$resultS2[$count]['leave_count'];}else{ echo $resultS2[$count]['leave_count'];} echo"</span><span style='font-size:9px;'></span> </span>
                                                 </li>";
                                         $count +=1;
                                     }
@@ -261,7 +261,7 @@ if(!$isLoggedin){
                             <hr>
                             <div class="list-group">
                                 <?php
-                                $sql = "select * from apply_leave JOIN leave_type ON apply_leave.leave_id=leave_type.leave_id WHERE comp_id=:empID";
+                                $sql = "select * from apply_leave JOIN leave_type ON apply_leave.leave_id=leave_type.leave_id WHERE comp_id=:empID ORDER BY apply_leave_id DESC LIMIT 10";
                                 $query = $pdo->prepare($sql);
                                 $query->execute(array('empID'=>$empID));
                                 $result = $query->fetchAll();
@@ -327,6 +327,7 @@ if(!$isLoggedin){
                 center: 'prev title next',
                 right: ''
             },
+            firstDay: 1,
             eventClick:  function(event, jsEvent, view) {
                 $('#modalTitle').html(event.title);
                 $('#modalBody').html(event.description);

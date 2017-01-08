@@ -296,7 +296,7 @@ $departmentId = $result['dept_id'];
                             <hr>
                             <div class="list-group">
                                 <?php
-                                $sql = "select * from medical_report where comp_id =:myId";
+                                $sql = "select * from medical_report where comp_id =:myId ORDER BY med_id DESC LIMIT 10";
                                 $query = $pdo->prepare($sql);
                                 $query->execute(array('myId'=>$empID));
                                 $rowCount = $query->rowCount();
@@ -307,7 +307,40 @@ $departmentId = $result['dept_id'];
                                 }
 
                                 foreach($result as $rs){
-                                    echo "<a href='' class=\"list-group-item\">Medical - ".$rs['uploaded_date']."<span style='float:right;'>"; if($rs['status']=='waiting'){echo 'Waiting for Approve <i class=\"fa fa-question\" aria-hidden=\"true\"></i></span></a>';}else if($rs['status']=='approved'){ echo 'Approved <i class=\'fa fa-check\' aria-hidden=\'true\'></i></span></a>';}else{echo 'Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></a>';};
+                                    ?>
+                                    <a href='#' class='list-group-item'><?php echo "Medical- ".$rs['uploaded_date']; ?>
+                                        <span style='float:right;'>
+                                            <?php if ($rs['status'] == 'waiting') {
+                                                echo "Waiting for Approve <button type='button' style='background-color:transparent;border:none;' data-toggle='modal' data-target='#myModal".$rs['med_id']."'><i class='fa fa-close' style='color:red; border:1px solid red; padding:1px;' aria-hidden='true'></i></button>";
+                                            } else if ($rs['status'] == 'approved') {
+                                                echo "Approved <i class='fa fa-check' aria-hidden='true'></i>";
+                                            }else {
+                                                echo "Rejected <i class='fa fa-close'  style='color:red;' aria-hidden='true'></i>";
+                                            }?>
+                                        </span>
+                                    </a>
+
+                                    <div id="myModal<?php echo $rs['med_id'];?>" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Delete Medical Report</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to delete this Medical Upload?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="../../module/deleteMedicalReport.php?id=<?php echo $rs['med_id']."&leaveid=".$rs['apply_leave_id'];?>"><button type="button" class="btn btn-danger">Delete</button></a>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <?php
                                 }
                                 ?>
 
@@ -323,7 +356,7 @@ $departmentId = $result['dept_id'];
                             <div class="list-group">
 
                                 <?php
-                                $sql = "select * from apply_leave where comp_id =:myId AND status=:log";
+                                $sql = "select * from apply_leave where comp_id =:myId AND status=:log ORDER BY apply_leave_id DESC LIMIT 10";
                                 $query = $pdo->prepare($sql);
                                 $query->execute(array('myId'=>$empID, 'log'=>"approved"));
                                 $rowCount = $query->rowCount();

@@ -178,17 +178,17 @@ $departmentId = $result['dept_id'];
                     <div class="row margin-top">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-list icon-margin-right"aria-hidden="true"></i>
-                               Approved Leaves In Same Time</h5>
+                               Request Leaves In Same Time</h5>
                             <hr>
                             <div class="list-group">
                                 <?php
                                     if($applyLeaveID!=null){
                                         $sql = "select * from apply_leave JOIN employee ON apply_leave.comp_id=employee.comp_id
                                             JOIN job_category ON job_category.job_cat_id = employee.job_cat_id
-                                            WHERE apply_leave.status=:log AND employee.dept_id=:deptID AND
+                                            WHERE apply_leave.status!=:log AND employee.dept_id=:deptID AND
                                             (STR_TO_DATE(apply_leave.start_date, '%d/%m/%Y') BETWEEN STR_TO_DATE('$startDate','%d/%m/%Y') AND STR_TO_DATE('$endDate', '%d/%m/%Y'))";
                                         $query = $pdo->prepare($sql);
-                                        $query->execute(array('log'=>"approved",'deptID'=>$departmentId));
+                                        $query->execute(array('log'=>"rejected",'deptID'=>$departmentId));
                                         $result = $query->fetchAll();
                                         $rowCount = $query->rowCount();
 
@@ -197,7 +197,7 @@ $departmentId = $result['dept_id'];
                                         }
 
                                         foreach($result as $rs){
-                                            echo "<a  class='list-group-item'>".$rs['name']."<span style='float:right;'>".$rs['job_cat_name']."</span></a>";
+                                            echo "<a  class='list-group-item' style='border-color:#0e0e0e; background-color:";if($rs['status']=='approved'){echo "#4EF570";}else{ echo "#F7EF94";} echo ";'>".$rs['name']." - ".$rs['start_date']." <b>To</b> ".$rs['end_date']."<span style='float:right;'>".$rs['job_cat_name']."</span></a>";
                                         }
                                     }else{
                                         echo "Select waiting leave request to get result";

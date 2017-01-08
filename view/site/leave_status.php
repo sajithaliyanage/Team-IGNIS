@@ -66,10 +66,10 @@ $pdo = connect();
                                 <thead style="color: #065ABC">
                                     <tr>
 
+                                        <th style='text-align: center;'>Applied Date</th>
+                                        <th style='text-align: center;'>Number of Days</th>
                                         <th style='text-align: center;'>Start Date - End Date</th>
                                         <th style='text-align: center;'>Leave Type</th>
-                                        <th style='text-align: center;'>Number of Days</th>
-                                        <th style='text-align: center;'>Applied Date</th>
                                         <th style='text-align: center;'>Leave Status</th>
 
                                     </tr>
@@ -77,7 +77,7 @@ $pdo = connect();
 
                                 <tbody>
                                     <?php
-                                        $sql = "select * from apply_leave JOIN leave_type ON apply_leave.leave_id = leave_type.leave_id where apply_leave.comp_id =:myId";
+                                        $sql = "select * from apply_leave JOIN leave_type ON apply_leave.leave_id = leave_type.leave_id where apply_leave.comp_id =:myId ORDER BY apply_leave_id DESC ";
                                         $query = $pdo->prepare($sql);
                                         $query->execute(array('myId'=>$empID));
                                         $rowCount = $query->rowCount();
@@ -93,15 +93,15 @@ $pdo = connect();
 
                                         foreach($result as $rs) {
                                             echo "<tr>
+                                                    <td style='text-align: center;'>" . $rs['apply_date'] . "</td>
+                                                    <td style='text-align: center;'>" . $rs['number_of_days'] . " day</td>
                                                     <td style='text-align: center;'>" . $rs['start_date'] . " - " . $rs['end_date'] . "</td>
                                                     <td style='text-align: center;'>" . ucwords($rs['leave_name']) . "</td>
-                                                    <td style='text-align: center;'>" . $rs['number_of_days'] . " day</td>
-                                                    <td style='text-align: center;'>" . $rs['apply_date'] . "</td>
                                                     <td style='text-align: center;'><span>";
                                                     if ($rs['status'] == 'waiting' | $rs['status'] == 'recommended') {
                                                         echo "Waiting for Approve <i class='fa fa-question' aria-hidden='true'></i></span></a> <a class=\"btn btn-link btn-xs\" data-toggle=\"modal\" data-target='#cancel-leave" . $rs['apply_leave_id'] . "'><span class=\"label label-danger\" title='Cancel leave'>X</span></a>";
                                                     } else if ($rs['status'] == 'approved') {
-                                                        echo '<span style="color:#00a65a;">Approved<i class=\'fa fa-check\' aria-hidden=\'true\'></i></span> </span></a>';
+                                                        echo "<span style=\"color:#00a65a;\">Approved<i class='fa fa-check' style='margin-left:4px;' aria-hidden='true'></i></span></a> <a class=\"btn btn-link btn-xs\" style='"; if(strtotime($rs['start_date']) < strtotime(date('d/m/Y'))){echo 'display:none;';} echo "' data-toggle=\"modal\" data-target='#cancel-approved-leave" . $rs['apply_leave_id'] . "'><span class=\"label label-danger\" title='Cancel leave'>X</span></a></span>";
                                                     } else if ($rs['status'] == 'rejected') {
                                                         echo '<span style="color:#d43f3a;">Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></span>';
                                                     } else if ($rs['status'] == 'canceled') {
@@ -110,6 +110,28 @@ $pdo = connect();
                                                     echo "</td>
                                                         </tr>
 
+                                                          <form action='../../module/rejectApprovedLeave.php?app_leave_id=".$rs['apply_leave_id']."' method='POST'>
+                                                            <div class=\"modal fade\" id='cancel-approved-leave".$rs['apply_leave_id']."' >
+                                                                        <div class=\"modal-dialog\">
+
+                                                                            <!-- Modal content-->
+                                                                            <div class=\"modal-content\">
+                                                                                <div class=\"modal-header\">
+                                                                                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>
+                                                                                    <h4 class=\"modal-title\">Cancel Approved Leave</h4>
+                                                                                </div>
+                                                                                <div class=\"modal-body\">
+                                                                                    <p>Are you sure you want to cancel this leave ?</p>
+                                                                                </div>
+                                                                                <div class=\"modal-footer\">
+                                                                                    <button class=\"btn btn-warning\" type='submit' name=\"submit\" value='cancel'>Cancel</button>
+                                                                                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                          </form>
                                                           <form action='../../module/cancelLeave.php?app_leave_id=".$rs['apply_leave_id']."' method='POST'>
                                                             <div class=\"modal fade\" id='cancel-leave".$rs['apply_leave_id']."' >
                                                                         <div class=\"modal-dialog\">
@@ -131,7 +153,9 @@ $pdo = connect();
 
                                                                         </div>
                                                                     </div>
-                                                          </form>";
+                                                          </form>
+                                                          
+                                                          ";
                                                 }
                                     ?>
 
