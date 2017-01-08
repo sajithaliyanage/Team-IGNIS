@@ -53,7 +53,7 @@ CREATE TABLE `apply_leave` (
   KEY `leave_id` (`leave_id`),
   KEY `apply_leave_ibfk_1` (`comp_id`),
   CONSTRAINT `apply_leave_ibfk_1` FOREIGN KEY (`comp_id`) REFERENCES `employee` (`comp_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 
 INSERT INTO apply_leave VALUES
@@ -73,13 +73,14 @@ INSERT INTO apply_leave VALUES
 ("17","Tr005","2","high","11/10/2016","26/10/2016","27/10/2016","2","xcdfsf","approved","Sajini Koongahawattage","","done","1"),
 ("18","Tr005","2","high","03/12/2016","16/12/2016","05/12/2016","2","sa","approved","Sajini Koongahawattage","","done","1"),
 ("19","Tr005","2","high","03/12/2016","04/12/2016","05/12/2016","1","None","approved","Sajini Koongahawattage","","pending","1"),
-("20","Tr005","1","high","05/12/2016","08/12/2016","16/12/2016","8","nn","waiting","","","","1"),
+("20","Tr005","1","high","05/12/2016","08/12/2016","16/12/2016","8","nn","approved","Sajini Koongahawattage","","no","0"),
 ("21","Tr004","2","high","08/12/2016","08/12/2016","09/12/2016","2","sad","canceled","Sajini Koongahawattage","","","1"),
 ("22","Tr005","2","medium","08/12/2016","09/12/2016","09/12/2016","1","for wedding","canceled","Sajini Koongahawattage","","","0"),
 ("23","Tr005","2","high","08/01/2017","09/01/2017","11/01/2017","2","Sick","canceled","","","no","0"),
 ("24","Tr006","1","medium","08/01/2017","09/01/2017","11/01/2017","3","Una Hedenwa","approved","Sajini Koongahawattage","","no","0"),
 ("25","Tr006","1","medium","08/01/2017","09/01/2017","12/01/2017","4","Sick","waiting","","","","0"),
-("26","Tr005","2","high","08/01/2017","09/01/2017","11/01/2017","2","Sick","approved","Sajini Koongahawattage","","no","1");
+("26","Tr005","2","high","08/01/2017","09/01/2017","11/01/2017","2","Sick","approved","Sajini Koongahawattage","","no","1"),
+("27","Tr005","2","high","08/01/2017","18/01/2017","20/01/2017","2","Private reason","waiting","","","","0");
 
 
 
@@ -97,7 +98,7 @@ CREATE TABLE `calendar` (
   KEY `comp_id(change)` (`comp_id`),
   KEY `dept_id` (`dept_id`),
   CONSTRAINT `calendar_ibfk_2` FOREIGN KEY (`comp_id`) REFERENCES `employee` (`comp_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 
 INSERT INTO calendar VALUES
@@ -112,7 +113,8 @@ INSERT INTO calendar VALUES
 ("14","Amma\'s BirthDay","2016-09-18","2016-09-19","gold","","#","Tr005"),
 ("15","dscsd","2016-10-26","2016-10-27","#3498db","cscds","0","Tr001"),
 ("16","asas","2016-10-10","2016-10-12","#3498db","sasasasa","0","Tr001"),
-("17","WWW","2016-11-29","2016-11-29","gold","dasdasdasd","#","Tr005");
+("17","WWW","2016-11-29","2016-11-29","gold","dasdasdasd","#","Tr005"),
+("18","General Meeting","2017-01-18","2017-01-18","#3498db","All the employees must to attend","0","Tr001");
 
 
 
@@ -257,7 +259,7 @@ INSERT INTO employee_leave_count VALUES
 ("Tr004","2","20"),
 ("Tr004","3","10"),
 ("Tr004","6","2"),
-("Tr005","1","42"),
+("Tr005","1","34"),
 ("Tr005","2","-1"),
 ("Tr005","3","8"),
 ("Tr005","6","1"),
@@ -599,7 +601,7 @@ CREATE TABLE `medical_report` (
   PRIMARY KEY (`med_id`),
   KEY `comp_id` (`comp_id`),
   KEY `apply_leave_id` (`apply_leave_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 
 INSERT INTO medical_report VALUES
