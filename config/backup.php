@@ -59,12 +59,12 @@ function EXPORT_TABLES($host, $user, $pass, $name, $tables = false, $backup_name
     //header('Content-Type: application/octet-stream');
     //header("Content-Transfer-Encoding: Binary");
     //header("Content-disposition: attachment; filename=\"" . $backup_name . "\"");
-    $handle = fopen('Backup_SQL/'.date('Y-m-d',strtotime('+5 hours')).'.sql','w+');
+    $handle = fopen('../config/Backup_SQL/'.date('Y-m-d',strtotime('+5 hours')).'.sql','w+');
     fwrite($handle,$content);
     fclose($handle);
     //echo $content;
-    echo "<h1 style='text-align: center; margin-top:40vh; font-size:50px; border:2px solid #e3e3e3;'>Backup Done Successfully !</h1>";
-    exit;
+    //echo "<h1 style='text-align: center; margin-top:40vh; font-size:50px; border:2px solid #e3e3e3;'>Backup Done Successfully !</h1>";
+    //exit;
 }      //see import.php too
 
 EXPORT_TABLES("localhost", "root", "", "takeyourleave");

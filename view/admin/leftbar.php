@@ -21,4 +21,5 @@
     <a href="jobcategory.php" class="list-group-item left-menu left-menu<?php if($var=="job"){echo"-active";}?>"><i class="fa fa-briefcase icon-bar" aria-hidden="true"></i>Edit Job Categories<span class="<?php if($var=="job"){echo"selected";}?>"></span></a>
     <a href="leavetypes.php" class="list-group-item left-menu left-menu<?php if($var=="leave"){echo"-active";}?>"><i class="fa fa-envelope-o icon-bar" aria-hidden="true"></i>Edit Leave types<span class="<?php if($var=="leave"){echo"selected";}?>"></span></a>
     <a href="roster.php" class="list-group-item left-menu left-menu<?php if($var=="roster"){echo"-active";}?>"><i class="fa fa-shirtsinbulk icon-bar" aria-hidden="true"></i>Edit Roster System<span class="<?php if($var=="roster"){echo"selected";}?>"></span></a>
+    <a href="settings.php" class="list-group-item left-menu left-menu<?php if($var=="settings"){echo"-active";}?>"><i class="fa fa-wrench icon-bar" aria-hidden="true"></i>Settings<span class="<?php if($var=="settings"){echo"selected";}?>"></span></a>
 </div>

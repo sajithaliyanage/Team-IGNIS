@@ -1,6 +1,7 @@
 <?php
 include('../config/connect.php');
 include('../module/class/Employee.php');
+include('../config/backup.php');
 $emp=new Employee;
 
 $pdo = connect();
