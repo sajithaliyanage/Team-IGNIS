@@ -65,3 +65,11 @@ if($sentMail) //output success or failure messages
 
 
 
+//$sendgrid = new SendGrid('username', 'password');
+//$mail = new SendGridMail();
+//$mail->addTo('foo@bar.com')->
+//setFrom('me@bar.com')->
+//setSubject('Subject goes here')->
+//setText('Hello World!')->
+//setHtml('<strong>Hello World!</strong>');
+//$sendgrid->smtp->send($mail);

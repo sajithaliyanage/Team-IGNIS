@@ -31,11 +31,16 @@ try{
             $this->Ln();
 
             foreach ($data as $eachResult){
+                if(intval($eachResult['leave_count'])<0){
+                    $val= abs(intval($eachResult['leave_count']));
+                } else{
+                    $val= 0;
+                }
                 $this->Cell(25,10,$eachResult["comp_id"],1);
                 $this->Cell(55,10,$eachResult["name"],1);
                 $this->Cell(50,10,$eachResult["leave_name"],1);
                 $this->Cell(40,10,$eachResult["leave_count"],1);
-                $this->Cell(25,10,$eachResult["leave_count"],1);
+                $this->Cell(25,10,$val,1);
                 $this->Ln();
             }
         }
