@@ -9,6 +9,7 @@ if(!$isLoggedin && $empRole!="director"){
 }
 
 ?>
+<!---****************************start************************--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -226,7 +227,7 @@ if(!$isLoggedin && $empRole!="director"){
                       $q[$n]=$query1[0];
                     }
                     $q=(array_count_values($q));
-                    
+
                   //display absent present belongs to a particular department
                     $sql="SELECT dept_name,dept_id,no_of_emp from department where currentStatus=:approve ";
                     $query = $pdo->prepare($sql);

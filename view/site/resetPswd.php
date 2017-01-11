@@ -110,13 +110,13 @@ if(isset($_POST['submit']))
 
 <body style=" background-color: #eceff4 !important;">
 
-    <?php include ("../layouts/navbar.php")?>
+    <?php include ("../layouts/navbar.php") ?>
 
     <div class="container-fluid ">
         <div class="row ">
 
             <div class="col-sm-2 col-xs-12 left-menu-div side-bar-display">
-                <?php include ("../layouts/leftbar.php")?>
+                <?php include ("../layouts/leftbar.php") ?>
             </div>
 
             <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2" style="position: relative;">

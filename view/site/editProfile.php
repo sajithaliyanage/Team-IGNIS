@@ -120,7 +120,9 @@ if(!$isLoggedin){
                                         <form role="form" data-toggle="validator" action="../../module/editEmployeeProfile.php" method="post">
                                             <?php
 
-                                            $sql = "select * from employee INNER JOIN department ON employee.dept_id=department.dept_id INNER JOIN job_category ON employee.job_cat_id=job_category.job_cat_id  JOIN job_level ON job_level.level_id=employee.level_id WHERE comp_id=:empID";
+                                            $sql = "SELECT * from employee INNER JOIN department ON employee.dept_id=department.dept_id
+                                            INNER JOIN job_category ON employee.job_cat_id=job_category.job_cat_id
+                                            JOIN job_level ON job_level.level_id=employee.level_id WHERE comp_id=:empID";
                                             $query = $pdo->prepare($sql);
                                             $query->execute(array('empID'=>$empID));
                                             $result = $query->fetchAll();
@@ -151,7 +153,7 @@ if(!$isLoggedin){
                                                         echo "Email:";
                                                         echo "</label>
                                                         <div class=\"col-sm-7 col-xs-12\">
-                                                            <input id=\"service_name\" name=\"emp_email\" value='".$rs['email']."' type=\"text\" placeholder=''
+                                                            <input id=\"service_name\" name=\"emp_email\" value='".$rs['email']."' type=\"email\" placeholder=''
                                                                    class=\"form-control input-md\" required>
                                                         </div>
                                                     </div>";
