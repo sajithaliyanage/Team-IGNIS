@@ -8,6 +8,7 @@ if(!$isLoggedin){
     header('Location:../../index.php');
 }
 ?>
+<!---****************************start************************--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,16 +30,16 @@ if(!$isLoggedin){
 </head>
 
 <body style=" background-color: #eceff4 !important;">
-
+<!---top navigation bar------------>
 <?php include("../layouts/navbar.php") ?>
 
 <div class="container-fluid ">
     <div class="row ">
-
+        <!---left nav bar-->
         <div class="col-sm-2 col-xs-12 left-menu-div side-bar-display">
             <?php include("../layouts/leftbar.php") ?>
         </div>
-
+        <!---content start-->
         <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2" style="position: relative;">
 
             <div class="row padding-row">
@@ -101,12 +102,13 @@ if(!$isLoggedin){
                                             $val = "0".$rs['leave_count'];
                                         }
                                         echo "<li class='list-group-item'>
-                                                ".ucwords($rs['leave_name'])."<span class=\"label label-danger\" style='margin-left:10px;";if($val>=0){echo'display:none;'; }echo "'>".abs($val)." No Pay Leave!!</span><span class='badge' style='background-color:#2c3b42; font-size:15px;'>".$val."<span style='font-size:9px;'> remaining</span> / <span style='font-size:13px;'>";if($resultS2[$count]['leave_count']<10){echo '0'.$resultS2[$count]['leave_count'];}else{ echo $resultS2[$count]['leave_count'];} echo"</span><span style='font-size:9px;'></span> </span>
+                                                ".ucwords($rs['leave_name'])."<span class=\"label label-danger\" style='margin-left:10px;";
+                                                if($val>=0){echo'display:none;'; }echo "'>".abs($val)." No Pay Leave!!</span><span class='badge' style='background-color:#2c3b42; font-size:15px;'>".$val."<span style='font-size:9px;'> remaining</span> / <span style='font-size:13px;'>";
+                                                if($resultS2[$count]['leave_count']<10){echo '0'.$resultS2[$count]['leave_count'];}else{ echo $resultS2[$count]['leave_count'];} echo"</span><span style='font-size:9px;'></span> </span>
                                                 </li>";
                                         $count +=1;
                                     }
                                 ?>
-<!--                                -->
                             </ul>
                         </div>
                     </div>
@@ -149,6 +151,7 @@ if(!$isLoggedin){
                     </div>
 
                 </div>
+                <!---leave application form---->
                 <div class="col-sm-6 col-xs-12 padding-box">
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top">
@@ -169,7 +172,7 @@ if(!$isLoggedin){
                                             <div class="col-xs-8">
                                                 <select name="leave_type" class="form-control">
                                                     <?php
-                                                        $sql = "select * from leave_type where currentStatus=:log AND leave_name !='Medical Leave'";
+                                                        $sql = "SELECT * from leave_type where currentStatus=:log AND leave_name !='Medical Leave'";
                                                         $query = $pdo->prepare($sql);
                                                         $query->execute(array('log'=>"approved"));
                                                         $result = $query->fetchAll();
@@ -261,7 +264,7 @@ if(!$isLoggedin){
                             <hr>
                             <div class="list-group">
                                 <?php
-                                $sql = "select * from apply_leave JOIN leave_type ON apply_leave.leave_id=leave_type.leave_id WHERE comp_id=:empID ORDER BY apply_leave_id DESC LIMIT 10";
+                                $sql = "SELECT * from apply_leave JOIN leave_type ON apply_leave.leave_id=leave_type.leave_id WHERE comp_id=:empID ORDER BY apply_leave_id DESC LIMIT 10";
                                 $query = $pdo->prepare($sql);
                                 $query->execute(array('empID'=>$empID));
                                 $result = $query->fetchAll();
@@ -272,7 +275,10 @@ if(!$isLoggedin){
                                 }
 
                                 foreach($result as $rs){
-                                    echo "<a  class='list-group-item'>".ucwords($rs['leave_name'])." - ".$rs['apply_date']."<span style='float:right;'>"; if($rs['status']=='waiting' || $rs['status']=='recommended' ){echo 'Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>';}else if($rs['status']=='approved'){ echo 'Approved <i class=\'fa fa-check\' aria-hidden=\'true\'></i></span></a>';}else{echo 'Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></a>';};
+                                    echo "<a  class='list-group-item'>".ucwords($rs['leave_name'])." - ".$rs['apply_date']."<span style='float:right;'>";
+                                    if($rs['status']=='waiting' || $rs['status']=='recommended' ){echo 'Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>';}
+                                    else if($rs['status']=='approved'){ echo 'Approved <i class=\'fa fa-check\' aria-hidden=\'true\'></i></span></a>';}
+                                    else{echo 'Rejected <i class=\'fa fa-close\' aria-hidden=\'true\'></i></span></a>';};
                                 }
                                 ?>
                             </div>

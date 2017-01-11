@@ -26,7 +26,7 @@ try{
             // Check if $uploadOk is set to 0 by an error
             if ($uploadOk == 0) {
                 header( 'Location:../view/site/profile.php?uploadError' ) ;
-                // if everything is ok, try to upload fil
+                // if everything is ok, try to upload file
             } else {
                 $temp = explode(".", $_FILES["fileToUpload.3"]["name"]);
                 $newfilename = "profile" . '.' . $imageFileType;

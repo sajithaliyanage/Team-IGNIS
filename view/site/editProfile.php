@@ -9,6 +9,8 @@ if(!$isLoggedin){
 }
 
 ?>
+<!--*********************************************************************************************************-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,18 +30,19 @@ if(!$isLoggedin){
 </head>
 
 <body style=" background-color: #eceff4 !important;">
-
+<!--navigation bar on the top-->
 <?php include ("../layouts/navbar.php");?>
 
 <div class="container-fluid ">
     <div class="row ">
-
+        <!--menu bar on the left-->
         <div class="col-sm-2 col-xs-12 left-menu-div side-bar-display">
             <?php include ("../layouts/leftbar.php");?>
         </div>
 
         <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2" style="position: relative;">
 
+          <!--show the navigated pages start-->
 
             <div class="row padding-row">
                 <div class="row">
@@ -58,10 +61,10 @@ if(!$isLoggedin){
                     </div>
                 </div>
             </div>
-
+            <!--show the navigated pages end-->
             <div class="row padding-row">
                 <div class="col-xs-12 col-sm-6 padding-box">
-
+                  <!--content of Edit Profile start-->
                     <div class="col-xs-12 nortification-box-top">
                         <h5 class="nortification-box-heading"><i class="fa fa-user icon-margin-right" aria-hidden="true"></i>
                             My Profile
@@ -117,7 +120,9 @@ if(!$isLoggedin){
                                         <form role="form" data-toggle="validator" action="../../module/editEmployeeProfile.php" method="post">
                                             <?php
 
-                                            $sql = "select * from employee INNER JOIN department ON employee.dept_id=department.dept_id INNER JOIN job_category ON employee.job_cat_id=job_category.job_cat_id  JOIN job_level ON job_level.level_id=employee.level_id WHERE comp_id=:empID";
+                                            $sql = "SELECT * from employee INNER JOIN department ON employee.dept_id=department.dept_id
+                                            INNER JOIN job_category ON employee.job_cat_id=job_category.job_cat_id
+                                            JOIN job_level ON job_level.level_id=employee.level_id WHERE comp_id=:empID";
                                             $query = $pdo->prepare($sql);
                                             $query->execute(array('empID'=>$empID));
                                             $result = $query->fetchAll();
@@ -148,7 +153,7 @@ if(!$isLoggedin){
                                                         echo "Email:";
                                                         echo "</label>
                                                         <div class=\"col-sm-7 col-xs-12\">
-                                                            <input id=\"service_name\" name=\"emp_email\" value='".$rs['email']."' type=\"text\" placeholder=''
+                                                            <input id=\"service_name\" name=\"emp_email\" value='".$rs['email']."' type=\"email\" placeholder=''
                                                                    class=\"form-control input-md\" required>
                                                         </div>
                                                     </div>";
@@ -200,7 +205,7 @@ if(!$isLoggedin){
                                                     ?>
 
                                             <a href="profile.php"><button class="btn btn-info btn-lg pull-right submit-button" type="submit" >Save Changes</button></a>
-
+                                              <!--content of Edit Profile ends-->
                                         </form>
                                     </div>
                                 </div>

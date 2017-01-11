@@ -30,14 +30,14 @@ if(!$isLoggedin){
     <body style=" background-color: #eceff4 !important;">
 
         <!--navigation bar on the top-->
-        <?php include ("../layouts/navbar.php")?>
+        <?php include ("../layouts/navbar.php") ?>
 
         <div class="container-fluid ">
             <div class="row ">
 
                 <div class="col-sm-2 col-xs-12 left-menu-div side-bar-display">
                     <!--menu bar on the left-->
-                    <?php include ("../layouts/leftbar.php")?>
+                    <?php include ("../layouts/leftbar.php") ?>
                 </div>
 
                 <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2" style="position: relative;">
@@ -84,7 +84,9 @@ if(!$isLoggedin){
                                                 <div class="nortification-box-status">
                                                     <center>
                                                         <div>
-                                                            <img class="profilepic" src='<?php if($result['image']!='null'){echo '../'.$result['image'];}else{echo "../../public/images/default.png";}?>' style="margin-bottom:40px; padding-top: 20px" width='73%' height='400'  />
+                                                            <img class="profilepic" src='<?php if($result['image']!='null'){echo '../'.$result['image'];}
+                                                            else{echo "../../public/images/default.png";}?>'
+                                                            style="margin-bottom:40px; padding-top: 20px" width='73%' height='400'  />
                                                         </div>
                                                     </center>
 
@@ -110,10 +112,11 @@ if(!$isLoggedin){
                                             <div class="alert-user" style="<?php if(!isset($_GET['changed'])){echo 'display:none;';}?>">Password reset successfully!</div>
                                             <hr>
 
-                                                <div class="col-xs-12">
-                                                <?php
-
-                                                $sql = "select * from employee INNER JOIN department ON employee.dept_id=department.dept_id INNER JOIN job_category ON employee.job_cat_id=job_category.job_cat_id JOIN job_level ON job_level.level_id=employee.level_id WHERE comp_id=:empID";
+                                              <div class="col-xs-12">
+                                              <?php
+                                                $sql = " SELECT * from employee INNER JOIN department ON employee.dept_id=department.dept_id
+                                                INNER JOIN job_category ON employee.job_cat_id=job_category.job_cat_id
+                                                JOIN job_level ON job_level.level_id=employee.level_id WHERE comp_id=:empID";
                                                 $query = $pdo->prepare($sql);
                                                 $query->execute(array('empID'=>$empID));
                                                 $result = $query->fetch();
