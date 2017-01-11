@@ -27,7 +27,12 @@ function  shift_assigning(){
         }
     }
 
+
+
     if($flag == 0){
+        $expo = array();
+        $expos = array();
+
         $smt = "select shift_id from shift_type";
         $query = $pdo->prepare($smt);
         $query->execute();
@@ -38,8 +43,7 @@ function  shift_assigning(){
         $query = $pdo->prepare($smt);
         $query->execute();
 
-        $expo = array();
-        $expos = array();
+
         foreach($results as $rs){
             array_push($expo,$rs['group_id']);
         }
@@ -71,10 +75,12 @@ function  shift_assigning(){
     $result = $query->fetchAll();
 
     $currentDate = strtotime($result[0]['today']);
-    //$today = date('d-m-Y');
-    $today = strtotime('11-01-2017');
+    $today = date('d-m-Y');
+    $todayI = strtotime(date('d-m-Y'));
+    //$todayI = strtotime('12-01-2017');
 
-    if($currentDate<$today){
+    if($currentDate<$todayI){
+
         $smt = "select shift_id from group_detail where dept_id =:id";
         $query = $pdo->prepare($smt);
         $query->execute(array('id'=>$deptId));
@@ -85,15 +91,25 @@ function  shift_assigning(){
             array_push($shifts,$rs['shift_id']);
         }
         $max = max($shifts);
-        //echo $max;
-        //print_r($shifts);
+
+        $smt = "select shift_id,group_id from group_detail where dept_id=:id";
+        $query = $pdo->prepare($smt);
+        $query->execute(array('id' => $deptId));
+        $results = $query->fetchAll();
+
+
+        $expo = array();
+
+        foreach($results as $rs){
+            array_push($expo,$rs['group_id']);
+        }
 
         $sql2 = "";
         $count = 0;
+
         while($rowCount>0){
-            global $expo;
-            global $expos;
-            $val = $expos[$count];
+
+            $val = $shifts[$count];
             $gId = $expo[$count];
             if($val != $max){
                 $val ++;
@@ -108,8 +124,13 @@ function  shift_assigning(){
             }
         }
         $stat = trim($sql2, ";");
+        //echo $stat;
         $query2 = $pdo->prepare($stat);
         $query2->execute();
+
+        $smt = "UPDATE group_detail set today ='$today' ";
+        $query = $pdo->prepare($smt);
+        $query->execute();
     }
 
 
