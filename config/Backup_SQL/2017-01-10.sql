@@ -409,20 +409,22 @@ CREATE TABLE `group_detail` (
   `dept_id` int(11) NOT NULL,
   `group_name` varchar(50) NOT NULL,
   `no_of_employees` int(11) NOT NULL,
+  `shift_id` int(11) DEFAULT '-1',
+  `today` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`group_id`),
   KEY `dept_id` (`dept_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 
 INSERT INTO group_detail VALUES
-("1","14","Group 1","3"),
-("2","14","Group 2","3"),
-("3","14","Group 3","1"),
-("4","14","Group 4","1"),
-("5","16","Group A","0"),
-("6","16","Group B","1"),
-("7","16","Group C","2"),
-("8","16","Group D","1");
+("1","14","Group 1","3","1","09-01-2017"),
+("2","14","Group 2","3","2","09-01-2017"),
+("3","14","Group 3","1","3","09-01-2017"),
+("4","14","Group 4","1","0","09-01-2017"),
+("5","16","Group A","0","-1","09-01-2017"),
+("6","16","Group B","1","-1","09-01-2017"),
+("7","16","Group C","2","-1","09-01-2017"),
+("8","16","Group D","1","-1","09-01-2017");
 
 
 

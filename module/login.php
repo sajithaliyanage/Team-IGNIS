@@ -2,10 +2,10 @@
 include('../config/connect.php');
 include('../module/class/Employee.php');
 include('../config/backup.php');
-//include('../module/rosterShiftAssign.php');
+$pdo = connect();
 $emp=new Employee;
 
-$pdo = connect();
+//include('rosterShiftAssign.php');
 $isValidUser = false;
 
 $companyID = $_POST['companyID'];
