@@ -47,5 +47,7 @@
 
     <a href="../site/graph.php" style="<?php if($empRole!="director"){echo "display:none;";}?>" class="list-group-item left-menu left-menu<?php if($var=="graph"){echo"-active";}?>"><i class="fa fa-bar-chart icon-bar" aria-hidden="true"></i><?php if($empRole=="director"){echo "Analyse Overall Company Attendance";}?><span class="<?php if($var=="graph"){echo"selected";}?>"></span></a>
 
+    <a href="../site/graphManager.php" style="<?php if($empRole!="manager"){echo "display:none;";}?>" class="list-group-item left-menu left-menu<?php if($var=="graphManager"){echo"-active";}?>"><i class="fa fa-bar-chart icon-bar" aria-hidden="true"></i> <?php if($empRole=="manager"){echo "Analyzing";} ?> <span class="<?php if($var=="graphManager"){echo"selected";}?>"></span></a>
+
 
 </div>
