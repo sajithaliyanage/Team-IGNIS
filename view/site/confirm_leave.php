@@ -272,6 +272,36 @@ $departmentId = $result['dept_id'];
 
                     <div class="row margin-top">
                         <div class="col-xs-12 nortification-box-top">
+                            <h5 class="nortification-box-heading"><i class="fa fa-angle-double-right " aria-hidden="true"></i>
+                                Today on Leave </h5>
+                            <hr>
+
+                            <div class="list-group">
+                                <?php
+
+                                    $sql = "SELECT * FROM apply_leave JOIN employee ON employee.comp_id = apply_leave.comp_id WHERE ";
+                                    $query = $pdo->prepare($sql);
+                                    $query->execute(array('log'=>$departmentId,'state'=>"recommended",'myId'=>$empID));
+                                    $rowCount = $query->rowCount();
+                                    $result = $query->fetchAll();
+
+                                    if($rowCount==0 && $managerrowCount==0){
+                                        echo "All Employees are working on today!";
+                                    }
+                                    foreach($managerresult as $rs){
+                                        echo "<a href='?appId=".$rs['apply_leave_id']."' class=\"list-group-item\" style='border-left:10px solid blue;'>".$rs['name']."<span style=\"float:right;\">Waiting for Approve <i class=\"fa fa-question\" aria-hidden=\"true\"></i></span></a>";
+                                    }
+
+                                ?>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row margin-top">
+                        <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-calendar icon-margin-right" aria-hidden="true"></i>
                                 Overall Calendar</h5>
                             <div style="margin-bottom:20px;">
