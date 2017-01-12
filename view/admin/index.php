@@ -241,7 +241,8 @@ if(!$isLoggedin && $empRole!="admin"){
                                                 <div class="col-xs-8">
                                                     <input id="startdate" name="start_date" type="text"
                                                            placeholder="yyyy-mm-dd"
-                                                           class="form-control input-md" required>
+                                                           class="form-control input-md" required onfocusout="getDate(this.value)">
+                                                      <div id="showdate">      </div>
 
                                                 </div>
                                             </div>
@@ -342,6 +343,19 @@ if(!$isLoggedin && $empRole!="admin"){
         });
     }
 </script>
+<script>
+function getDate(str) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+            document.getElementById("showdate").innerHTML = xhttp.responseText;
+        }
+    }
+    xhttp.open("GET", "ajaxindex.php?r=" + str, true);
+    xhttp.send();
+
+    
+</script>
 
 
 
@@ -370,6 +384,7 @@ if(!$isLoggedin && $empRole!="admin"){
     $query->execute(array('log' => '0'));
     $result = $query->fetchAll();
 ?>
+
 
 <script>
     $(document).ready(function() {
