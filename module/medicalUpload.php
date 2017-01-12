@@ -1,9 +1,10 @@
 <?php
 include('../config/connect.php');
 include('../controller/siteController.php');
+include ('xssValidation.php');
 $pdo = connect();
 
-$applyLeaveID = $_POST['apply_leave_id'];
+$applyLeaveID = xss_clean($_POST['apply_leave_id']);
 $uploadDate = date("d/m/Y");
 
 try{

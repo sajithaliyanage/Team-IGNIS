@@ -1,10 +1,11 @@
 <?php
 include('../config/connect.php');
 include('../controller/siteController.php');
+include ('xssValidation.php');
 $pdo = connect();
 
-$action = $_POST['submit'];
-$appliedLeaveId = $_GET['app_leave_id'];
+$action = xss_clean($_POST['submit']);
+$appliedLeaveId = xss_clean($_GET['app_leave_id']);
 
 try{
     if($action == 'cancel'){

@@ -1,9 +1,10 @@
 <?php
 include('../controller/siteController.php');
 include('../config/connect.php');
+include ('xssValidation.php');
 $pdo = connect();
 
-$recId = $_POST['receiverID'];
+$recId = xss_clean($_POST['receiverID']);
 
 try{
     $sql="SELECT * FROM conversation WHERE (receiver_id=:receiver_id and sender_id=:sender_id) or (receiver_id=:sender_id and sender_id=:receiver_id)";

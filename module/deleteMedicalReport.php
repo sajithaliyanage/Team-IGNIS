@@ -2,11 +2,12 @@
 
 include('../controller/siteController.php');
 include('../config/connect.php');
+include ('xssValidation.php');
 $pdo = connect();
 
 //post request data
-$medID = $_GET['id'];
-$leaveID = $_GET['leaveid'];
+$medID = xss_clean($_GET['id']);
+$leaveID = xss_clean($_GET['leaveid']);
 
 try{
 //    delete medcal report

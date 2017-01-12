@@ -1,12 +1,13 @@
 <?php
 include('../config/connect.php');
 include('../controller/siteController.php');
+include ('xssValidation.php');
 $pdo = connect();
 
 //get post request data from generate graph
 
-$startDate = $_POST['start_date'];
-$endDate = $_POST['end_date'];
+$startDate = xss_clean($_POST['start_date']);
+$endDate = xss_clean($_POST['end_date']);
 
     //<!-- get the attendance from excel sheet -->
 

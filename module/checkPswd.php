@@ -1,10 +1,11 @@
 <?php
 include('../controller/siteController.php');
 include('../config/connect.php');
+include ('xssValidation.php');
 
 $pdo = connect();
 
-$password=$_GET['q'];
+$password=xss_clean($_GET['q']);
 
 $sql = "SELECT password FROM employee where comp_id=:empID";
 $query = $pdo->prepare($sql);

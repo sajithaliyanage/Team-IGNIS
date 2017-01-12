@@ -2,12 +2,13 @@
 include('../config/mySQLConnection.php');
 include('../controller/siteController.php');
 include('../module/fpdf/fpdf.php');
+include ('xssValidation.php');
 
 //get post request data from generate form
-$reportType = $_POST['report_type'];
-$startDate = $_POST['start_date'];
-$endDate = $_POST['end_date'];
-$fileType = $_POST['file_type'];
+$reportType = xss_clean($_POST['report_type']);
+$startDate = xss_clean($_POST['start_date']);
+$endDate = xss_clean($_POST['end_date']);
+$fileType = xss_clean($_POST['file_type']);
 
 try{
     if($reportType!="empty" && $fileType !="empty"){
