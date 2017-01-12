@@ -183,7 +183,8 @@ if(!$isLoggedin && $empRole!="admin"){
                                             <label class="col-sm-5 col-xs-12 control-label form-lable">Company ID :</label>
                                             <div class="col-sm-7 col-xs-12">
                                                 <input id="service_name" name="emp_id" type="text" placeholder="Tryonics-01"
-                                                       class="form-control input-md" required>
+                                                       class="form-control input-md" required onfocusout="showHint(this.value)">
+                                                       <p id="textHint" style="color:red;font: 10px;margin-top:5px;margin-left: 5px"></p>
                                             </div>
                                         </div>
                                         <br>
@@ -193,7 +194,8 @@ if(!$isLoggedin && $empRole!="admin"){
                                             <label class="col-sm-5 col-xs-12 control-label form-lable">Employee Name :</label>
                                             <div class="col-sm-7 col-xs-12">
                                                 <input id="service_name" name="emp_name" type="text" placeholder=""
-                                                       class="form-control input-md" required>
+                                                       class="form-control input-md" required >
+                                                
                                             </div>
                                         </div>
                                         <br>
@@ -277,5 +279,22 @@ if(!$isLoggedin && $empRole!="admin"){
     <script src="js/jquery.js"></script>
 <!--    <script src="js/filter.js"></script>-->
     <script src="js/bootstrap.js"></script>
+
+    <script>
+    
+
+    function showHint(str) {
+        
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                document.getElementById("textHint").innerHTML = xhttp.responseText;
+            }
+        }
+        xhttp.open("GET", "ajaxemployee.php?q=" + str, true);
+        xhttp.send();
+    }
+
+</script>
 </body>
 </html>
