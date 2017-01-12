@@ -26,6 +26,7 @@ if(!$isLoggedin && $empRole!="admin"){
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/fullcalendar.min.css" rel="stylesheet">
     <link href="../../public/css/datepicker.css" rel="stylesheet">
+    <link href="../../public/css/jquery-ui.css" rel="stylesheet">
 
 </head>
 
@@ -238,7 +239,7 @@ if(!$isLoggedin && $empRole!="admin"){
                                                 <label class="col-xs-4 control-label form-lable">Start Date:</label>
 
                                                 <div class="col-xs-8">
-                                                    <input id="example1" name="start_date" type="text"
+                                                    <input id="startdate" name="start_date" type="text"
                                                            placeholder="yyyy-mm-dd"
                                                            class="form-control input-md" required>
 
@@ -251,7 +252,7 @@ if(!$isLoggedin && $empRole!="admin"){
                                                 <label class="col-xs-4 control-label form-lable">End Date:</label>
 
                                                 <div class="col-xs-8">
-                                                    <input id="example2" name="end_date" type="text"
+                                                    <input id="enddate" name="end_date" type="text"
                                                            placeholder="yyyy-mm-dd"
                                                            class="form-control input-md" required>
 
@@ -315,6 +316,7 @@ if(!$isLoggedin && $empRole!="admin"){
 <script src="js/moment.min.js"></script>
 <script src="js/fullcalendar.min.js"></script>
 <script src="js/bootstrap.js"></script>
+<script src="../../public/js/jquery-ui.js"></script>
 
 <script language="javascript" type="text/javascript">
     $('#iconified').on('keyup', function() {
@@ -340,21 +342,28 @@ if(!$isLoggedin && $empRole!="admin"){
         });
     }
 </script>
-<script src="../../public/js/bootstrap-datepicker.js"></script>
+
+
+
+
 <script type="text/javascript">
     // When the document is ready
     $(document).ready(function () {
 
-        $('#example1').datepicker({
-            format: "yyyy-mm-dd"
+
+        $('#startdate').datepicker({
+            dateFormat: "yy/mm/dd",
+            minDate: +0
+        });
+        $('#enddate').datepicker({
+            minDate: +0,
+            dateFormat: "yy/mm/dd"
         });
 
-        $('#example2').datepicker({
-            format: "yyyy-mm-dd"
-        });
 
     });
 </script>
+
 <?php
     $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE calendar.dept_id=:log";
     $query = $pdo->prepare($smt);
@@ -396,5 +405,7 @@ if(!$isLoggedin && $empRole!="admin"){
         });
     });
 </script>
+
+
 </body>
 </html>
