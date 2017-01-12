@@ -8,7 +8,7 @@ if(!$isLoggedin){
     header('Location:../../index.php');
 }
 ?>
-<!---****************************start************************--->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +26,8 @@ if(!$isLoggedin){
     <link href="../../public/css/font-awesome.min.css" rel="stylesheet">
     <link href="../../public/css/fullcalendar.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../public/css/datepicker.css">
-    <script src="../../public/js/jquery.js"></script>
+    <link href="../../public/css/jquery-ui.css" rel="stylesheet">
+    
 </head>
 
 <body style=" background-color: #eceff4 !important;">
@@ -207,7 +208,7 @@ if(!$isLoggedin){
                                             <label class="col-xs-4 control-label form-lable">Starting Date:</label>
 
                                             <div class="col-xs-8">
-                                                <input id="example2" name="start_date" type="text"
+                                                <input id="startdate" name="start_date" type="text"
                                                        placeholder="dd/mm/yyyy"
                                                        class="form-control input-md" required>
                                             </div>
@@ -219,7 +220,7 @@ if(!$isLoggedin){
                                             <label class="col-xs-4 control-label form-lable">End Date:</label>
 
                                             <div class="col-xs-8">
-                                                <input id="example1" name="end_date" type="text"
+                                                <input id="enddate" name="end_date" type="text"
                                                        placeholder="dd/mm/yyyy"
                                                        class="form-control input-md" required>
                                             </div>
@@ -292,26 +293,33 @@ if(!$isLoggedin){
 
 </div>
 
-
+<script src="../../public/js/jquery.js"></script>
+<script src="../../public/js/jquery-ui.js"></script>
 <script src="../../public/js/moment.min.js"></script>
 <script src="../../public/js/bootstrap.js"></script>
 <script src="../../public/js/fullcalendar.min.js"></script>
-<script src="../../public/js/bootstrap-datepicker.js"></script>
+
+
+
 <script type="text/javascript">
     // When the document is ready
     $(document).ready(function () {
-        var date = new Date();
-        date.setDate(date.getDate()-1);
 
-        $('#example1').datepicker({
-            format: "dd/mm/yyyy"
+
+        $('#startdate').datepicker({
+            dateFormat: "yy/mm/dd",
+            minDate: +0
         });
-        $('#example2').datepicker({
-            format: "dd/mm/yyyy"
+        $('#enddate').datepicker({
+            minDate: +0,
+            dateFormat: "yy/mm/dd"
         });
+
 
     });
 </script>
+
+
 <?php
     $smts = "SELECT * FROM employee WHERE comp_id=:log2";
     $querys = $pdo->prepare($smts);

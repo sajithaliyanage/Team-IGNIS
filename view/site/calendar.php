@@ -25,6 +25,7 @@ if(!$isLoggedin){
     <link href="../../public/css/font-awesome.min.css" rel="stylesheet">
     <link href="../../public/css/fullcalendar.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../public/css/datepicker.css">
+    <link href="../../public/css/jquery-ui.css" rel="stylesheet">
 
 </head>
 
@@ -196,7 +197,7 @@ if(!$isLoggedin){
                                                         <label class="col-xs-4 control-label form-lable">Start Date:</label>
 
                                                         <div class="col-xs-8">
-                                                            <input id="example1" name="start_date" type="text"
+                                                            <input id="startdate" name="start_date" type="text"
                                                                    placeholder="yyyy-mm-dd"
                                                                    class="form-control input-md" required>
 
@@ -209,7 +210,7 @@ if(!$isLoggedin){
                                                         <label class="col-xs-4 control-label form-lable">End Date:</label>
 
                                                         <div class="col-xs-8">
-                                                            <input id="example2" name="end_date" type="text"
+                                                            <input id="enddate" name="end_date" type="text"
                                                                    placeholder="yyyy-mm-dd"
                                                                    class="form-control input-md" required>
 
@@ -263,11 +264,31 @@ if(!$isLoggedin){
 
 </div>
 
+<script src="../../public/js/jquery-ui.js"></script>
 <script src="../../public/js/jquery.js"></script>
 <script src="../../public/js/moment.min.js"></script>
 <script src="../../public/js/bootstrap.js"></script>
 <script src="../../public/js/fullcalendar.min.js"></script>
 <script src="../../public/js/bootstrap-datepicker.js"></script>
+
+<script type="text/javascript">
+    // When the document is ready
+    $(document).ready(function () {
+
+
+        $('#startdate').datepicker({
+            dateFormat: "yy/mm/dd",
+            minDate: +0
+        });
+        $('#enddate').datepicker({
+            minDate: +0
+            dateFormat: "yy/mm/dd"
+        });
+
+
+    });
+</script>
+
 <script type="text/javascript">
     // When the document is ready
     $(document).ready(function () {
