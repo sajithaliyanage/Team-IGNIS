@@ -2,13 +2,14 @@
 
 include('../../../controller/siteController.php');
 include('../../../config/connect.php');
+include ('../../../module/xssValidation.php');
 $pdo = connect();
 
 //post request data
-$title = $_POST['title'];
-$start_date = $_POST['start_date'];
-$end_date = $_POST['end_date'];
-$description = $_POST['description'];
+$title = xss_clean($_POST['title']);
+$start_date = xss_clean($_POST['start_date']);
+$end_date = xss_clean($_POST['end_date']);
+$description = xss_clean($_POST['description']);
 
 try{
 //    create event for company
