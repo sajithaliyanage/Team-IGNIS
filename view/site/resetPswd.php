@@ -1,5 +1,5 @@
 <?php
-
+$var='';
 include('../../controller/siteController.php');
 include('../../config/connect.php');
 $pdo = connect();
@@ -57,7 +57,7 @@ if(isset($_POST['submit']))
                 document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET","checkPswd.php?q="+str,true);
+        xmlhttp.open("GET","../../module/checkPswd.php?q="+str,true);
 
         xmlhttp.send();
     }
@@ -151,25 +151,27 @@ if(isset($_POST['submit']))
                                     <form role="form"  data-toggle="validator" action="" method="post" onSubmit="return passvali();">
 
                                             <div class="form-group">
-                                                <label class="col-xs-4" for="form-username">Current password <span style="color:#F00;">*</span></label>
+                                                <label class="col-xs-4"for="form-username">Current password <span style="color:#F00;">*</span></label>
                                                 <div class="col-xs-5"><input type="password" name="cur_pswd" placeholder="Current password" class="form-username form-control" onChange="showUser(this.value)" id="cur_pswd" required></div>
-                                                <label class="col-xs-3" ><span class="st" id="txtHint"></span></label>
+                                                <label class="col-xs-3" ><span id="txtHint" style="color:#F00; padding-top: 5px;"> </span></label>
+
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-xs-4" for="form-password">New password<span style="color:#F00;">*</span></label>
-                                                <div class="col-xs-5"><input type="password" name="new_pswd" placeholder="New password" class="form-password form-control" id="new_pswd" required></div>
+                                                <label class="col-xs-4"  style="margin-top: 20px" for="form-password">New password<span style="color:#F00;">*</span></label>
+                                                <div class="col-xs-5"><input type="password" name="new_pswd" placeholder="New password" style="margin-top: 20px" class="form-password form-control" id="new_pswd" required></div>
                                                 <label class="col-xs-3" ></label>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-xs-4" for="form-password">Confirm password<span style="color:#F00;">*</span></label>
-                                                <div class="col-xs-5"><input type="password" name="con_pswd" placeholder="Confirm password" class="form-password form-control" onChange="return pass()" id="con_pswd" required></div>
+                                                <label class="col-xs-4" style="margin-top: 20px" for="form-password">Confirm password<span style="color:#F00;">*</span></label>
+                                                <div class="col-xs-5"><input type="password" name="con_pswd" placeholder="Confirm password"  style="margin-top: 20px" class="form-password form-control" onChange="return pass()" id="con_pswd" required></div>
                                                 <label class="col-xs-3" ><span id="pass" style="color:#F00;"> </span></label>
                                             </div>
-                                            <button class="btn btn-info btn-lg pull-right submit-button" name="submit" type="submit" >Reset password</button>
 
                                     </form>
                                 </div>
-                                </div>
+                                <button class="btn btn-info btn-lg pull-right submit-button"style="margin-top: 70px !important;" name="submit" type="submit" >Reset password</button>
+
+                            </div>
                             </div>
                         </div>
                 </div>
