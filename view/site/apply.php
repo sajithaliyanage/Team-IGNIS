@@ -334,6 +334,7 @@ if(!$isLoggedin){
 ?>
 
 <script>
+
     $(document).ready(function() {
         $('#bootstrapModalFullCalendar').fullCalendar({
             header: {
