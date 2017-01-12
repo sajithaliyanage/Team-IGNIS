@@ -307,8 +307,8 @@ if(!$isLoggedin){
 
 
         $('#startdate').datepicker({
-            dateFormat: "yy/mm/dd",
-            minDate: +0
+            dateFormat: "yy/mm/dd"
+
         });
         $('#enddate').datepicker({
             minDate: +0,
