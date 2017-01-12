@@ -264,12 +264,12 @@ if(!$isLoggedin){
 
 </div>
 
-<script src="../../public/js/jquery-ui.js"></script>
 <script src="../../public/js/jquery.js"></script>
+<script src="../../public/js/jquery-ui.js"></script>
 <script src="../../public/js/moment.min.js"></script>
 <script src="../../public/js/bootstrap.js"></script>
 <script src="../../public/js/fullcalendar.min.js"></script>
-<script src="../../public/js/bootstrap-datepicker.js"></script>
+<!--<script src="../../public/js/bootstrap-datepicker.js"></script>-->
 
 <script type="text/javascript">
     // When the document is ready
@@ -277,12 +277,12 @@ if(!$isLoggedin){
 
 
         $('#startdate').datepicker({
-            dateFormat: "yy/mm/dd",
+            dateFormat: "dd/mm/yy",
             minDate: +0
         });
         $('#enddate').datepicker({
-            minDate: +0
-            dateFormat: "yy/mm/dd"
+            minDate: +0,
+            dateFormat: "dd/mm/yy"
         });
 
 
