@@ -1,7 +1,7 @@
 <?php
 
-include('../../config/connect.php');
-include('../../controller/siteController.php');
+include('../../../config/connect.php');
+include('../../../controller/siteController.php');
 $pdo = connect();
 
 if (isset($_GET['q'])){

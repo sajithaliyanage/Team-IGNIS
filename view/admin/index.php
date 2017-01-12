@@ -351,7 +351,7 @@ function getDate(str) {
             document.getElementById("showdate").innerHTML = xhttp.responseText;
         }
     }
-    xhttp.open("GET", "ajaxindex.php?r=" + str, true);
+    xhttp.open("GET", "module/ajaxindex.php?r=" + str, true);
     xhttp.send();
 
     

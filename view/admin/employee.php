@@ -183,8 +183,8 @@ if(!$isLoggedin && $empRole!="admin"){
                                             <label class="col-sm-5 col-xs-12 control-label form-lable">Company ID :</label>
                                             <div class="col-sm-7 col-xs-12">
                                                 <input id="service_name" name="emp_id" type="text" placeholder="Tryonics-01"
-                                                       class="form-control input-md" required onfocusout="showHint(this.value)">
-                                                       <p id="textHint" style="color:red;font: 10px;margin-top:5px;margin-left: 5px"></p>
+                                                       class="form-control input-md" required  onblur="showHint(this.value)" />
+                                                       <p id="textHint" style="color:red;font-size: 10px; margin-top:5px;margin-left: 5px"></p>
                                             </div>
                                         </div>
                                         <br>
@@ -291,7 +291,7 @@ if(!$isLoggedin && $empRole!="admin"){
                 document.getElementById("textHint").innerHTML = xhttp.responseText;
             }
         }
-        xhttp.open("GET", "ajaxemployee.php?q=" + str, true);
+        xhttp.open("GET", "module/ajaxemployee.php?q=" + str, true);
         xhttp.send();
     }
 
