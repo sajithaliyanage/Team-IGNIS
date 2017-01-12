@@ -74,6 +74,15 @@
 
         <script src="public/js/jquery.js"></script>
         <script src="public/js/bootstrap.js"></script>
+        <script>
+            $(document).ready(function()
+            {
+                $(document).bind("contextmenu",function(e){
+                    return false;
+                });
+            })
+
+        </script>
     </body>
 
 </html>
