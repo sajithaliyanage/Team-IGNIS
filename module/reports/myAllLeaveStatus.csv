@@ -1,8 +1,18 @@
 leave_name,leave_priority,apply_date,start_date,end_date,status
-Annual Leave,high,27/08/2016,30/08/2016,31/08/2016,recommended
-Annual Leave,medium,28/08/2016,06/10/2016,07/10/2016,approved
-Casual Leave,medium,27/08/2016,31/08/2016,01/09/2016,canceled
-Medical Leave,medium,13/08/2016,21/11/2016,23/11/2016,approved
-Medical Leave,high,23/08/2016,03/12/2016,05/03/2016,approved
-Medical Leave,high,29/08/2016,31/08/2016,31/08/2016,approved
-Short Leaves,low,28/08/2016,31/08/2016,31/08/2016,approved
+Annual Leave,medium,13/09/2016,23/09/2016,23/09/2016,canceled
+Annual Leave,high,13/09/2016,28/10/2016,29/10/2016,canceled
+Annual Leave,medium,13/09/2016,27/09/2016,29/09/2016,approved
+Annual Leave,low,13/09/2016,29/09/2016,30/09/2016,canceled
+Annual Leave,high,05/12/2016,08/12/2016,16/12/2016,approved
+Casual Leave,low,13/09/2016,09/10/2016,10/10/2016,approved
+Casual Leave,high,11/10/2016,26/10/2016,27/10/2016,approved
+Casual Leave,high,03/12/2016,16/12/2016,05/12/2016,approved
+Casual Leave,high,03/12/2016,04/12/2016,05/12/2016,approved
+Casual Leave,medium,08/12/2016,09/12/2016,09/12/2016,canceled
+Casual Leave,high,08/01/2017,09/01/2017,11/01/2017,canceled
+Casual Leave,high,08/01/2017,09/01/2017,11/01/2017,canceled
+Casual Leave,high,08/01/2017,18/01/2017,20/01/2017,waiting
+Casual Leave,low,12/01/2017,11/01/2017,14/01/2017,approved
+Medical Leave,high,13/09/2016,22/09/2016,23/09/2016,approved
+Medical Leave,high,13/09/2016,11/10/2016,12/10/2016,approved
+Short Leaves,medium,13/09/2016,20/10/2016,21/10/2016,rejected
