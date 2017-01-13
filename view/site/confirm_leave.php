@@ -243,7 +243,8 @@ $departmentId = $result['dept_id'];
                                     }
 
                                     foreach($result as $rs){
-                                        echo "<a href='?appId=".$rs['apply_leave_id']."' class=\"list-group-item\" style='";if($rs['leave_priority']=='high'){echo 'border-left:10px solid red;';} echo"'>".$rs['name']."<span style=\"float:right;\">Waiting for Approve <i class=\"fa fa-question\" aria-hidden=\"true\"></i></span></a>";
+                                        echo "<a href='?appId=".$rs['apply_leave_id']."' class=\"list-group-item\" style='";if($rs['leave_priority']=='high'){echo 'border-left:10px solid red;';}
+                                        else if(DateTime::createFromFormat('d/m/Y',$rs['start_date']) < DateTime::createFromFormat('d/m/Y',date('d/m/Y'))){echo 'border-left:10px solid black;';} echo"'>".$rs['name']."<span style=\"float:right;\">Waiting for Approve <i class=\"fa fa-question\" aria-hidden=\"true\"></i></span></a>";
                                     }
 
                                 }else if($empRole == 'executive'){
@@ -258,7 +259,8 @@ $departmentId = $result['dept_id'];
                                     }
 
                                     foreach($result as $rs){
-                                        echo "<a href='?appId=".$rs['apply_leave_id']."' class=\"list-group-item\" style='";if($rs['leave_priority']=='high'){echo 'border-left:10px solid red;';} echo"'>".$rs['name']."<span style=\"float:right;\">Waiting for Approve <i class=\"fa fa-question\" aria-hidden=\"true\"></i></span></a>";
+                                        echo "<a href='?appId=".$rs['apply_leave_id']."' class=\"list-group-item\" style='";if($rs['leave_priority']=='high'){echo 'border-left:10px solid red;';}
+                                        else if(DateTime::createFromFormat('d/m/Y',$rs['start_date']) < DateTime::createFromFormat('d/m/Y',date('d/m/Y'))){echo 'border-left:10px solid black;';} echo"'>".$rs['name']."<span style=\"float:right;\">Waiting for Approve <i class=\"fa fa-question\" aria-hidden=\"true\"></i></span></a>";
                                     }
                                 }
 

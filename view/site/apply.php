@@ -410,10 +410,15 @@ if(!$isLoggedin){
     $results = $querys->fetch();
     $deptID = $results['dept_id'];
 
-    $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE calendar.dept_id IN (:log,:log2)";
+    $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE calendar.dept_id IN (:log,:log1,:log2)";
     $query = $pdo->prepare($smt);
-    $query ->execute(array('log'=>'0','log2'=>$deptID));
+    $query ->execute(array('log'=>'0','log1'=>'@','log2'=>$deptID));
     $result = $query->fetchAll();
+
+    $smts = "SELECT * FROM calendar WHERE dept_id=:log2";
+    $querys = $pdo->prepare($smts);
+    $querys->execute(array('log2'=>'@'));
+    $results = $querys->fetchAll();
 ?>
 
 <script>
@@ -426,6 +431,18 @@ if(!$isLoggedin){
                 right: ''
             },
             firstDay: 1,
+            dayRender: function (date, cell) {
+                <?php
+                foreach ($results as $rs){
+                ?>
+                if (date.isSame('<?php echo $rs['start_date'];?>')) {
+                    cell.css("background-color", "#FE5C5C");
+                }
+                <?php
+                }
+                ?>
+            },
+
             eventClick:  function(event, jsEvent, view) {
                 $('#modalTitle').html(event.title);
                 $('#modalBody').html(event.description);
