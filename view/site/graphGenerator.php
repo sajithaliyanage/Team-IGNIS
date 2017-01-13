@@ -58,9 +58,7 @@ $d2=strtotime($endDate);
           }
         }
         $num=count($drange);
-        $dteCount=(array_count_values($drange));
-        $empCount=(array_count_values($empid));
-        //print_r($drange);
+        //print_r($empid);
       ?>
 
         <?php
@@ -84,6 +82,7 @@ $d2=strtotime($endDate);
                 $j=$j+1;
               }
             }
+            //print_r($emp);
             $dCount=(array_count_values($dte));
 
             //take employee count in that department
@@ -100,16 +99,22 @@ $d2=strtotime($endDate);
               if($dates[$i]==$dte[$j]){
                 $d_dte=$dates[$i];
                 $dept[$j][1] = intval($dCount[$d_dte]);
-                $absnt= intval($query[0])-$dept[$j][1];
+                $absnt= intval($query[0][0])-$dept[$j][1];
+                $dept[$j][2] =intval($absnt);
+                $j=$j+1;
+              }
+              else{
+                $dept[$j][1] = 0;
+                $absnt= intval($query[0][0])-$dept[$j][1];
                 $dept[$j][2] =intval($absnt);
               }
 
 
             }
 
-               array_unshift($dept, array('Date', 'Present','Absent'));
-               //print_r($dept);
-              ?>
+            array_unshift($dept, array('Date', 'Present','Absent'));
+            //print_r($dept);
+          ?>
               <center><div id="columnchart_material" style="width: 900px; height: 500px;"></div></center>
         </div>
       </div>
