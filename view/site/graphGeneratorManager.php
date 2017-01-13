@@ -1,8 +1,12 @@
 <?php
-
+error_reporting(0);
 include('../../controller/siteController.php');
 include('../../config/connect.php');
 $pdo = connect();
+
+if(!$isLoggedin && $empRole!="manager"){
+    header('Location:../../index.php');
+}
 
 //get post request data from generate graph
 
@@ -99,66 +103,77 @@ $d2=strtotime($endDate);
 ?>
         <!---start top boxes--->
         <div class="row padding-row">
-            <div class="col-sm-5 col-xs-12 padding-box">
-                <div class="row">
-                    <div class="col-xs-8 main-box-1-1">
-                        <div class="row">
-                          <div class="col-xs-4">
-                                <i class="fa fa-group fa-5x box-icon" aria-hidden="true"></i>
-                          </div>
-                          <div class="col-xs-8">
-                                <center><h3 class="box-head">Today<br> Presents</h3></center>
-                          </div>
-                        </div>
-                    </div>
-                <div class="col-sm-4 col-xs-12" style="background-color:#FFFFFF; height:110px;">
-                        <div class="row">
-                          <?php
-                              $sql="SELECT * FROM employee";
-                              $query = $pdo->prepare($sql);
-                              $query->execute();
-                              $numrow = $query->rowCount();
-                              $numrows = intval($numrow);
-                              $precetage=($n/($numrows))*100;
-                          ?>
-                          <center><h2 class="box-count"><?php if($n<10){echo "0".$n;}else{echo $n;}?><br><?php echo round($precetage);?>%</h2></center>
-                        </div>
-                </div>
-            </div>
+          <div class="col-sm-2 col-xs-12 padding-box">
+              <div class="row">
+              </div>
           </div>
-            <div class="col-sm-2 col-xs-12 padding-box">
+
+            <div class="col-sm-3 col-xs-12 padding-box">
                 <div class="row">
-                </div>
+                      <div class="col-xs-12 main-box-1-1">
+                          <div class="row">
+                              <div class="col-xs-8">
+                                <?php
+                                    $sql="SELECT * FROM employee";
+                                    $query = $pdo->prepare($sql);
+                                    $query->execute();
+                                    $numrow = $query->rowCount();
+                                    $numrows = intval($numrow);
+                                    $precetage=($n/($numrows))*100;
+                                ?>
+                                <center><h2 class="box-count"><?php if($n<10){echo "0".$n;}else{echo $n;}?></h2></center>
+                                <h3 class="box-head">Today Presents</h3>
+                              </div>
+                              <div class="col-xs-4">
+                                  <i class="fa fa-group fa-5x box-icon" aria-hidden="true"></i>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-xs-12  main-box-1-2" style="color:#FFFFFF;">
+                           <center><h4><?php echo round($precetage);?>%</h4></center>
+                      </div>
+                  </div>
             </div>
 
-            <div class="col-sm-5 col-xs-12 padding-box">
-                <div class="row">
-                    <div class="col-sm-8 col-xs-12 main-box-4-1">
+          <div class="col-sm-2 col-xs-12 padding-box">
+              <div class="row">
+              </div>
+          </div>
+          <div class="col-sm-3 col-xs-12 padding-box">
+              <div class="row">
+                    <div class="col-xs-12 main-box-4-1">
                         <div class="row">
-                          <div class="col-xs-4">
+                            <div class="col-xs-8">
+                              <?php
+                                $sql="SELECT * FROM employee";
+                                $query = $pdo->prepare($sql);
+                                $query->execute();
+                                $numrow = $query->rowCount();
+                                $numrows = intval($numrow);
+                                $absent=intval($numrows-$n);
+                                $precetage=($absent/($numrows))*100;
+                              ?>
+                              <center><h2 class="box-count"><?php if($absent<10){echo "0".$absent;}else{echo $absent;}?></h2></center>
+                              <h3 class="box-head">Today Absents</h3>
+                            </div>
+                            <div class="col-xs-4">
                                 <i class="fa fa-eye fa-5x box-icon" aria-hidden="true"></i>
-                          </div>
-                          <div class="col-xs-8">
-                                <center><h3 class="box-head">Today<br> Absents</h3></center>
-                          </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-4 col-xs-12" style="background-color:#ffffff; height:110px;">
-                        <div class="raw">
-                          <?php
-                          $sql="SELECT * FROM employee";
-                          $query = $pdo->prepare($sql);
-                          $query->execute();
-                          $numrow = $query->rowCount();
-                          $numrows = intval($numrow);
-                          $absent=intval($numrows-$n);
-                          $precetage=($absent/($numrows))*100;
-                          ?>
-                          <center><h2 class="box-count"><?php if($absent<10){echo "0".$absent;}else{echo $absent;}?><br><?php echo round($precetage);?>%</h2></center>
-                        </div>
-            </div>
-        </div>
-      </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12  main-box-4-2" style="color:#FFFFFF;">
+                         <center><h4><?php echo round($precetage);?>%</h4></center>
+                    </div>
+                </div>
+          </div>
+          <div class="col-sm-2 col-xs-12 padding-box">
+              <div class="row">
+              </div>
+          </div>
     </div>
     <br><br>
       <!---end top boxes--->
@@ -224,7 +239,7 @@ $d2=strtotime($endDate);
           }
         }
         $num=count($drange);
-    
+
             //check the department of the manager
             $sql1="SELECT dept_id from employee where comp_id=:empID ";
             $query1 = $pdo->prepare($sql1);
