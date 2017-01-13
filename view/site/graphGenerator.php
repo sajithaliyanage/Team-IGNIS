@@ -1,29 +1,27 @@
 <?php
-include('../config/connect.php');
-include('../controller/siteController.php');
+include('../../controller/siteController.php');
+include('../../config/connect.php');
 $pdo = connect();
 
 //get post request data from generate graph
 
-$startDate = $_POST['start_date'];
-$endDate = $_POST['end_date'];
+$sDate =$_POST['start_date'];
+$eDate = $_POST['end_date'];
+$sDate=str_replace('/', '-', $sDate);
+$startDate=date("Y-m-d", strtotime($sDate) );
+$eDate=str_replace('/', '-', $eDate);
+$endDate=date("Y-m-d", strtotime($eDate) );
+$d1=strtotime($startDate);
+$d2=strtotime($endDate);
+
 
     //<!-- get the attendance from excel sheet -->
 
       try{
-        require_once "PHPExcel/PHPExcel.php";
-        $tempFile = "../view/site/testing.xlsx";
+        require_once "../../module/PHPExcel/PHPExcel.php";
+        $tempFile = "testing.xlsx";
         $objPHPExcel = PHPExcel_IOFactory::load($tempFile);
-        $j=0;
 
-        $dep=array();
-        $sql="SELECT dept_id from department where currentStatus=:approve";
-        $query = $pdo->prepare($sql);
-        $query->execute(array('approve'=>"approved"));
-        foreach ($query as $r){
-          $dep[$j]=0;
-          $j+=1;
-        }
         //get employee ids from excel sheet
         $i=0;
         $id=array();
@@ -49,27 +47,27 @@ $endDate = $_POST['end_date'];
         echo $e;
         }
 
+        $drange=array();
         for($i=0,$j=0; $i<$num; $i++){
-          if((strtotime($startDate) <= strtotime($dates[$i])) && (strtotime($dates[$i]) <= strtotime($endDate))){
+          $d=strtotime($dates[$i]);
+          if(($d >= $d1) && ($d2 >= $d)){
             $drange[$j]=$dates[$i];
             $j=$j+1;
           }
         }
         $num=count($drange);
-        print_r($drange);
+        $q=(array_count_values($drange));
+        print_r ($q);
+        //print_r($drange);
       ?>
 
-                <?php
-                //check the department of each employee and count it
-                $q=array();
-                for ($n=0; $n <$num ; $n++) {
-                  $sql1="SELECT dept_id from employee where comp_id=:c_id Limit 1 ";
-                  $query1 = $pdo->prepare($sql1);
-                  $query1->execute(array('c_id'=>$id[$n]));
-                  $query1 = $query1->fetch();
-                  $q[$n]=$query1[0];
-                }
-                $q=(array_count_values($q));
+        <?php
+            //check the department of the manager
+            $sql1="SELECT dept_id from employee where comp_id=:empID ";
+            $query1 = $pdo->prepare($sql1);
+            $query1->execute(array('empID'=> $empID));
+            $query1 = $query1->fetch();
+            print_r ($query1);
 
 
               //display absent present belongs to a particular department

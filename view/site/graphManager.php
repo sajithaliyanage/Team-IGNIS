@@ -60,44 +60,36 @@ if(!$isLoggedin && $empRole!="manager"){
 
           <!-- get the attendance from excel sheet -->
           <?php
-              require_once "../../module/PHPExcel/PHPExcel.php";
-              try {
-                  $tempFile = "testing.xlsx";
-                  $objPHPExcel = PHPExcel_IOFactory::load($tempFile);
-                  $j=0;
+          require_once "../../module/PHPExcel/PHPExcel.php";
+          try {
+              $tempFile = "testing.xlsx";
+              $objPHPExcel = PHPExcel_IOFactory::load($tempFile);
+              $j=0;
 
-                  $dep=array();
-                  $sql="SELECT dept_id from department where currentStatus=:approve";
-                  $query = $pdo->prepare($sql);
-                  $query->execute(array('approve'=>"approved"));
-                  foreach ($query as $r){
-                    $dep[$j]=0;
-                    $j+=1;
-                  }
-                  //get employee ids from excel sheet
-                  $i=0;
-                  $id=array();
-                  foreach ($objPHPExcel->getActiveSheet()->getRowIterator() as $row) {
-                      if ($objPHPExcel->getActiveSheet()->getRowDimension($row->getRowIndex())->getVisible() and $row->getRowIndex() !=1 && $objPHPExcel->getActiveSheet()->getCell('A'.$row->getRowIndex())->getValue()!= null) {
-                          $id[$i]= $objPHPExcel->getActiveSheet()->getCell('A'.$row->getRowIndex())->getValue();
-                          $i+=1;
-                      }
-                  }
-                  $num=count($id);
-
-                  //get the dates from excel sheet
-                  $i=0;
-                  $dates=array();
-                  foreach ($objPHPExcel->getActiveSheet()->getRowIterator() as $row) {
-                      if ($objPHPExcel->getActiveSheet()->getRowDimension($row->getRowIndex())->getVisible() and $row->getRowIndex() !=1 && $objPHPExcel->getActiveSheet()->getCell('B'.$row->getRowIndex())->getValue()!= null) {
-                          $dates[$i]= $objPHPExcel->getActiveSheet()->getCell('B'.$row->getRowIndex())->getFormattedValue();
-                          $i+=1;
-                      }
-                  }
-
-              }catch(Exception $e){
-                  echo $e;
+              $dep=array();
+              $sql="SELECT dept_id from department where currentStatus=:approve";
+              $query = $pdo->prepare($sql);
+              $query->execute(array('approve'=>"approved"));
+              foreach ($query as $r){
+                $dep[$j]=0;
+                $j+=1;
               }
+
+              //get employee ids from excel sheet
+              $i=0;
+              $id=array();
+              foreach ($objPHPExcel->getActiveSheet()->getRowIterator() as $row) {
+                  if ($objPHPExcel->getActiveSheet()->getRowDimension($row->getRowIndex())->getVisible() and $row->getRowIndex() !=1 && $objPHPExcel->getActiveSheet()->getCell('A'.$row->getRowIndex())->getValue()!= null) {
+                      $id[$i]= $objPHPExcel->getActiveSheet()->getCell('A'.$row->getRowIndex())->getValue();
+                      $i+=1;
+
+                  }
+              }
+              $num=count($id);
+
+          }catch(Exception $e){
+              echo $e;
+          }
           ?>
 
           <!---start top boxes--->
@@ -173,15 +165,16 @@ if(!$isLoggedin && $empRole!="manager"){
                             Overall Attendance Analysis</h5>
                         <hr>
                         <!-- filtering option start -->
-                        <form role="form" data-toggle="validator" action="../../module/graphGenerator.php" method="post">
+                        <form role="form" data-toggle="validator" action="graphGenerator.php" method="post">
                             <div class="department-add">
-
                                 <div class="col-xs-12">
                                   <div class="form-group">
-                                      <div class="col-xs-2">
+                                      <div class="col-xs-1">
                                       </div>
                                   </div>
+
                                     <div class="form-group">
+                                        <label class="col-xs-2 control-label form-lable">Start date:</label>
                                         <div class="col-xs-3">
                                             <input id="example1" name="start_date" type="text"
                                                    placeholder="Start Date"
@@ -190,10 +183,12 @@ if(!$isLoggedin && $empRole!="manager"){
                                     </div>
 
                                     <div class="form-group">
+                                      <label class="col-xs-2 control-label form-lable">End date:</label>
                                         <div class="col-xs-3">
                                             <input id="example2" name="end_date" type="text"
                                                    placeholder="End Date"
                                                    class="form-control input-md" required>
+
                                         </div>
                                     </div>
 
@@ -202,10 +197,9 @@ if(!$isLoggedin && $empRole!="manager"){
                                   </div>
 
                                   <div class="form-group">
-                                      <div class="col-xs-2">
+                                      <div class="col-xs-1">
                                       </div>
                                   </div>
-
                                 </div>
                             </div>
                         </form>
@@ -214,35 +208,33 @@ if(!$isLoggedin && $empRole!="manager"){
                       <!---chart start-->
                     <?php
                     //check the department of each employee and count it
-                  //   $q=array();
-                  //   for ($n=0; $n <$num ; $n++) {
-                  //     $sql1="SELECT dept_id from employee where comp_id=:c_id Limit 1 ";
-                  //     $query1 = $pdo->prepare($sql1);
-                  //     $query1->execute(array('c_id'=>$id[$n]));
-                  //     $query1 = $query1->fetch();
-                  //     $q[$n]=$query1[0];
-                  //   }
-                  //   $q=(array_count_values($q));
-                  //
-                  //
-                  // //display absent present belongs to a particular department
-                  //   $sql="SELECT dept_name,dept_id,no_of_emp from department where currentStatus=:approve ";
-                  //   $query = $pdo->prepare($sql);
-                  //   $query->execute(array('approve'=>"approved"));
-                  //   $dept = $query->fetchAll(PDO::FETCH_NUM);
-                  //   for($i=0;$i<count($dept);$i++)
-                  //   {
-                  //     $d_id=$dept[$i][1];
-                  //     $dept[$i][1] = intval($q[$d_id]);
-                  //     $absnt= $dept[$i][2]-$dept[$i][1];
-                  //     $dept[$i][2] =intval($absnt);
-                  //   }
-                  //
-                  //  array_unshift($dept, array('Department', 'Present','Absent'));
-                  //  //print_r($dept);
+                    $q=array();
+                    for ($n=0; $n <$num ; $n++) {
+                      $sql1="SELECT dept_id from employee where comp_id=:c_id Limit 1 ";
+                      $query1 = $pdo->prepare($sql1);
+                      $query1->execute(array('c_id'=>$id[$n]));
+                      $query1 = $query1->fetch();
+                      $q[$n]=$query1[0];
+                    }
+                    $q=(array_count_values($q));
 
-                  ?>
-                  <?php include("../../module/graphGenerator.php") ?>
+                  //display absent present belongs to a particular department
+                    $sql="SELECT dept_name,dept_id,no_of_emp from department where currentStatus=:approve ";
+                    $query = $pdo->prepare($sql);
+                    $query->execute(array('approve'=>"approved"));
+                    $dept = $query->fetchAll(PDO::FETCH_NUM);
+                    for($i=0;$i<count($dept);$i++)
+                    {
+                      $d_id=$dept[$i][1];
+                      $dept[$i][1] = intval($q[$d_id]);
+                      $absnt= $dept[$i][2]-$dept[$i][1];
+                      $dept[$i][2] =intval($absnt);
+                    }
+
+                   array_unshift($dept, array('Department', 'Present','Absent'));
+                   //print_r($dept);
+                    ?>
+                    <center><div id="columnchart_material" style="width: 900px; height: 500px;"></div></center>
             </div>
           </div>
         </div>
@@ -253,6 +245,32 @@ if(!$isLoggedin && $empRole!="manager"){
     </div>
 </div>
 
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
+    <script type="text/javascript">
+
+        var result=JSON.parse('<?php echo json_encode($dept)?>');
+
+        google.charts.load('current', {'packages':['bar']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        var currentdate = new Date();
+        var datetime = currentdate.getDate() + "/"+ (currentdate.getMonth()+1)  + "/" + currentdate.getFullYear();
+
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable(result);
+            var options = {
+            chart: {
+            // title: 'Overoll Company Attendance',
+            subtitle: 'Attendance in each department:'+datetime,
+            }
+        };
+
+            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+            chart.draw(data, options);
+        }
+    </script>
 
     <script src="../admin/js/jquery.js"></script>
     <script src="../admin/js/bootstrap.js"></script>
