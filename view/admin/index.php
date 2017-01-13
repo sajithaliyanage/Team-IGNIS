@@ -189,6 +189,7 @@ if(!$isLoggedin && $empRole!="admin"){
                             <h5 class="nortification-box-heading"><i class="fa fa-calendar icon-margin-right" aria-hidden="true"></i>
                                 Company Calendar</h5>
                                 <div class="alert-user" style="<?php if(!isset($_GET['event'])){echo 'display:none;';}?>">Event added successfully!</div>
+                                <div class="alert-user" style="<?php if(!isset($_GET['holiday'])){echo 'display:none;';}?>">Holiday added successfully!</div>
                                 <hr>
 
                             <div style="margin-bottom:20px;">
@@ -278,23 +279,41 @@ if(!$isLoggedin && $empRole!="admin"){
                             </div>
                         </div>
                     </div>
-                </div>
-                <br>
-                <br>
-                <br>
-                <br>
-                <div class="col-xs-12 col-sm-5 padding-box">
-                    <div class="row">
+
+                    <div class="row margin-top">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-pencil icon-margin-right"aria-hidden="true"></i>
-                                Sync Attendance</h5>
+                                Add Holidays</h5>
                             <hr>
                             <div class="list-group">
-                                <form role="form"  action="../../module/excelRead.php" >
-                                        <p>Update today attendance to the database</p>
+                                <form role="form" data-toggle="validator" action="module/addHoliday.php" method="post">
+                                    <div class="department-add">
+                                        <div class="col-xs-12">
+                                            <!-- Text input-->
+                                            <div class="form-group">
+                                                <label class="col-xs-4 control-label form-lable">Holiday:</label>
+                                                <div class="col-xs-8">
+                                                    <input id="service_name" name="title" type="text" placeholder=""
+                                                           class="form-control input-md" required>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <br>
 
+                                            <div class="form-group">
+                                                <label class="col-xs-4 control-label form-lable">Date:</label>
 
-                                    <button class="btn btn-info btn-lg center-block submit-button" type="submit" style="margin-top:20px;">Sync</button>
+                                                <div class="col-xs-8">
+                                                    <input id="setDate" name="start_date" type="text"
+                                                           placeholder="yyyy-mm-dd"
+                                                           class="form-control input-md" required ">
+                                                      <div id="showdate">      </div>
+
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <button class="btn btn-info btn-lg pull-right submit-button" type="submit" style="margin-top:20px;">Submit</button>
                                         </div>
                                     </div>
                                 </form>
@@ -302,6 +321,10 @@ if(!$isLoggedin && $empRole!="admin"){
                         </div>
                     </div>
                 </div>
+                <br>
+                <br>
+                <br>
+                <br>
 
             </div>
         </div>
@@ -366,12 +389,16 @@ function getDate(str) {
 
 
         $('#startdate').datepicker({
-            dateFormat: "yy/mm/dd",
+            dateFormat: "yy-mm-dd",
             minDate: +0
         });
         $('#enddate').datepicker({
             minDate: +0,
-            dateFormat: "yy/mm/dd"
+            dateFormat: "yy-mm-dd"
+        });
+
+        $('#setDate').datepicker({
+            dateFormat: "yy-mm-dd"
         });
 
 
@@ -379,10 +406,15 @@ function getDate(str) {
 </script>
 
 <?php
-    $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE calendar.dept_id=:log";
+    $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE (calendar.dept_id=:log OR calendar.dept_id=:log2)";
     $query = $pdo->prepare($smt);
-    $query->execute(array('log' => '0'));
+    $query->execute(array('log' => '0','log2'=>'@'));
     $result = $query->fetchAll();
+
+    $smts = "SELECT * FROM calendar WHERE dept_id=:log2";
+    $querys = $pdo->prepare($smts);
+    $querys->execute(array('log2'=>'@'));
+    $results = $querys->fetchAll();
 ?>
 
 
@@ -400,6 +432,19 @@ function getDate(str) {
                 $('#fullCalModal').modal();
                 return false;
             },
+            firstDay: 1,
+            dayRender: function (date, cell) {
+                <?php
+                    foreach ($results as $rs){
+                ?>
+                    if (date.isSame('<?php echo $rs['start_date'];?>')) {
+                        cell.css("background-color", "#FE5C5C");
+                    }
+                <?php
+                }
+                ?>
+            },
+
             events:
                 [
                     <?php
@@ -411,12 +456,14 @@ function getDate(str) {
                                     \"end\":\" ".$rs['end_date']." \",
                                     \"color\": \" ".$rs['event_color']." \",
                                     \"textColor\": \"#ffffff\",
-                                    \"url\" : \"#\"
+                                    \"url\" : \"#\",
+                                    \"eventColor \" : \"red\"
                                  },";
                          }
                     ?>
 
                 ]
+
         });
     });
 </script>

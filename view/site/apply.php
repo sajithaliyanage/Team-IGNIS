@@ -56,7 +56,25 @@ if(!$isLoggedin){
                         </ol>
                     </div>
                 </div>
+                <?php
+                    $sql = "SELECT * FROM unauthorized_leave WHERE comp_id=:log";
+                    $query = $pdo->prepare($sql);
+                    $query->execute(array('log'=>$empID));
+                    $result = $query->fetchAll();
+
+                    foreach ($result as $rs){
+                        echo "
+                            <div class=\"alert alert-danger\" role=\"alert\">
+                                <p style='text-align: center;'><i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i>
+                                    You have an unauthorized leave on <b>".$rs['absent_date']."</b>. Please follow the process </p>
+                            </div>
+                        ";
+                    }
+                ?>
+
+
             </div>
+
 
             <div class="row padding-row">
                 <div class="col-sm-6 col-xs-12 padding-box">
