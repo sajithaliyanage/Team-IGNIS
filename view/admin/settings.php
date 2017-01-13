@@ -2,6 +2,7 @@
 $var = "settings";
 include('../../controller/siteController.php');
 include('../../config/connect.php');
+
 $pdo = connect();
 
 if(!$isLoggedin && $empRole!="admin"){
@@ -97,16 +98,16 @@ $managerCount = $query->rowCount();
                             <div class="modal-body">
                                 <p>Are you sure you want to do this action ? </p>
                                 <form action="module/sendReportEmail.php" method="POST">
-                                    <div class="row"  style="margin-top:30px;">
-                                        <div class="form-group">
-                                            <label class="col-xs-4 control-label form-lable">Sender Email:</label>
-
-                                            <div class="col-xs-8">
-                                                <input name="senderEmail" type="text" value="<?php echo $results['email']?>"
-                                                       class="form-control input-md" required>
-                                            </div>
-                                        </div>
-                                    </div>
+<!--                                    <div class="row"  style="margin-top:30px;">-->
+<!--                                        <div class="form-group">-->
+<!--                                            <label class="col-xs-4 control-label form-lable">Sender Email:</label>-->
+<!---->
+<!--                                            <div class="col-xs-8">-->
+<!--                                                <input name="senderEmail" type="text" value="--><?php //echo $results['email']?><!--"-->
+<!--                                                       class="form-control input-md" required>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
                                     <div class="row" style="margin-top:20px;">
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label form-lable"  style="margin-bottom:10px !important;">Receiver Email:</label>
@@ -121,7 +122,7 @@ $managerCount = $query->rowCount();
                                             <label class="col-xs-4 control-label form-lable"  style="margin-bottom:10px !important;">Leave Report:</label>
 
                                             <div class="col-xs-8">
-                                                <input type="file" name="report"">
+                                                <input type="text" class="form-control input-md " name="report" value="Employee_Leave_Details.pdf">
                                             </div>
                                         </div>
                                     </div>

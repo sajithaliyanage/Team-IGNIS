@@ -1,7 +1,10 @@
 <?php
+include('../../../module/sendEmailLocalHost.php');
+
 $sender = $_POST['senderEmail'];
 $receier = $_POST['receiverEmail'];
-
+$report = '../../../module/reports/Employee_Leave_Details.pdf';
+/*
 $subject = "Take Your Leave - Online Leave Management System";
 $message ="Leave Details on ".date('F-Y')."\n\n";
 $message .= <<<EOF
@@ -63,8 +66,14 @@ if($sentMail) //output success or failure messages
     header("Location:../settings.php?emailSentFail");
 }
 
+*/
+$sent = sendEmail($receier,$report);
 
-
+if($sent){
+    header("Location:../settings.php?emailSent");
+}else{
+    header("Location:../settings.php?emailSentFail");
+}
 //$sendgrid = new SendGrid('username', 'password');
 //$mail = new SendGridMail();
 //$mail->addTo('foo@bar.com')->
