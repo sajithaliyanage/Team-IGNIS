@@ -178,6 +178,11 @@ if(!$isLoggedin && $empRole!="admin"){
 <!--                            //alert to user-->
                             <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">Department added successfully!</div>
 
+                            <div class="alert-user " style="<?php if(!isset($_GET['error'])){echo 'display:none;';}?>color:#d43f3a">Invalid Form Actions!</div>
+
+                            <div class="alert-user " style="<?php if(!isset($_GET['color_error'])){echo 'display:none;';}?>color:#d43f3a">Department Color Already Exists!</div>
+
+
                             <hr>
                             <form role="form" data-toggle="validator" action="module/addDepartments.php" method="post">
                                 <div class="department-add">
@@ -197,7 +202,7 @@ if(!$isLoggedin && $empRole!="admin"){
                                         <div class="form-group">
                                             <label class="col-xs-5 control-label form-lable">Department Color :</label>
                                             <div class="col-xs-7">
-                                                <input type="color" id="service_name" name="dept_color" placeholder="" class="form-control input-md jscolor" required onchange="getColor(this.value)">
+                                                <input type="color" id="service_name" name="dept_color" placeholder="" class="form-control input-md jscolor" required onchange = 'getColor(this.value)''>
                                                 <p id="showHintColor" style="color:red;font-size: 10px; margin-top:5px;margin-left: 5px"></p>
                                             </div>
                                         </div>
@@ -310,8 +315,6 @@ if(!$isLoggedin && $empRole!="admin"){
         xhttp.open("GET", "module/ajaxdepartment.php?c=" + str, true);
         xhttp.send();
     }
-
-
 
         
     </script>
