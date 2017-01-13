@@ -15,6 +15,44 @@ $empEmail = $_POST['emp_email'];
 $empPassword = password_hash($_POST['emp_password'], PASSWORD_DEFAULT);
 $empTelephone = $_POST['emp_tele'];
 
+function is_valid_nic($nic)
+{
+    $result = true;
+    if ($nic != "") {
+        if (strlen($nic) <> 10) {
+            $result = FALSE;
+        }
+
+        $nic_9 = substr($nic, 0, 9);
+
+        if (!is_numeric($nic_9)) {
+            $result = false;
+        }
+
+        $nic_v = substr($nic, 9, 1);
+        if (is_numeric($nic_v)) {
+            $result = false;
+        }
+    }
+    return $result;
+}
+$length=intval(strlen($empTelephone));
+
+$validNic=is_valid_nic($empNIC);
+
+$smt = "SELECT email FROM employee where email =:log";
+$query = $pdo->prepare($smt);
+$query->execute(array('log'=>$empEmail));
+$result = $query->fetchAll();
+$rownum = $query->rowCount();
+
+$smt1 = "SELECT comp_id FROM employee where comp_id =:log";
+$query1 = $pdo->prepare($smt1);
+$query1->execute(array('log'=>$empId));
+$result1 = $query1->fetchAll();
+$rownum1 = $query1->rowCount();
+
+
 $flag = 1;
 if (empty($deptId)) {
     $flag = 0;
@@ -36,14 +74,21 @@ if (empty($deptId)) {
     $flag = 0;
 } else if (empty($empPassword)) {
     $flag = 0;
-} else if (empty($empTelephone)) {
+}else if (empty($empTelephone)) {
     $flag = 0;
-} else if ($shift_time == "Holiday") {
+}else if ($rownum1 != 0) {
     $flag = 0;
-} else if ($shifter_time == "Holiday") {
+}else if ($length!==10) {
+    $flag = 0;
+} else if (!$validNic) {
+    $flag = 0;
+} else if (!filter_var($empEmail, FILTER_VALIDATE_EMAIL)) {
+    $flag = 0;
+} else if (empty($rownum != 0)) {
     $flag = 0;
 }
-if ($flag = 1) {
+
+if ($flag == 1) {
 
 //    incrment number of employee by 1
     $sql = "UPDATE department SET no_of_emp =no_of_emp+1 WHERE dept_id=:depID";
@@ -128,6 +173,7 @@ if ($flag = 1) {
     header("Location:../employee.php?job=done");
 
 } else {
+    header("Location:../employee.php?error");
 
 }
 
