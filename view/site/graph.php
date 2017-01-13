@@ -165,23 +165,27 @@ if(!$isLoggedin && $empRole!="director"){
                             Overall Attendance Analysis</h5>
                         <hr>
                         <!-- filtering option start -->
-                        <form role="form" data-toggle="validator" action="#" method="post">
+                        <form role="form" data-toggle="validator" action="graphGeneratorDirector.php" method="post">
                             <div class="department-add">
 
                                 <div class="col-xs-12">
                                   <div class="form-group">
-                                      <label class="col-xs-1 control-label form-lable">Department:</label>
+                                      <div class="col-xs-1">
+                                      </div>
+                                  </div>
 
+                                  <div class="form-group">
+                                      <label class="col-xs-1 control-label form-lable">Department:</label>
                                       <div class="col-xs-3">
                                           <select name="dept_name" class="form-control">
                                             <option value="YES">-All-</option>
                                             <?php
-                                              $sql="SELECT dept_name from department where currentStatus=:approve";
+                                              $sql="SELECT dept_name,dept_id from department where currentStatus=:approve";
                                               $query = $pdo->prepare($sql);
                                               $query->execute(array('approve'=>"approved"));
                                               $d_name = $query->fetchAll();
                                               foreach ($d_name as $r){
-                                                echo "<option value=". "YES".">"; echo $r['dept_name']; echo "</option>";
+                                                echo "<option value=". $r['dept_id'] .">"; echo $r['dept_name']; echo "</option>";
 
                                               }
                                             ?>
@@ -190,7 +194,6 @@ if(!$isLoggedin && $empRole!="director"){
                                   </div>
 
                                     <div class="form-group">
-
                                         <div class="col-xs-3">
                                             <input id="example1" name="start_date" type="text"
                                                    placeholder="Start Date"
@@ -199,12 +202,10 @@ if(!$isLoggedin && $empRole!="director"){
                                     </div>
 
                                     <div class="form-group">
-
                                         <div class="col-xs-3">
                                             <input id="example2" name="end_date" type="text"
                                                    placeholder="End Date"
                                                    class="form-control input-md" required>
-
                                         </div>
                                     </div>
 

@@ -57,7 +57,7 @@ $d2=strtotime($endDate);
                               <i class="fa fa-dashboard"></i> <a href="director.php">Take Your Leave</a>
                           </li>
                           <li class="active">
-                              <i class="fa fa-bar-chart"></i> Company Attendance Analyse
+                              <i class="fa fa-bar-chart"></i> Department Attendance Analyse
                           </li>
                       </ol>
                   </div>
@@ -167,7 +167,7 @@ $d2=strtotime($endDate);
             <div class="row">
                 <div class="col-xs-12 nortification-box-top">
                     <h5 class="nortification-box-heading"><i class="fa fa-bar-chart icon-margin-right" aria-hidden="true"></i>
-                          Overall Attendance Analysis</h5>
+                          Department Attendance Analysis</h5>
                       <hr>
                       <!-- filtering option start -->
                       <form role="form" data-toggle="validator" action="graphGenerator.php" method="post">
@@ -224,10 +224,7 @@ $d2=strtotime($endDate);
           }
         }
         $num=count($drange);
-        //print_r($empid);
-      ?>
-
-        <?php
+    
             //check the department of the manager
             $sql1="SELECT dept_id from employee where comp_id=:empID ";
             $query1 = $pdo->prepare($sql1);
@@ -248,7 +245,6 @@ $d2=strtotime($endDate);
                 $j=$j+1;
               }
             }
-            //print_r($dte);
             $dCount=(array_count_values($dte));
 
             //take employee count in that department
