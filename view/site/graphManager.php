@@ -165,7 +165,7 @@ if(!$isLoggedin && $empRole!="manager"){
                             Overall Attendance Analysis</h5>
                         <hr>
                         <!-- filtering option start -->
-                        <form role="form" data-toggle="validator" action="graphGenerator.php" method="post">
+                        <form role="form" data-toggle="validator" action="graphGeneratorManager.php" method="post">
                             <div class="department-add">
                                 <div class="col-xs-12">
                                   <div class="form-group">
