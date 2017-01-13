@@ -80,7 +80,7 @@ $d2=strtotime($endDate);
                 $i+=1;
             }
         }
-        $num=count($id);
+        $n=count($id);
         $num1=count($id);
 
         //get the dates from excel sheet
@@ -119,9 +119,9 @@ $d2=strtotime($endDate);
                               $query->execute();
                               $numrow = $query->rowCount();
                               $numrows = intval($numrow);
-                              $precetage=($num/($numrows))*100;
+                              $precetage=($n/($numrows))*100;
                           ?>
-                          <center><h2 class="box-count"><?php if($num<10){echo "0".$num;}else{echo $num;}?><br><?php echo round($precetage);?>%</h2></center>
+                          <center><h2 class="box-count"><?php if($n<10){echo "0".$n;}else{echo $n;}?><br><?php echo round($precetage);?>%</h2></center>
                         </div>
                 </div>
             </div>
@@ -151,7 +151,7 @@ $d2=strtotime($endDate);
                           $query->execute();
                           $numrow = $query->rowCount();
                           $numrows = intval($numrow);
-                          $absent=intval($numrows-$num);
+                          $absent=intval($numrows-$n);
                           $precetage=($absent/($numrows))*100;
                           ?>
                           <center><h2 class="box-count"><?php if($absent<10){echo "0".$absent;}else{echo $absent;}?><br><?php echo round($precetage);?>%</h2></center>
