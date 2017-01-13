@@ -14,7 +14,28 @@ $count =0;
 if(isset($_GET['number'])){
     $count +=intval($_GET['number']);
 }
+
+try{
+
+    $todayToSync = date('d/m/Y');
+    $sql = "INSERT IGNORE INTO attendance_syncing_status(date)  VALUES ('$todayToSync')";
+
+    $pdo->exec($sql);
+
+
+
+}catch(Exception $e){
+
+
+    echo $e;
+}
+
+
+
 ?>
+
+
+
 
 
  <!DOCTYPE html>
@@ -73,30 +94,54 @@ if(isset($_GET['number'])){
                                 Today Attendance</h5>
 
                             <?php
-                                if ($dateLastPressed > $today || $count!=0){
-                                    echo '<button type="button" class="btn btn-primary" style="float:right; margin-top:-35px;" disabled="disabled"><i class="fa fa-refresh fa-x" style="margin-right:5px;"></i>Sync</button>';
-                                }
-                                else{
-                                    echo "<form action='../../module/excelRead.php' method='GET'>
+
+                            $sql2 = "SELECT status FROM attendance_syncing_status WHERE date = '$todayToSync'";
+                            $query = $pdo->prepare($sql2);
+                            $query->execute();
+
+                            $result = $query->fetch();
+
+                            if($result[0][0] == 0){
+
+                                echo "<form action='../../module/excelRead.php' method='GET'>
                                             <input type='hidden' name='number' value='1' />
                                             <button type=\"submit\" class=\"btn btn-primary\" style=\"float:right; margin-top:-35px;\"><i class=\"fa fa-refresh fa-spin fa-x\" style=\"margin-right:5px;\"></i>Sync</button>
                                            </form>";
 
-                                }
+                                $sql3 = "UPDATE attendance_syncing_status set status = 1 WHERE date = '$todayToSync'";
+                                $query2 = $pdo->prepare($sql3);
+                                $query2->execute();
+
+                            }else{
+
+
+                                echo '<button type="button" class="btn btn-primary" style="float:right; margin-top:-35px;" disabled="disabled"><i class="fa fa-refresh fa-x" style="margin-right:5px;"></i>Sync</button>';
+
+
+                            }
+
+
+//                                if ($dateLastPressed > $today || $count!=0){
+//                                }
+//                                else{
+//
+//
+//                                }
                             ?>
 <!--                            <hr>-->
                             <div class="row" style="margin-top:20px;">
                                 <div class="col-xs-12">
                                     <table class="table table-responsive">
                                         <tr>
-                                            <th>Date</th>
                                             <th>Employee Id</th>
+
                                             <th>In Time</th>
                                             <th>Out Time</th>
                                             <th>Work Time</th>
                                             <th>Over Time</th>
                                         </tr>
                                         <?php include "../../module/getTodayAttendance.php"?>
+                                        <?//php include "../../module/getAbsentListWithoutApproval.php"?>
 
 
                                     </table>

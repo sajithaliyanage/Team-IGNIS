@@ -20,17 +20,13 @@ try{
 
     foreach($objPHPExcel->getActiveSheet()->getRowIterator() as $row){
 
-        if ($objPHPExcel->getActiveSheet()->getRowDimension($row->getRowIndex())->getVisible() and $row->getRowIndex()!=1) {
+        if ($objPHPExcel->getActiveSheet()->getRowDimension($row->getRowIndex())->getVisible() and $row->getRowIndex()!=1 and $objPHPExcel->getActiveSheet()->getCell('A'.$row->getRowIndex())->getValue() != null) {
 
             echo"<tr><td>";
             echo $objPHPExcel->getActiveSheet()->getCell(
                 'A'.$row->getRowIndex()
             )->getValue(), ' ';
-            echo "</td><td>";
 
-            echo $objPHPExcel->getActiveSheet()->getCell(
-                'B'.$row->getRowIndex()
-            )->getValue(), ' ';
             echo "</td><td>";
             echo $objPHPExcel->getActiveSheet()->getCell(
                 'C'.$row->getRowIndex()

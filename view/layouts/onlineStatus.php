@@ -18,7 +18,7 @@ require_once "../../module/PHPExcel/PHPExcel.php";
 ?>
 <div class="btn-group dropup online-status">
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding:5px 40px;">
-        Online Status (23)
+        Online Status (<?php echo $num ?>)
         <span class="caret"></span>
         <span class="sr-only">Toggle Dropdown</span>
     </button>

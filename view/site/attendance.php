@@ -113,12 +113,12 @@ if(!$isLoggedin){
                                             </div>
                                         <div class="col-xs-12 col-sm-1" ></div>
                                         <div class="col-xs-12 col-sm-2">
-                                            <button class="btn btn-info btn-lg pull-right submit-button" type="submit" onclick="callme();" style="padding:15px 25px; margin-top:-5px ;width: 180px">Filter Dates
+                                            <button class="btn btn-info  pull-right submit-button" type="submit" onclick="" style="padding:10px 25px; margin-top:-5px ;width: 160px">Filter Data
                                             </button>
                                         </div>
                                         <div class="col-xs-12 col-sm-1" ></div>
                                             <div class="col-xs-12 col-sm-2">
-                                                <button class="btn btn-info btn-lg pull-right submit-button" type="submit" onclick="callme();" style="padding:15px 25px; margin-top:-5px;">Download As PDF
+                                                <button class="btn btn-info  pull-right submit-button" type="submit"  onclick="callme();" style="padding:10px 25px; margin-top:-5px;width: 160px">Download As PDF
                                                 </button>
                                             </div>
                                         </div>
@@ -187,6 +187,23 @@ if(!$isLoggedin){
         doc.save('Report.pdf');
     }
 </script>
+
+<script >function filter(){
+
+
+        var startDate = Document.getElementById('example1');
+        var endDate = Document.getElementById('example2');
+
+
+        var td,tr,tableName;
+
+
+
+
+
+
+
+    }</script>
 
 <script src="../../public/js/jspdf.js"></script>
 <script src="../../public/js/jquery.js"></script>
