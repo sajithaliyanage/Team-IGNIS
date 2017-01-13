@@ -3,13 +3,14 @@ include('../controller/siteController.php');
 include('../config/connect.php');
 include('../module/sendSMS.php');
 include('../module/sendEmail.php');
+include ('xssValidation.php');
 $pdo = connect();
 
 //get post request from confirm leave form
-$action = $_POST['submit'];
-$note = $_POST['note'];
-$appliedEmployeeId = $_GET['empId'];
-$appliedLeaveId = $_GET['app_leave_id'];
+$action = xss_clean($_POST['submit']);
+$note = xss_clean($_POST['note']);
+$appliedEmployeeId = xss_clean($_GET['empId']);
+$appliedLeaveId = xss_clean($_GET['app_leave_id']);
 
 $sql0 = "SELECT * FROM employee join apply_leave on apply_leave.comp_id = employee.comp_id where employee.comp_id=:employeeID AND apply_leave.apply_leave_id=:leaveID";
 $query0 = $pdo->prepare($sql0);

@@ -1,9 +1,10 @@
 <?php
 include('../config/connect.php');
 include('../controller/siteController.php');
+include ('xssValidation.php');
 $pdo = connect();
 
-$action = $_GET['q'];
+$action =xss_clean( $_GET['q']);
 
 try {
     if($action == "empty"){

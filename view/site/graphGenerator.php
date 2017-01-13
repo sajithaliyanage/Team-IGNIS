@@ -1,4 +1,5 @@
 <?php
+
 include('../../controller/siteController.php');
 include('../../config/connect.php');
 $pdo = connect();
@@ -13,7 +14,6 @@ $eDate=str_replace('/', '-', $eDate);
 $endDate=date("Y-m-d", strtotime($eDate) );
 $d1=strtotime($startDate);
 $d2=strtotime($endDate);
-
 
     //<!-- get the attendance from excel sheet -->
 
@@ -31,7 +31,7 @@ $d2=strtotime($endDate);
                 $i+=1;
             }
         }
-        $num=count($id);
+        $num1=count($id);
 
         //get the dates from excel sheet
         $i=0;
@@ -46,18 +46,20 @@ $d2=strtotime($endDate);
         }catch(Exception $e){
         echo $e;
         }
-
+        //take the dates within the range
         $drange=array();
-        for($i=0,$j=0; $i<$num; $i++){
+        $empid=array();
+        for($i=0,$j=0; $i<$num1; $i++){
           $d=strtotime($dates[$i]);
           if(($d >= $d1) && ($d2 >= $d)){
             $drange[$j]=$dates[$i];
+            $empid[$j]=$id[$i];
             $j=$j+1;
           }
         }
         $num=count($drange);
-        $q=(array_count_values($drange));
-        print_r ($q);
+        $dteCount=(array_count_values($drange));
+        $empCount=(array_count_values($empid));
         //print_r($drange);
       ?>
 
@@ -67,23 +69,45 @@ $d2=strtotime($endDate);
             $query1 = $pdo->prepare($sql1);
             $query1->execute(array('empID'=> $empID));
             $query1 = $query1->fetch();
-            print_r ($query1);
+
+            //take the employee count belongs to the department
+            $emp=array();
+            $dte=array();
+            for($i=0,$j=0; $i<$num; $i++){
+              $sql2="SELECT dept_id from employee where comp_id=:empID ";
+              $query2 = $pdo->prepare($sql2);
+              $query2->execute(array('empID'=> $empid[$i]));
+              $query2 = $query2->fetch();
+              if($query1[0]==$query2[0]){
+                $emp[$j]=$empid[$i];
+                $dte[$j]=$drange[$i];
+                $j=$j+1;
+              }
+            }
+            $dCount=(array_count_values($dte));
+
+            //take employee count in that department
+            $sql="SELECT no_of_emp from department where dept_id=:dID ";
+            $query = $pdo->prepare($sql);
+            $query->execute(array('dID'=>$query1[0]));
+            $query = $query->fetchAll();
+
+            //display absent present belongs to a the department
+            $dept=array();
+            for($i=0,$j=0;$i<$num1;$i++)
+            {
+              $dept[$j][0]=$dates[$i];
+              if($dates[$i]==$dte[$j]){
+                $d_dte=$dates[$i];
+                $dept[$j][1] = intval($dCount[$d_dte]);
+                $absnt= intval($query[0])-$dept[$j][1];
+                $dept[$j][2] =intval($absnt);
+              }
 
 
-              //display absent present belongs to a particular department
-                $sql="SELECT dept_name,dept_id,no_of_emp from department where currentStatus=:approve ";
-                $query = $pdo->prepare($sql);
-                $query->execute(array('approve'=>"approved"));
-                $dept = $query->fetchAll(PDO::FETCH_NUM);
-                for($i=0;$i<count($dept);$i++)
-                {
-                  $d_id=$dept[$i][1];
-                  $dept[$i][1] = intval($q[$d_id]);
-                  $absnt= $dept[$i][2]-$dept[$i][1];
-                  $dept[$i][2] =intval($absnt);
-                }
+            }
 
-               array_unshift($dept, array('Department', 'Present','Absent'));
+               array_unshift($dept, array('Date', 'Present','Absent'));
                //print_r($dept);
               ?>
               <center><div id="columnchart_material" style="width: 900px; height: 500px;"></div></center>

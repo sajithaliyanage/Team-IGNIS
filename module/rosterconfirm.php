@@ -1,10 +1,11 @@
 <?php
 include('../controller/siteController.php');
 include('../config/connect.php');
+include ('xssValidation.php');
 $pdo = connect();
 
 
-$appliedShiftId = $_GET['shiftid'];
+$appliedShiftId = xss_clean($_GET['shiftid']);
 
 if ($_POST['submit'] == 'approve') {
 

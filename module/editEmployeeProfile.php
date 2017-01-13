@@ -1,12 +1,13 @@
 <?php
 include('../controller/siteController.php');
 include('../config/connect.php');
+include ('xssValidation.php');
 $pdo = connect();
 
 //get post request data from edit form
-$empName = $_POST['emp_name'];
-$empEmail = $_POST['emp_email'];
-$empTel = $_POST['emp_tele'];
+$empName = xss_clean($_POST['emp_name']);
+$empEmail = xss_clean($_POST['emp_email']);
+$empTel = xss_clean($_POST['emp_tele']);
 
 try{
 //    edit employee details

@@ -8,7 +8,7 @@ if(!$isLoggedin){
     header('Location:../../index.php');
 }
 ?>
-<!---****************************start************************--->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +26,8 @@ if(!$isLoggedin){
     <link href="../../public/css/font-awesome.min.css" rel="stylesheet">
     <link href="../../public/css/fullcalendar.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../public/css/datepicker.css">
-    <script src="../../public/js/jquery.js"></script>
+    <link href="../../public/css/jquery-ui.css" rel="stylesheet">
+    
 </head>
 
 <body style=" background-color: #eceff4 !important;">
@@ -160,6 +161,8 @@ if(!$isLoggedin){
 
                             <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">Leave application send successfully!</div>
                             <div class="alert-user" style="<?php if(!isset($_GET['count'])){echo 'display:none;';}?> color:#d43f3a">Leave count is not sufficient!</div>
+                            <div class="alert-user" style="<?php if(!isset($_GET['invalid'])){echo 'display:none;';}?> color:#d43f3a">Invalid Action!</div>
+                            <div class="alert-user" style="<?php if(!isset($_GET['exists'])){echo 'display:none;';}?> color:#d43f3a">Leave already requested!</div>
 
                             <hr>
                             <form role="form" data-toggle="validator" action="../../module/applyLeave.php" method="post">
@@ -170,7 +173,7 @@ if(!$isLoggedin){
                                             <label class="col-xs-4 control-label form-lable">Leave Type:</label>
 
                                             <div class="col-xs-8">
-                                                <select name="leave_type" class="form-control">
+                                                <select name="leave_type" class="form-control" onchange='checkLeave(this.value)'>
                                                     <?php
                                                         $sql = "SELECT * from leave_type where currentStatus=:log AND leave_name !='Medical Leave'";
                                                         $query = $pdo->prepare($sql);
@@ -183,6 +186,7 @@ if(!$isLoggedin){
                                                     ?>
 
                                                 </select>
+                                                <p id="nopay" style="color:red;font-size: 10px; margin-top:5px;margin-left: 5px"></p>
                                             </div>
                                         </div>
                                         <br>
@@ -193,9 +197,8 @@ if(!$isLoggedin){
 
                                             <div class="col-xs-8">
                                                 <select name="leave_priority" class="form-control">
+                                                    <option value="modarate">Modarate</option>
                                                     <option value="high">High</option>
-                                                    <option value="medium">Medium</option>
-                                                    <option value="low">Low</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -207,9 +210,10 @@ if(!$isLoggedin){
                                             <label class="col-xs-4 control-label form-lable">Starting Date:</label>
 
                                             <div class="col-xs-8">
-                                                <input id="example2" name="start_date" type="text"
+                                                <input id="startdate" name="start_date" type="text"
                                                        placeholder="dd/mm/yyyy"
-                                                       class="form-control input-md" required>
+                                                       class="form-control input-md" required onchange="getDate1(this.value)">
+                                                <p id="showdate1" style="color:red;font-size: 10px; margin-top:5px;margin-left: 5px"></p>
                                             </div>
                                         </div>
                                         <br>
@@ -219,10 +223,12 @@ if(!$isLoggedin){
                                             <label class="col-xs-4 control-label form-lable">End Date:</label>
 
                                             <div class="col-xs-8">
-                                                <input id="example1" name="end_date" type="text"
+                                                <input id="enddate" name="end_date" type="text"
                                                        placeholder="dd/mm/yyyy"
-                                                       class="form-control input-md" required>
+                                                       class="form-control input-md" required onchange="getDate(this.value)">
+                                                <p id="showdate" style="color:red;font-size: 10px; margin-top:5px;margin-left: 5px"></p>
                                             </div>
+
                                         </div>
                                         <br>
                                         <br>
@@ -231,7 +237,7 @@ if(!$isLoggedin){
                                             <label class="col-xs-4 control-label form-lable">Day Count:</label>
 
                                             <div class="col-xs-8">
-                                                <input id="service_name" name="numDays" type="text"
+                                                <input id="service_name" name="numDays" readonly type="text"
                                                        placeholder="" class="form-control input-md" required>
                                             </div>
                                         </div>
@@ -292,26 +298,93 @@ if(!$isLoggedin){
 
 </div>
 
-
+<script src="../../public/js/jquery.js"></script>
+<script src="../../public/js/jquery-ui.js"></script>
 <script src="../../public/js/moment.min.js"></script>
 <script src="../../public/js/bootstrap.js"></script>
 <script src="../../public/js/fullcalendar.min.js"></script>
-<script src="../../public/js/bootstrap-datepicker.js"></script>
+
+
+<script>
+    function checkLeave(str) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    document.getElementById("nopay").innerHTML = xhttp.responseText;
+
+            }
+        }
+        xhttp.open("GET", "../../module/ajaxApplyLeave.php?nopay="+str, true);
+        xhttp.send();
+
+    }
+
+    function getDate1(str) {
+        var end_date = document.getElementById("enddate").value;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+
+                if(xhttp.responseText == 'Invalid Selection'){
+                    document.getElementById("showdate1").innerHTML = xhttp.responseText;
+                    document.getElementById("startdate").style.color = "red";
+                    document.getElementById("service_name").value = "Invalid";
+                }else{
+                    document.getElementById("startdate").style.color = "#555";
+                    document.getElementById("showdate1").innerHTML = '';
+                    document.getElementById("service_name").value = parseInt(xhttp.responseText)+1;
+                }
+
+            }
+        }
+        xhttp.open("GET", "../../module/ajaxApplyLeave.php?q="+end_date+"&r="+str, true);
+        xhttp.send();
+
+    }
+
+    function getDate(str) {
+        var start_date = document.getElementById("startdate").value;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+
+                if(xhttp.responseText == 'Invalid Selection'){
+                    document.getElementById("showdate").innerHTML = xhttp.responseText;
+                    document.getElementById("enddate").style.color = "red";
+                    document.getElementById("service_name").value = "Invalid";
+                }else{
+                    document.getElementById("enddate").style.color = "#555";
+                    document.getElementById("showdate").innerHTML = '';
+                    document.getElementById("service_name").value = parseInt(xhttp.responseText)+1;
+                }
+
+            }
+        }
+        xhttp.open("GET", "../../module/ajaxApplyLeave.php?edate="+str+"&sdate="+start_date, true);
+        xhttp.send();
+
+    }
+</script>
+
 <script type="text/javascript">
     // When the document is ready
     $(document).ready(function () {
-        var date = new Date();
-        date.setDate(date.getDate()-1);
+        var gap = parseInt(document.getElementById("showdate").innerHTML);
+        //alert(gap);
+        $('#startdate').datepicker({
+            dateFormat: "dd/mm/yy"
 
-        $('#example1').datepicker({
-            format: "dd/mm/yyyy"
         });
-        $('#example2').datepicker({
-            format: "dd/mm/yyyy"
+        $('#enddate').datepicker({
+            minDate: gap,
+            dateFormat: "dd/mm/yy"
         });
+
 
     });
 </script>
+
+
 <?php
     $smts = "SELECT * FROM employee WHERE comp_id=:log2";
     $querys = $pdo->prepare($smts);
@@ -326,6 +399,7 @@ if(!$isLoggedin){
 ?>
 
 <script>
+
     $(document).ready(function() {
         $('#bootstrapModalFullCalendar').fullCalendar({
             header: {
@@ -360,6 +434,7 @@ if(!$isLoggedin){
         });
     });
 </script>
+
 
 </body>
 </html>

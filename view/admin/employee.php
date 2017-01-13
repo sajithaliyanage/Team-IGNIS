@@ -97,6 +97,10 @@ if(!$isLoggedin && $empRole!="admin"){
                                 Add New Employee</h5>
 
                             <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">New employee added successfully!</div>
+                            <div class="alert-user" style="<?php if (!isset($_GET['error'])) {
+                                echo 'display:none;';
+                            } ?> color:#d43f3a">Invalid Form Actions!
+                            </div>
                             <hr>
                             <form role="form" data-toggle="validator" action="module/addEmployee.php" method="post">
                                 <div class="department-add">
@@ -183,7 +187,8 @@ if(!$isLoggedin && $empRole!="admin"){
                                             <label class="col-sm-5 col-xs-12 control-label form-lable">Company ID :</label>
                                             <div class="col-sm-7 col-xs-12">
                                                 <input id="service_name" name="emp_id" type="text" placeholder="Tryonics-01"
-                                                       class="form-control input-md" required>
+                                                       class="form-control input-md" required  onblur="showHint(this.value)" />
+                                                       <p id="textHint" style="color:red;font-size: 12px; margin-top:5px;margin-left: 5px"></p>
                                             </div>
                                         </div>
                                         <br>
@@ -193,7 +198,8 @@ if(!$isLoggedin && $empRole!="admin"){
                                             <label class="col-sm-5 col-xs-12 control-label form-lable">Employee Name :</label>
                                             <div class="col-sm-7 col-xs-12">
                                                 <input id="service_name" name="emp_name" type="text" placeholder=""
-                                                       class="form-control input-md" required>
+                                                       class="form-control input-md" required >
+                                                
                                             </div>
                                         </div>
                                         <br>
@@ -203,7 +209,9 @@ if(!$isLoggedin && $empRole!="admin"){
                                         <div class="form-group">
                                             <label class="col-sm-5 col-xs-12 control-label form-lable">Employee NIC :</label>
                                             <div class="col-sm-7 col-xs-12">
-                                                <input id="service_name" name="emp_nic" type="text" placeholder="xxxxxxxxxV" class="form-control input-md" required>                                            </div>
+                                                <input id="service_name" name="emp_nic" type="text" placeholder="xxxxxxxxxV" class="form-control input-md" required onblur="Nicvalidation(this.value)" >
+                                                <p id="demo" style="color:red;font-size: 12px; margin-top:5px;margin-left: 5px"></p>
+                                            </div>
                                         </div>
                                         <br>
                                         <br>
@@ -223,7 +231,8 @@ if(!$isLoggedin && $empRole!="admin"){
                                         <div class="form-group">
                                             <label class="col-sm-5 col-xs-12 control-label form-lable">Employee Email :</label>
                                             <div class="col-sm-7 col-xs-12">
-                                                <input id="service_name" name="emp_email" placeholder="" type="email" class="form-control input-md " required>
+                                                <input id="service_name" name="emp_email" placeholder="" type="email" class="form-control input-md " required onblur="Emailvalidation(this.value)" >
+                                                <p id="demo1" style="color:red;font-size: 12px; margin-top:5px;margin-left: 5px"></p>
                                             </div>
                                         </div>
                                         <br>
@@ -241,7 +250,8 @@ if(!$isLoggedin && $empRole!="admin"){
                                         <div class="form-group">
                                             <label class="col-sm-5 col-xs-12 control-label form-lable">Employee Telephone :</label>
                                             <div class="col-sm-7 col-xs-12">
-                                                <input id="service_name" name="emp_tele" placeholder="" type="text" class="form-control input-md " required>
+                                                <input id="service_name" name="emp_tele" placeholder="" type="text" class="form-control input-md " required required onblur="PhoneNovalidation(this.value)">
+                                                <p id="demo2" style="color:red;font-size: 12px; margin-top:5px;margin-left: 5px"></p>
                                             </div>
                                         </div>
                                         <br>
@@ -277,5 +287,53 @@ if(!$isLoggedin && $empRole!="admin"){
     <script src="js/jquery.js"></script>
 <!--    <script src="js/filter.js"></script>-->
     <script src="js/bootstrap.js"></script>
+
+    <script>
+    
+
+    function showHint(str) {
+        
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                document.getElementById("textHint").innerHTML = xhttp.responseText;
+            }
+        }
+        xhttp.open("GET", "module/ajaxemployee.php?q=" + str, true);
+        xhttp.send();
+    }
+    function Nicvalidation(str) {
+        groupId = str;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                document.getElementById("demo").innerHTML = xhttp.responseText;
+            }
+        }
+        xhttp.open("GET", "module/ajaxAddNewEmployee.php?r=" + str, true);
+        xhttp.send();
+    }function Emailvalidation(str) {
+        groupId = str;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                document.getElementById("demo1").innerHTML = xhttp.responseText;
+            }
+        }
+        xhttp.open("GET", "module/ajaxAddNewEmployee.php?q=" + str, true);
+        xhttp.send();
+    }function PhoneNovalidation(str) {
+        groupId = str;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                document.getElementById("demo2").innerHTML = xhttp.responseText;
+            }
+        }
+        xhttp.open("GET", "module/ajaxAddNewEmployee.php?p=" + str, true);
+        xhttp.send();
+    }
+
+</script>
 </body>
 </html>

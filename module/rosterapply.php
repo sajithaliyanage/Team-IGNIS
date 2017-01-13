@@ -1,16 +1,17 @@
 <?php
 include('../config/connect.php');
 include('../controller/siteController.php');
+include ('xssValidation.php');
 $pdo = connect();
 
 //shift post request
-$shift_date= $_POST['shift_date'];
-$shift_time = $_POST['shift_my_time'];
-$shift_group = $_POST['shift_group'];
-$shifter = $_POST['employeeDetails'];
-$rework_date = $_POST['rework_date'];
-$shifter_time = $_POST['shift_his_time'];
-$reason = $_POST['reason'];
+$shift_date= xss_clean($_POST['shift_date']);
+$shift_time = xss_clean($_POST['shift_my_time']);
+$shift_group = xss_clean($_POST['shift_group']);
+$shifter = xss_clean($_POST['employeeDetails']);
+$rework_date =xss_clean( $_POST['rework_date']);
+$shifter_time = xss_clean($_POST['shift_his_time']);
+$reason = xss_clean($_POST['reason']);
 
 $flag=1;
 if(empty($shift_date)){

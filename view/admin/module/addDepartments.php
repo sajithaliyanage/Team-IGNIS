@@ -1,11 +1,12 @@
 <?php
 include('../../../config/connect.php');
+include ('../../../module/xssValidation.php');
 $pdo = connect();
 
 //post request data
-$deptName = $_POST['dept_name'];
-$deptColor = $_POST['dept_color'];
-$rosterStatus = $_POST['roster_status'];
+$deptName = xss_clean($_POST['dept_name']);
+$deptColor = xss_clean($_POST['dept_color']);
+$rosterStatus = xss_clean($_POST['roster_status']);
 
 try{
 //    insert new dept to department table

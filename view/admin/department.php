@@ -186,8 +186,9 @@ if(!$isLoggedin && $empRole!="admin"){
                                         <div class="form-group">
                                             <label class="col-xs-5 control-label form-lable">Department Name :</label>
                                             <div class="col-xs-7">
-                                                <input id="service_name" name="dept_name" type="text" placeholder=""
-                                                       class="form-control input-md" required>
+                                                <input id="service_name" name="dept_name" type="text" placeholder="Example: HR"
+                                                       class="form-control input-md" required onblur="getDept(this.value)">
+                                                <p id="showHint" style="color:red;font-size: 10px; margin-top:5px;margin-left: 5px"></p>
                                             </div>
                                         </div>
                                         <br>
@@ -196,7 +197,8 @@ if(!$isLoggedin && $empRole!="admin"){
                                         <div class="form-group">
                                             <label class="col-xs-5 control-label form-lable">Department Color :</label>
                                             <div class="col-xs-7">
-                                                <input type="color" id="service_name" name="dept_color" placeholder="" class="form-control input-md jscolor" required>
+                                                <input type="color" id="service_name" name="dept_color" placeholder="" class="form-control input-md jscolor" required onchange="getColor(this.value)">
+                                                <p id="showHintColor" style="color:red;font-size: 10px; margin-top:5px;margin-left: 5px"></p>
                                             </div>
                                         </div>
                                         <br>
@@ -284,5 +286,34 @@ if(!$isLoggedin && $empRole!="admin"){
     <script src="js/jquery.js"></script>
 <!--    <script src="js/jscolor.min.js"></script>-->
     <script src="js/bootstrap.js"></script>
+    <script>
+    function getDept(str) {
+        
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                document.getElementById("showHint").innerHTML = xhttp.responseText;
+            }
+        }
+        xhttp.open("GET", "module/ajaxdepartment.php?r=" + str, true);
+        xhttp.send();
+    }
+
+    function getColor(str) {
+        
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                document.getElementById("showHintColor").innerHTML = xhttp.responseText;
+            }
+        }
+        xhttp.open("GET", "module/ajaxdepartment.php?c=" + str, true);
+        xhttp.send();
+    }
+
+
+
+        
+    </script>
 </body>
 </html>

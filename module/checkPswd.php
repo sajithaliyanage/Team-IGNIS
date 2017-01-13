@@ -1,26 +1,18 @@
 <?php
 include('../controller/siteController.php');
 include('../config/connect.php');
+include ('xssValidation.php');
+include('../module/class/Employee.php');
+
+$emp=new Employee;
 
 $pdo = connect();
 
-$password=$_GET['q'];
+$emp->empId =$empID;
+$password=xss_clean($_GET['q']);
+$hashed_password = $emp->fetchEmployeePassword($pdo);
+$flag=password_verify($password, $hashed_password);
 
-$sql = "SELECT password FROM employee where comp_id=:empID";
-$query = $pdo->prepare($sql);
-$query->execute(array('empID'=>$empID));
-$result = $query->fetch();
-
-try{
-    //check passswrd is equal or not with existing password
-    if($result["password"]==$password) {
-        echo "<font color=\"green\">Password matches</font>!";
-
-    }else{
-        echo "<font color=\"red\">Provide existing password</font>!";
-    }
-
-
-}catch (PDOException $e){
-    header("Location : ../view/layouts/error.php");
+if(!$flag){
+    echo "<span style='color:red; margin-left:3px;'>".'Password is not matched!'.'</span>';
 }

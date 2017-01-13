@@ -3,12 +3,13 @@ include('../controller/siteController.php');
 include('../config/connect.php');
 include('../module/sendSMS.php');
 include('../module/sendEmail.php');
+include ('xssValidation.php');
 $pdo = connect();
 
 //get post request from medicl upload form
-$action = $_POST['submit'];
-$appliedEmployeeId = $_GET['empId'];
-$appliedMedId = $_GET['app_medical_id'];
+$action = xss_clean($_POST['submit']);
+$appliedEmployeeId = xss_clean($_GET['empId']);
+$appliedMedId = xss_clean($_GET['app_medical_id']);
 
 $sqlQ = "SELECT apply_leave_id FROM medical_report where med_id=:medID";
 $queryQ = $pdo->prepare($sqlQ);

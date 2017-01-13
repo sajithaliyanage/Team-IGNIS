@@ -2,9 +2,10 @@
 include('../controller/siteController.php');
 include('../config/connect.php');
 $pdo = connect();
+include ('xssValidation.php');
 
-$recId = $_POST['receiverID'];
-$message= $_POST['message'];
+$recId = xss_clean($_POST['receiverID']);
+$message= xss_clean($_POST['message']);
 $dateSend = date('d/m/Y');
 
 try{

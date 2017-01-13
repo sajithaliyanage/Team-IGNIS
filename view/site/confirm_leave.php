@@ -272,6 +272,39 @@ $departmentId = $result['dept_id'];
 
                     <div class="row margin-top">
                         <div class="col-xs-12 nortification-box-top">
+                            <h5 class="nortification-box-heading"><i class="fa fa-angle-double-right " aria-hidden="true"></i>
+                                Today on Leave </h5>
+                            <hr>
+
+                            <div class="list-group">
+                                <?php
+                                $today = date('d/m/Y');
+                                $sql = "select * from apply_leave JOIN employee ON apply_leave.comp_id=employee.comp_id
+                                            JOIN job_category ON job_category.job_cat_id = employee.job_cat_id
+                                            WHERE apply_leave.status=:log AND employee.dept_id=:deptID AND
+                                            (STR_TO_DATE('$today','%d/%m/%Y') BETWEEN STR_TO_DATE(apply_leave.start_date,'%d/%m/%Y') AND STR_TO_DATE(apply_leave.end_date, '%d/%m/%Y'))";
+                                $query = $pdo->prepare($sql);
+                                $query->execute(array('log'=>"approved",'deptID'=>$departmentId));
+                                $result = $query->fetchAll();
+                                $rowCount = $query->rowCount();
+
+                                    if($rowCount==0){
+                                        echo "All Employees are working on today!";
+                                    }
+                                    foreach($result as $rs){
+                                        echo "<a href='#' class=\"list-group-item\">".$rs['name']."<span style=\"float:right;\">".$rs['job_cat_name']."<i class=\"fa fa-check\" aria-hidden=\"true\" style='margin-left:5px;'></i></span></a>";
+                                    }
+
+                                ?>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row margin-top">
+                        <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-calendar icon-margin-right" aria-hidden="true"></i>
                                 Overall Calendar</h5>
                             <div style="margin-bottom:20px;">

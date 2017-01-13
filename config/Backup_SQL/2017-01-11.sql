@@ -53,26 +53,34 @@ CREATE TABLE `apply_leave` (
   KEY `leave_id` (`leave_id`),
   KEY `apply_leave_ibfk_1` (`comp_id`),
   CONSTRAINT `apply_leave_ibfk_1` FOREIGN KEY (`comp_id`) REFERENCES `employee` (`comp_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 
 INSERT INTO apply_leave VALUES
 ("4","Tr003","1","medium","13/09/2016","28/09/2016","28/09/2016","1","Sick","recommended","S.M. Samarainghe","","","0"),
-("5","Tr005","1","medium","13/09/2016","23/09/2016","23/09/2016","1","Sick","approved","Sajini Koongahawattage","","no","1"),
-("6","Tr005","1","high","13/09/2016","28/09/2016","29/09/2016","2","Sick","approved","Sajini Koongahawattage","","no","1"),
+("5","Tr005","1","medium","13/09/2016","23/09/2016","23/09/2016","1","Sick","canceled","Sajini Koongahawattage","","no","1"),
+("6","Tr006","1","high","09/12/2016","10/12/2016","10/12/2016","2","Sick","approved","Sajini Koongahawattage","","no","1"),
 ("7","Tr005","6","medium","13/09/2016","20/10/2016","21/10/2016","1","Trip","rejected","Sajini Koongahawattage","","","1"),
 ("8","Tr005","3","high","13/09/2016","22/09/2016","23/09/2016","1","Sick","approved","Sajini Koongahawattage","","done","1"),
-("9","Tr005","2","low","13/09/2016","09/10/2016","10/10/2016","2","Personal Issue","approved","Sajini Koongahawattage","","no","1"),
+("9","Tr005","2","low","13/09/2016","09/10/2016","10/10/2016","2","Personal Issue","approved","Sajini Koongahawattage","","pending","1"),
 ("10","Tr005","1","high","13/09/2016","28/10/2016","29/10/2016","1","Personal Issue","canceled","","","","1"),
-("11","Tr014","1","medium","13/09/2016","20/10/2016","21/10/2016","1","Personal Issue","recommended","Sajini Koongahawattage","","","0"),
-("12","Tr007","1","low","13/09/2016","28/09/2016","30/09/2016","2","Personal Isue","recommended","Gothami Karunarathne","","","0"),
-("13","Tr015","2","low","13/09/2016","01/10/2016","02/10/2016","1","Personal Issue","recommended","Sajini Koongahawattage","","","0"),
+("11","Tr014","1","medium","13/09/2016","20/10/2016","21/10/2016","1","Personal Issue","approved","Sajini Koongahawattage","","no","0"),
+("12","Tr007","1","low","13/09/2016","28/09/2016","30/09/2016","2","Personal Isue","approved","Gothami Karunarathne","","no","0"),
+("13","Tr015","2","low","13/09/2016","01/10/2016","02/10/2016","1","Personal Issue","approved","Sajini Koongahawattage","","no","0"),
 ("14","Tr005","3","high","13/09/2016","11/10/2016","12/10/2016","1","Sick","approved","Sajini Koongahawattage","","pending","1"),
 ("15","Tr005","1","medium","13/09/2016","27/09/2016","29/09/2016","2","Personal Issue","approved","Sajini Koongahawattage","","no","1"),
-("16","Tr005","1","low","13/09/2016","29/09/2016","30/09/2016","1","Personal Issue","waiting","","","","1"),
-("17","Tr005","2","high","11/10/2016","26/10/2016","27/10/2016","2","xcdfsf","approved","Sajini Koongahawattage","","no","1"),
+("16","Tr005","1","low","13/09/2016","29/09/2016","30/09/2016","1","Personal Issue","canceled","","","","1"),
+("17","Tr005","2","high","11/10/2016","26/10/2016","27/10/2016","2","xcdfsf","approved","Sajini Koongahawattage","","done","1"),
 ("18","Tr005","2","high","03/12/2016","16/12/2016","05/12/2016","2","sa","approved","Sajini Koongahawattage","","done","1"),
-("19","Tr005","2","high","03/12/2016","04/12/2016","05/12/2016","1","None","approved","Sajini Koongahawattage","","no","1");
+("19","Tr005","2","high","03/12/2016","04/12/2016","05/12/2016","1","None","approved","Sajini Koongahawattage","","pending","1"),
+("20","Tr005","1","high","05/12/2016","08/12/2016","16/12/2016","8","nn","approved","Sajini Koongahawattage","","no","0"),
+("21","Tr004","2","high","08/12/2016","08/12/2016","09/12/2016","2","sad","canceled","Sajini Koongahawattage","","","1"),
+("22","Tr005","2","medium","08/12/2016","09/12/2016","09/12/2016","1","for wedding","canceled","Sajini Koongahawattage","","","0"),
+("23","Tr005","2","high","08/01/2017","09/01/2017","11/01/2017","2","Sick","canceled","","","no","0"),
+("24","Tr006","1","medium","08/01/2017","09/01/2017","11/01/2017","3","Una Hedenwa","approved","Sajini Koongahawattage","","no","0"),
+("25","Tr006","1","medium","08/01/2017","09/01/2017","12/01/2017","4","Sick","waiting","","","","0"),
+("26","Tr005","2","high","08/01/2017","09/01/2017","11/01/2017","2","Sick","canceled","Sajini Koongahawattage","","no","1"),
+("27","Tr005","2","high","08/01/2017","18/01/2017","20/01/2017","2","Private reason","waiting","","","","0");
 
 
 
@@ -90,7 +98,7 @@ CREATE TABLE `calendar` (
   KEY `comp_id(change)` (`comp_id`),
   KEY `dept_id` (`dept_id`),
   CONSTRAINT `calendar_ibfk_2` FOREIGN KEY (`comp_id`) REFERENCES `employee` (`comp_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 
 INSERT INTO calendar VALUES
@@ -105,7 +113,8 @@ INSERT INTO calendar VALUES
 ("14","Amma\'s BirthDay","2016-09-18","2016-09-19","gold","","#","Tr005"),
 ("15","dscsd","2016-10-26","2016-10-27","#3498db","cscds","0","Tr001"),
 ("16","asas","2016-10-10","2016-10-12","#3498db","sasasasa","0","Tr001"),
-("17","WWW","2016-11-29","2016-11-29","gold","dasdasdasd","#","Tr005");
+("17","WWW","2016-11-29","2016-11-29","gold","dasdasdasd","#","Tr005"),
+("18","General Meeting","2017-01-18","2017-01-18","#3498db","All the employees must to attend","0","Tr001");
 
 
 
@@ -118,15 +127,16 @@ CREATE TABLE `conversation` (
   `send_date` varchar(50) NOT NULL DEFAULT '0',
   `seen` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`chat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=latin1;
 
 
 INSERT INTO conversation VALUES
 ("60","Tr003","Tr002","Hello","13/09/2016","0"),
-("61","Tr005","Tr001","xcvxvx","11/10/2016","0"),
-("62","Tr003","Tr001","hhaha","08/11/2016","0"),
-("63","Tr001","Tr004","Hello","30/11/2016","0"),
-("64","Tr005","Tr001","DEDE","1/12/2016","0");
+("61","Tr005","Tr001","xcvxvx","11/10/2016","1"),
+("62","Tr003","Tr001","hhaha","08/11/2016","1"),
+("63","Tr001","Tr004","Hello","30/11/2016","1"),
+("64","Tr005","Tr001","DEDE","1/12/2016","1"),
+("65","Tr001","Tr011","Hello","08/12/2016","1");
 
 
 
@@ -146,9 +156,9 @@ INSERT INTO department VALUES
 ("11","HR Department","8","#008000","NO","approved"),
 ("12","Finance Department","4","#0000ff","NO","approved"),
 ("13","IT Department","4","#ff8000","NO","approved"),
-("14","Server Department","2","#9d009d","YES","approved"),
+("14","Server Department","8","#f4fa1f","YES","approved"),
 ("15","Security Department","0","#000000","YES","rejected"),
-("16","Server Room Department","1","#808080","YES","approved");
+("16","Server Room Department","5","#808080","YES","approved");
 
 
 
@@ -190,8 +200,9 @@ CREATE TABLE `employee` (
 
 
 INSERT INTO employee VALUES
-("Tr001","Sajitha Liyanage","943423547V","male","sajithaliyanage@gmail.com","$2y$10$S0hu6vLpkXEWXecvx/Q35.EFoy/45Pu9uB0gMboA8tun6L0rtZJNK","0716849672","null","2","1","0","11"),
+("Tr001","Sajitha Liyanage","943423547V","male","sajithaliyanage@gmail.com","$2y$10$S0hu6vLpkXEWXecvx/Q35.EFoy/45Pu9uB0gMboA8tun6L0rtZJNK","0716849672","../uploads/profilePicture/Tr001/profile.png","2","1","0","11"),
 ("Tr002","Sulochana Kodituwakku","907548659V","male","sajithaliyanage@gmail.com","$2y$10$hEJE8pkERFKmDZvQ5/P0a.FVE.UB6ofHTOJv/LIJ0tip.a62fo0vq","0716849672","../uploads/profilePicture/Tr002/profile.png","1","1","0","11"),
+("Tr0020","Methmal Prabanjana","940290448V","male","methmal@gmail.com","$2y$10$KCf6qaF6U4OCz8J/N/LxeOXMA8Lq492yKvWczAaV1L35YKR6DJwQa","0719563289","null","2","1","1","14"),
 ("Tr003","S.M. Samarainghe","675236981V","male","sajithaliyanage@gmail.com","$2y$10$RKa41WAN/lZQ889AO3qiDuNml71tQ6hxRK2tbGE5lWtLdAn/ke2Ii","0716849672","../uploads/profilePicture/Tr003/profile.jpg","1","1","0","11"),
 ("Tr004","Sajini Koongahawattage","902364587V","female","sajithaliyanage@gmail.com","$2y$10$TL4HlYu7J.2QdX9Wu7dA3.8jc7d5GnZ7nB8aZE3vgbRwPco3ryVl.","0716849672","../uploads/profilePicture/Tr004/profile.jpg","1","1","0","11"),
 ("Tr005","Umesh Jayasinghe","943323547V","male","sajithaliyanage@gmail.com","$2y$10$DksDUHccDe8JtJfKA793q.7VfK.Fz8NGFW3vcSynttbGBb8f1.ml.","0716849672","../uploads/profilePicture/Tr005/profile.jpg","3","1","0","11"),
@@ -199,14 +210,22 @@ INSERT INTO employee VALUES
 ("Tr007","Gothami Karunarathne","943323547V","female","sajithaliyanage@gmail.com","$2y$10$N1KezglFJl9mB2ciOajv5OMUzVoqJdDE0c.0tjD54ewvUzCUv9RkG","0716849672","null","2","1","0","12"),
 ("Tr010","Nilaksha Deemantha","907548659V","male","sajithaliyanage@gmail.com","$2y$10$x35UVhzCyoobqKJg.6LsseybVp/.GzRw/QhxVmvRlocCTcU4ayCFa","0716849672","null","5","2","0","13"),
 ("Tr011","Kasun Lakmal","675236981V","male","sajithaliyanage@gmail.com","$2y$10$5z.Ki6OCjtSR3KWwadqgx.ukEfp3/EaO3p26iraSRid00tReYyPF.","0716849672","null","1","1","1","14"),
-("Tr012","Ishika Godage","943423547V","male","sajithaliyanage@gmail.com","$2y$10$LVp4cCsNi2u8KH9ypPQ.W.hNE2neUJKAtVW2pVcLUKHxIygm7ovKm","0716849672","null","3","2","2","16"),
+("Tr012","Ishika Godage","943423547V","male","sajithaliyanage@gmail.com","$2y$10$LVp4cCsNi2u8KH9ypPQ.W.hNE2neUJKAtVW2pVcLUKHxIygm7ovKm","0716849672","null","3","2","5","16"),
 ("Tr013","Wishwa Sudantha","943423547V","male","sajithaliyanage@gmail.com","$2y$10$1g8I5o3Wi.5t09L5CzcEBObTcwqMDIvGzmGkna4F9hhDst9q8E4rC","0716849672","null","3","2","1","14"),
 ("Tr014","Sandunika Dissanayake","943423547V","female","sajithaliyanage@gmail.com","$2y$10$UO9quEckOdv6DwsNCkIrSOqt6.fHnQTt55z5QfAvun6UokWkYNvjm","0716849672","null","1","1","0","11"),
 ("Tr015","Buddhi Wathsala","943423547V","male","sajithaliyanage@gmail.com","$2y$10$tWt08ueVXOkTWd4.Phukhuur6/CWnSAvkTG9hFUCbBmcw4RoxrSD2","0716849672","null","3","1","0","11"),
 ("Tr016","Himashini Silva","951236547V","female","sajithaliyanage@gmail.com","$2y$10$vlEaLzzOIhFFisJvcM8dhekNH14moFxwnfNQtoVdMIsq9yIoJCwS.","0716849672","null","2","1","0","12"),
 ("Tr017","Madura Herath","902364587V","male","sajithaliyanage@gmail.com","$2y$10$Zz2sfewZsj8cGuFycgn.gu4XBbheCiOAUCAKys/xf51LHJXiXiCZO","0716849672","null","3","1","0","13"),
 ("Tr018","Roshan Madushanka","943323547V","male","sajithaliyanage@gmail.com","$2y$10$yJ5rtmLxjRCHru4XpA1OsONajnFj44bmPpuNvweJW16wnpa0EjII6","0716849672","null","5","1","0","12"),
-("Tr019","Sajini Shanilka","943423547V","female","sajithaliyanage@gmail.com","$2y$10$2leH1iRxaedcN7JlHsXXWu4dAJaOKpBvIdnssgPsLrHi6.XT77krW","0716849672","null","1","1","0","13");
+("Tr019","Sajini Shanilka","943423547V","female","sajithaliyanage@gmail.com","$2y$10$2leH1iRxaedcN7JlHsXXWu4dAJaOKpBvIdnssgPsLrHi6.XT77krW","0716849672","null","1","1","0","13"),
+("Tr021","Milan Perera","940290447V","male","Milan@gmail.com","$2y$10$EUPjaCC8OJZClPqM99wch.0IcGtstxJbvcSpp6.MVYkkgrodvH7/i","0714568921","null","3","1","2","14"),
+("Tr022","Rahal Jayawardena","932456891V","male","rahal@gmail.com","$2y$10$GTwqZmfD/RKs2pp4YkjaeuL1pyubN4kurC3ezC3KqM0/FqB.BOXCe","0777345623","null","5","1","3","14"),
+("Tr023","Chamrith jayasinghe","940245632V","male","chmrith@gmail.com","$2y$10$/06QezE6LJDyfZecsNK.QO7nMbhMyXzKOIR3D/R4omPumcKOUcVBK","0755123456","null","1","1","4","14"),
+("Tr024","Dilushan Dilu","940265894V","male","dilushan@gmail.com","$2y$10$V9tUCt5xiB7UIajvQI4CvuNrB8gNFbhygYjn8nuvFrUiMAWi50ELO","0754236521","null","1","1","6","16"),
+("Tr025","Eranga Ravindu","940290447V","male","eranga@gmail.com","$2y$10$FLp7R/CyvgrMaIqnCupVLOVNKt67TWnz/YRTfuvYTApIvKB1xIwpq","0755102456","null","1","1","7","16"),
+("Tr026","Ayodhya Karunananyake","940214563V","male","ayodhya@gmail.com","$2y$10$5Ae4cSroxZhySxu8Hvru7OhQvYzsqgVn9plg0qZwrMO2K7Mv7wmZO","0784561234","null","1","1","8","16"),
+("Tr027","Malith senaweera","940231564V","male","malith@gmai.com","$2y$10$zh/j/dWBiZ9eW0eHrH7fZuoxm4Z4ouWeYN971S.LmxeLAnIyFiZAW","071256956","null","1","1","2","14"),
+("Tr028","delushan dilu","9456231456","male","diushan@gmail.com","$2y$10$7sItE1CNto.mcYMfvKCO/ON3c8u3Q/b8GHsXwl/1Lp7sWTlS0g87K","0712546823","null","1","1","2","14");
 
 
 
@@ -228,6 +247,10 @@ INSERT INTO employee_leave_count VALUES
 ("Tr002","2","20"),
 ("Tr002","3","10"),
 ("Tr002","6","2"),
+("Tr0020","1","42"),
+("Tr0020","2","20"),
+("Tr0020","3","10"),
+("Tr0020","6","2"),
 ("Tr003","1","42"),
 ("Tr003","2","20"),
 ("Tr003","3","10"),
@@ -236,11 +259,11 @@ INSERT INTO employee_leave_count VALUES
 ("Tr004","2","20"),
 ("Tr004","3","10"),
 ("Tr004","6","2"),
-("Tr005","1","37"),
-("Tr005","2","20"),
+("Tr005","1","34"),
+("Tr005","2","1"),
 ("Tr005","3","8"),
-("Tr005","6","5"),
-("Tr006","1","24"),
+("Tr005","6","1"),
+("Tr006","1","21"),
 ("Tr006","2","12"),
 ("Tr006","3","11"),
 ("Tr006","6","2"),
@@ -277,7 +300,7 @@ INSERT INTO employee_leave_count VALUES
 ("Tr014","3","10"),
 ("Tr014","6","2"),
 ("Tr015","1","42"),
-("Tr015","2","25"),
+("Tr015","2","24"),
 ("Tr015","3","12"),
 ("Tr015","6","5"),
 ("Tr016","1","42"),
@@ -295,7 +318,40 @@ INSERT INTO employee_leave_count VALUES
 ("Tr019","1","42"),
 ("Tr019","2","20"),
 ("Tr019","3","10"),
-("Tr019","6","2");
+("Tr019","6","2"),
+("Tr021","1","42"),
+("Tr021","2","25"),
+("Tr021","3","12"),
+("Tr021","6","5"),
+("Tr022","1","38"),
+("Tr022","2","26"),
+("Tr022","3","12"),
+("Tr022","6","5"),
+("Tr023","1","42"),
+("Tr023","2","20"),
+("Tr023","3","10"),
+("Tr023","6","2"),
+("Tr024","1","42"),
+("Tr024","2","20"),
+("Tr024","3","10"),
+("Tr024","6","2"),
+("Tr025","1","42"),
+("Tr025","2","20"),
+("Tr025","3","10"),
+("Tr025","6","2");
+INSERT INTO employee_leave_count VALUES
+("Tr026","1","42"),
+("Tr026","2","20"),
+("Tr026","3","10"),
+("Tr026","6","2"),
+("Tr027","1","42"),
+("Tr027","2","20"),
+("Tr027","3","10"),
+("Tr027","6","2"),
+("Tr028","1","42"),
+("Tr028","2","20"),
+("Tr028","3","10"),
+("Tr028","6","2");
 
 
 
@@ -327,7 +383,7 @@ CREATE TABLE `general_employee` (
   KEY `comp_id` (`comp_id`),
   KEY `dept_id` (`dept_id`),
   CONSTRAINT `FK_general_employee_employee` FOREIGN KEY (`comp_id`) REFERENCES `employee` (`comp_id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 
 INSERT INTO general_employee VALUES
@@ -336,7 +392,14 @@ INSERT INTO general_employee VALUES
 ("14","Tr011","14"),
 ("15","Tr012","16"),
 ("16","Tr014","11"),
-("17","Tr015","11");
+("17","Tr015","11"),
+("18","Tr0020","14"),
+("19","Tr021","14"),
+("20","Tr022","14"),
+("21","Tr023","14"),
+("22","Tr024","16"),
+("23","Tr025","16"),
+("24","Tr028","14");
 
 
 
@@ -346,16 +409,22 @@ CREATE TABLE `group_detail` (
   `dept_id` int(11) NOT NULL,
   `group_name` varchar(50) NOT NULL,
   `no_of_employees` int(11) NOT NULL,
+  `shift_id` int(11) DEFAULT '-1',
+  `today` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`group_id`),
   KEY `dept_id` (`dept_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 
 INSERT INTO group_detail VALUES
-("1","14","Group 1","2"),
-("2","14","Group 2","0"),
-("3","14","Group 3","0"),
-("4","14","Group 4","0");
+("1","14","Group 1","3","1","09-01-2017"),
+("2","14","Group 2","3","2","09-01-2017"),
+("3","14","Group 3","1","3","09-01-2017"),
+("4","14","Group 4","1","0","09-01-2017"),
+("5","16","Group A","0","-1","09-01-2017"),
+("6","16","Group B","1","-1","09-01-2017"),
+("7","16","Group C","2","-1","09-01-2017"),
+("8","16","Group D","1","-1","09-01-2017");
 
 
 
@@ -508,7 +577,7 @@ CREATE TABLE `manager` (
   KEY `comp_id` (`comp_id`),
   KEY `dept_id` (`dept_id`),
   CONSTRAINT `FK_manager_employee` FOREIGN KEY (`comp_id`) REFERENCES `employee` (`comp_id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 
 INSERT INTO manager VALUES
@@ -517,7 +586,9 @@ INSERT INTO manager VALUES
 ("12","Tr016","12"),
 ("13","Tr017","13"),
 ("14","Tr018","12"),
-("15","Tr019","13");
+("15","Tr019","13"),
+("16","Tr026","16"),
+("17","Tr027","14");
 
 
 
@@ -532,11 +603,12 @@ CREATE TABLE `medical_report` (
   PRIMARY KEY (`med_id`),
   KEY `comp_id` (`comp_id`),
   KEY `apply_leave_id` (`apply_leave_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 
 INSERT INTO medical_report VALUES
-("1","Tr005","18","03/12/2016","approved","../uploads/medicalReport/18/15272268_1328535453877988_5891635308864634948_o.jpg");
+("1","Tr005","18","03/12/2016","approved","../uploads/medicalReport/18/15272268_1328535453877988_5891635308864634948_o.jpg"),
+("3","Tr005","17","08/12/2016","approved","../uploads/medicalReport/17/sajithaliyanage CV.pdf");
 
 
 
@@ -561,21 +633,25 @@ INSERT INTO shift_type VALUES
 
 CREATE TABLE `shifting` (
   `shifting_id` int(11) NOT NULL AUTO_INCREMENT,
-  `emp_id` int(11) NOT NULL,
+  `emp_id` varchar(10) NOT NULL,
   `shiftingForDate` varchar(10) NOT NULL,
-  `shitingForSession` varchar(10) NOT NULL,
+  `shitingForSession` varchar(50) NOT NULL,
   `changingGroup` varchar(10) NOT NULL,
   `replace_emp_id` varchar(20) NOT NULL,
   `recovery_date` varchar(10) NOT NULL,
-  `recovery_time` varchar(10) NOT NULL,
+  `recovery_time` varchar(50) NOT NULL,
   `reason` varchar(255) NOT NULL,
   `status` varchar(50) NOT NULL,
   PRIMARY KEY (`shifting_id`),
   KEY `replace_emp_id` (`replace_emp_id`),
   KEY `emp_id` (`emp_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 
+INSERT INTO shifting VALUES
+("9","Tr011","2016/12/07","Night Session","2","Tr021","2016/12/08","Morning Session","bb","waiting"),
+("10","Tr012","2016/12/09","Morning Session","6","Tr024","2016/12/16","Morning Session","ill","waiting"),
+("11","Tr011","2016/12/07","Night Session","2","Tr021","2016/12/08","Morning Session","ill","waiting");
 
 
 

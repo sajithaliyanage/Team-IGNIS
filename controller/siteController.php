@@ -17,11 +17,14 @@ if(isset($_SESSION['empID']) && !empty($_SESSION['empID'])) {
 
 }
 
-
+//Session Destroy in 60 seconds
 //if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 60)) {
 //    session_unset();
 //    session_destroy();
+//    header('Location:http://localhost/lms/Team-Ignis/index.php');
 //}
 //$_SESSION['LAST_ACTIVITY'] = time();
+//
+
 
 ?>

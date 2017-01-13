@@ -78,16 +78,6 @@ $managerCount = $query->rowCount();
                     <div id="salary_report"></div>
                 </div>
 
-                <div class="col-sm-12 col-xs-12 nortification-box-top padding-box" style="padding-bottom:30px;  margin-top:20px;">
-                    <h5 class="nortification-box-heading"><i class="fa fa-flag icon-margin-right"aria-hidden="true"></i>
-                        Reset Leave Counts</h5>
-                    <hr>
-                    <h4 style="margin-top:20px;">In this section can reset all the employee leave counts <br> <small><i>(For the New Year)</i></small></h4>
-
-                    <button class="btn btn-primary btn-md pull-right" type="submit" style="margin-top:-40px; margin-right:30px;"  data-toggle="modal" data-target="#resetData">Reset</button>
-
-                </div>
-
                 <?php
                     $sqls = "SELECT email from employee where comp_id=:id";
                     $querys = $pdo->prepare($sqls);
@@ -148,6 +138,46 @@ $managerCount = $query->rowCount();
                     </div>
                 </div>
 
+                <div class="col-sm-12 col-xs-12 nortification-box-top padding-box" style="padding-bottom:30px;  margin-top:20px;">
+                    <h5 class="nortification-box-heading"><i class="fa fa-flag icon-margin-right"aria-hidden="true"></i>
+                        Reset Leave Counts</h5>
+                    <div class="alert-user" style="<?php if(!isset($_GET['reset'])){echo 'display:none;';}?>">Leave Counts Are Reseted Successfully!</div>
+                    <hr>
+                    <h4 style="margin-top:20px;">In this section can reset all the employee leave counts <br> <small><i>(For the New Year)</i></small></h4>
+
+                    <button class="btn btn-primary btn-md pull-right" type="submit" style="margin-top:-40px; margin-right:30px;"  data-toggle="modal" data-target="#resetData">Reset Leave Count</button>
+
+                </div>
+
+                <div id="resetData" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Reset All Leave Counts</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to do this action ? </p>
+                                <center>
+                                    <img id="loading" src="images/loading.gif" style="width:40px; display:none;"/>
+                                </center>
+
+                            </div>
+                            <form action="module/resetLeaves.php" method="POST">
+                                <div class="modal-footer">
+                                    <button onclick="loading()" type="submit" class="btn btn-success" >Yes</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
             </div>
 
 
@@ -169,6 +199,24 @@ $managerCount = $query->rowCount();
         xhttp.open("POST","module/salaryReport.php" ,true);
         xhttp.send();
     }
+</script>
+<script type="text/javascript">
+
+    function loading(){
+        var myDiv = document.getElementById("loading"),
+
+            show = function(){
+                myDiv.style.display = "block";
+                setTimeout(hide, 5000); // 5 seconds
+            },
+
+            hide = function(){
+                myDiv.style.display = "none";
+            };
+
+        show();
+    }
+
 </script>
 
 

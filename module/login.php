@@ -1,15 +1,16 @@
 <?php
 include('../config/connect.php');
 include('../module/class/Employee.php');
-include('../config/backup.php');
-//include('../module/rosterShiftAssign.php');
+include ('xssValidation.php');
+//include('../config/backup.php');
+$pdo = connect();
 $emp=new Employee;
 
-$pdo = connect();
+//include('rosterShiftAssign.php');
 $isValidUser = false;
 
-$companyID = $_POST['companyID'];
-$password = $_POST['password'];
+$companyID = xss_clean($_POST['companyID']);
+$password = xss_clean($_POST['password']);
 
 
 try{
