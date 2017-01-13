@@ -197,7 +197,7 @@ if(!$isLoggedin){
 
                                             <div class="col-xs-8">
                                                 <select name="leave_priority" class="form-control">
-                                                    <option value="modarate">Modarate</option>
+                                                    <option value="modarate">Moderate</option>
                                                     <option value="high">High</option>
                                                 </select>
                                             </div>
