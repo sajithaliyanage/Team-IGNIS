@@ -347,6 +347,10 @@ if(!$isLoggedin){
                     document.getElementById("showdate1").innerHTML = xhttp.responseText;
                     document.getElementById("startdate").style.color = "red";
                     document.getElementById("service_name").value = "Invalid";
+                }else if(xhttp.responseText == 'This is a Holiday'){
+                    document.getElementById("showdate1").innerHTML = xhttp.responseText;
+                    document.getElementById("startdate").style.color = "red";
+                    document.getElementById("service_name").value = "Invalid";
                 }else{
                     document.getElementById("startdate").style.color = "#555";
                     document.getElementById("showdate1").innerHTML = '';
@@ -367,6 +371,10 @@ if(!$isLoggedin){
             if (xhttp.readyState == 4 && xhttp.status == 200) {
 
                 if(xhttp.responseText == 'Invalid Selection'){
+                    document.getElementById("showdate").innerHTML = xhttp.responseText;
+                    document.getElementById("enddate").style.color = "red";
+                    document.getElementById("service_name").value = "Invalid";
+                }else if(xhttp.responseText == 'This is a Holiday'){
                     document.getElementById("showdate").innerHTML = xhttp.responseText;
                     document.getElementById("enddate").style.color = "red";
                     document.getElementById("service_name").value = "Invalid";
