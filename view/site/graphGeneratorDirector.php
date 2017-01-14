@@ -1,23 +1,23 @@
 <?php
-error_reporting(0);
-include('../../controller/siteController.php');
-include('../../config/connect.php');
-$pdo = connect();
+  error_reporting(0);
+  include('../../controller/siteController.php');
+  include('../../config/connect.php');
+  $pdo = connect();
 
-if(!$isLoggedin && $empRole!="director"){
-    header('Location:../../index.php');
-}
+  if(!$isLoggedin && $empRole!="director"){
+      header('Location:../../index.php');
+  }
 
 //get post request data from generate graph
-$departmnt =$_POST['dept_name'];
-$sDate =$_POST['start_date'];
-$eDate = $_POST['end_date'];
-$sDate=str_replace('/', '-', $sDate);
-$startDate=date("Y-m-d", strtotime($sDate) );
-$eDate=str_replace('/', '-', $eDate);
-$endDate=date("Y-m-d", strtotime($eDate) );
-$d1=strtotime($startDate);
-$d2=strtotime($endDate);
+  $departmnt =$_POST['dept_name'];
+  $sDate =$_POST['start_date'];
+  $eDate = $_POST['end_date'];
+  $sDate=str_replace('/', '-', $sDate);
+  $startDate=date("Y-m-d", strtotime($sDate) );
+  $eDate=str_replace('/', '-', $eDate);
+  $endDate=date("Y-m-d", strtotime($eDate) );
+  $d1=strtotime($startDate);
+  $d2=strtotime($endDate);
 ?>
 
 <!DOCTYPE html>
@@ -104,12 +104,12 @@ $d2=strtotime($endDate);
 ?>
         <!---start top boxes--->
         <div class="row padding-row">
-          <div class="col-sm-2 col-xs-12 padding-box">
+          <div class="col-sm-1 col-xs-12 padding-box">
               <div class="row">
               </div>
           </div>
 
-            <div class="col-sm-3 col-xs-12 padding-box">
+            <div class="col-sm-4 col-xs-12 padding-box">
                 <div class="row">
                       <div class="col-xs-12 main-box-1-1">
                           <div class="row">
@@ -122,8 +122,8 @@ $d2=strtotime($endDate);
                                     $numrows = intval($numrow);
                                     $precetage=($n/($numrows))*100;
                                 ?>
-                                <center><h2 class="box-count"><?php if($n<10){echo "0".$n;}else{echo $n;}?></h2></center>
-                                <h3 class="box-head">Today Presents</h3>
+                                <right><h1 class="box-count"  style="font-size:45px;"><?php if($n<10){echo "0".$n;}else{echo $n;}?></h1></right>
+                                <h3 class="box-head" style="margin-top:-2px;">Today Presents</h3>
                               </div>
                               <div class="col-xs-4">
                                   <i class="fa fa-group fa-5x box-icon" aria-hidden="true"></i>
@@ -132,8 +132,8 @@ $d2=strtotime($endDate);
                       </div>
                   </div>
                   <div class="row">
-                      <div class="col-xs-12  main-box-1-2" style="color:#FFFFFF;">
-                           <center><h4><?php echo round($precetage);?>%</h4></center>
+                      <div class="col-xs-12  main-box-1-2" style="color:#FFFFFF;margin-top:-3px;">
+                           <center><h5>Precentage -<?php echo round($precetage);?>%</h5></center>
                       </div>
                   </div>
             </div>
@@ -142,7 +142,7 @@ $d2=strtotime($endDate);
               <div class="row">
               </div>
           </div>
-          <div class="col-sm-3 col-xs-12 padding-box">
+          <div class="col-sm-4 col-xs-12 padding-box">
               <div class="row">
                     <div class="col-xs-12 main-box-4-1">
                         <div class="row">
@@ -156,22 +156,22 @@ $d2=strtotime($endDate);
                                 $absent=intval($numrows-$n);
                                 $precetage=($absent/($numrows))*100;
                               ?>
-                              <center><h2 class="box-count"><?php if($absent<10){echo "0".$absent;}else{echo $absent;}?></h2></center>
-                              <h3 class="box-head">Today Absents</h3>
+                              <right><h1 class="box-count" style="font-size:45px;"><?php if($absent<10){echo "0".$absent;}else{echo $absent;} ?></h1></right>
+                              <h3 class="box-head" style="margin-top:-2px;">Today Absents</h3>
                             </div>
                             <div class="col-xs-4">
-                                <i class="fa fa-eye fa-5x box-icon" aria-hidden="true"></i>
+                                <i class="fa fa-group fa-5x box-icon" aria-hidden="true"></i>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12  main-box-4-2" style="color:#FFFFFF;">
-                         <center><h4><?php echo round($precetage);?>%</h4></center>
+                    <div class="col-xs-12  main-box-4-2" style="color:#FFFFFF;margin-top:-3px;">
+                         <center><h5>Precentage -<?php echo round($precetage);?>%</h5></center>
                     </div>
                 </div>
           </div>
-          <div class="col-sm-2 col-xs-12 padding-box">
+          <div class="col-sm-1 col-xs-12 padding-box">
               <div class="row">
               </div>
           </div>
@@ -183,61 +183,9 @@ $d2=strtotime($endDate);
             <div class="row">
                 <div class="col-xs-12 nortification-box-top">
                     <h5 class="nortification-box-heading"><i class="fa fa-bar-chart icon-margin-right" aria-hidden="true"></i>
-                          Overall Attendance Analysis</h5>
+                          Department Wise Attendance Analysis</h5>
                       <hr>
-                      <!-- filtering option start -->
-                      <form role="form" data-toggle="validator" action="graphGeneratorDirector.php" method="post">
-                          <div class="department-add">
 
-                              <div class="col-xs-12">
-                                <div class="form-group">
-                                    <div class="col-xs-1">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-xs-1 control-label form-lable">Department:</label>
-                                    <div class="col-xs-3">
-                                        <select name="dept_name" class="form-control">
-                                          <option value="YES">-All-</option>
-                                          <?php
-                                            $sql="SELECT dept_name,dept_id from department where currentStatus=:approve";
-                                            $query = $pdo->prepare($sql);
-                                            $query->execute(array('approve'=>"approved"));
-                                            $d_name = $query->fetchAll();
-                                            foreach ($d_name as $r){
-                                              echo "<option value=". $r['dept_id'] .">"; echo $r['dept_name']; echo "</option>";
-
-                                            }
-                                          ?>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                  <div class="form-group">
-                                      <div class="col-xs-3">
-                                          <input id="example1" name="start_date" type="text"
-                                                 placeholder="Start Date"
-                                                 class="form-control input-md" required>
-                                      </div>
-                                  </div>
-
-                                  <div class="form-group">
-                                      <div class="col-xs-3">
-                                          <input id="example2" name="end_date" type="text"
-                                                 placeholder="End Date"
-                                                 class="form-control input-md" required>
-                                      </div>
-                                  </div>
-
-                                  <div class="col-xs-2">
-                                    <button class="btn btn-primary btn-lg pull-right submit-button" style="width: 150px " type="submit">Fitler</button>
-                                </div>
-                              </div>
-                          </div>
-                      </form>
-                    <!-- filtering option end -->
-                    <br><br><br><br><br><br>
 
   <?php
         //take the dates within the range
