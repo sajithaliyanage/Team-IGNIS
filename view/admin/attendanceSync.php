@@ -7,6 +7,7 @@ $pdo = connect();
 if(!$isLoggedin){
     header('Location:../../index.php');
 }
+
 $dateLastPressed = date('Y-m-d',strtotime("-1 days"));
 $today = date('Y-m-d');
 $count =0;
@@ -18,21 +19,13 @@ if(isset($_GET['number'])){
 try{
 
     $todayToSync = date('d/m/Y');
-    $sql = "INSERT IGNORE INTO attendance_syncing_status(date)  VALUES ('$todayToSync')";
-
-    $pdo->exec($sql);
-
-   // include_once('../../module/getAbsentListWithoutApproval.php');
-
-
+    $sql = "INSERT IGNORE INTO attendance_syncing_status(date,status)  VALUES (:log,:log2)";
+    $query = $pdo->prepare($sql);
+    $query->execute(array('log'=>$todayToSync,'log2'=>'0'));
 
 }catch(Exception $e){
-
-
     echo $e;
 }
-
-
 
 ?>
 
