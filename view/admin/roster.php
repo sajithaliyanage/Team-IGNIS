@@ -369,6 +369,14 @@ $deptID = null;
                                             <div class="col-xs-12 nortification-box-top">
                                                 <h5 class="nortification-box-heading"><i class="fa fa-plus icon-margin-right" aria-hidden="true"></i>
                                                     Add New Group</h5>
+                                                <div class="alert-user" style="<?php if (!isset($_GET['group'])) {
+                                                    echo 'display:none;';
+                                                } ?> color:green;">Group Added successfully!
+                                                </div>
+                                                <div class="alert-user" style="<?php if (!isset($_GET['error'])) {
+                                                    echo 'display:none;';
+                                                } ?> color:#d43f3a">Invalid Form Actions!
+                                                </div>
                                                 <hr>
                                                 <form role="form" data-toggle="validator" action="module/addGroup.php" method="post">
                                                     <div class="department-add">
@@ -398,7 +406,8 @@ $deptID = null;
                                                                 <label class="col-xs-5 control-label form-lable">Group Name :</label>
                                                                 <div class="col-xs-7">
                                                                     <input id="service_name" name="group_name" type="text" placeholder=""
-                                                                           class="form-control input-md" required>
+                                                                           class="form-control input-md" required onblur="GroupValidation(this.value)">
+                                                                    <p id="demo5" style="color:red;font-size: 12px; margin-top:5px;margin-left: 5px"></p>
                                                                 </div>
                                                             </div>
                                                             <br>
@@ -507,7 +516,6 @@ $deptID = null;
             xhttp.send();
         }
         function Nicvalidation(str) {
-            groupId = str;
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -517,7 +525,7 @@ $deptID = null;
             xhttp.open("GET", "module/ajaxRosterAddEmployee.php?q4=" + str, true);
             xhttp.send();
         }function Emailvalidation(str) {
-            groupId = str;
+
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -528,7 +536,7 @@ $deptID = null;
             xhttp.send();
 
         }function PhoneNovalidation(str) {
-            groupId = str;
+
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -536,6 +544,16 @@ $deptID = null;
                 }
             }
             xhttp.open("GET", "module/ajaxRosterAddEmployee.php?q6=" + str, true);
+            xhttp.send();
+        }function GroupValidation(str) {
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    document.getElementById("demo5").innerHTML = xhttp.responseText;
+                }
+            }
+            xhttp.open("GET", "module/ajaxRosterAddGroup.php?q7=" + str, true);
             xhttp.send();
         }
     </script>
