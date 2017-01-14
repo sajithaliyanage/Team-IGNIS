@@ -428,6 +428,12 @@ if(!$isLoggedin){
     $querys->execute(array('log2'=>'@'));
     $results = $querys->fetchAll();
 ?>
+<script type="text/javascript">
+    function readOnly() {
+        document.getElementById("service_name").readOnly = true;
+    }
+    window.onload = readOnly;
+</script>
 
 <script>
 
