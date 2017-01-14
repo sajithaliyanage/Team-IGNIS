@@ -4,6 +4,8 @@ include('../../controller/siteController.php');
 include('../../config/connect.php');
 $pdo = connect();
 
+include_once('../../module/rosterShiftAssign.php');
+
 if (!$isLoggedin) {
     header('Location:../../index.php');
 }
