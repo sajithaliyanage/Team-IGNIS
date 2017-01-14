@@ -255,7 +255,7 @@ if(!$isLoggedin){
                                             <label class="col-xs-4 control-label form-lable">Day Count:</label>
 
                                             <div class="col-xs-8">
-                                                <input id="service_name" name="numDays" readonly type="text"
+                                                <input id="service_name" name="numDays" type="text"
                                                        placeholder="" class="form-control input-md" required>
                                             </div>
                                         </div>
@@ -323,6 +323,11 @@ if(!$isLoggedin){
 <script src="../../public/js/fullcalendar.min.js"></script>
 
 
+<script>
+    $(document).ready(function () {
+        $('#service_name').prop('readonly', true);
+    }
+</script>
 <script>
     function checkLeave(str) {
         var xhttp = new XMLHttpRequest();
@@ -418,9 +423,9 @@ if(!$isLoggedin){
     $results = $querys->fetch();
     $deptID = $results['dept_id'];
 
-    $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE calendar.dept_id IN (:log,:log1,:log2)";
+    $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE calendar.dept_id IN (:log,:log1,:log2,:log3)";
     $query = $pdo->prepare($smt);
-    $query ->execute(array('log'=>'0','log1'=>'@','log2'=>$deptID));
+    $query ->execute(array('log'=>'0','log1'=>'@','log2'=>$deptID,'log3'=>'#'));
     $result = $query->fetchAll();
 
     $smts = "SELECT * FROM calendar WHERE dept_id=:log2";

@@ -277,12 +277,12 @@ if(!$isLoggedin){
 
 
         $('#startdate').datepicker({
-            dateFormat: "dd/mm/yy",
+            dateFormat: "yy-mm-dd",
             minDate: +0
         });
         $('#enddate').datepicker({
             minDate: +0,
-            dateFormat: "dd/mm/yy"
+            dateFormat: "yy-mm-dd"
         });
 
 
@@ -294,10 +294,10 @@ if(!$isLoggedin){
     $(document).ready(function () {
 
         $('#example1').datepicker({
-            format: "yyyy-mm-dd"
+            format: "yy-mm-dd"
         });
         $('#example2').datepicker({
-            format: "yyyy-mm-dd"
+            format: "yy-mm-dd"
         });
 
     });
