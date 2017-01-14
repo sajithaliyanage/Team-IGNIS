@@ -9,9 +9,7 @@ if(!$isLoggedin && $empRole!="admin"){
 }
 $deptID = null;
 
-if(isset($_GET['id'])){
-    $deptID =$_GET['id'];
-}
+
 
 
 ?>
@@ -179,6 +177,10 @@ if(isset($_GET['id'])){
                                                 <h5 class="nortification-box-heading"><i class="fa fa-plus icon-margin-right" aria-hidden="true"></i>
                                                     Add New Employee</h5>
                                                 <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">New employee added successfully!</div>
+                                                <div class="alert-user" style="<?php if (!isset($_GET['error'])) {
+                                                    echo 'display:none;';
+                                                } ?> color:#d43f3a">Invalid Form Actions!
+                                                </div>
                                                 <hr>
 
                                                 <form role="form" data-toggle="validator" action="module/addRosterEmployee.php" method="post">
@@ -188,17 +190,9 @@ if(isset($_GET['id'])){
                                                             <div class="form-group">
                                                                 <label class="col-sm-5 col-xs-12 control-label form-lable">Employee Department :</label>
                                                                 <div class="col-sm-7 col-xs-12">
-                                                                    <select  name="emp_department" class="form-control"  onchange = 'showUser3(this.value)'>
+                                                                    <select  name="emp_department" class="form-control"  onchange = 'changeDept(this.value)'>
                                                                         <?php
-                                                                            if(isset($_GET['id'])){
-                                                                                $sqls = "select dept_name from department WHERE currentStatus=:log and roster_status=:state and dept_id=:dID";
-                                                                                $querys = $pdo->prepare($sqls);
-                                                                                $querys->execute(array('log'=>"approved",'state'=>"YES",'dID'=>$deptID));
-                                                                                $results = $querys->fetch();
-
-                                                                                echo "<option value="; if(isset($_GET['id'])){echo $deptID;}else{ echo 'empty';} echo" >"; if(isset($_GET['id'])){echo $results['dept_name'];}else{ echo '- Select -';} echo"</option>";
-                                                                            }else{
-                                                                                echo "<option value='empty'>- Select -</option>";
+                                                                                echo "<option value='0'>--Select--</option>";
 
                                                                                 $sql = "select * from department WHERE currentStatus=:log and roster_status=:state";
                                                                                 $query = $pdo->prepare($sql);
@@ -208,7 +202,7 @@ if(isset($_GET['id'])){
                                                                                 foreach($result as $rs){
                                                                                     echo " <option value='".$rs['dept_id']."'>".$rs['dept_name']."</option>";
                                                                                 }
-                                                                            }
+
                                                                         ?>
 
                                                                     </select>
@@ -275,7 +269,8 @@ if(isset($_GET['id'])){
                                                                 <label class="col-sm-5 col-xs-12 control-label form-lable">Company ID :</label>
                                                                 <div class="col-sm-7 col-xs-12">
                                                                     <input id="service_name" name="emp_id" type="text" placeholder="Tryonics-01"
-                                                                           class="form-control input-md" required>
+                                                                           class="form-control input-md" required onblur="CompIdValidation(this.value)">
+                                                                    <p id="demo1" style="color:red;font-size: 12px; margin-top:5px;margin-left: 5px"></p>
                                                                 </div>
                                                             </div>
                                                             <br>
@@ -284,19 +279,10 @@ if(isset($_GET['id'])){
                                                             <div class="form-group">
                                                                 <label class="col-sm-5 col-xs-12 control-label form-lable">Group Name :</label>
                                                                 <div class="col-sm-7 col-xs-12">
-                                                                    <select  name="group_id" class="form-control">
-                                                                        <?php
-                                                                        $sql = "select * from group_detail WHERE dept_id=:deptID";
-                                                                        $query = $pdo->prepare($sql);
-                                                                        $query->execute(array('deptID'=>$deptID));
-                                                                        $result = $query->fetchAll();
-
-                                                                        foreach($result as $rs){
-                                                                            echo " <option value='".$rs['group_id']."'>".$rs['group_name']."</option>";
-                                                                        }
-                                                                        ?>
-
-                                                                    </select>
+                                                                    <div id="demo">
+                                                                        <input type="text" placeholder="- Select a Department -  "
+                                                                               class="form-control input-md" readonly="readonly">
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <br>
@@ -316,7 +302,9 @@ if(isset($_GET['id'])){
                                                             <div class="form-group">
                                                                 <label class="col-sm-5 col-xs-12 control-label form-lable">Employee NIC :</label>
                                                                 <div class="col-sm-7 col-xs-12">
-                                                                    <input id="service_name" name="emp_nic" type="text" placeholder="xxxxxxxxxV" class="form-control input-md" required>                                            </div>
+                                                                    <input id="service_name" name="emp_nic" type="text" placeholder="xxxxxxxxxV" class="form-control input-md" required onblur="Nicvalidation(this.value)">
+                                                                    <p id="demo2" style="color:red;font-size: 12px; margin-top:5px;margin-left: 5px"></p>
+                                                                </div>
                                                             </div>
                                                             <br>
                                                             <br>
@@ -336,7 +324,8 @@ if(isset($_GET['id'])){
                                                             <div class="form-group">
                                                                 <label class="col-sm-5 col-xs-12 control-label form-lable">Employee Email :</label>
                                                                 <div class="col-sm-7 col-xs-12">
-                                                                    <input id="service_name" name="emp_email" placeholder="" type="email" class="form-control input-md " required>
+                                                                    <input id="service_name" name="emp_email" placeholder="" type="email" class="form-control input-md " required onblur="Emailvalidation(this.value)">
+                                                                    <p id="demo3" style="color:red;font-size: 12px; margin-top:5px;margin-left: 5px"></p>
                                                                 </div>
                                                             </div>
                                                             <br>
@@ -354,7 +343,8 @@ if(isset($_GET['id'])){
                                                             <div class="form-group">
                                                                 <label class="col-sm-5 col-xs-12 control-label form-lable">Employee Telephone :</label>
                                                                 <div class="col-sm-7 col-xs-12">
-                                                                    <input id="service_name" name="emp_tele" placeholder="" type="text" class="form-control input-md " required>
+                                                                    <input id="service_name" name="emp_tele" placeholder="" type="text" class="form-control input-md " required onblur="PhoneNovalidation(this.value)">
+                                                                    <p id="demo4" style="color:red;font-size: 12px; margin-top:5px;margin-left: 5px"></p>
                                                                 </div>
                                                             </div>
                                                             <br>
@@ -495,7 +485,7 @@ if(isset($_GET['id'])){
             xhttp.send();
         }
 
-        function showUser2(str){
+        function changeDept(str){
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){
                 if(xhttp.readyState==4 && xhttp.status==200){
@@ -505,13 +495,48 @@ if(isset($_GET['id'])){
             xhttp.open("GET","module/ajaxRoster.php?q2="+str ,true);
             xhttp.send();
         }
+        function CompIdValidation(str) {
 
-
-        function showUser3(str) {
-            if(str != 'empty'){
-                var javascriptVariable = str;
-                window.location.href = "roster.php?id=" + javascriptVariable;
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    document.getElementById("demo1").innerHTML = xhttp.responseText;
+                }
             }
+            xhttp.open("GET", "module/ajaxRosterAddEmployee.php?q3=" + str, true);
+            xhttp.send();
+        }
+        function Nicvalidation(str) {
+            groupId = str;
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    document.getElementById("demo2").innerHTML = xhttp.responseText;
+                }
+            }
+            xhttp.open("GET", "module/ajaxRosterAddEmployee.php?q4=" + str, true);
+            xhttp.send();
+        }function Emailvalidation(str) {
+            groupId = str;
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    document.getElementById("demo3").innerHTML = xhttp.responseText;
+                }
+            }
+            xhttp.open("GET", "module/ajaxRosterAddEmployee.php?q5=" + str, true);
+            xhttp.send();
+
+        }function PhoneNovalidation(str) {
+            groupId = str;
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    document.getElementById("demo4").innerHTML = xhttp.responseText;
+                }
+            }
+            xhttp.open("GET", "module/ajaxRosterAddEmployee.php?q6=" + str, true);
+            xhttp.send();
         }
     </script>
 
