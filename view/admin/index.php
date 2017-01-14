@@ -438,7 +438,7 @@ function getDate(str) {
                     foreach ($results as $rs){
                 ?>
                     if (date.isSame('<?php echo $rs['start_date'];?>')) {
-                        cell.css("background-color", "#FE5C5C");
+                        cell.css("background-color", "#f9e712");
                     }
                 <?php
                 }

@@ -51,7 +51,7 @@ try {
             $result = $query->fetchAll();
             $rowNum = $query->rowCount();
 
-            echo "<select name='employeeDept' class='form-control'>";
+            echo "<select name='group_id' class='form-control'>";
             if($rowNum !=0){
                 foreach ($result as $rs) {
                     echo "<option value='" . $rs['group_id'] . "' >".$rs['group_name']  . '</option>';
@@ -62,7 +62,7 @@ try {
 
             echo "</select>";
         }else{
-            echo "<select name='employeeDept' class='form-control'>";
+            echo "<select name='group_id' class='form-control'>";
             echo "<option value='empty'>- Department not selected -</option>";
             echo "</select>";
         }
