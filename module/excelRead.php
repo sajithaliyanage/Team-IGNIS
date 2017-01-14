@@ -17,6 +17,9 @@ $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel1, 'Excel2007');
 $objWriter->save('../view/site/new.xlsx');
 
 
+include_once "../module/getAbsentListWithoutApproval.php";
+
+
 header('Location:../view/admin/attendanceSync.php');
 exit;
 

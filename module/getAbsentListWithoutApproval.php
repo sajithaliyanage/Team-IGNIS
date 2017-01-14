@@ -60,13 +60,13 @@ try {
 
      $exclude = array_diff($allIdArray,$id);
 
-    print_r($allIdArray);
-
-    echo "<br>";
-    echo "<br>";
-    echo "<br>";
-
-    print_r($exclude);
+//    print_r($allIdArray);
+//
+//    echo "<br>";
+//    echo "<br>";
+//    echo "<br>";
+//
+//    print_r($exclude);
 
 
 //selecting persons absent today without any leave approval
@@ -81,14 +81,14 @@ try {
 
     $result4 = $query3->fetchAll(PDO::FETCH_ASSOC);
 
-    echo "<br>";
-    echo "<br>";
-    echo "<br>";
+//    echo "<br>";
+//    echo "<br>";
+//    echo "<br>";
 
     $arraysize2 = count($result4);
 
-    echo "<br>";
-    echo "<br>";
+//    echo "<br>";
+//    echo "<br>";
 
 
     $approvedLeaveCompId = array();
@@ -101,19 +101,19 @@ try {
 
     $personsWithoutApprovedLeave = array_diff($exclude,$approvedLeaveCompId);
 
-
-    echo "<br>";
-    echo "<br>";
-    echo "<br>";
-    print_r($approvedLeaveCompId);
-
-    echo "<br>";
-    echo "<br>";
-    echo "<br>";
-
-
-
-    print_r($personsWithoutApprovedLeave);
+//
+//    echo "<br>";
+//    echo "<br>";
+//    echo "<br>";
+//    print_r($approvedLeaveCompId);
+//
+//    echo "<br>";
+//    echo "<br>";
+//    echo "<br>";
+//
+//
+//
+//    print_r($personsWithoutApprovedLeave);
 
     $size = count($personsWithoutApprovedLeave);
     $date = date('d/m/Y');
