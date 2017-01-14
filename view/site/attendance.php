@@ -9,34 +9,6 @@ if(!$isLoggedin){
 }
 ?>
 
-<script>
-    function tableToJson(table) {
-        var data = [];
-
-// first row needs to be headers
-        var headers = [];
-        for (var i=0; i<table.rows[0].cells.length; i++) {
-            headers[i] = table.rows[0].cells[i].innerHTML.toUpperCase().replace(/ /gi,'');
-        }
-        data.push(headers);
-// go through cells
-        for (var i=1; i<table.rows.length; i++) {
-
-            var tableRow = table.rows[i];
-            var rowData = {};
-
-            for (var j=0; j<tableRow.cells.length; j++) {
-
-                rowData[ headers[j] ] = tableRow.cells[j].innerHTML;
-
-            }
-
-            data.push(rowData);
-        }
-
-        return data;
-    }
-</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,12 +28,11 @@ if(!$isLoggedin){
     <link rel="stylesheet" href="../../public/css/attendance.css">
     <link href="../admin/css/datatable.css" rel="stylesheet">
 
-
 </head>
 
 <body style=" background-color: #eceff4 !important;">
 
-<?php include("../layouts/navbar.php") ?>
+<?php include("../layouts/navbar.php"); ?>
 
 <div class="container-fluid">
     <div class="row">
@@ -70,7 +41,7 @@ if(!$isLoggedin){
             <?php include("../layouts/leftbar.php") ?>
         </div>
 
-        <div class="col-sm-10 col-xs-12 col-sm-push-2 padding-box ">
+        <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2" style="position: relative;">
             <div class="row padding-row">
                 <div class="row">
                     <div class="col-lg-12">
@@ -86,8 +57,6 @@ if(!$isLoggedin){
                 </div>
             </div>
 
-
-            <br>
             <div class="row padding-row">
                 <div class="col-xs-12 padding-box">
                     <div class="row">
@@ -110,28 +79,23 @@ if(!$isLoggedin){
                                                        placeholder="Start Date"
                                                        class="form-control input-md" required>
                                             </div>
-
-                                            <div class="col-xs-12 col-sm-3"  ">
+                                            <div class="col-xs-12 col-sm-3">
                                             <input id="example2" name="max" type="text"
                                                    placeholder="End date"
                                                    class="form-control input-md" required>
                                             </div>
-                                        <div class="col-xs-12 col-sm-1" ></div>
-
-                                        <div class="col-xs-12 col-sm-1" ></div>
+                                            <div class="col-xs-12 col-sm-1" ></div>
+                                            <div class="col-xs-12 col-sm-1" ></div>
                                             <div class="col-xs-12 col-sm-2">
                                                 <button class="btn btn-info  pull-right submit-button" onclick="callme()" style="padding:10px 20px; margin-top:-5px;width: 160px">Download as PDF
                                                 </button>
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </div>
 
                         </div>
                     </div>
-
                 </div>
             </div>
 
@@ -169,10 +133,38 @@ if(!$isLoggedin){
             </div>
         </div>
     </div>
-
 </div>
 
-<script> function callme(){
+<script>
+    function tableToJson(table) {
+        var data = [];
+
+// first row needs to be headers
+        var headers = [];
+        for (var i=0; i<table.rows[0].cells.length; i++) {
+            headers[i] = table.rows[0].cells[i].innerHTML.toUpperCase().replace(/ /gi,'');
+        }
+        data.push(headers);
+// go through cells
+        for (var i=1; i<table.rows.length; i++) {
+
+            var tableRow = table.rows[i];
+            var rowData = {};
+
+            for (var j=0; j<tableRow.cells.length; j++) {
+
+                rowData[ headers[j] ] = tableRow.cells[j].innerHTML;
+
+            }
+
+            data.push(rowData);
+        }
+
+        return data;
+    }
+</script>
+<script>
+    function callme(){
         var table = tableToJson($('#myTable').get(0));
         var doc = new jsPDF('l','pt','letter',true);
 
@@ -192,7 +184,6 @@ if(!$isLoggedin){
         doc.save('Report.pdf');
     }
 </script>
-
 <script src="../../public/js/jquery.js"></script>
 <script src="../../public/js/jspdf.js"></script>
 <script src="../../public/js/bootstrap.js"></script>
@@ -210,7 +201,6 @@ if(!$isLoggedin){
 
     });
 </script>
-
 <script src="../admin/js/datatable.js"></script>
 <script type="application/javascript">
     $.fn.dataTable.ext.search.push(
@@ -243,8 +233,6 @@ if(!$isLoggedin){
         } );
     });
 </script>
-
-
 
 </body>
 </html>

@@ -127,9 +127,9 @@ if(!$isLoggedin){
                             <h5 class="nortification-box-heading"><i class="fa fa-eye icon-margin-right" aria-hidden="true"></i>
                                 Preview of Report</h5>
                             <hr>
-                            <div class="row">
+                            <div class="row" style="padding-bottom:20px;">
                                 <div class="col-xs-12">
-                                    <div id="demo"><center>Select a leave type to filtring</center></div>
+                                    <div id="demo"><center>- Select a leave type to filtring -</center></div>
                                 </div>
                             </div>
                         </div>
