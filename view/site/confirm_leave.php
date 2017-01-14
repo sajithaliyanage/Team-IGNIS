@@ -351,9 +351,9 @@ $querys ->execute(array('log2'=>$empID));
 $results = $querys->fetch();
 $deptID = $results['dept_id'];
 
-$smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE calendar.dept_id IN (:log,:log2)";
+$smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE calendar.dept_id IN (:log,:log2,:log3)";
 $query = $pdo->prepare($smt);
-$query ->execute(array('log'=>'0','log2'=>$deptID));
+$query ->execute(array('log'=>'0','log2'=>$deptID,'log3'=>'@'));
 $result = $query->fetchAll();
 ?>
 
@@ -370,6 +370,18 @@ $result = $query->fetchAll();
                 $('#modalBody').html(event.description);
                 $('#fullCalModal').modal();
                 return false;
+            },
+            firstDay: 1,
+            dayRender: function (date, cell) {
+                <?php
+                foreach ($results as $rs){
+                ?>
+                if (date.isSame('<?php echo $rs['start_date'];?>')) {
+                    cell.css("background-color", "#f9e712");
+                }
+                <?php
+                }
+                ?>
             },
             events:
                 [

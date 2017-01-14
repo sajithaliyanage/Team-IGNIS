@@ -2,10 +2,11 @@
 
 include('../../../controller/siteController.php');
 include('../../../config/connect.php');
+include ('../../../module/xssValidation.php');
 $pdo = connect();
 
 //post request data
-$depID = $_GET['id'];
+$depID = xss_clean($_GET['id']);
 
 
 try{

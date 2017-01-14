@@ -26,9 +26,26 @@ function is_valid_nic($nic)
     return $result;
 
 }
+if (isset($_GET['q3'])){
+    $q =$_GET['q3'];
 
-if (isset($_GET['r'])) {
-    $nic = $_GET['r'];
+    $smt = "SELECT comp_id FROM employee where comp_id =:log";
+    $query = $pdo->prepare($smt);
+    $query->execute(array('log'=>$q));
+    $result = $query->fetchAll();
+    $rownum = $query->rowCount();
+    //print_r($rownum)
+
+    if($rownum !== 0){
+        echo "ID already exist!!!";
+    }
+
+
+}
+
+
+if (isset($_GET['q4'])) {
+    $nic = $_GET['q4'];
     $flag = is_valid_nic($nic);
     if (!$flag) {
         echo "Enter a valid NIC No!";
@@ -36,8 +53,8 @@ if (isset($_GET['r'])) {
 
 
 }
-if (isset($_GET['q'])) {
-    $email = $_GET['q'];
+if (isset($_GET['q5'])) {
+    $email = $_GET['q5'];
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $emailErr = "Invalid email format";
         echo $emailErr;
@@ -60,14 +77,13 @@ if (isset($_GET['q'])) {
 
 
 }
-if (isset($_GET['p'])) {
-    $phoneNo = $_GET['p'];
-   $length=intval(strlen($phoneNo));
+if (isset($_GET['q6'])) {
+    $phoneNo = $_GET['q6'];
+    $length=intval(strlen($phoneNo));
     if ($length!==10) {
         echo "Enter a valid phone number!";
     }
 
 
 }
-
 ?>

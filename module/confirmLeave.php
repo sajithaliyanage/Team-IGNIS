@@ -102,7 +102,7 @@ try{
             $mobileNumber = sprintf( "%d%d", $var1, $var2 );
 
             //send SMS for reject
-            sendRejetSMS($textlocal,$mobileNumber,$result['name'],$result['apply_date']);
+            //sendRejetSMS($textlocal,$mobileNumber,$result['name'],$result['apply_date']);
             //send email
             sendRejectEmail($result['email'],$result['name'],$result['apply_date']);
 
@@ -155,7 +155,7 @@ try{
             $mobileNumber = sprintf( "%d%d", $var1, $var2 );
 
             //send SMS for reject
-            sendRejetSMS($textlocal,$mobileNumber,$result['name'],$result['apply_date']);
+            //sendRejetSMS($textlocal,$mobileNumber,$result['name'],$result['apply_date']);
             //send email
             sendRejectEmail($result['email'],$result['name'],$result['apply_date']);
 

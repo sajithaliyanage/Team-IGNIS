@@ -277,12 +277,12 @@ if(!$isLoggedin){
 
 
         $('#startdate').datepicker({
-            dateFormat: "dd/mm/yy",
+            dateFormat: "yy-mm-dd",
             minDate: +0
         });
         $('#enddate').datepicker({
             minDate: +0,
-            dateFormat: "dd/mm/yy"
+            dateFormat: "yy-mm-dd"
         });
 
 
@@ -294,10 +294,10 @@ if(!$isLoggedin){
     $(document).ready(function () {
 
         $('#example1').datepicker({
-            format: "yyyy-mm-dd"
+            format: "yy-mm-dd"
         });
         $('#example2').datepicker({
-            format: "yyyy-mm-dd"
+            format: "yy-mm-dd"
         });
 
     });
@@ -380,7 +380,7 @@ if(!$isLoggedin){
                 foreach ($results as $rs){
                 ?>
                 if (date.isSame('<?php echo $rs['start_date'];?>')) {
-                    cell.css("background-color", "#FE5C5C");
+                    cell.css("background-color", "#f9e712");
                 }
                 <?php
                 }
@@ -420,7 +420,7 @@ if(!$isLoggedin){
 <?php
     $smt2 = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE (calendar.dept_id =:log2 OR calendar.dept_id =:log1)";
     $query2 = $pdo->prepare($smt2);
-    $query2 ->execute(array('log1'=>'@','log2'=>'0'));
+    $query2 ->execute(array('log2'=>'0','log1'=>'@'));
     $result2 = $query2->fetchAll();
 
     $smts = "SELECT * FROM calendar WHERE dept_id=:log2";
@@ -442,7 +442,7 @@ if(!$isLoggedin){
                 foreach ($results as $rs){
                 ?>
                 if (date.isSame('<?php echo $rs['start_date'];?>')) {
-                    cell.css("background-color", "#FE5C5C");
+                    cell.css("background-color", "#f9e712");
                 }
                 <?php
                 }
@@ -500,7 +500,7 @@ if(!$isLoggedin){
                 foreach ($results as $rs){
                 ?>
                 if (date.isSame('<?php echo $rs['start_date'];?>')) {
-                    cell.css("background-color", "#FE5C5C");
+                    cell.css("background-color", "#f9e712");
                 }
                 <?php
                 }

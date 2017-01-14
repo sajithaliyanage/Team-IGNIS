@@ -2,10 +2,11 @@
 
 include('../../../controller/siteController.php');
 include('../../../config/connect.php');
+include ('../../../module/xssValidation.php');
 $pdo = connect();
 
 //post request data
-$string = $_GET['q1'];
+$string = xss_clean($_GET['q1']);
 $pieces = explode(",", $string);
 $catID = $pieces[0];
 $levelID = $pieces[1];

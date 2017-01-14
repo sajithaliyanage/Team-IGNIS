@@ -1,9 +1,10 @@
 <?php
 include('../../../config/connect.php');
+include ('../../../module/xssValidation.php');
 $pdo = connect();
 
 //post request data
-$levelname = $_POST['level_name'];
+$levelname = xss_clean($_POST['level_name']);
 
 $smt = "SELECT level_name FROM job_level where level_name =:log";
 $query = $pdo->prepare($smt);

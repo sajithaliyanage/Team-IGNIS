@@ -1,9 +1,10 @@
 <?php
 include('../../../config/connect.php');
+include ('../../../module/xssValidation.php');
 $pdo = connect();
 
 //post request data
-$catName = $_POST['job_category'];
+$catName = xss_clean($_POST['job_category']);
 
 $smt = "SELECT job_cat_name FROM job_category where job_cat_name =:log AND (currentStatus =:log1 OR currentStatus=:log2) ";
 $query = $pdo->prepare($smt);

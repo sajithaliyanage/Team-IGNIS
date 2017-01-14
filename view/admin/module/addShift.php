@@ -1,13 +1,14 @@
 <?php
 include('../../../controller/siteController.php');
 include('../../../config/connect.php');
+include ('../../../module/xssValidation.php');
 $pdo = connect();
 
 //post request data
-$deptID = $_POST['dept_id'];
-$shiftName = $_POST['shift_name'];
-$start_time = $_POST['start_time'];
-$end_time = $_POST['end_time'];
+$deptID = xss_clean($_POST['dept_id']);
+$shiftName = xss_clean($_POST['shift_name']);
+$start_time = xss_clean($_POST['start_time']);
+$end_time = xss_clean($_POST['end_time']);
 
 try {
 //    create new shift for roster department
