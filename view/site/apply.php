@@ -66,7 +66,7 @@ if(!$isLoggedin){
                         echo "
                             <div class=\"alert alert-danger\" role=\"alert\">
                                 <p style='text-align: center;'><i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i>
-                                    You have an unauthorized leave on <b>".$rs['absent_date']."</b>. Please follow the process </p>
+                                    You have an unauthorized leave on <b>".$rs['absent_date']."</b>. Please apply a leave! </p>
                             </div>
                         ";
                     }
