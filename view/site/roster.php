@@ -127,7 +127,7 @@ if(isset($_GET['shiftid'])){
                                             <p>Are you sure you want to Approve this Shift?</p>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="sumbit" class="btn btn-success" name='submit' value='approve'>Approve</button>
+                                            <button type="submit" class="btn btn-success" name='submit' value='approve'>Approve</button>
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                         </div>
                                     </div>
@@ -254,24 +254,32 @@ if(isset($_GET['shiftid'])){
 
                                                             $dep = $result13["dept_id"];
 
-                                                            $smt = "SELECT * FROM group_detail WHERE dept_id=:log1";
+                                                            $smt = "SELECT * FROM group_detail WHERE dept_id=:log1 ORDER BY shift_id";
                                                             $query = $pdo->prepare($smt);
                                                             $query->execute(array('log1' => $dep));
                                                             $result12 = $query->fetchAll();
 
+                                                            $b = false;
                                                             foreach ($result12 as $rs) {
-                                                                array_push($groupIds, intval($rs["group_id"]));
-                                                                $groupNames[intval($rs['group_id'] - 1)] = $rs['group_name'];
+                                                                if(!$b) {       //edited for accuracy
+                                                                    $b = true;
+                                                                    continue;
+                                                                }
+//                                                                array_push($groupIds, intval($rs["group_id"]));
+//                                                                $groupNames[intval($rs['group_id'] - 1)] = $rs['group_name'];
                                                                 echo '<tr>';
                                                                 echo '<td>' . $rs["group_name"] . '</td>';
                                                                 echo '</tr>';
                                                             }
 
 
-                                                            $minGroupId = min($groupIds);
-                                                            $maxGroupId = max($groupIds);
-                                                            $groupCount = count($groupIds);
+                                                            //$minGroupId = min($groupIds);
+                                                           // $maxGroupId = max($groupIds);
+                                                            //$groupCount = count($groupIds);
                                                             ?>
+                                                            <tr>
+                                                                <td><?php echo $result12[0]['group_name']; ?></td>
+                                                            </tr>
 
                                                             </tbody>
 
@@ -345,7 +353,7 @@ if(isset($_GET['shiftid'])){
                                                         </thead>
                                                         <tbody>
                                                         <?php
-                                                        $stm2 = "SELECT shift_name FROM shift_type";
+                                                        $stm2 = "SELECT shift_name FROM shift_type ";
                                                         $query3 = $pdo->prepare($stm2);
                                                         $query3->execute();
                                                         $result3 = $query3->fetchAll();
@@ -385,11 +393,12 @@ if(isset($_GET['shiftid'])){
                                                             foreach ($result12 as $rs) {
                                                                 echo '<tr>';
                                                                 echo '<td>';
-                                                                if (intval($rs["group_id"]) != $minGroupId) {
-                                                                    echo $groupNames[intval($rs["group_id"]) - 2];
-                                                                } else {
-                                                                    echo $groupNames[intval($rs["group_id"]) + $groupCount - 2];
-                                                                }
+//                                                                if (intval($rs["group_id"]) != $minGroupId) {
+//                                                                    echo $groupNames[intval($rs["group_id"]) - 2];
+//                                                                } else {
+//                                                                    echo $groupNames[intval($rs["group_id"]) + $groupCount - 2];
+//                                                                }
+                                                                    echo $rs['group_name'];
                                                                 echo '</td>';
                                                                 echo '</tr>';
                                                             }
@@ -500,19 +509,32 @@ if(isset($_GET['shiftid'])){
                                                             </thead>
                                                             <tbody>
                                                             <?php
-
+                                                            $count = 2;
                                                             foreach ($result12 as $rs) {
+                                                                if($count>0) {       //edited for accuracy
+                                                                    $count--;
+                                                                    continue;
+                                                                }
                                                                 echo '<tr>';
                                                                 echo '<td>';
-                                                                if (intval($rs["group_id"]) != $maxGroupId) {
-                                                                    echo $groupNames[intval($rs["group_id"])];
-                                                                } else {
-                                                                    echo $groupNames[intval($rs["group_id"]) - ($groupCount - 1) - 1];
-                                                                }
+//                                                                if (intval($rs["group_id"]) != $maxGroupId) {
+//                                                                    echo $groupNames[intval($rs["group_id"])];
+//                                                                } else {
+//                                                                    echo $groupNames[intval($rs["group_id"]) - ($groupCount - 1) - 1];
+//                                                                }
+                                                                    echo $rs['group_name'];
                                                                 echo '</td>';
                                                                 echo '</tr>';
                                                             }
                                                             ?>
+                                                            <tr>
+                                                                <td><?php echo $result12[0]['group_name']; ?></td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td><?php echo $result12[1]['group_name']; ?></td>
+                                                            </tr>
+
 
                                                             </tbody>
 

@@ -77,7 +77,7 @@ function  shift_assigning(){
     $currentDate = strtotime($result[0]['today']);
     $today = date('d-m-Y');
     $todayI = strtotime(date('d-m-Y'));
-    //$todayI = strtotime('12-01-2017');
+    //$todayI = strtotime('15-01-2017');
 
     if($currentDate<$todayI){
 

@@ -355,10 +355,15 @@ if(!$isLoggedin){
     $results = $querys->fetch();
     $deptID = $results['dept_id'];
 
-    $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE calendar.dept_id =:log AND calendar.comp_id=:log2";
+    $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE (calendar.dept_id =:log OR calendar.dept_id =:log1 ) AND calendar.comp_id=:log2";
     $query = $pdo->prepare($smt);
-    $query ->execute(array('log'=>'#','log2'=>$empID));
+    $query ->execute(array('log'=>'#','log1'=>'@','log2'=>$empID));
     $result = $query->fetchAll();
+
+    $smts = "SELECT * FROM calendar WHERE dept_id=:log2";
+    $querys = $pdo->prepare($smts);
+    $querys->execute(array('log2'=>'@'));
+    $results = $querys->fetchAll();
 ?>
 
 <script>
@@ -368,6 +373,18 @@ if(!$isLoggedin){
                 left: '',
                 center: 'prev title next',
                 right: ''
+            },
+            firstDay: 1,
+            dayRender: function (date, cell) {
+                <?php
+                foreach ($results as $rs){
+                ?>
+                if (date.isSame('<?php echo $rs['start_date'];?>')) {
+                    cell.css("background-color", "#FE5C5C");
+                }
+                <?php
+                }
+                ?>
             },
             eventClick:  function(event, jsEvent, view) {
                 $('#modalTitle').html(event.title);
@@ -401,10 +418,15 @@ if(!$isLoggedin){
     });
 </script>
 <?php
-    $smt2 = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE calendar.dept_id =:log2";
+    $smt2 = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE (calendar.dept_id =:log2 OR calendar.dept_id =:log1)";
     $query2 = $pdo->prepare($smt2);
-    $query2 ->execute(array('log2'=>'0'));
+    $query2 ->execute(array('log1'=>'@','log2'=>'0'));
     $result2 = $query2->fetchAll();
+
+    $smts = "SELECT * FROM calendar WHERE dept_id=:log2";
+    $querys = $pdo->prepare($smts);
+    $querys->execute(array('log2'=>'@'));
+    $results = $querys->fetchAll();
 ?>
 <script>
     $(document).ready(function() {
@@ -413,6 +435,18 @@ if(!$isLoggedin){
                 left: '',
                 center: 'prev title next',
                 right: ''
+            },
+            firstDay: 1,
+            dayRender: function (date, cell) {
+                <?php
+                foreach ($results as $rs){
+                ?>
+                if (date.isSame('<?php echo $rs['start_date'];?>')) {
+                    cell.css("background-color", "#FE5C5C");
+                }
+                <?php
+                }
+                ?>
             },
             eventClick:  function(event, jsEvent, view) {
                 $('#modalTitle2').html(event.title);
@@ -442,10 +476,15 @@ if(!$isLoggedin){
 </script>
 
 <?php
-$smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE calendar.dept_id =:log2";
-$query = $pdo->prepare($smt);
-$query ->execute(array('log2'=>$deptID));
-$result = $query->fetchAll();
+    $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE (calendar.dept_id =:log2 OR calendar.dept_id =:log1)";
+    $query = $pdo->prepare($smt);
+    $query ->execute(array('log1'=>'@','log2'=>$deptID));
+    $result = $query->fetchAll();
+
+    $smts = "SELECT * FROM calendar WHERE dept_id=:log2";
+    $querys = $pdo->prepare($smts);
+    $querys->execute(array('log2'=>'@'));
+    $results = $querys->fetchAll();
 ?>
 <script>
     $(document).ready(function() {
@@ -454,6 +493,18 @@ $result = $query->fetchAll();
                 left: '',
                 center: 'prev title next',
                 right: ''
+            },
+            firstDay: 1,
+            dayRender: function (date, cell) {
+                <?php
+                foreach ($results as $rs){
+                ?>
+                if (date.isSame('<?php echo $rs['start_date'];?>')) {
+                    cell.css("background-color", "#FE5C5C");
+                }
+                <?php
+                }
+                ?>
             },
             eventClick:  function(event, jsEvent, view) {
                 $('#modalTitle3').html(event.title);

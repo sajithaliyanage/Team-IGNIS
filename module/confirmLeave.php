@@ -17,9 +17,18 @@ $query0 = $pdo->prepare($sql0);
 $query0->execute(array('employeeID'=>$appliedEmployeeId,'leaveID'=>$appliedLeaveId));
 $result = $query0->fetch();
 
+$start = $result['start_date'];
+$startDate = DateTime::createFromFormat('d/m/Y',$start);
+$toDate = DateTime::createFromFormat('d/m/Y',date('d/m/Y'));
+
 try{
     if($empRole=='manager' || $empRole=='admin'){
         if($action =='done'){
+            if($startDate < $toDate ){
+                $sql = "DELETE FROM unauthorized_leave WHERE comp_id=:employeeID AND absent_date =:log";
+                $query = $pdo->prepare($sql);
+                $query->execute(array('employeeID'=>$appliedEmployeeId,'log'=>$start));
+            }
 //            approve leave
             $sql = "UPDATE apply_leave SET status=:log, medical_status=:medical,seen=:seen where comp_id=:employeeID AND apply_leave_id=:apply_leave_id";
             $query = $pdo->prepare($sql);
@@ -58,6 +67,31 @@ try{
             header("Location:../view/site/confirm_leave.php?job=done");
 
         }else if($action =='reject'){
+            if($startDate < $toDate ){
+                $sql = "DELETE FROM unauthorized_leave WHERE comp_id=:employeeID AND absent_date =:log";
+                $query = $pdo->prepare($sql);
+                $query->execute(array('employeeID'=>$appliedEmployeeId,'log'=>$start));
+
+                $sql = "SELECT leave_id,number_of_days FROM apply_leave where comp_id=:employeeID AND apply_leave_id=:apply_leave_id";
+                $query = $pdo->prepare($sql);
+                $query->execute(array('employeeID'=>$appliedEmployeeId,'apply_leave_id'=>$appliedLeaveId));
+                $getLeaveID = $query->fetch();
+
+                $intValLeaveId = intval($getLeaveID['leave_id']);
+                $intNumOfDays = intval($getLeaveID['number_of_days']);
+
+                $sql = "SELECT leave_count FROM employee_leave_count where comp_id=:employeeID AND leave_id=:leave_id";
+                $query = $pdo->prepare($sql);
+                $query->execute(array('employeeID'=>$appliedEmployeeId,'leave_id'=>$intValLeaveId));
+                $getLeaveID = $query->fetch();
+
+                $currentVal = intval($getLeaveID['leave_count']);
+                $newVal = $currentVal - $intNumOfDays;
+
+                $sql = "UPDATE employee_leave_count SET leave_count =:newCount where comp_id=:employeeID AND leave_id=:leave_id";
+                $query = $pdo->prepare($sql);
+                $query->execute(array('newCount'=>$newVal,'employeeID'=>$appliedEmployeeId,'leave_id'=>$intValLeaveId));
+            }
 //            reject leave
             $sql = "UPDATE apply_leave SET status=:log, special_note=:note where comp_id=:employeeID AND apply_leave_id=:apply_leave_id";
             $query = $pdo->prepare($sql);
@@ -85,6 +119,32 @@ try{
             header("Location:../view/site/confirm_leave.php?job=done");
 
         }else if($action == 'reject'){
+            if($startDate < $toDate ){
+                $sql = "DELETE FROM unauthorized_leave WHERE comp_id=:employeeID AND absent_date =:log";
+                $query = $pdo->prepare($sql);
+                $query->execute(array('employeeID'=>$appliedEmployeeId,'log'=>$start));
+
+                $sql = "SELECT leave_id,number_of_days FROM apply_leave where comp_id=:employeeID AND apply_leave_id=:apply_leave_id";
+                $query = $pdo->prepare($sql);
+                $query->execute(array('employeeID'=>$appliedEmployeeId,'apply_leave_id'=>$appliedLeaveId));
+                $getLeaveID = $query->fetch();
+
+                $intValLeaveId = intval($getLeaveID['leave_id']);
+                $intNumOfDays = intval($getLeaveID['number_of_days']);
+
+                $sql = "SELECT leave_count FROM employee_leave_count where comp_id=:employeeID AND leave_id=:leave_id";
+                $query = $pdo->prepare($sql);
+                $query->execute(array('employeeID'=>$appliedEmployeeId,'leave_id'=>$intValLeaveId));
+                $getLeaveID = $query->fetch();
+
+                $currentVal = intval($getLeaveID['leave_count']);
+                $newVal = $currentVal - $intNumOfDays;
+
+                $sql = "UPDATE employee_leave_count SET leave_count =:newCount where comp_id=:employeeID AND leave_id=:leave_id";
+                $query = $pdo->prepare($sql);
+                $query->execute(array('newCount'=>$newVal,'employeeID'=>$appliedEmployeeId,'leave_id'=>$intValLeaveId));
+            }
+
 //            reject leave
             $sql = "UPDATE apply_leave SET status=:log,special_note=:note where comp_id=:employeeID AND apply_leave_id=:apply_leave_id";
             $query = $pdo->prepare($sql);

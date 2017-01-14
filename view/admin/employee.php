@@ -250,7 +250,7 @@ if(!$isLoggedin && $empRole!="admin"){
                                         <div class="form-group">
                                             <label class="col-sm-5 col-xs-12 control-label form-lable">Employee Telephone :</label>
                                             <div class="col-sm-7 col-xs-12">
-                                                <input id="service_name" name="emp_tele" placeholder="" type="text" class="form-control input-md " required required onblur="PhoneNovalidation(this.value)">
+                                                <input id="service_name" name="emp_tele" placeholder="" type="text" class="form-control input-md " required  onblur="PhoneNovalidation(this.value)">
                                                 <p id="demo2" style="color:red;font-size: 12px; margin-top:5px;margin-left: 5px"></p>
                                             </div>
                                         </div>

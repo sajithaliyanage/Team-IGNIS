@@ -1,11 +1,15 @@
 <?php
-
+error_reporting(0);
 include('../../controller/siteController.php');
 include('../../config/connect.php');
 $pdo = connect();
 
-//get post request data from generate graph
+if(!$isLoggedin && $empRole!="director"){
+    header('Location:../../index.php');
+}
 
+//get post request data from generate graph
+$departmnt =$_POST['dept_name'];
 $sDate =$_POST['start_date'];
 $eDate = $_POST['end_date'];
 $sDate=str_replace('/', '-', $sDate);
@@ -57,12 +61,13 @@ $d2=strtotime($endDate);
                               <i class="fa fa-dashboard"></i> <a href="director.php">Take Your Leave</a>
                           </li>
                           <li class="active">
-                              <i class="fa fa-bar-chart"></i> Company Attendance Analyse
+                              <i class="fa fa-bar-chart"></i> Overoll Attendance Analyse
                           </li>
                       </ol>
                   </div>
               </div>
           </div>
+
 <?php
     //<!-- get the attendance from excel sheet -->
 
@@ -99,66 +104,77 @@ $d2=strtotime($endDate);
 ?>
         <!---start top boxes--->
         <div class="row padding-row">
-            <div class="col-sm-5 col-xs-12 padding-box">
-                <div class="row">
-                    <div class="col-xs-8 main-box-1-1">
-                        <div class="row">
-                          <div class="col-xs-4">
-                                <i class="fa fa-group fa-5x box-icon" aria-hidden="true"></i>
-                          </div>
-                          <div class="col-xs-8">
-                                <center><h3 class="box-head">Today<br> Presents</h3></center>
-                          </div>
-                        </div>
-                    </div>
-                <div class="col-sm-4 col-xs-12" style="background-color:#FFFFFF; height:110px;">
-                        <div class="row">
-                          <?php
-                              $sql="SELECT * FROM employee";
-                              $query = $pdo->prepare($sql);
-                              $query->execute();
-                              $numrow = $query->rowCount();
-                              $numrows = intval($numrow);
-                              $precetage=($n/($numrows))*100;
-                          ?>
-                          <center><h2 class="box-count"><?php if($n<10){echo "0".$n;}else{echo $n;}?><br><?php echo round($precetage);?>%</h2></center>
-                        </div>
-                </div>
-            </div>
+          <div class="col-sm-2 col-xs-12 padding-box">
+              <div class="row">
+              </div>
           </div>
-            <div class="col-sm-2 col-xs-12 padding-box">
+
+            <div class="col-sm-3 col-xs-12 padding-box">
                 <div class="row">
-                </div>
+                      <div class="col-xs-12 main-box-1-1">
+                          <div class="row">
+                              <div class="col-xs-8">
+                                <?php
+                                    $sql="SELECT * FROM employee";
+                                    $query = $pdo->prepare($sql);
+                                    $query->execute();
+                                    $numrow = $query->rowCount();
+                                    $numrows = intval($numrow);
+                                    $precetage=($n/($numrows))*100;
+                                ?>
+                                <center><h2 class="box-count"><?php if($n<10){echo "0".$n;}else{echo $n;}?></h2></center>
+                                <h3 class="box-head">Today Presents</h3>
+                              </div>
+                              <div class="col-xs-4">
+                                  <i class="fa fa-group fa-5x box-icon" aria-hidden="true"></i>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-xs-12  main-box-1-2" style="color:#FFFFFF;">
+                           <center><h4><?php echo round($precetage);?>%</h4></center>
+                      </div>
+                  </div>
             </div>
 
-            <div class="col-sm-5 col-xs-12 padding-box">
-                <div class="row">
-                    <div class="col-sm-8 col-xs-12 main-box-4-1">
+          <div class="col-sm-2 col-xs-12 padding-box">
+              <div class="row">
+              </div>
+          </div>
+          <div class="col-sm-3 col-xs-12 padding-box">
+              <div class="row">
+                    <div class="col-xs-12 main-box-4-1">
                         <div class="row">
-                          <div class="col-xs-4">
+                            <div class="col-xs-8">
+                              <?php
+                                $sql="SELECT * FROM employee";
+                                $query = $pdo->prepare($sql);
+                                $query->execute();
+                                $numrow = $query->rowCount();
+                                $numrows = intval($numrow);
+                                $absent=intval($numrows-$n);
+                                $precetage=($absent/($numrows))*100;
+                              ?>
+                              <center><h2 class="box-count"><?php if($absent<10){echo "0".$absent;}else{echo $absent;}?></h2></center>
+                              <h3 class="box-head">Today Absents</h3>
+                            </div>
+                            <div class="col-xs-4">
                                 <i class="fa fa-eye fa-5x box-icon" aria-hidden="true"></i>
-                          </div>
-                          <div class="col-xs-8">
-                                <center><h3 class="box-head">Today<br> Absents</h3></center>
-                          </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-4 col-xs-12" style="background-color:#ffffff; height:110px;">
-                        <div class="raw">
-                          <?php
-                          $sql="SELECT * FROM employee";
-                          $query = $pdo->prepare($sql);
-                          $query->execute();
-                          $numrow = $query->rowCount();
-                          $numrows = intval($numrow);
-                          $absent=intval($numrows-$n);
-                          $precetage=($absent/($numrows))*100;
-                          ?>
-                          <center><h2 class="box-count"><?php if($absent<10){echo "0".$absent;}else{echo $absent;}?><br><?php echo round($precetage);?>%</h2></center>
-                        </div>
-            </div>
-        </div>
-      </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12  main-box-4-2" style="color:#FFFFFF;">
+                         <center><h4><?php echo round($precetage);?>%</h4></center>
+                    </div>
+                </div>
+          </div>
+          <div class="col-sm-2 col-xs-12 padding-box">
+              <div class="row">
+              </div>
+          </div>
     </div>
     <br><br>
       <!---end top boxes--->
@@ -170,16 +186,35 @@ $d2=strtotime($endDate);
                           Overall Attendance Analysis</h5>
                       <hr>
                       <!-- filtering option start -->
-                      <form role="form" data-toggle="validator" action="graphGenerator.php" method="post">
+                      <form role="form" data-toggle="validator" action="graphGeneratorDirector.php" method="post">
                           <div class="department-add">
+
                               <div class="col-xs-12">
                                 <div class="form-group">
                                     <div class="col-xs-1">
                                     </div>
                                 </div>
 
+                                <div class="form-group">
+                                    <label class="col-xs-1 control-label form-lable">Department:</label>
+                                    <div class="col-xs-3">
+                                        <select name="dept_name" class="form-control">
+                                          <option value="YES">-All-</option>
+                                          <?php
+                                            $sql="SELECT dept_name,dept_id from department where currentStatus=:approve";
+                                            $query = $pdo->prepare($sql);
+                                            $query->execute(array('approve'=>"approved"));
+                                            $d_name = $query->fetchAll();
+                                            foreach ($d_name as $r){
+                                              echo "<option value=". $r['dept_id'] .">"; echo $r['dept_name']; echo "</option>";
+
+                                            }
+                                          ?>
+                                        </select>
+                                    </div>
+                                </div>
+
                                   <div class="form-group">
-                                      <label class="col-xs-2 control-label form-lable">Start date:</label>
                                       <div class="col-xs-3">
                                           <input id="example1" name="start_date" type="text"
                                                  placeholder="Start Date"
@@ -188,22 +223,15 @@ $d2=strtotime($endDate);
                                   </div>
 
                                   <div class="form-group">
-                                    <label class="col-xs-2 control-label form-lable">End date:</label>
                                       <div class="col-xs-3">
                                           <input id="example2" name="end_date" type="text"
                                                  placeholder="End Date"
                                                  class="form-control input-md" required>
-
                                       </div>
                                   </div>
 
                                   <div class="col-xs-2">
                                     <button class="btn btn-primary btn-lg pull-right submit-button" style="width: 150px " type="submit">Fitler</button>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-xs-1">
-                                    </div>
                                 </div>
                               </div>
                           </div>
@@ -224,17 +252,7 @@ $d2=strtotime($endDate);
           }
         }
         $num=count($drange);
-        //print_r($empid);
-      ?>
-
-        <?php
-            //check the department of the manager
-            $sql1="SELECT dept_id from employee where comp_id=:empID ";
-            $query1 = $pdo->prepare($sql1);
-            $query1->execute(array('empID'=> $empID));
-            $query1 = $query1->fetch();
-
-            //take the employee count belongs to the department
+        //take the employee count belongs to the department
             $emp=array();
             $dte=array();
             for($i=0,$j=0; $i<$num; $i++){
@@ -242,19 +260,19 @@ $d2=strtotime($endDate);
               $query2 = $pdo->prepare($sql2);
               $query2->execute(array('empID'=> $empid[$i]));
               $query2 = $query2->fetch();
-              if($query1[0]==$query2[0]){
+              if($departmnt==$query2[0]){
                 $emp[$j]=$empid[$i];
                 $dte[$j]=$drange[$i];
                 $j=$j+1;
               }
             }
-            //print_r($dte);
+
             $dCount=(array_count_values($dte));
 
             //take employee count in that department
             $sql="SELECT no_of_emp from department where dept_id=:dID ";
             $query = $pdo->prepare($sql);
-            $query->execute(array('dID'=>$query1[0]));
+            $query->execute(array('dID'=>$departmnt));
             $query = $query->fetchAll();
 
             //display absent present belongs to a the department

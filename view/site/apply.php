@@ -56,7 +56,25 @@ if(!$isLoggedin){
                         </ol>
                     </div>
                 </div>
+                <?php
+                    $sql = "SELECT * FROM unauthorized_leave WHERE comp_id=:log";
+                    $query = $pdo->prepare($sql);
+                    $query->execute(array('log'=>$empID));
+                    $result = $query->fetchAll();
+
+                    foreach ($result as $rs){
+                        echo "
+                            <div class=\"alert alert-danger\" role=\"alert\">
+                                <p style='text-align: center;'><i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i>
+                                    You have an unauthorized leave on <b>".$rs['absent_date']."</b>. Please follow the process </p>
+                            </div>
+                        ";
+                    }
+                ?>
+
+
             </div>
+
 
             <div class="row padding-row">
                 <div class="col-sm-6 col-xs-12 padding-box">
@@ -392,10 +410,15 @@ if(!$isLoggedin){
     $results = $querys->fetch();
     $deptID = $results['dept_id'];
 
-    $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE calendar.dept_id IN (:log,:log2)";
+    $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE calendar.dept_id IN (:log,:log1,:log2)";
     $query = $pdo->prepare($smt);
-    $query ->execute(array('log'=>'0','log2'=>$deptID));
+    $query ->execute(array('log'=>'0','log1'=>'@','log2'=>$deptID));
     $result = $query->fetchAll();
+
+    $smts = "SELECT * FROM calendar WHERE dept_id=:log2";
+    $querys = $pdo->prepare($smts);
+    $querys->execute(array('log2'=>'@'));
+    $results = $querys->fetchAll();
 ?>
 
 <script>
@@ -408,6 +431,18 @@ if(!$isLoggedin){
                 right: ''
             },
             firstDay: 1,
+            dayRender: function (date, cell) {
+                <?php
+                foreach ($results as $rs){
+                ?>
+                if (date.isSame('<?php echo $rs['start_date'];?>')) {
+                    cell.css("background-color", "#FE5C5C");
+                }
+                <?php
+                }
+                ?>
+            },
+
             eventClick:  function(event, jsEvent, view) {
                 $('#modalTitle').html(event.title);
                 $('#modalBody').html(event.description);

@@ -167,6 +167,10 @@ if(!$isLoggedin && $empRole!="admin"){
                             <h5 class="nortification-box-heading"><i class="fa fa-plus icon-margin-right" aria-hidden="true"></i>
                                 Add New Job Category</h5>
                             <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">Job category added successfully!</div>
+                            <div class="alert-user" style="<?php if (!isset($_GET['jobCaterror'])) {
+                                echo 'display:none;';
+                            } ?> color:#d43f3a">Invalid Form Actions!
+                            </div>
                             <hr>
                             <form role="form" data-toggle="validator" action="module/addJobCategory.php" method="post">
                                 <div class="department-add">
@@ -176,7 +180,8 @@ if(!$isLoggedin && $empRole!="admin"){
                                             <label class="col-xs-5 control-label form-lable">Job Category :</label>
                                             <div class="col-xs-7">
                                                 <input id="service_name" name="job_category" type="text" placeholder=""
-                                                       class="form-control input-md" required>
+                                                       class="form-control input-md" required onblur="JobCatValidation(this.value)">
+                                                <p id="demo" style="color:red;font-size: 12px; margin-top:5px;margin-left: 5px"></p>
                                             </div>
                                         </div>
                                         <br>
@@ -194,6 +199,10 @@ if(!$isLoggedin && $empRole!="admin"){
                             <h5 class="nortification-box-heading"><i class="fa fa-plus icon-margin-right" aria-hidden="true"></i>
                                 Add New Job Level</h5>
                             <div class="alert-user" style="<?php if(!isset($_GET['job1'])){echo 'display:none;';}?>">Job level added successfully!</div>
+                            <div class="alert-user" style="<?php if (!isset($_GET['jobLevelerror'])) {
+                                echo 'display:none;';
+                            } ?> color:#d43f3a">This Job Level is already exists
+                            </div>
                             <hr>
                             <form role="form" data-toggle="validator" action="module/addJobLevels.php" method="post">
                                 <div class="department-add">
@@ -203,7 +212,8 @@ if(!$isLoggedin && $empRole!="admin"){
                                             <label class="col-xs-5 control-label form-lable">Job Level :</label>
                                             <div class="col-xs-7">
                                                 <input id="service_name" name="level_name" type="text" placeholder="all in simple letters"
-                                                       class="form-control input-md" required>
+                                                       class="form-control input-md" required onblur="JobLevelValidation(this.value)">
+                                                <p id="demo1" style="color:red;font-size: 12px; margin-top:5px;margin-left: 5px"></p>
                                             </div>
                                         </div>
                                         <br>
@@ -277,5 +287,29 @@ if(!$isLoggedin && $empRole!="admin"){
 
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
+  <script>
+      function JobCatValidation(str) {
+          groupId = str;
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function () {
+              if (xhttp.readyState == 4 && xhttp.status == 200) {
+                  document.getElementById("demo").innerHTML = xhttp.responseText;
+              }
+          }
+          xhttp.open("GET", "module/ajaxEditJobCategories.php?p=" + str, true);
+          xhttp.send();
+      }
+      function JobLevelValidation(str) {
+          groupId = str;
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function () {
+              if (xhttp.readyState == 4 && xhttp.status == 200) {
+                  document.getElementById("demo1").innerHTML = xhttp.responseText;
+              }
+          }
+          xhttp.open("GET", "module/ajaxEditJobCategories.php?q=" + str, true);
+          xhttp.send();
+      }
+  </script>
 </body>
 </html>
