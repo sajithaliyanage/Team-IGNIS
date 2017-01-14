@@ -167,10 +167,11 @@ if(isset($_POST['submit']))
                                                 <label class="col-xs-3" ><span id="pass" style="color:#F00;"> </span></label>
                                             </div>
 
+                                            <button class="btn btn-info btn-lg pull-right submit-button"style="margin-top: 70px !important;" name="submit" type="submit" >Reset password</button>
                                     </form>
                                 </div>
-                                <button class="btn btn-info btn-lg pull-right submit-button"style="margin-top: 70px !important;" name="submit" type="submit" >Reset password</button>
 
+                                
                             </div>
                             </div>
                         </div>
