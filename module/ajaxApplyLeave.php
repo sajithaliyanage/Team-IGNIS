@@ -23,7 +23,7 @@ if(isset($_GET['sdate'])){
     if($startDate > $endDate){
         echo "Invalid Selection";
     }else if($numRows >0){
-        echo "This is a Holiday";
+        echo "This is a Holiday or include a Holiday";
     }else{
         echo $diff = $endDate->diff($startDate)->format("%a");
     }
@@ -43,7 +43,7 @@ if(isset($_GET['q'])){
     $numRows = $query->rowCount();
 
     if($numRows >0){
-        echo "This is a Holiday";
+        echo "This is a Holiday or include a Holiday";
     }else if($_GET['q'] != ''){
         $startDate = DateTime::createFromFormat('d/m/Y',$_GET['r']);
         $endDate = DateTime::createFromFormat('d/m/Y',$_GET['q']);

@@ -468,6 +468,13 @@ function getDate(str) {
     });
 </script>
 
-
+<script>
+    $(document).ready(function()
+    {
+        $(document).bind("contextmenu",function(e){
+            return false;
+        });
+    })
+</script>
 </body>
 </html>

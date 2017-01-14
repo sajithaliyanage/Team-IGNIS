@@ -49,5 +49,4 @@
 
     <a href="../site/graphManager.php" style="<?php if($empRole!="manager"){echo "display:none;";}?>" class="list-group-item left-menu left-menu<?php if($var=="graphManager"){echo"-active";}?>"><i class="fa fa-bar-chart icon-bar" aria-hidden="true"></i> <?php if($empRole=="manager"){echo "Analyse Department Attendance";} ?> <span class="<?php if($var=="graphManager"){echo"selected";}?>"></span></a>
 
-
 </div>

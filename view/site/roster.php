@@ -908,9 +908,11 @@ if(isset($_GET['shiftid'])){
 
         </div>
     </div>
+    <?php
+    include('../layouts/onlineStatus.php');
+    ?>
+</div>
 
-</div>
-</div>
 
 <script src="../../public/js/jquery.js"></script>
 <script src="../../public/js/bootstrap.js"></script>
@@ -993,6 +995,15 @@ if(isset($_GET['shiftid'])){
         xhttp.send();
     }
 </script>
+<script>
+    $(document).ready(function()
+    {
+        $(document).bind("contextmenu",function(e){
+            return false;
+        });
+    })
+</script>
+
 
 
 </body>

@@ -133,6 +133,9 @@ if(!$isLoggedin){
             </div>
         </div>
     </div>
+    <?php
+    include('../layouts/onlineStatus.php');
+    ?>
 </div>
 
 <script>
@@ -232,6 +235,14 @@ if(!$isLoggedin){
             table.draw();
         } );
     });
+</script>
+<script>
+    $(document).ready(function()
+    {
+        $(document).bind("contextmenu",function(e){
+            return false;
+        });
+    })
 </script>
 
 </body>

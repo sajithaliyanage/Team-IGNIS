@@ -114,6 +114,7 @@ FROM conversation JOIN employee ON conversation.receiver_id=employee.comp_id WHE
                     <ul class="dropdown-menu dropdown-menu-admin">
                         <li style="<?php if($empRole!='admin'){echo 'display:none;';}?>"><a href="../site/default_admin.php">Switch Profile</a></li>
                         <li><a href="../site/profile.php">My Profile</a></li>
+                        <li><a href="../../module/reports/userManual.pdf" target="_blank">User Manual</a></li>
                         <li><a href="../../module/logout.php">Logout</a></li>
                     </ul>
                 </li>

@@ -476,7 +476,9 @@ $deptID = null;
             </div>
          </div>
       </div>
-
+        <?php
+        include('../layouts/onlineStatus.php');
+        ?>
     </div>
 
     <script src="js/jquery.js"></script>
@@ -556,6 +558,14 @@ $deptID = null;
             xhttp.open("GET", "module/ajaxRosterAddGroup.php?q7=" + str, true);
             xhttp.send();
         }
+    </script>
+    <script>
+        $(document).ready(function()
+        {
+            $(document).bind("contextmenu",function(e){
+                return false;
+            });
+        })
     </script>
 
 </body>

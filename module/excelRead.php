@@ -1,8 +1,6 @@
 <?php
 
-    require_once "../module/PHPExcel/PHPExcel.php";
-
-
+require_once "../module/PHPExcel/PHPExcel.php";
 $objPHPExcel1 = PHPExcel_IOFactory::load("../view/site/new.xlsx");
 $objPHPExcel2 = PHPExcel_IOFactory::load("../view/site/testing.xlsx");
 
@@ -16,11 +14,10 @@ $objPHPExcel1->getActiveSheet()->fromArray(
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel1, 'Excel2007');
 $objWriter->save('../view/site/new.xlsx');
 
-
 include_once "../module/getAbsentListWithoutApproval.php";
-
-
+//include "../module/rosterShiftAssign.php";
 header('Location:../view/admin/attendanceSync.php');
+
 exit;
 
 

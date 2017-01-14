@@ -205,7 +205,9 @@ if(!$isLoggedin && $empRole!="admin"){
             </div>
          </div>
       </div>
-
+        <?php
+            include('../layouts/onlineStatus.php');
+        ?>
     </div>
 
     <script src="js/jquery.js"></script>
@@ -225,5 +227,13 @@ if(!$isLoggedin && $empRole!="admin"){
       }
 
   </script>
+    <script>
+        $(document).ready(function()
+        {
+            $(document).bind("contextmenu",function(e){
+                return false;
+            });
+        })
+    </script>
 </body>
 </html>

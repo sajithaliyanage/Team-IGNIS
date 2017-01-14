@@ -26,6 +26,13 @@
     color:#FFFFFF !important;
 
 }
+.online-status{
+    bottom:0;
+    right:20px;
+    position:fixed;
+    width:250px;
+    padding:0 20px !important;
+}
 
 .left-menu-div{
     background-color: #3498db !important;

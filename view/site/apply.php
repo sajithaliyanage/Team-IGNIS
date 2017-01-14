@@ -32,17 +32,16 @@ if(!$isLoggedin){
 
 <body style=" background-color: #eceff4 !important;">
 <!---top navigation bar------------>
-<?php include("../layouts/navbar.php") ?>
+<?php include("../layouts/navbar.php"); ?>
 
-<div class="container-fluid ">
-    <div class="row ">
+<div class="container-fluid">
+    <div class="row">
         <!---left nav bar-->
         <div class="col-sm-2 col-xs-12 left-menu-div side-bar-display">
-            <?php include("../layouts/leftbar.php") ?>
+            <?php include("../layouts/leftbar.php"); ?>
         </div>
         <!---content start-->
-        <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2" style="position: relative;">
-
+        <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2">
             <div class="row padding-row">
                 <div class="row">
                     <div class="col-lg-12">
@@ -74,8 +73,6 @@ if(!$isLoggedin){
 
 
             </div>
-
-
             <div class="row padding-row">
                 <div class="col-sm-6 col-xs-12 padding-box">
                     <div class="row">
@@ -310,10 +307,11 @@ if(!$isLoggedin){
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-
+    <?php
+    include('../layouts/onlineStatus.php');
+    ?>
 </div>
 
 <script src="../../public/js/jquery.js"></script>
@@ -321,8 +319,6 @@ if(!$isLoggedin){
 <script src="../../public/js/moment.min.js"></script>
 <script src="../../public/js/bootstrap.js"></script>
 <script src="../../public/js/fullcalendar.min.js"></script>
-
-
 <script>
     $(document).ready(function () {
         $('#service_name').prop('readonly', true);
@@ -352,7 +348,7 @@ if(!$isLoggedin){
                     document.getElementById("showdate1").innerHTML = xhttp.responseText;
                     document.getElementById("startdate").style.color = "red";
                     document.getElementById("service_name").value = "Invalid";
-                }else if(xhttp.responseText == 'This is a Holiday'){
+                }else if(xhttp.responseText == 'This is a Holiday or include a Holiday'){
                     document.getElementById("showdate1").innerHTML = xhttp.responseText;
                     document.getElementById("startdate").style.color = "red";
                     document.getElementById("service_name").value = "Invalid";
@@ -379,7 +375,7 @@ if(!$isLoggedin){
                     document.getElementById("showdate").innerHTML = xhttp.responseText;
                     document.getElementById("enddate").style.color = "red";
                     document.getElementById("service_name").value = "Invalid";
-                }else if(xhttp.responseText == 'This is a Holiday'){
+                }else if(xhttp.responseText == 'This is a Holiday or include a Holiday'){
                     document.getElementById("showdate").innerHTML = xhttp.responseText;
                     document.getElementById("enddate").style.color = "red";
                     document.getElementById("service_name").value = "Invalid";
@@ -396,7 +392,6 @@ if(!$isLoggedin){
 
     }
 </script>
-
 <script type="text/javascript">
     // When the document is ready
     $(document).ready(function () {
@@ -439,7 +434,6 @@ if(!$isLoggedin){
     }
     window.onload = readOnly;
 </script>
-
 <script>
 
     $(document).ready(function() {
@@ -488,7 +482,14 @@ if(!$isLoggedin){
         });
     });
 </script>
-
+<script>
+    $(document).ready(function()
+    {
+        $(document).bind("contextmenu",function(e){
+            return false;
+        });
+    })
+</script>
 
 </body>
 </html>

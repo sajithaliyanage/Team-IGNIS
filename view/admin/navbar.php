@@ -42,7 +42,7 @@
                 <li class="list-side-menu"><a href="index.php">Overall Company</a></li>
                 <li class="list-side-menu"><a href="department.php">Edit Departments</a></li>
                 <li class="list-side-menu"><a href="employee.php">Edit Employees</a></li>
-                <li class="list-side-menu"><a href=setleaves.php">Edit Set Leaves</a></li>
+                <li class="list-side-menu"><a href="setleaves.php">Edit Set Leaves</a></li>
                 <li class="list-side-menu"><a href="jobcategory.php">Edit Job Categories</a></li>
                 <li class="list-side-menu"><a href="leavetypes.php">Edit Leave Types</a></li>
                 <li class="list-side-menu"><a href="roster.php">Edit Roster System</a></li>
@@ -51,6 +51,7 @@
                        aria-haspopup="true" aria-expanded="false"><img src="../<?php if($empImage != 'null'){echo $empImage;}else{ echo '../public/images/default.png';}?>" class="img-circle image-user"  /><?php echo $empName?> <span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-admin">
                         <li><a href="../site/default_admin.php">Switch Profile</a></li>
+                        <li><a href="../../module/reports/userManual.pdf" target="_blank">User Manual</a></li>
                         <li><a href="../../module/logout.php">Logout</a></li>
                     </ul>
                 </li>

@@ -180,9 +180,20 @@ $empCount = $query3->rowCount();
 
         </div>
     </div>
+    <?php
+    include('../layouts/onlineStatus.php');
+    ?>
 </div>
 
 <script src="../admin/js/jquery.js"></script>
 <script src="../admin/js/bootstrap.js"></script>
+<script>
+    $(document).ready(function()
+    {
+        $(document).bind("contextmenu",function(e){
+            return false;
+        });
+    })
+</script>
 </body>
 </html>

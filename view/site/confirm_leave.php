@@ -335,6 +335,9 @@ $departmentId = $result['dept_id'];
             </div>
 
         </div>
+    <?php
+    include('../layouts/onlineStatus.php');
+    ?>
     </div>
 
 
@@ -355,6 +358,12 @@ $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_i
 $query = $pdo->prepare($smt);
 $query ->execute(array('log'=>'0','log2'=>$deptID,'log3'=>'@'));
 $result = $query->fetchAll();
+
+$smts = "SELECT * FROM calendar WHERE dept_id=:log2";
+$querys = $pdo->prepare($smts);
+$querys->execute(array('log2'=>'@'));
+$resultd = $querys->fetchAll();
+?>
 ?>
 
 <script>
@@ -374,7 +383,7 @@ $result = $query->fetchAll();
             firstDay: 1,
             dayRender: function (date, cell) {
                 <?php
-                foreach ($results as $rs){
+                foreach ($resultd as $rs){
                 ?>
                 if (date.isSame('<?php echo $rs['start_date'];?>')) {
                     cell.css("background-color", "#f9e712");
@@ -402,6 +411,14 @@ $result = $query->fetchAll();
                 ]
         });
     });
+</script>
+<script>
+    $(document).ready(function()
+    {
+        $(document).bind("contextmenu",function(e){
+            return false;
+        });
+    })
 </script>
 </body>
 </html>

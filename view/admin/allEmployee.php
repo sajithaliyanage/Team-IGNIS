@@ -137,6 +137,9 @@ $result0 = $query0->fetchAll();
 
         </div>
     </div>
+    <?php
+        include('../layouts/onlineStatus.php');
+    ?>
 </div>
 
 <script src="js/jquery.js"></script>
@@ -146,6 +149,14 @@ $result0 = $query0->fetchAll();
     $(document).ready(function(){
         $('#myTable').DataTable();
     });
+</script>
+<script>
+    $(document).ready(function()
+    {
+        $(document).bind("contextmenu",function(e){
+            return false;
+        });
+    })
 </script>
 
 </body>

@@ -265,29 +265,17 @@ if(!$isLoggedin && $empRole!="admin"){
                         </div>
                     </div>
 
-<!--                    <div class="row margin-top">-->
-<!--                        <div class="col-xs-12 nortification-box-top">-->
-<!--                            <h5 class="nortification-box-heading"><i class="fa fa-cogs icon-margin-right" aria-hidden="true"></i>-->
-<!--                                Pending Requests</h5>-->
-<!--                            <hr>-->
-<!--                            <div class="list-group">-->
-<!--                                <a href="#" class="list-group-item">IT Department<span style="float:right;"> Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>-->
-<!--                                <a href="#" class="list-group-item">Sales Department<span style="float:right;"> Waiting for Approve <i class="fa fa-question" aria-hidden="true"></i></span></a>-->
-<!--                                <a href="#" class="list-group-item">HR Department<span style="float:right;"> Approved <i class="fa fa-check" aria-hidden="true"></i></span></a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
                 </div>
             </div>
          </div>
       </div>
-
+        <?php
+            include('../layouts/onlineStatus.php');
+        ?>
     </div>
 
     <script src="js/jquery.js"></script>
-<!--    <script src="js/filter.js"></script>-->
     <script src="js/bootstrap.js"></script>
-
     <script>
     
 
@@ -335,5 +323,13 @@ if(!$isLoggedin && $empRole!="admin"){
     }
 
 </script>
+    <script>
+        $(document).ready(function()
+        {
+            $(document).bind("contextmenu",function(e){
+                return false;
+            });
+        })
+    </script>
 </body>
 </html>

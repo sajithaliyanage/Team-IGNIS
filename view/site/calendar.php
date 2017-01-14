@@ -261,7 +261,9 @@ if(!$isLoggedin){
 
         </div>
     </div>
-
+    <?php
+    include('../layouts/onlineStatus.php');
+    ?>
 </div>
 
 <script src="../../public/js/jquery.js"></script>
@@ -355,10 +357,10 @@ if(!$isLoggedin){
     $results = $querys->fetch();
     $deptID = $results['dept_id'];
 
-    $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE (calendar.dept_id =:log OR calendar.dept_id =:log1 ) AND calendar.comp_id=:log2";
-    $query = $pdo->prepare($smt);
-    $query ->execute(array('log'=>'#','log1'=>'@','log2'=>$empID));
-    $result = $query->fetchAll();
+    $smtd = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE (calendar.dept_id =:log OR calendar.dept_id =:log1 ) AND (calendar.comp_id=:log2 OR calendar.comp_id=:log3)";
+    $queryd = $pdo->prepare($smtd);
+    $queryd ->execute(array('log'=>'#','log1'=>'@','log2'=>$empID,'log3'=>'Tr001'));
+    $resultd = $queryd->fetchAll();
 
     $smts = "SELECT * FROM calendar WHERE dept_id=:log2";
     $querys = $pdo->prepare($smts);
@@ -400,7 +402,7 @@ if(!$isLoggedin){
             events:
                 [
                     <?php
-                        foreach($result as $rs){
+                        foreach($resultd as $rs){
                             echo "{
                                     \"title\":\" ".$rs['title']." \",
                                     \"description\":\"<p>".$rs['description']."</p><p>Date -".$rs['start_date']."</p><br/><p>Posted by : <strong>".$rs['name']."</strong></p>\",
@@ -532,6 +534,13 @@ if(!$isLoggedin){
         });
     });
 </script>
-
+<script>
+    $(document).ready(function()
+    {
+        $(document).bind("contextmenu",function(e){
+            return false;
+        });
+    })
+</script>
 </body>
 </html>

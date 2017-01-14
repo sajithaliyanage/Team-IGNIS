@@ -33,7 +33,7 @@ require_once "../../module/PHPExcel/PHPExcel.php";
         //print_r($result0[$j]["name"]);
         echo "
                <li>
-               <a href='#'>
+               <a href='../site/visitProfile.php?empId=".$result0[$j]["comp_id"]."'>
                 <i class='fa fa-circle' aria-hidden='true' style='color: #398439; margin-top:12px; font-size:10px; margin-right:10px;'></i>
                 <img src='";if($result0[$j]["image"]!='null'){echo "../".$result0[$j]["image"]."'";}else{echo "../../public/images/default.png'";}echo "style='width:30px; height:30px; margin-right:10px;' />".$result0[$j]["name"]."
                </a>
