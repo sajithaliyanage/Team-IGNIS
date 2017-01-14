@@ -1,10 +1,11 @@
 <?php
 include('../../../config/connect.php');
+include ('../../../module/xssValidation.php');
 $pdo = connect();
 
 //post request data
-$leaveType = strtolower($_POST['leave_type']);
-$leavePeriod = $_POST['leave_period'];
+$leaveType = xss_clean(strtolower($_POST['leave_type']));
+$leavePeriod = xss_clean($_POST['leave_period']);
 
 $smt = "SELECT leave_name FROM leave_type where leave_name =:log";
 $query = $pdo->prepare($smt);

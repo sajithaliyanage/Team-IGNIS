@@ -1,8 +1,9 @@
 <?php
 include('../../../module/sendEmailLocalHost.php');
+include ('../../../module/xssValidation.php');
 
-$sender = $_POST['senderEmail'];
-$receier = $_POST['receiverEmail'];
+$sender = xss_clean($_POST['senderEmail']);
+$receier = xss_clean($_POST['receiverEmail']);
 $report = '../../../module/reports/Employee_Leave_Details.pdf';
 /*
 $subject = "Take Your Leave - Online Leave Management System";

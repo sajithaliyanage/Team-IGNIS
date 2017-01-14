@@ -2,13 +2,14 @@
 
 include('../../../controller/siteController.php');
 include('../../../config/connect.php');
+include ('../../../module/xssValidation.php');
 $pdo = connect();
 
 //post request data
-$depID = $_GET['id'];
-$dName = $_POST['deptName'];
-$dColor = $_POST['dept_color'];
-$dStatus = $_POST['dept_status'];
+$depID = xss_clean($_GET['id']);
+$dName = xss_clean($_POST['deptName']);
+$dColor = xss_clean($_POST['dept_color']);
+$dStatus = xss_clean($_POST['dept_status']);
 
 
 try{

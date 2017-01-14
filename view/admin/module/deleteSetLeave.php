@@ -2,11 +2,12 @@
 
 include('../../../controller/siteController.php');
 include('../../../config/connect.php');
+include ('../../../module/xssValidation.php');
 $pdo = connect();
 
 //post request data
-$catID = $_POST['catid'];
-$levelID = $_POST['levelid'];
+$catID = xss_clean($_POST['catid']);
+$levelID = xss_clean($_POST['levelid']);
 
 
 try{

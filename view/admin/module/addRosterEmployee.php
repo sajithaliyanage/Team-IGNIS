@@ -1,20 +1,21 @@
 <?php
 include('../../../config/connect.php');
+include ('../../../module/xssValidation.php');
 $pdo = connect();
 
 //post request data
-$deptId = $_POST['emp_department'];
-$empRole = $_POST['emp_role'];
-$empCategory = $_POST['emp_category'];
-$empLevel = $_POST['emp_level'];
-$empId = $_POST['emp_id'];
-$empName = $_POST['emp_name'];
-$empNIC = $_POST['emp_nic'];
-$empGender = $_POST['emp_gender'];
-$empEmail =  $_POST['emp_email'];
-$empPassword = password_hash($_POST['emp_password'], PASSWORD_DEFAULT);
-$empTelephone = $_POST['emp_tele'];
-$groupID = $_POST['group_id'];
+$deptId = xss_clean($_POST['emp_department']);
+$empRole = xss_clean($_POST['emp_role']);
+$empCategory = xss_clean($_POST['emp_category']);
+$empLevel = xss_clean($_POST['emp_level']);
+$empId = xss_clean($_POST['emp_id']);
+$empName = xss_clean($_POST['emp_name']);
+$empNIC = xss_clean($_POST['emp_nic']);
+$empGender = xss_clean($_POST['emp_gender']);
+$empEmail =  xss_clean($_POST['emp_email']);
+$empPassword = xss_clean(password_hash($_POST['emp_password'], PASSWORD_DEFAULT));
+$empTelephone = xss_clean($_POST['emp_tele']);
+$groupID = xss_clean($_POST['group_id']);
 
 function is_valid_nic($nic)
 {

@@ -1,11 +1,12 @@
 <?php
 include('../../../config/connect.php');
+include ('../../../module/xssValidation.php');
 $pdo = connect();
 
 //post request data
-$joc_cat_id = $_POST['job_cat'];
-$joc_cat_level_id = $_POST['job_level'];
-$leaveValues = $_POST['leave_type'];// Returns an array
+$joc_cat_id = xss_clean($_POST['job_cat']);
+$joc_cat_level_id = xss_clean($_POST['job_level']);
+$leaveValues =xss_clean( $_POST['leave_type']);// Returns an array
 
 try{
 //    select leave id

@@ -1,11 +1,12 @@
 <?php
 include('../../../controller/siteController.php');
 include('../../../config/connect.php');
+include ('../../../module/xssValidation.php');
 $pdo = connect();
 
 //post request data
-$deptID = $_POST['groups'];
-$groupName = $_POST['group_name'];
+$deptID = xss_clean($_POST['groups']);
+$groupName = xss_clean($_POST['group_name']);
 
 $smt = "SELECT group_name FROM group_detail where group_name =:log";
 $query = $pdo->prepare($smt);
