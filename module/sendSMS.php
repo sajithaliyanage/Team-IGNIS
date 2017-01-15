@@ -1,6 +1,6 @@
 <?php
 require('textlocal.class.php');
-$textlocal = new Textlocal('projectucsc16@gmail.com', '6c5b7ff3040eb9b44123faf6c6c8a35b8270b5cb');
+$textlocal = new Textlocal('dileepjayasundara@gmail.com', 'cd9b636b24f319c6405c137cc30b79befb2f0c2a');
 
 function sendApprovedSMS($textlocal,$mobileNumber,$employeeName,$leaveCount,$startDate,$endDate){
 
