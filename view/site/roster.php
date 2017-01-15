@@ -94,9 +94,9 @@ if(isset($_GET['shiftid'])){
                         <hr>
 
                         <?php
-                        $sql15 = "select * from employee JOIN shifting ON employee.comp_id=shifting.emp_id where shifting.status=:log and shifting.replace_emp_id =:comp_id";
+                        $sql15 = "select * from employee JOIN shifting ON employee.comp_id=shifting.emp_id where shifting.status=:log and shifting.replace_emp_id =:comp_id and shifting.shifting_id=:log2";
                         $query15 = $pdo->prepare($sql15);
-                        $query15->execute(array('log'=>"waiting",'comp_id'=>$empID));
+                        $query15->execute(array('log'=>"waiting",'comp_id'=>$empID,'log2'=>$appliedShiftId));
                         $result15= $query15->fetchAll();
                         foreach ($result15 as $rs){
                             echo "
@@ -597,6 +597,23 @@ if(isset($_GET['shiftid'])){
                                 <i class="fa fa-chevron-right fa-1x" style="margin-top:150px; color:#3498db;"
                                    aria-hidden="true"></i>
                             </a>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <?php
+                                    $my = "select * from employee JOIN shifting ON employee.comp_id=shifting.emp_id where shifting.status=:log and shifting.replace_emp_id =:comp_id";
+                                    $query8 = $pdo->prepare($my);
+                                    $query8->execute(array('log'=>'approved','comp_id' => $empID));
+                                    $result8 = $query8->fetchAll();
+
+                                    foreach ($result8 as $rs){
+                                ?>
+                                    <h5 style="text-align: center;color:red; ">You have change your working date <b><?php echo $rs['recovery_date'];?></b> to <b><?php echo $rs['shiftingForDate'];?></b> </h5>
+                                <?php
+                                    }
+                                ?>
+                            </div>
                         </div>
                     </div>
 

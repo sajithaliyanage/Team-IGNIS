@@ -211,6 +211,30 @@ if(!$isLoggedin && $empRole!="admin"){
                                 </div>
                             </div>
 
+                            <div class="row" style="margin-bottom:10px;">
+                                <div class="col-xs-6">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <div style="background-color:red;height:20px; width:10px;float:right;"></div>
+                                            <div style="background-color:rgb(249, 231, 18);height:20px; width:10px;float:right;"></div>
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <h5 style="margin-left:-10px;margin-top:2px;">Government Holiday</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <div style="background-color:#3498db;height:20px; width:20px;float:right;"></div>
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <h5 style="margin-left:-10px;margin-top:2px;">Company Event</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
