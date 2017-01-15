@@ -1,3 +1,25 @@
+<?php
+include('../../config/connect.php');
+$pdo = connect();
+
+$encode = $_GET['id'];
+$email = $_GET['email'];
+
+$sql = "SELECT comp_id,password FROM employee WHERE email=:log";
+$query = $pdo->prepare($sql);
+$query->execute(array('log'=>$email));
+$result = $query->fetch();
+$decode = md5($result['password']);
+
+if ($encode != $decode) {
+    header("Location:../../index.php");
+}
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,32 +58,31 @@
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3 form-box">
 
-                            <div class="alert alert-danger alert-dismissible" role="alert" <?php if(!isset($_GET['fail'])){ echo "style='display:none;'";}?> >
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></strong> Invalid Company Email, please try again
-                            </div>
-
                         	<div class="form-top">
                         		<div class="form-top-left">
-                        			<h3>Forget your password ?</h3>
-                            		<p>Enter your company email:</p>
+                        			<h3>Reset Your Password</h3>
+                            		<p>Enter your new password:</p>
                         		</div>
                         		<div class="form-top-right">
                         			<i class="fa fa-lock"></i>
                         		</div>
                             </div>
                             <div class="form-bottom">
-			                    <form role="form" action="../../module/forgetPassword.php" method="post" class="login-form">
+			                    <form role="form" action="resetPassword.php?email=<?php echo $email;?>" method="post" class="login-form">
 			                    	<div class="form-group">
-			                    		<label class="sr-only">Email</label>
-			                        	<input type="email" name="companyID" placeholder="Company email" class="form-username form-control" id="form-username" required>
-			                        </div>
-			                        <button type="submit" class="btn">Confirm</button>
+                                        <label class="sr-only">Password</label>
+                                        <input id="new_pswd" type="password" name="new_pswd" placeholder="New Password" class="form-username form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only">Password</label>
+                                        <input id="con_pswd" type="password" name="con_pswd" placeholder="Confirm New Password" onChange="return pass()" class="form-username form-control"required>
+                                    </div>
+                                    <p id="pass" style="color:#F00; text-align: center;"> </p>
+			                        <button type="submit" name="submit" class="btn">Reset</button>
 			                    </form>
 		                    </div>
                         </div>
                     </div>
-                   
                 </div>
             </div>
             
@@ -69,6 +90,31 @@
 
         <script src="../../public/js/jquery.js"></script>
         <script src="../../public/js/bootstrap.js"></script>
+        <script type="text/javascript">
+            function pass()
+            {
+                var pwd=document.getElementById("new_pswd").value;
+                var cpwd=document.getElementById("con_pswd").value;
+                if(pwd==cpwd)
+                {
+                    var t1=document.getElementById('pass');
+                    t1.innerHTML="Password matches!";
+                    t1.style.color="green";
+
+
+                    /*t1.style.display='block';*/
+                }
+                else
+                {
+                    var t1=document.getElementById('pass');
+                    t1.innerHTML="Does not match with New password!";
+                    t1.style.color="red";
+                    /* t1.style.display='block';*/
+                    document.form.password.focus();
+                }
+            }
+        </script>
+
     </body>
 
 </html>

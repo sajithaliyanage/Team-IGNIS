@@ -234,6 +234,59 @@ if(!$isLoggedin){
                                         </form>
                                     </div>
                                 </div>
+
+                                <div class="row" style="margin-bottom:10px;">
+                                    <?php
+                                    $items = "SELECT dept_id FROM employee WHERE comp_id=:log2";
+                                    $querys = $pdo->prepare($items);
+                                    $querys->execute(array('log2'=>$empID));
+                                    $done = $querys->fetch();
+                                    $deptIds = $done['dept_id'];
+
+                                    $item = "SELECT dept_color FROM department WHERE dept_id=:log2";
+                                    $querys = $pdo->prepare($item);
+                                    $querys->execute(array('log2'=>$deptIds));
+                                    $done = $querys->fetch();
+                                    $deptColor = $done['dept_color'];
+                                    ?>
+                                    <div class="col-xs-6">
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                <div style="background-color:red;height:20px; width:10px;float:right;"></div>
+                                                <div style="background-color:rgb(249, 231, 18);height:20px; width:10px;float:right;"></div>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <h5 style="margin-left:-10px;margin-top:2px;">Government Holiday</h5>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                <div style="background-color:<?php echo $deptColor;?>;height:20px; width:20px;float:right;"></div>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <h5 style="margin-left:-10px;margin-top:2px;">Department Event</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                <div style="background-color:#3498db;height:20px; width:20px;float:right;"></div>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <h5 style="margin-left:-10px;margin-top:2px;">Company Event</h5>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                <div style="background-color:gold;height:20px; width:20px;float:right;"></div>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <h5 style="margin-left:-10px;margin-top:2px;">My Event</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -261,7 +314,9 @@ if(!$isLoggedin){
 
         </div>
     </div>
-
+    <?php
+    include('../layouts/onlineStatus.php');
+    ?>
 </div>
 
 <script src="../../public/js/jquery.js"></script>
@@ -355,10 +410,10 @@ if(!$isLoggedin){
     $results = $querys->fetch();
     $deptID = $results['dept_id'];
 
-    $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE (calendar.dept_id =:log OR calendar.dept_id =:log1 ) AND calendar.comp_id=:log2";
-    $query = $pdo->prepare($smt);
-    $query ->execute(array('log'=>'#','log1'=>'@','log2'=>$empID));
-    $result = $query->fetchAll();
+    $smtd = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_id WHERE (calendar.dept_id =:log OR calendar.dept_id =:log1 ) AND (calendar.comp_id=:log2 OR calendar.comp_id=:log3)";
+    $queryd = $pdo->prepare($smtd);
+    $queryd ->execute(array('log'=>'#','log1'=>'@','log2'=>$empID,'log3'=>'Tr001'));
+    $resultd = $queryd->fetchAll();
 
     $smts = "SELECT * FROM calendar WHERE dept_id=:log2";
     $querys = $pdo->prepare($smts);
@@ -400,7 +455,7 @@ if(!$isLoggedin){
             events:
                 [
                     <?php
-                        foreach($result as $rs){
+                        foreach($resultd as $rs){
                             echo "{
                                     \"title\":\" ".$rs['title']." \",
                                     \"description\":\"<p>".$rs['description']."</p><p>Date -".$rs['start_date']."</p><br/><p>Posted by : <strong>".$rs['name']."</strong></p>\",
@@ -532,6 +587,13 @@ if(!$isLoggedin){
         });
     });
 </script>
-
+<script>
+    $(document).ready(function()
+    {
+        $(document).bind("contextmenu",function(e){
+            return false;
+        });
+    })
+</script>
 </body>
 </html>

@@ -9,6 +9,135 @@ if(!$isLoggedin){
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Take Your Leave | Online</title>
+
+    <link href="../../public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../public/css/interface-leftmenu.css" rel="stylesheet">
+    <link href="../../public/css/leave-interface.css" rel="stylesheet">
+    <link href="../../public/css/navbar-style.css" rel="stylesheet">
+    <link href="../../public/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../public/css/datepicker.css">
+    <link rel="stylesheet" href="../../public/css/attendance.css">
+    <link href="../admin/css/datatable.css" rel="stylesheet">
+
+</head>
+
+<body style=" background-color: #eceff4 !important;">
+
+<?php include("../layouts/navbar.php"); ?>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-sm-2 col-xs-12 left-menu-div side-bar-display">
+            <?php include("../layouts/leftbar.php") ?>
+        </div>
+
+        <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2" style="position: relative;">
+            <div class="row padding-row">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ol class="breadcrumb breadcrumb-style">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="../../index.php">Take Your Leave</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-briefcase"></i> My Attendance
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row padding-row">
+                <div class="col-xs-12 padding-box">
+                    <div class="row">
+                        <div class="col-xs-12 nortification-box-top">
+                            <h5 class="nortification-box-heading"><i class="fa fa-paperclip icon-margin-right" aria-hidden="true"></i>
+                                Attendance Option</h5>
+                            <hr>
+
+                                <div class="department-add">
+                                    <div class="col-xs-12">
+                                        <div class="row">
+
+                                            <div class="col-xs-12 col-sm-2" >
+
+                                                <label style="padding-top: 5px;">Filter Attendance: </label>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-3" >
+
+                                                <input id="example1" name="min" type="text"
+                                                       placeholder="Start Date"
+                                                       class="form-control input-md" required>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-3">
+                                            <input id="example2" name="max" type="text"
+                                                   placeholder="End date"
+                                                   class="form-control input-md" required>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-1" ></div>
+                                            <div class="col-xs-12 col-sm-1" ></div>
+                                            <div class="col-xs-12 col-sm-2">
+                                                <button class="btn btn-info  pull-right submit-button" onclick="callme()" style="padding:10px 20px; margin-top:-5px;width: 160px">Download as PDF
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row padding-row">
+                <div class="col-sm-12 col-xs-12 padding-box">
+                    <div class="row">
+                        <div class="col-xs-12 nortification-box-top">
+                            <h5 class="nortification-box-heading"><i class="fa fa-eye icon-margin-right" aria-hidden="true"></i>
+                                My Attendance</h5>
+                            <hr>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <table id="myTable" class="display">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>In Time</th>
+                                                <th>Out Time</th>
+                                                <th>Work Time</th>
+                                                <th>Over Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php include "../../module/FilterByEmp_Name.php"?>
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <?php
+    include('../layouts/onlineStatus.php');
+    ?>
+</div>
+
 <script>
     function tableToJson(table) {
         var data = [];
@@ -37,138 +166,9 @@ if(!$isLoggedin){
         return data;
     }
 </script>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Take Your Leave | Online</title>
-
-    <link href="../../public/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../public/css/interface-leftmenu.css" rel="stylesheet">
-    <link href="../../public/css/leave-interface.css" rel="stylesheet">
-    <link href="../../public/css/navbar-style.css" rel="stylesheet">
-    <link href="../../public/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../public/css/datepicker.css">
-    <link rel="stylesheet" href="../../public/css/attendance.css">
-
-
-</head>
-
-<body style=" background-color: #eceff4 !important;">
-
-<?php include("../layouts/navbar.php") ?>
-
-<div class="container-fluid">
-    <div class="row">
-
-        <div class="col-sm-2 col-xs-12 left-menu-div side-bar-display">
-            <?php include("../layouts/leftbar.php") ?>
-        </div>
-
-        <div class="col-sm-10 col-xs-12 col-sm-push-2 padding-box ">
-            <div class="row padding-row">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <ol class="breadcrumb breadcrumb-style">
-                            <li>
-                                <i class="fa fa-dashboard"></i>  <a href="../../index.php">Take Your Leave</a>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-briefcase"></i> My Attendance
-                            </li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-
-
-            <br>
-            <div class="row padding-row">
-                <div class="col-xs-12 padding-box">
-                    <div class="row">
-                        <div class="col-xs-12 nortification-box-top">
-                            <h5 class="nortification-box-heading"><i class="fa fa-paperclip icon-margin-right" aria-hidden="true"></i>
-                                Attendance Option</h5>
-                            <hr>
-                            <form role="form" data-toggle="validator" action="" method="post">
-                                <div class="department-add">
-                                    <div class="col-xs-12">
-                                        <div class="row">
-
-
-                                            <div class="col-xs-12 col-sm-3" >
-                                                <input id="example1" name="example1" type="text"
-                                                       placeholder="Start Date"
-                                                       class="form-control input-md" required>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-1" ></div>
-                                            <div class="col-xs-12 col-sm-3"  ">
-                                            <input id="example2" name="example2" type="text"
-                                                   placeholder="End date"
-                                                   class="form-control input-md" required>
-                                            </div>
-                                        <div class="col-xs-12 col-sm-1" ></div>
-                                        <div class="col-xs-12 col-sm-2">
-                                            <button class="btn btn-info  pull-right submit-button" type="submit" onclick="" style="padding:10px 25px; margin-top:-5px ;width: 160px">Filter Data
-                                            </button>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-1" ></div>
-                                            <div class="col-xs-12 col-sm-2">
-                                                <button class="btn btn-info  pull-right submit-button" type="submit"  onclick="callme();" style="padding:10px 25px; margin-top:-5px;width: 160px">Download As PDF
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="row padding-row">
-                <div class="col-sm-12 col-xs-12 padding-box">
-                    <div class="row">
-                        <div class="col-xs-12 nortification-box-top">
-                            <h5 class="nortification-box-heading"><i class="fa fa-eye icon-margin-right" aria-hidden="true"></i>
-                                My Attendance</h5>
-                            <hr>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <table class="table table-responsive" id="table-id">
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>In Time</th>
-                                            <th>Out Time</th>
-                                            <th>Work Time</th>
-                                            <th>Over Time</th>
-                                        </tr>
-                                        <?//php include "../../module/excelRead.php"?>
-                                        <?php include "../../module/FilterByEmp_Name.php"?>
-
-
-                                    </table>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<script> function callme(){
-        var table = tableToJson($('#table-id').get(0));
+<script>
+    function callme(){
+        var table = tableToJson($('#myTable').get(0));
         var doc = new jsPDF('l','pt','letter',true);
 
 
@@ -187,26 +187,8 @@ if(!$isLoggedin){
         doc.save('Report.pdf');
     }
 </script>
-
-<script >function filter(){
-
-
-        var startDate = Document.getElementById('example1');
-        var endDate = Document.getElementById('example2');
-
-
-        var td,tr,tableName;
-
-
-
-
-
-
-
-    }</script>
-
-<script src="../../public/js/jspdf.js"></script>
 <script src="../../public/js/jquery.js"></script>
+<script src="../../public/js/jspdf.js"></script>
 <script src="../../public/js/bootstrap.js"></script>
 <script src="../../public/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
@@ -214,13 +196,53 @@ if(!$isLoggedin){
     $(document).ready(function () {
 
         $('#example1').datepicker({
-            format: "dd/mm/yyyy"
+            format: "yyyy-mm-dd"
         });
         $('#example2').datepicker({
-            format: "dd/mm/yyyy"
+            format: "yyyy-mm-dd"
         });
 
     });
+</script>
+<script src="../admin/js/datatable.js"></script>
+<script type="application/javascript">
+    $.fn.dataTable.ext.search.push(
+        function( settings, data, dataIndex ) {
+
+            var min = new Date($('#example1').val());
+            var max = new Date($('#example2').val());
+            var age = new Date(data[0] || 0);
+
+
+            //alert(min);
+            if ( ( isNaN( min ) && isNaN( max ) ) ||
+                ( isNaN( min ) && age <= max ) ||
+                ( min <= age   && isNaN( max ) ) ||
+                ( min <= age   && age <= max ) )
+            {
+                return true;
+            }
+            return false;
+        }
+    );
+
+    $(document).ready(function(){
+        var table = $('#myTable').DataTable();
+
+        // Event listener to the two range filtering inputs to redraw on input
+
+        $('#example1, #example2').focusout( function() {
+            table.draw();
+        } );
+    });
+</script>
+<script>
+    $(document).ready(function()
+    {
+        $(document).bind("contextmenu",function(e){
+            return false;
+        });
+    })
 </script>
 
 </body>

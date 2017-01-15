@@ -127,9 +127,9 @@ if(isset($_GET['id'])){
             </div>
         </div>
     </div>
-
-
-
+    <?php
+        include('../layouts/onlineStatus.php');
+    ?>
 
 </div>
 
@@ -248,7 +248,14 @@ if(isset($_GET['id'])){
 
 
 </script>
-
+<script>
+    $(document).ready(function()
+    {
+        $(document).bind("contextmenu",function(e){
+            return false;
+        });
+    })
+</script>
 
 </body>
 </html>

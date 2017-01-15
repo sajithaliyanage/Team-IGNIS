@@ -271,6 +271,9 @@ if(!$isLoggedin && $empRole!="director"){
 
     </div>
     </div>
+    <?php
+    include('../layouts/onlineStatus.php');
+    ?>
 </div>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
@@ -317,6 +320,13 @@ if(!$isLoggedin && $empRole!="director"){
         });
     </script>
     <script type="application/javascript" src="../layouts/awesomechart.js"> </script>
-
+<script>
+    $(document).ready(function()
+    {
+        $(document).bind("contextmenu",function(e){
+            return false;
+        });
+    })
+</script>
 </body>
 </html>

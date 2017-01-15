@@ -379,7 +379,9 @@ $departmentId = $result['dept_id'];
 
         </div>
     </div>
-
+    <?php
+    include('../layouts/onlineStatus.php');
+    ?>
 </div>
 
 <script src="../../public/js/jquery.js"></script>
@@ -487,6 +489,14 @@ $departmentId = $result['dept_id'];
         }
     }
 
+</script>
+<script>
+    $(document).ready(function()
+    {
+        $(document).bind("contextmenu",function(e){
+            return false;
+        });
+    })
 </script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 function connect() {
-	
+
 	if ($_SERVER['HTTP_HOST'] == 'localhost'){
 		return new PDO(
         'mysql:host=localhost;dbname=takeyourleave','root','',

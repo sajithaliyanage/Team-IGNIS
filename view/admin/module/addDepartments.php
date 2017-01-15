@@ -14,7 +14,7 @@ $query->execute(array('log'=>$deptName));
 $result = $query->fetchAll();
 $rownum = $query->rowCount();
 
-$smt1 = "SELECT dept_color FROM department where dept_color =:log";
+$smt1 = "SELECT dept_color FROM department where currentStatus !='rejected' AND dept_color =:log ";
 $query1 = $pdo->prepare($smt1);
 $query1->execute(array('log'=>$deptColor));
 $result1 = $query1->fetchAll();

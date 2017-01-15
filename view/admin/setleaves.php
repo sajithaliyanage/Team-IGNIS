@@ -275,11 +275,12 @@ if(isset($_GET['id'])){
             </div>
          </div>
       </div>
-
+        <?php
+        include('../layouts/onlineStatus.php');
+        ?>
     </div>
 
     <script src="js/jquery.js"></script>
-    <script src="js/jscolor.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script language="javascript" type="text/javascript">
         $('#iconified').on('keyup', function() {
@@ -327,5 +328,14 @@ if(isset($_GET['id'])){
             xhttp.send();
         }
     </script>
+    <script>
+        $(document).ready(function()
+        {
+            $(document).bind("contextmenu",function(e){
+                return false;
+            });
+        })
+    </script>
+
 </body>
 </html>

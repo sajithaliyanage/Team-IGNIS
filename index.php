@@ -40,6 +40,14 @@
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></strong> Invalid login, please try again
                             </div>
+                            <div class="alert alert-danger alert-dismissible" role="alert" <?php if(!isset($_GET['fail'])){ echo "style='display:none;'";}?> >
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></strong> Password not reset, please try again
+                            </div>
+                            <div class="alert alert-success alert-dismissible" role="alert" <?php if(!isset($_GET['success'])){ echo "style='display:none;'";}?> >
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></strong> Password reset successfully, Login to your account now!
+                            </div>
 
                         	<div class="form-top">
                         		<div class="form-top-left">

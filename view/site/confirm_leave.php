@@ -215,6 +215,36 @@ $departmentId = $result['dept_id'];
                             <h5 class="nortification-box-heading"><i class="fa fa-angle-double-right " aria-hidden="true"></i>
                                  Waiting for approval or rejection</h5>
                             <hr>
+                            <div class="row" style="margin-bottom:10px;">
+                                <div class="col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <div class="row">
+                                                <div style="background-color:red;height:15px;width:15px; margin-left:15px; float:left;"></div>
+                                                <div style="float:left; margin-left:5px; margin-top:0px; font-size:12px;">Emergency</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-3" style="display:<?php if($empRole !='manager') echo 'none;';?>;">
+                                            <div class="row">
+                                                <div style="background-color:blue;height:15px;width:15px; margin-left:15px; float:left;"></div>
+                                                <div style="float:left; margin-left:5px; margin-top:0px; font-size:12px;">Managerial</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <div class="row">
+                                                <div style="background-color:black;height:15px;width:15px; margin-left:12px; float:left;"></div>
+                                                <div style="float:left; margin-left:5px; margin-top:0px; font-size:12px;">Unauthorized</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <div class="row">
+                                                <div style="background-color:white;height:15px;width:15px; border:1px solid #000; margin-left:15px; float:left;"></div>
+                                                <div style="float:left; margin-left:5px; margin-top:0px; font-size:12px;">Moderate</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="list-group">
                                 <?php
@@ -327,6 +357,59 @@ $departmentId = $result['dept_id'];
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row" style="margin-bottom:10px;">
+                                <?php
+                                $items = "SELECT dept_id FROM employee WHERE comp_id=:log2";
+                                $querys = $pdo->prepare($items);
+                                $querys->execute(array('log2'=>$empID));
+                                $done = $querys->fetch();
+                                $deptIds = $done['dept_id'];
+
+                                $item = "SELECT dept_color FROM department WHERE dept_id=:log2";
+                                $querys = $pdo->prepare($item);
+                                $querys->execute(array('log2'=>$deptIds));
+                                $done = $querys->fetch();
+                                $deptColor = $done['dept_color'];
+                                ?>
+                                <div class="col-xs-6">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <div style="background-color:red;height:20px; width:10px;float:right;"></div>
+                                            <div style="background-color:rgb(249, 231, 18);height:20px; width:10px;float:right;"></div>
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <h5 style="margin-left:-10px;margin-top:2px;">Holiday</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <div style="background-color:<?php echo $deptColor;?>;height:20px; width:20px;float:right;"></div>
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <h5 style="margin-left:-10px;margin-top:2px;">Department Event</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <div style="background-color:#3498db;height:20px; width:20px;float:right;"></div>
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <h5 style="margin-left:-10px;margin-top:2px;">Company Event</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <div style="background-color:gold;height:20px; width:20px;float:right;"></div>
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <h5 style="margin-left:-10px;margin-top:2px;">My Event</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         </div>
                     </div>
@@ -335,6 +418,9 @@ $departmentId = $result['dept_id'];
             </div>
 
         </div>
+    <?php
+    include('../layouts/onlineStatus.php');
+    ?>
     </div>
 
 
@@ -355,6 +441,12 @@ $smt = "SELECT * FROM calendar JOIN employee ON employee.comp_id=calendar.comp_i
 $query = $pdo->prepare($smt);
 $query ->execute(array('log'=>'0','log2'=>$deptID,'log3'=>'@'));
 $result = $query->fetchAll();
+
+$smts = "SELECT * FROM calendar WHERE dept_id=:log2";
+$querys = $pdo->prepare($smts);
+$querys->execute(array('log2'=>'@'));
+$resultd = $querys->fetchAll();
+?>
 ?>
 
 <script>
@@ -374,7 +466,7 @@ $result = $query->fetchAll();
             firstDay: 1,
             dayRender: function (date, cell) {
                 <?php
-                foreach ($results as $rs){
+                foreach ($resultd as $rs){
                 ?>
                 if (date.isSame('<?php echo $rs['start_date'];?>')) {
                     cell.css("background-color", "#f9e712");
@@ -402,6 +494,14 @@ $result = $query->fetchAll();
                 ]
         });
     });
+</script>
+<script>
+    $(document).ready(function()
+    {
+        $(document).bind("contextmenu",function(e){
+            return false;
+        });
+    })
 </script>
 </body>
 </html>

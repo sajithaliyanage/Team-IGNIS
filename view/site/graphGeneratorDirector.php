@@ -256,6 +256,9 @@
 
 </div>
 </div>
+    <?php
+    include('../layouts/onlineStatus.php');
+    ?>
 </div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -285,9 +288,9 @@
     }
 </script>
 
-<script src="../view/admin/js/jquery.js"></script>
-<script src="../view/admin/js/bootstrap.js"></script>
-<script src="../public/js/bootstrap-datepicker.js"></script>
+<script src="../../view/admin/js/jquery.js"></script>
+<script src="../../view/admin/js/bootstrap.js"></script>
+<script src="../../public/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
     // When the document is ready
     $(document).ready(function () {
@@ -301,7 +304,15 @@
 
     });
 </script>
-<script type="application/javascript" src="../view/layouts/awesomechart.js"> </script>
+<script type="application/javascript" src="../layouts/awesomechart.js"> </script>
+<script>
+    $(document).ready(function()
+    {
+        $(document).bind("contextmenu",function(e){
+            return false;
+        });
+    })
+</script>
 
 </body>
 </html>

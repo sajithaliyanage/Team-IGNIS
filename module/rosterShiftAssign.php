@@ -1,7 +1,7 @@
 <?php
-include_once "../config/connect.php";
-include_once "../controller/siteController.php";
-$pdo = connect();
+//include_once "../config/connect.php";
+//include_once "../controller/siteController.php";
+//$pdo = connect();
 
 function  shift_assigning(){
     global $pdo;
