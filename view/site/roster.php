@@ -609,9 +609,26 @@ if(isset($_GET['shiftid'])){
 
                                     foreach ($result8 as $rs){
                                 ?>
-                                    <h5 style="text-align: center;color:red; ">You have change your working date <b><?php echo $rs['recovery_date'];?></b> to <b><?php echo $rs['shiftingForDate'];?></b> </h5>
+                                    <h5 style="text-align: center;color:red; ">You have change your working date <b><?php echo $rs['recovery_date'];?></b> to <b><?php echo $rs['shiftingForDate'];?></b><br> (<?php echo $rs['shitingForSession'];?>) </h5>
                                 <?php
                                     }
+                                ?>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <?php
+                                $my = "select * from employee JOIN shifting ON employee.comp_id=shifting.emp_id where shifting.status=:log and shifting.emp_id =:comp_id";
+                                $query8 = $pdo->prepare($my);
+                                $query8->execute(array('log'=>'approved','comp_id' => $empID));
+                                $result8 = $query8->fetchAll();
+
+                                foreach ($result8 as $rs){
+                                    ?>
+                                    <h5 style="text-align: center;color:red; ">You have change your working date <b><?php echo $rs['shiftingForDate'];?></b> to <b><?php echo $rs['recovery_date'];?></b><br> (<?php echo $rs['recovery_time'];?>) </h5>
+                                    <?php
+                                }
                                 ?>
                             </div>
                         </div>
