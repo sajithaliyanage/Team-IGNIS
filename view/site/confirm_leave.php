@@ -224,7 +224,7 @@ $departmentId = $result['dept_id'];
                                                 <div style="float:left; margin-left:5px; margin-top:0px; font-size:12px;">Emergency</div>
                                             </div>
                                         </div>
-                                        <div class="col-xs-3">
+                                        <div class="col-xs-3" style="display:<?php if($empRole !='manager') echo 'none;';?>;">
                                             <div class="row">
                                                 <div style="background-color:blue;height:15px;width:15px; margin-left:15px; float:left;"></div>
                                                 <div style="float:left; margin-left:5px; margin-top:0px; font-size:12px;">Managerial</div>
