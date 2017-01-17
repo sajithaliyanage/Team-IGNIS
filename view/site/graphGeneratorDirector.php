@@ -54,6 +54,7 @@
 
         <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2" style="position: relative;">
           <div class="row padding-row">
+            <!--show the navigated pages start-->
               <div class="row">
                   <div class="col-lg-12">
                       <ol class="breadcrumb breadcrumb-style">
@@ -66,6 +67,7 @@
                       </ol>
                   </div>
               </div>
+              <!--show the navigated pages end-->
           </div>
 
 <?php
