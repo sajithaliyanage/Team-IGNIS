@@ -10,7 +10,7 @@ $rosterStatus = xss_clean($_POST['roster_status']);
 
 $smt = "SELECT dept_name FROM department where dept_name =:log";
 $query = $pdo->prepare($smt);
-$query->execute(array('log'=>$deptName));
+$query->execute(array('log'=>$deptName.' Department'));
 $result = $query->fetchAll();
 $rownum = $query->rowCount();
 
@@ -59,5 +59,3 @@ if (empty($deptName)) {
 	    //echo $e;
 	    header("Location:../../layouts/error.php");
 	}
-
-

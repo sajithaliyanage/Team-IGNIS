@@ -1,4 +1,5 @@
 <?php
+//error_reporting(0);
 $var = "apply";
 include('../../controller/siteController.php');
 include('../../config/connect.php');
