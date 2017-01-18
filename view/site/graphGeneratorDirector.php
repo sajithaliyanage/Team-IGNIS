@@ -75,7 +75,7 @@
 
       try{
         require_once "../../module/PHPExcel/PHPExcel.php";
-        $tempFile = "testing.xlsx";
+        $tempFile = "test.xlsx";
         $objPHPExcel = PHPExcel_IOFactory::load($tempFile);
 
         //get employee ids from excel sheet
@@ -116,6 +116,7 @@
                       <div class="col-xs-12 main-box-1-1">
                           <div class="row">
                               <div class="col-xs-8">
+                                <!---to diplay the present count-->
                                 <?php
                                     $sql="SELECT * FROM employee";
                                     $query = $pdo->prepare($sql);
@@ -148,6 +149,7 @@
               <div class="row">
                     <div class="col-xs-12 main-box-4-1">
                         <div class="row">
+                          <!---to diplay the absent count-->
                             <div class="col-xs-8">
                               <?php
                                 $sql="SELECT * FROM employee";
@@ -218,6 +220,8 @@
             }
 
             $dCount=(array_count_values($dte));
+            $c=count($dCount);
+            $key=array_keys($dCount);
 
             //take employee count in that department
             $sql="SELECT no_of_emp from department where dept_id=:dID ";
@@ -227,25 +231,15 @@
 
             //display absent present belongs to a the department
             $dept=array();
-            for($i=0,$j=0;$i<$num1;$i++)
+            for($i=0,$j=0;$i<$c;$i++)
             {
-              $dept[$j][0]=$dates[$i];
-              if($dates[$i]==$dte[$j]){
-                $d_dte=$dates[$i];
-                $dept[$j][1] = intval($dCount[$d_dte]);
+                $d=$key[$i];
+                $dept[$j][0] = $d;
+                $dept[$j][1] = intval($dCount[$d]);
                 $absnt= intval($query[0][0])-$dept[$j][1];
                 $dept[$j][2] =intval($absnt);
                 $j=$j+1;
-              }
-              else{
-                $dept[$j][1] = 0;
-                $absnt= intval($query[0][0])-$dept[$j][1];
-                $dept[$j][2] =intval($absnt);
-              }
-
-
             }
-
             array_unshift($dept, array('Date', 'Present','Absent'));
             //print_r($dept);
           ?>

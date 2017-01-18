@@ -64,7 +64,7 @@ if(!$isLoggedin){
             <!--show the navigated pages end-->
             <div class="row padding-row">
                 <div class="col-xs-12 col-sm-6 padding-box">
-                  <!--content of Edit Profile start-->
+                  <!--content of Edit Profile Picture start-->
                     <div class="col-xs-12 nortification-box-top">
                         <h5 class="nortification-box-heading"><i class="fa fa-user icon-margin-right" aria-hidden="true"></i>
                             My Profile
@@ -78,7 +78,7 @@ if(!$isLoggedin){
                                     $query->execute(array('empID'=>$empID));
                                     $result = $query->fetch();
                                 ?>
-
+                                <!--upload new profile picture-->
                                 <div class="nortification-box-status">
                                     <center>
                                         <form action="../../module/changeProfilePic.php" method="POST"  enctype="multipart/form-data"  title="Click here to change your profile picture!">
@@ -112,7 +112,7 @@ if(!$isLoggedin){
                             <div class="row">
 
                                 <div class="col-xs-12">
-
+                                    <!--content of Edit Profile start-->
                                     <div class="col-xs-12 nortification-box-top">
                                         <h5 class="nortification-box-heading"><i class="fa fa-edit icon-margin-right" aria-hidden="true"></i>
                                             Edit Profile</h5>

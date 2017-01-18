@@ -62,7 +62,7 @@ if(!$isLoggedin){
                     <!--show the navigated pages end-->
 
                     <div class="row padding-row">
-                        <!--content of My Profile start-->
+                        <!--content left top-My Profile Picture-->
                         <div class="col-xs-12 col-sm-6 padding-box">
 
                             <div class="row">
@@ -74,6 +74,7 @@ if(!$isLoggedin){
                                     <hr>
                                     <div class="row">
                                             <div class="col-xs-12">
+                                              <!--select the employee's image-->
                                                 <?php
                                                     $sql = "SELECT image from employee WHERE comp_id=:empID";
                                                     $query = $pdo->prepare($sql);
@@ -97,9 +98,9 @@ if(!$isLoggedin){
                                     </div>
                                 </div>
                             </div>
-                        <!--content of My Profile ends-->
+                        <!--content of My Profile Picture ends-->
 
-                        <!--content of Edit Profile start-->
+                        <!--right top-content of Edit Profile start-->
 
                         <div class="col-sm-6 col-xs-12 padding-box">
 
@@ -108,10 +109,11 @@ if(!$isLoggedin){
                                         <div class="col-xs-12 nortification-box-top">
                                             <h5 class="nortification-box-heading"><i class="fa fa-edit icon-margin-right" aria-hidden="true"></i>
                                                 Edit Profile</h5>
+                                                <!--give user alerts-->
                                             <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">Your profile edited successfully!</div>
                                             <div class="alert-user" style="<?php if(!isset($_GET['changed'])){echo 'display:none;';}?>">Password reset successfully!</div>
                                             <hr>
-
+                                              <!--content right top-My Profile edit-->
                                               <div class="col-xs-12">
                                               <?php
                                                 $sql = " SELECT * from employee INNER JOIN department ON employee.dept_id=department.dept_id
@@ -176,7 +178,7 @@ if(!$isLoggedin){
                                                         <div class="col-xs-7"><?php echo $result['nic']?></div>
                                                     </div>
                                                     <br/>
-
+                                                      <!--reset passord link-->
                                                     <div class="form-group toped">
                                                         <label class="col-xs-5 ">Password:</label>
                                                         <div class="col-xs-7"><a href="resetPswd.php">Reset Password</a></div>

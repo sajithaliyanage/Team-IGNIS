@@ -27,7 +27,7 @@ if(!$isLoggedin){
     <link href="../../public/css/fullcalendar.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../public/css/datepicker.css">
     <link href="../../public/css/jquery-ui.css" rel="stylesheet">
-    
+
 </head>
 
 <body style=" background-color: #eceff4 !important;">
@@ -43,6 +43,7 @@ if(!$isLoggedin){
         <!---content start-->
         <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2">
             <div class="row padding-row">
+              <!--display the navigated pages start-->
                 <div class="row">
                     <div class="col-lg-12">
                         <ol class="breadcrumb breadcrumb-style">
@@ -55,12 +56,15 @@ if(!$isLoggedin){
                         </ol>
                     </div>
                 </div>
+                <!--show the navigated pages end-->
+
+                <!--check whether there are any unauthorized leave-->
                 <?php
                     $sql = "SELECT * FROM unauthorized_leave WHERE comp_id=:log";
                     $query = $pdo->prepare($sql);
                     $query->execute(array('log'=>$empID));
                     $result = $query->fetchAll();
-
+                  //display alert message for unauthorized leave
                     foreach ($result as $rs){
                         echo "
                             <div class=\"alert alert-danger\" role=\"alert\">
@@ -70,9 +74,8 @@ if(!$isLoggedin){
                         ";
                     }
                 ?>
-
-
             </div>
+            <!--content left top-remaining leaves-->
             <div class="row padding-row">
                 <div class="col-sm-6 col-xs-12 padding-box">
                     <div class="row">
@@ -83,6 +86,7 @@ if(!$isLoggedin){
                             <ul class="list-group">
 
                                 <?php
+                                //get employee job category and ob level, logged in
                                     $sqlS="SELECT * FROM employee WHERE comp_id=:empID";
                                     $queryS = $pdo->prepare($sqlS);
                                     $queryS->execute(array('empID'=> $empID));
@@ -90,20 +94,20 @@ if(!$isLoggedin){
 
                                     $levelID = $resultS['level_id'];
                                     $jobID = $resultS['job_cat_id'];
-
+                                  //take the job id belongs to above job cayegory and level
                                     $sqlS1="SELECT set_id FROM leave_set_job WHERE job_cat_id=:jobID AND level_id=:lID";
                                     $queryS1 = $pdo->prepare($sqlS1);
                                     $queryS1->execute(array('jobID'=> $jobID,'lID'=>$levelID));
                                     $resultS1 = $queryS1->fetch();
 
                                     $setID = $resultS1['set_id'];
-
+                                  //take the leave counts of that job
                                     $sqlS2="SELECT leave_count FROM leave_count_details WHERE set_id=:setID";
                                     $queryS2 = $pdo->prepare($sqlS2);
                                     $queryS2->execute(array('setID'=> $setID));
                                     $resultS2 = $queryS2->fetchAll();
 
-
+                                    //take the leave type name
                                     $sql="SELECT employee_leave_count.leave_count ,leave_type.leave_name FROM employee_leave_count
                                           JOIN leave_type ON employee_leave_count.leave_id = leave_type.leave_id
                                           WHERE employee_leave_count.comp_id=:empID and leave_type.currentStatus=:log";
@@ -128,16 +132,8 @@ if(!$isLoggedin){
                             </ul>
                         </div>
                     </div>
-<!--                    <div class="row margin-top">-->
-<!--                        <div class="col-xs-12 nortification-box-top">-->
-<!--                            <h5 class="nortification-box-heading"><i class="fa fa-calendar icon-margin-right" aria-hidden="true"></i>-->
-<!--                                Profile Calendar</h5>-->
-<!--                            <div style="height:300px;background-color:#4cae4c; margin-bottom:20px;">-->
-<!---->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
 
+                      <!--content left bottom-calendar-->
                     <div class="row margin-top">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-calendar icon-margin-right" aria-hidden="true"></i>
@@ -219,23 +215,23 @@ if(!$isLoggedin){
                     </div>
 
                 </div>
-                <!---leave application form---->
+                  <!--content right top -leave application form-->
                 <div class="col-sm-6 col-xs-12 padding-box">
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-tag icon-margin-right" aria-hidden="true"></i>
                                 Leave Application</h5>
-
+                            <!--give alerts for user-->
                             <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">Leave application send successfully!</div>
                             <div class="alert-user" style="<?php if(!isset($_GET['count'])){echo 'display:none;';}?> color:#d43f3a">Leave count is not sufficient!</div>
                             <div class="alert-user" style="<?php if(!isset($_GET['invalid'])){echo 'display:none;';}?> color:#d43f3a">Invalid Action!</div>
                             <div class="alert-user" style="<?php if(!isset($_GET['exists'])){echo 'display:none;';}?> color:#d43f3a">Leave already requested!</div>
 
                             <hr>
+                            <!-- Form start-->
                             <form role="form" data-toggle="validator" action="../../module/applyLeave.php" method="post">
                                 <div class="department-add">
                                     <div class="col-xs-12">
-                                        <!-- Text input-->
                                         <div class="form-group">
                                             <label class="col-xs-4 control-label form-lable">Leave Type:</label>
 
@@ -330,6 +326,7 @@ if(!$isLoggedin){
                             </form>
                         </div>
                     </div>
+                      <!--content right bottom -past leave notifications-->
                     <div class="row margin-top">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-list icon-margin-right" aria-hidden="true"></i>
@@ -374,7 +371,7 @@ if(!$isLoggedin){
 <script>
     $(document).ready(function () {
         $('#service_name').prop('readonly', true);
-    }
+    })
 </script>
 <script>
     function checkLeave(str) {
@@ -462,7 +459,7 @@ if(!$isLoggedin){
     });
 </script>
 
-
+<!---to display the calendar event details-->
 <?php
     $smts = "SELECT * FROM employee WHERE comp_id=:log2";
     $querys = $pdo->prepare($smts);

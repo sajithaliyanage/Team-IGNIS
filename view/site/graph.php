@@ -45,7 +45,6 @@ if(!$isLoggedin && $empRole!="director"){
 
         <div class="col-sm-10 col-xs-12 admin-background col-sm-push-2" style="position: relative;">
           <div class="row padding-row">
-            <!--show the navigated pages start-->
               <div class="row">
                   <div class="col-lg-12">
                       <ol class="breadcrumb breadcrumb-style">
@@ -58,14 +57,13 @@ if(!$isLoggedin && $empRole!="director"){
                       </ol>
                   </div>
               </div>
-              <!--show the navigated pages end-->
           </div>
 
           <!-- get the attendance from excel sheet -->
           <?php
           require_once "../../module/PHPExcel/PHPExcel.php";
           try {
-              $tempFile = "test.xlsx";
+              $tempFile = "testing.xlsx";
               $objPHPExcel = PHPExcel_IOFactory::load($tempFile);
               $j=0;
 

@@ -4,7 +4,7 @@ include('../controller/siteController.php');
 include('xssValidation.php');
 $pdo = connect();
 
-//leave post request
+//leave request data
 $leaveType = xss_clean($_POST['leave_type']);
 $leavePriority = xss_clean($_POST['leave_priority']);
 $startDate = xss_clean($_POST['start_date']);
@@ -21,7 +21,7 @@ try {
 
     $flag = 1;
     $flag2 = 1;
-
+    //check whether the fields are empty or invalid inputs
     if (empty($startDate)) {
         $flag = 0;
     } else if (empty($endDate)) {
@@ -36,9 +36,11 @@ try {
         $flag = 0;
     } else if ($numDays == "Invalid") {
         $flag = 0;
-    }else{
-        $smt = "SELECT * FROM apply_leave WHERE comp_id=:empID AND (status =:log OR status =:log2 OR status =:log3 ) AND 
-      (str_to_date('$startDate', '%d/%m/%Y') <= STR_TO_DATE(end_date,'%d/%m/%Y') 
+    }
+    //check whether there is an holiday,past requested leave betwen selected date range
+    else{
+        $smt = "SELECT * FROM apply_leave WHERE comp_id=:empID AND (status =:log OR status =:log2 OR status =:log3 ) AND
+      (str_to_date('$startDate', '%d/%m/%Y') <= STR_TO_DATE(end_date,'%d/%m/%Y')
     AND str_to_date('$endDate', '%d/%m/%Y') >= STR_TO_DATE(start_date, '%d/%m/%Y'))";
         $querySmt = $pdo->prepare($smt);
         $querySmt->execute(array('empID'=>$empID,'log'=>'approved','log2'=>'waiting','log3'=>'recommended'));
@@ -59,7 +61,7 @@ try {
     }else{
         if ($empRole == 'executive' || $empRole == 'manager' || $empRole == 'admin') {
 
-//            insert data to apply leave table
+//         //insert recommended data to apply leave table status as recoomended
             $sql = "INSERT INTO apply_leave (comp_id,leave_id,leave_priority,apply_date,start_date,end_date,number_of_days,reason,status,recommandBy) VALUES
             (:comp_id,:leave_id,:leave_priority,:apply_date,:start_date,:end_date,:number_of_days,:reason,:status,:myID)";
             $query = $pdo->prepare($sql);
@@ -69,7 +71,7 @@ try {
             header("Location:../view/site/apply.php?job=done");
 
         } else {
-            //            insert data to apply leave table
+            // insert data to apply leave table
             $sql = "INSERT INTO apply_leave (comp_id,leave_id,leave_priority,apply_date,start_date,end_date,number_of_days,reason,status) VALUES
             (:comp_id,:leave_id,:leave_priority,:apply_date,:start_date,:end_date,:number_of_days,:reason,:status)";
             $query = $pdo->prepare($sql);

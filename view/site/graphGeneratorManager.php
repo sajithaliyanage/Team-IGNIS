@@ -74,7 +74,7 @@ $d2=strtotime($endDate);
 
       try{
         require_once "../../module/PHPExcel/PHPExcel.php";
-        $tempFile = "testing.xlsx";
+        $tempFile = "test.xlsx";
         $objPHPExcel = PHPExcel_IOFactory::load($tempFile);
 
         //get employee ids from excel sheet
@@ -115,6 +115,7 @@ $d2=strtotime($endDate);
                       <div class="col-xs-12 main-box-1-1">
                           <div class="row">
                               <div class="col-xs-8">
+                                <!---display the employee count in the department--->
                                 <?php
                                     $sql="SELECT * FROM employee";
                                     $query = $pdo->prepare($sql);
@@ -148,6 +149,7 @@ $d2=strtotime($endDate);
                     <div class="col-xs-12 main-box-4-1">
                         <div class="row">
                             <div class="col-xs-8">
+                              <!---display the absent employee count in the department--->
                               <?php
                                 $sql="SELECT * FROM employee";
                                 $query = $pdo->prepare($sql);
@@ -201,59 +203,52 @@ $d2=strtotime($endDate);
         }
         $num=count($drange);
 
-            //check the department of the manager
-            $sql1="SELECT dept_id from employee where comp_id=:empID ";
-            $query1 = $pdo->prepare($sql1);
-            $query1->execute(array('empID'=> $empID));
-            $query1 = $query1->fetch();
+        //check the department of the manager
+        $sql1="SELECT dept_id from employee where comp_id=:empID ";
+        $query1 = $pdo->prepare($sql1);
+        $query1->execute(array('empID'=> $empID));
+        $query1 = $query1->fetch();
 
-            //take the employee count belongs to the department
-            $emp=array();
-            $dte=array();
-            for($i=0,$j=0; $i<$num; $i++){
-              $sql2="SELECT dept_id from employee where comp_id=:empID ";
-              $query2 = $pdo->prepare($sql2);
-              $query2->execute(array('empID'=> $empid[$i]));
-              $query2 = $query2->fetch();
-              if($query1[0]==$query2[0]){
-                $emp[$j]=$empid[$i];
-                $dte[$j]=$drange[$i];
-                $j=$j+1;
-              }
-            }
-            $dCount=(array_count_values($dte));
+        //take the employee count belongs to the department
+        $emp=array();
+        $dte=array();
+        for($i=0,$j=0; $i<$num; $i++){
+          $sql2="SELECT dept_id from employee where comp_id=:empID ";
+          $query2 = $pdo->prepare($sql2);
+          $query2->execute(array('empID'=> $empid[$i]));
+          $query2 = $query2->fetch();
+          if($query1[0]==$query2[0]){
+            $emp[$j]=$empid[$i];
+            $dte[$j]=$drange[$i];
+            $j=$j+1;
+          }
+        }
+        $dCount=(array_count_values($dte));
+        $c=count($dCount);
+        $key=array_keys($dCount);
 
-            //take employee count in that department
-            $sql="SELECT no_of_emp from department where dept_id=:dID ";
-            $query = $pdo->prepare($sql);
-            $query->execute(array('dID'=>$query1[0]));
-            $query = $query->fetchAll();
+        //take employee count in that department
+        $sql="SELECT no_of_emp from department where dept_id=:dID ";
+        $query = $pdo->prepare($sql);
+        $query->execute(array('dID'=>$query1[0]));
+        $query = $query->fetchAll();
 
-            //display absent present belongs to a the department
-            $dept=array();
-            for($i=0,$j=0;$i<$num1;$i++)
-            {
-              $dept[$j][0]=$dates[$i];
-              if($dates[$i]==$dte[$j]){
-                $d_dte=$dates[$i];
-                $dept[$j][1] = intval($dCount[$d_dte]);
-                $absnt= intval($query[0][0])-$dept[$j][1];
-                $dept[$j][2] =intval($absnt);
-                $j=$j+1;
-              }
-              else{
-                $dept[$j][1] = 0;
-                $absnt= intval($query[0][0])-$dept[$j][1];
-                $dept[$j][2] =intval($absnt);
-              }
-
-
-            }
-
-            array_unshift($dept, array('Date', 'Present','Absent'));
-            //print_r($dept);
-          ?>
-              <center><div id="columnchart_material" style="width: 900px; height: 500px;"></div></center>
+        //display absent present belongs to a the department
+        $dept=array();
+        //create an array to send the script
+        for($i=0,$j=0;$i<$c;$i++)
+        {
+            $d=$key[$i];
+            $dept[$j][0] = $d;
+            $dept[$j][1] = intval($dCount[$d]);
+            $absnt= intval($query[0][0])-$dept[$j][1];
+            $dept[$j][2] =intval($absnt);
+            $j=$j+1;
+        }
+        array_unshift($dept, array('Date', 'Present','Absent'));
+        //print_r($dept);
+      ?>
+        <center><div id="columnchart_material" style="width: 900px; height: 500px;"></div></center>
         </div>
       </div>
     </div>
