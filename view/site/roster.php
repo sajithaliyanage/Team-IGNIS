@@ -674,7 +674,8 @@ if(isset($_GET['shiftid'])){
                                             $Date = $objPHPExcel->getActiveSheet()->getCell(
                                                     'B'.$row->getRowIndex())->getValue() ;
 
-                                            if ($monday <= $Date and $Date <= $sunday) {
+
+                                            if ($monday <= $Date ) {
                                                 $timesum += $objPHPExcel->getActiveSheet()->getCell('E'.$row->getRowIndex())->getValue() ;
 
                                                 
