@@ -10,7 +10,7 @@ $start_date = xss_clean($_POST['start_date']);
 
 
 try{
-//    create event for company
+//    create holidays for company
     if($empRole == 'admin'){
         $sql = "INSERT INTO calendar (title,start_date,end_date,event_color,dept_id,comp_id) VALUES
             (:title,:start_date,:end_date,:event_color,:dept_id,:comp_id )";

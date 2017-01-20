@@ -22,7 +22,7 @@ $mail->isHTML(true);                                  // Set email format to HTM
 
 $mail->Subject = 'Reset Your Take Your Leave Password';
 $mail->Body    = "Click the below link to reset your password 
-            <br><a href='http://takeyourleave.azurewebsites.net/view/layouts/reset_password.php?id=".$encode."&email=".$receiver."'>Click Here to reset your password in Take Your Leave</a>
+            <br><a href='http://localhost/lms/Team-IGNIS/view/layouts/reset_password.php?id=".$encode."&email=".$receiver."'>Click Here to reset your password in Take Your Leave</a>
             <br/><br/><br/><img src='http://www.teamwhileloop.com/email/lms.png' />";
 //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
     if(!$mail->send()) {

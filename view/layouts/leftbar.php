@@ -8,7 +8,7 @@
 ?>
 
 <!--left menu bar-->
-<div class="list-group" style="margin-top:-10px;">
+<div class="list-group" style="margin-top:-10px; ">
     <center>
         <div class="admin-panel-heading">
             <p  class=" font new"  role="button"

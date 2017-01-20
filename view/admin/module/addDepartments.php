@@ -20,6 +20,7 @@ $query1->execute(array('log'=>$deptColor));
 $result1 = $query1->fetchAll();
 $rownum1 = $query1->rowCount();
 
+//check validations
 $flag =1;
 $flagcolor =1;
 
@@ -39,7 +40,8 @@ if (empty($deptName)) {
 
 	try{
 		if($flag==1 & $flagcolor==1){
-			$sql = "INSERT INTO department (dept_name,dept_color,roster_status,currentStatus) VALUES (:deptName,:deptColor,:rosterStatus,:status)";
+            //insert data to databse
+			$sql = "INSERT INTO department(dept_name,dept_color,roster_status,currentStatus) VALUES (:deptName,:deptColor,:rosterStatus,:status)";
     		$query = $pdo->prepare($sql);
     		$query->execute(array('deptName'=>$deptName." Department",'deptColor'=>$deptColor,'rosterStatus'=>$rosterStatus,'status'=>"waiting"));
 
@@ -50,9 +52,7 @@ if (empty($deptName)) {
 
     	}else{
 			header("Location:../department.php?error");
-
 		}
-
 
     }
 	catch(PDOException $e){

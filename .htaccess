@@ -1,2 +1,2 @@
-ErrorDocument 404 /view/layouts/404.php
-ErrorDocument 403 /view/layouts/404.php
+ErrorDocument 404 /lms/Team-IGNIS/view/layouts/404.php
+ErrorDocument 403 /htdocs/lms/Team-IGNIS/view/layouts/404.php

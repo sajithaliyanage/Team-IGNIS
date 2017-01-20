@@ -38,7 +38,7 @@ if(!$isLoggedin){
 <div class="container-fluid">
     <div class="row">
         <!---left nav bar-->
-        <div class="col-sm-2 col-xs-12 left-menu-div side-bar-display">
+        <div class="col-sm-2 col-xs-12 left-menu-div side-bar-display ">
             <?php include("../layouts/leftbar.php"); ?>
         </div>
         <!---content start-->
@@ -477,8 +477,12 @@ if(!$isLoggedin){
     $querys = $pdo->prepare($smts);
     $querys->execute(array('log2'=>'@'));
     $results = $querys->fetchAll();
-    $deptColor = $results[0]['event_color'];
+    $numRows = $querys->rowCount();
 
+    if($numRows >0){
+        $deptColor = $results[0]['event_color'];
+    }
+    //print_r($results);
 ?>
 <script type="text/javascript">
     function readOnly() {

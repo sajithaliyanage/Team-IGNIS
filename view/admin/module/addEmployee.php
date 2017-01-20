@@ -53,7 +53,7 @@ $query1->execute(array('log'=>$empId));
 $result1 = $query1->fetchAll();
 $rownum1 = $query1->rowCount();
 
-
+//check validations
 $flag = 1;
 if (empty($deptId)) {
     $flag = 0;
