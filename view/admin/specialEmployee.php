@@ -86,21 +86,6 @@ if(!$isLoggedin && $empRole!="admin"){
                             </ul>
                         </div>
                     </div>
-
-                    <div class="row margin-top">
-                        <div class="col-xs-12 nortification-box-top">
-                            <h5 class="nortification-box-heading"><i class="fa fa-user-plus icon-margin-right" aria-hidden="true"></i>
-                                Add Employees with customize leave counts <counts></counts></h5>
-                            <hr>
-                            <ul class="list-group" >
-                                <a href='specialEmployee.php' style="margin-bottom:20px !important;">
-                                    <li class="list-group-item"  style='border-radius:0 !important; color:#333;margin-bottom:20px !important;border:2px solid #05aad7;'>
-                                        <b>Add Employee</b><h5 style='float: right; margin-top:4px;'>Click here <i class='fa fa-chevron-circle-right' style=' margin-right:5px;' aria-hidden='true'></i>
-                                    </li>
-                                </a>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
 
 <!--                add employee to department-->
@@ -108,7 +93,7 @@ if(!$isLoggedin && $empRole!="admin"){
                     <div class="row">
                         <div class="col-xs-12 nortification-box-top">
                             <h5 class="nortification-box-heading"><i class="fa fa-plus icon-margin-right" aria-hidden="true"></i>
-                                Add New Employee</h5>
+                                Add Employees with customize leave counts</h5>
 
                             <div class="alert-user" style="<?php if(!isset($_GET['job'])){echo 'display:none;';}?>">New employee added successfully!</div>
                             <div class="alert-user" style="<?php if (!isset($_GET['error'])) {
@@ -116,7 +101,7 @@ if(!$isLoggedin && $empRole!="admin"){
                             } ?> color:#d43f3a">Invalid Form Actions!
                             </div>
                             <hr>
-                            <form role="form" data-toggle="validator" action="module/addEmployee.php" method="post">
+                            <form role="form" data-toggle="validator" action="module/addSpecialEmployee.php" method="post">
                                 <div class="department-add">
                                     <div class="col-xs-12">
                                             <!-- Text input-->
@@ -270,6 +255,25 @@ if(!$isLoggedin && $empRole!="admin"){
                                         </div>
                                         <br>
                                         <br>
+
+                                        <?php
+                                        $sql = "select * from leave_type WHERE currentStatus=:log";
+                                        $query = $pdo->prepare($sql);
+                                        $query->execute(array('log'=>"approved"));
+                                        $result = $query->fetchAll();
+
+                                        foreach($result as $rs){
+                                            echo "<div class='form-group'>
+                                                        <label class='col-xs-5 control-label form-lable'>".ucwords($rs['leave_name'])." :</label>
+                                                        <div class='col-xs-7'>
+                                                            <input id='service_name' name='leave_type[]' type='text' placeholder=''
+                                                       class='form-control input-md' required>
+                                                        </div>
+                                                        </div>
+                                                    <br/>
+                                                    <br/>";
+                                        }
+                                        ?>
 
 
                                             <button class="btn btn-info btn-lg pull-right submit-button" type="submit" >Submit</button>
