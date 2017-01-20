@@ -41,6 +41,13 @@ try{
             $getMedID = $query->fetch();
             $intMedeId = $getMedID['leave_id'];
 
+            $sql = "SELECT number_of_days FROM apply_leave where comp_id=:employeeID AND apply_leave_id=:apply_leave_id";
+            $query = $pdo->prepare($sql);
+            $query->execute(array('employeeID'=>$appliedEmployeeId,'apply_leave_id'=>$applyLeaveId));
+            $getLeaveID = $query->fetch();
+
+            $intNumOfDays = intval($getLeaveID['number_of_days']);
+
             $sql = "SELECT leave_count FROM employee_leave_count where comp_id=:employeeID AND leave_id=:leave_id";
             $query = $pdo->prepare($sql);
             $query->execute(array('employeeID'=>$appliedEmployeeId,'leave_id'=>$intMedeId));
@@ -49,7 +56,11 @@ try{
             $currentVal = intval($getLeaveID['leave_count']);
             $newVal = $currentVal - $intNumOfDays;
 
-            if($newVal>0){
+            $sql = "UPDATE employee_leave_count SET leave_count =:newCount where comp_id=:employeeID AND leave_id=:leave_id";
+            $query = $pdo->prepare($sql);
+            $query->execute(array('newCount'=>$newVal,'employeeID'=>$appliedEmployeeId,'leave_id'=> $intMedeId));
+
+             if($newVal>0){
                 $sql = "UPDATE employee_leave_count SET leave_count =:newCount where comp_id=:employeeID AND leave_id=:leave_id";
                 $query = $pdo->prepare($sql);
                 $query->execute(array('newCount'=>$newVal,'employeeID'=>$appliedEmployeeId,'leave_id'=>$intMedeId));
