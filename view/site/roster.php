@@ -694,8 +694,8 @@ if(isset($_GET['shiftid'])){
                                 }
                                 catch(Exception $e){}
                             ?>
-                            <div class="progress-bar" role="progressbar" aria-valuenow=":<?php echo ($timesum/$workinghours)*100;?>%;" aria-valuemin="0"
-                                 aria-valuemax="100" style="width:<?php echo ($timesum/$workinghours)*100;?>%;"><?php echo ($timesum/$workinghours)*100;?>%
+                            <div class="progress-bar" role="progressbar" aria-valuenow=":10%;" aria-valuemin="0"
+                                 aria-valuemax="100" style="width:10%;">10%
                             </div>
                         </div>
                         <p style="text-align:left; margin-top:-20px;">0h</p>
@@ -708,7 +708,7 @@ if(isset($_GET['shiftid'])){
                                         <p>Total Hours per week:</p>
                                     </div>
                                     <div class="col-xs-6">
-                                        <p><strong><?php echo $workinghours;?> hours</strong></p>
+                                        <p><strong>60 hours</strong></p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -716,7 +716,7 @@ if(isset($_GET['shiftid'])){
                                         <p>Done Hours per week:</p>
                                     </div>
                                     <div class="col-xs-6">
-                                        <p style=" color:#00a65a;"><strong><?php echo $timesum;?> hours</strong></p>
+                                        <p style=" color:#00a65a;">3 hours</strong></p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -724,7 +724,7 @@ if(isset($_GET['shiftid'])){
                                         <p>Remaining Hours per week:</p>
                                     </div>
                                     <div class="col-xs-6">
-                                        <p style=" color:#d43f3a;"><strong><?php echo ($workinghours-$timesum); ?> hours</strong>
+                                        <p style=" color:#d43f3a;"><strong>57 hours</strong>
                                         </p>
                                     </div>
                                 </div>
@@ -733,7 +733,7 @@ if(isset($_GET['shiftid'])){
                                             <p>Days remaining in this week:</p>
                                         </div>
                                         <div class="col-xs-6">
-                                            <p style=" color:#00a65a;margin-top: 9px"><strong>
+                                            <p style=" color:#00a65a;margin-top:0px"><strong>
                                             <?php 
                                             $date1=date_create(date('Y/m/d',strtotime( 'sunday this week' )));
                                             $date2=date_create(date('Y/m/d'));
