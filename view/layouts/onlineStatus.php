@@ -44,5 +44,28 @@ require_once "../../module/PHPExcel/PHPExcel.php";
 ?>
     </ul>
 </div>
+<script language="javascript" type="text/javascript">
+    $('#iconified').on('keyup', function() {
+        var input = $(this);
+        if(input.val().length === 0) {
+            input.addClass('empty');
+        } else {
+            input.removeClass('empty');
+        }
+    });
 
+    function filter(element) {
+        var value = $(element).val().toLowerCase();;
+
+        $("#theList > li").each(function() {
+            var listVal = $(this).text().toLowerCase();
+            if (listVal.indexOf(value)>= 0) {
+                $(this).show();
+            }
+            else {
+                $(this).hide();
+            }
+        });
+    }
+</script>
 
